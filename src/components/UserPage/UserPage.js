@@ -33,6 +33,7 @@ class UserPage extends Component {
     if (this.props.user.user) {
       content = (
         <div>
+
           <h1
             id="welcome"
           >
