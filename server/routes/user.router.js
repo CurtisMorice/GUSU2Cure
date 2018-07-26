@@ -30,7 +30,6 @@ router.post('/register', (req, res, next) => {
     .then(()=> {res.sendStatus(201);})
     .catch((err) => {
       console.log('error creating user:', err);
-      
       res.sendStatus(500);})      
     ;
 });
