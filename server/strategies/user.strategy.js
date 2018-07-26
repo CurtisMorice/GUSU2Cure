@@ -17,7 +17,6 @@ passport.deserializeUser((id, done) => {
       done(null, false, { message: 'Incorrect credentials.' });
     } else {
       // user found
-      console.log('Your plan worked, Sean');
       done(null, user);
     }
   }).catch((err) => {
