@@ -25,9 +25,9 @@ router.post('/register', (req, res, next) => {
   const email = req.body.email;
   const validated = true;
 
-  const queryText = `INSERT INTO users (username, password, type, email, validated) VALUES ($1, $2, $3, $4, $5) RETURNING id`;
+  const queryText = `INSERT INTO users (username, hash, type, email, validated) VALUES ($1, $2, $3, $4, $5) RETURNING id`;
   pool.query(queryText, [username, password, type, email, validated])
-    then(()=> {res.sendStatus(201);})
+    .then(()=> {res.sendStatus(201);})
     .catch((err) => {
       console.log('error creating user:', err);
       
