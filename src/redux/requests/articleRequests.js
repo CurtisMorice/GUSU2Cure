@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export function getArticles() {
-    return axios.get('/article')
+    return axios.get('/api/article')
     .then(response => response.data)
     .catch((error)=>{
         console.log('error getting articles', error);
@@ -10,7 +10,7 @@ export function getArticles() {
 }
 
 export function postArticle(article){
-    return axios.post('/article', article)
+    return axios.post('/api/article', article)
     .then((response) => {
         console.log('successfully posted article');
     })
@@ -21,7 +21,7 @@ export function postArticle(article){
 }
 
 export function deleteArticle(id){
-    return axios.delete(`/article/${id}`)
+    return axios.delete(`/api/article/${id}`)
     .then((response) => {
         console.log('successfully deleted article');
     })
@@ -32,7 +32,7 @@ export function deleteArticle(id){
 }
 
 export function putArticle(article, id){
-    return axios.put(`/article/${id}`, article)
+    return axios.put(`/api/article/${id}`, article)
     .then((response) => {
         console.log('successfully updated article', response);
     })
