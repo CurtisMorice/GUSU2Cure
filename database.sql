@@ -11,13 +11,6 @@ CREATE TABLE "users" (
 );
 
 -- create the resources table
-CREATE TABLE "resources" (
-    "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR (200),
-    "url" VARCHAR (300),
-    "summary" VARCHAR (500),
-    "date_created" DATE
-);
 
 CREATE TABLE "resources" (
     "id" SERIAL PRIMARY KEY,
