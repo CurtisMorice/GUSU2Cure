@@ -11,6 +11,7 @@ import Landing from './components/Pages/Landing/Landing';
 import LoginPage from './components/Pages/LoginPage/LoginPage';
 import UserHome from './components/Pages/UserHome/UserHome';
 import RegisterPage from './components/Pages/RegisterPage/RegisterPage';
+import Resources from './components/Pages/Resources/Resources';
 
 
 import './styles/main.css';
@@ -37,6 +38,11 @@ const App = () => (
           path="/register"
           component={RegisterPage}
         />
+        <Route 
+          path="/resources"
+          component={Resources}
+        />
+        
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
 
