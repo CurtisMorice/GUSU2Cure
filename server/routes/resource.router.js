@@ -7,10 +7,12 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
     const queryText = `SELECT * FROM resources;`;
-    pool.query().then(()=>{
-
+    pool.query(queryText).then((result)=>{
+        console.log('result.rows:', result.rows);
+        res.send(result.rows)
     }).catch((error)=>{
-
+        console.log('error getting resources:', error);
+        res.sendStatus(500);
     });
 });
 

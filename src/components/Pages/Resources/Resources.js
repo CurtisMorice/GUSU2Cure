@@ -14,10 +14,18 @@ const mapStateToProps = state => ({
 
 class UserHome extends Component {
   
+    constructor(props) {
+        super(props);
     
+        this.state = {
+          resources: ['l'],
+          resourcesFetched: false
+        };
+      }
   
     componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+    this.getResources();
   }
 
   componentDidUpdate() {
@@ -31,17 +39,36 @@ class UserHome extends Component {
     // this.props.history.push('home');
   }
 
-  getResources = () =>{
-      let resources = axios.get
+  getResources = async () =>{
+    axios.get('api/resource').then((response)=>{
+        console.log('got resources successfully:', response.data);
+        this.setState({...this.state, resources: response.data, resourcesFetched:true});
+        
+        return response.data;  
+      })
+      .catch((error)=>{
+          console.log('error getting resources:', error);
+          return error
+      });
+    //   console.log('resources:',resources);
+    //   await this.setState({...this.state, resources: [...resources], resourcesFetched:true});
+    //   console.log('this.state:', this.state);
+  }
+
+  getCall = async ()=>{
+   
   }
 
   render() {
     let content = null;
 
-    if (true) {
+    if (this.state) {
       content = (
         <div>
           <h1>Resources</h1>
+          {this.state.resourcesFetched && <ol>
+              {this.state.resources.map((resource, i)=><li key={i}>{resource.name}</li>)}
+          </ol>}
         </div>
       );
     }
