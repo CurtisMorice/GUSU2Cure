@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from '../../components/Nav/Nav';
+import Nav from '../../Global/Nav/Nav';
 
-import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { triggerLogout } from '../../redux/actions/loginActions';
+import { USER_ACTIONS } from '../../../redux/actions/userActions';
+import { triggerLogout } from '../../../redux/actions/loginActions';
 
 
 const mapStateToProps = state => ({
   user: state.user,
 });
 
-class UserPage extends Component {
+class UserHome extends Component {
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
@@ -58,5 +58,5 @@ class UserPage extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(UserPage);
+export default connect(mapStateToProps)(UserHome);
 
