@@ -19,13 +19,13 @@ CREATE TABLE "profiles" (
 	);
 
 --create resources table
-CREATE TABLE "resources" (
-    "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR (200),
-    "url" VARCHAR (300),
-    "summary" VARCHAR (500),
-    "date_created" DATE DEFAULT current_date
-);
+-- CREATE TABLE "resources" (
+--     "id" SERIAL PRIMARY KEY,
+--     "name" VARCHAR (200),
+--     "url" VARCHAR (300),
+--     "summary" VARCHAR (500),
+--     "date_created" DATE DEFAULT current_date
+-- );
 
 --create status table
 CREATE TABLE "statuses" (
@@ -109,7 +109,7 @@ INSERT INTO research_type(type) VALUES ('other');
 INSERT INTO research_phase(phase) VALUES ('other');
 
 --insert into location table. this should happen before an article is created.
-INSERT INTO location(address, lat, lng) VALUES ('10520 France Ave S, Bloomington, MN 55431', 44.812558, -93.330891);
+INSERT INTO locations(address, lat, lng) VALUES ('10520 France Ave S, Bloomington, MN 55431', 44.812558, -93.330891);
 
 -- inserrt into article table. 
 INSERT INTO articles(location_id, user_id, research_date, research_title, research_type, research_phase, institution_name, institution_url, status, funding_source, related_articles) VALUES(
