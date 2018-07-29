@@ -25,10 +25,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* Routes */
-app.use('/api/user', userRouter);
-app.use('/api/resource', resourceRouter)
-app.use('/api/article', articleRouter)
-app.use('/api/profile', profileRouter)
+app.use('/api/users', userRouter);
+app.use('/api/resources', resourceRouter)
+app.use('/api/articles', articleRouter)
+app.use('/api/profiles', profileRouter)
 
 // Serve static files
 app.use(express.static('build'));

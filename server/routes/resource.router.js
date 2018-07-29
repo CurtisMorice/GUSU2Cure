@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
     const name = req.body.name;
     const url = req.body.url;
     const summary = req.body.summary;
-    const queryText = `INSERT INTO resources(name, url, summary) VALUES ($1,$2,$3)`;
+    const queryText = `INSERT INTO resources(name, url, summary) VALUES ($1,$2,$3);`;
     pool.query(queryText, [name, url, summary])
     .then(()=>{
         console.log('resource created');
@@ -36,7 +36,7 @@ router.put('/:id', (req, res) =>{
     const name = req.body.name;
     const url = req.body.url;
     const summary = req.body.name;
-    const queryText = `UPDATE resources SET name=$1, url=$2, summary=$3 WHERE id=$4`
+    const queryText = `UPDATE resources SET name=$1, url=$2, summary=$3 WHERE id=$4;`
     pool.query(queryText, [name, url, summary, id])
     .then(()=>{
         console.log('updated resource');
@@ -50,7 +50,7 @@ router.put('/:id', (req, res) =>{
 
 router.delete('/:id', (req, res) =>{
     const id = req.params.id;
-    const queryText = `DELETE FROM resources WHERE id=$1`;
+    const queryText = `DELETE FROM resources WHERE id=$1;`;
     pool.query(queryText, [id])
     .then(()=>{
         console.log('deleted resource');
