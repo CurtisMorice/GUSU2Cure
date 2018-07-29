@@ -11,6 +11,8 @@ class RegisterPage extends Component {
       password: '',
       message: '',
       email: '',
+      bio: '',
+      contact_info: ''
     };
   }
 
@@ -25,7 +27,9 @@ class RegisterPage extends Component {
       const body = {
         username: this.state.username,
         password: this.state.password,
-        email: this.state.email
+        email: this.state.email,
+        bio: this.state.bio,
+        contact_info: this.state.contact_info
       };
 
       // making the request to the server to post the new user's registration
@@ -103,6 +107,28 @@ class RegisterPage extends Component {
                 name="email"
                 value={this.state.email}
                 onChange={this.handleInputChangeFor('email')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="bio">
+              Bio:
+              <input
+                type="text"
+                name="bio"
+                value={this.state.bio}
+                onChange={this.handleInputChangeFor('bio')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="contact_info">
+              Contact Information:
+              <input
+                type="text"
+                name="contact_info"
+                value={this.state.contact_info}
+                onChange={this.handleInputChangeFor('contact_info')}
               />
             </label>
           </div>

@@ -24,10 +24,22 @@ router.post('/register', (req, res, next) => {
   const type = "user";
   const email = req.body.email;
   const validated = true;
+  const bio = req.body.bio;
+  const contact_info = req.body.contact_info;
 
   const queryText = `INSERT INTO users (username, hash, type, email, validated) VALUES ($1, $2, $3, $4, $5) RETURNING id`;
   pool.query(queryText, [username, password, type, email, validated])
-    .then(()=> {res.sendStatus(201);})
+    .then((result)=> {
+      const user_id = result.rows[0].id;
+      const profileQueryText = `INSERT INTO profiles (user_id, bio, contact_info) VALUES ($1, $2, $3)`
+      pool.query(profileQueryText, [user_id, bio, contact_info]).then(()=>{
+        console.log('user profile created');
+        res.sendStatus(201);
+      }).catch((error)=>{
+        console.log('error creating user profile:', error);
+        res.sendStatus(500);
+      })
+    })
     .catch((err) => {
       console.log('error creating user:', err);
       res.sendStatus(500);})      
