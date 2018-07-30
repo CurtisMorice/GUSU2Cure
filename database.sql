@@ -1,5 +1,9 @@
 -- database name: gusu_project
 
+-- !!!!!!!!!!!!!!!!!!!!
+-- UNCOMMENT THE DATE_CREATED LINE IN RESOURCES, DATE_POSTED, RELATED_ARTICLES, 
+-- AND ADMIN_COMMENT IN ARTICLES, AND DATE_CREATED IN COMMENTS
+
 -- create the user table
 CREATE TABLE "users" (
     "id" SERIAL PRIMARY KEY,
@@ -19,13 +23,13 @@ CREATE TABLE "profiles" (
 	);
 
 --create resources table
--- CREATE TABLE "resources" (
---     "id" SERIAL PRIMARY KEY,
---     "name" VARCHAR (200),
---     "url" VARCHAR (300),
---     "summary" VARCHAR (500),
---     "date_created" DATE DEFAULT current_date
--- );
+CREATE TABLE "resources" (
+    "id" SERIAL PRIMARY KEY,
+    "name" VARCHAR (200),
+    "url" VARCHAR (300),
+    "summary" VARCHAR (500),
+    -- "date_created" DATE DEFAULT current_date
+);
 
 --create status table
 CREATE TABLE "statuses" (
@@ -49,7 +53,7 @@ CREATE TABLE "research_phase" (
 	);
 
 --create location table
-CREATE TABLE "location"(
+CREATE TABLE "locations"(
 	"id" SERIAL PRIMARY KEY,
 	"address" varchar(200), 
 	"lat" DECIMAL(9,6),
@@ -57,32 +61,32 @@ CREATE TABLE "location"(
 	);
 
 
---create article table. date_posted is automatically inserted every time new article is inserted. up to five related articles are accepted. commented out due to linter errors.
--- CREATE TABLE "articles"(
--- 	"id" SERIAL PRIMARY KEY,
--- 	"location_id" INT NOT NULL REFERENCES locations,
--- 	"user_id" INT NOT NULL REFERENCES users,
--- 	"date_posted" DATE DEFAULT current_date,
--- 	"research_date" date NOT NULL,
--- 	"research_title" VARCHAR(200) NOT NULL,
--- 	"research_type" INT NOT NULL REFERENCES research_type,
--- 	"research_phase" INT NOT NULL REFERENCES research_phase,
--- 	"institution_name" VARCHAR(100) NOT NULL,
--- 	"institution_url" VARCHAR(300) NOT NULL,
--- 	"status" INT NOT NULL REFERENCES statuses,
--- 	"funding_source" VARCHAR(100),
--- 	"related_articles" text[5],
--- 	"admin_comment" VARCHAR(500)
--- 	);
+-- create article table. date_posted is automatically inserted every time new article is inserted. up to five related articles are accepted. commented out due to linter errors.
+CREATE TABLE "articles"(
+	"id" SERIAL PRIMARY KEY,
+	"location_id" INT NOT NULL REFERENCES locations,
+	"user_id" INT NOT NULL REFERENCES users,
+	-- "date_posted" DATE DEFAULT current_date,
+	"research_date" date NOT NULL,
+	"research_title" VARCHAR(200) NOT NULL,
+	"research_type" INT NOT NULL REFERENCES research_type,
+	"research_phase" INT NOT NULL REFERENCES research_phase,
+	"institution_name" VARCHAR(100) NOT NULL,
+	"institution_url" VARCHAR(300) NOT NULL,
+	"status" INT NOT NULL REFERENCES statuses,
+	"funding_source" VARCHAR(100),
+	-- "related_articles" text[5],
+	-- "admin_comment" VARCHAR(500)
+	);
 	
 --create comments table. date will be automatically inserted. commented out due to linter errors
--- CREATE TABLE "comments"(
--- 	"id" SERIAL PRIMARY KEY,
--- 	"comment" VARCHAR(300) NOT NULL,
--- 	"user_id" INT NOT NULL REFERENCES users,
--- 	"article_id" INT NOT NULL REFERENCES articles,
--- 	"date_created" DATE DEFAULT current_date
--- 	);
+CREATE TABLE "comments"(
+	"id" SERIAL PRIMARY KEY,
+	"comment" VARCHAR(300) NOT NULL,
+	"user_id" INT NOT NULL REFERENCES users,
+	"article_id" INT NOT NULL REFERENCES articles,
+	-- "date_created" DATE DEFAULT current_date
+	);
 	
 -- insert into comments table
 INSERT INTO comments(comment, user_id, article_id) VALUES ('Fascinating', 1, 1);
@@ -100,12 +104,28 @@ INSERT INTO resources(name, url, summary, date_created) VALUES ('Organization Na
 INSERT INTO profiles(user_id, bio, contact_info) VALUES (1, 'I love research!', '555-555-5555');
 
 -- insert into statuses table. only will accept four values: 'pending', 'approved', 'rejected', and 'reviewing'. articles should reference these statuses by their ids.
+INSERT INTO statuses(status) VALUES ('pending');
+INSERT INTO statuses(status) VALUES ('approved');
 INSERT INTO statuses(status) VALUES ('rejected');
+INSERT INTO statuses(status) VALUES ('reviewing');
+
 
 -- insert into research_type table will only accept nine values: 'stem_cell', 'molecular', 'gene', 'pharmaceutical', 'device', 'rehabilitation', 'fitness', 'survey',  and'other'.
+INSERT INTO research_type(type) VALUES ('stem_cell');
+INSERT INTO research_type(type) VALUES ('molecular');
+INSERT INTO research_type(type) VALUES ('gene');
+INSERT INTO research_type(type) VALUES ('pharmaceutical');
+INSERT INTO research_type(type) VALUES ('device');
+INSERT INTO research_type(type) VALUES ('rehabilitation');
+INSERT INTO research_type(type) VALUES ('fitness');
+INSERT INTO research_type(type) VALUES ('survey');
 INSERT INTO research_type(type) VALUES ('other');
 
+
 -- insert into research_phase table. will only accept four values: 'cellular', 'small_animal', 'large_animal', 'human', and 'other'.
+INSERT INTO research_phase(phase) VALUES ('cellular');
+INSERT INTO research_phase(phase) VALUES ('small_animal');
+INSERT INTO research_phase(phase) VALUES ('large_animal');
 INSERT INTO research_phase(phase) VALUES ('other');
 
 --insert into location table. this should happen before an article is created.
@@ -126,5 +146,5 @@ INSERT INTO articles(location_id, user_id, research_date, research_title, resear
 	'{"www.example.com", "www.example.com", "www.example.com", "www.example.com", "www.example.com"}'
 	);
 	
-	-- insert into comments table
+-- insert into comments table
 INSERT INTO comments(comment, user_id, article_id) VALUES ('Fascinating', 1, 1);

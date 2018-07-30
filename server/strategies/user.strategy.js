@@ -8,7 +8,8 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  pool.query('SELECT id, username, type, validated FROM users WHERE id = $1', [id]).then((result) => {
+  pool.query('SELECT users.id, username, type, validated, bio, contact_info, email FROM users JOIN profiles ON user_id = users.id WHERE users.id = $1', [id])
+    .then((result) => {
     // Handle Errors
     const user = result && result.rows && result.rows[0];
     console.log('strategy user is:', user);

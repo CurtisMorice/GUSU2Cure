@@ -40,7 +40,7 @@ class UserHome extends Component {
   }
 
   getResources = async () =>{
-    axios.get('api/resource').then((response)=>{
+    axios.get('api/resources').then((response)=>{
         console.log('got resources successfully:', response.data);
         this.setState({...this.state, resources: response.data, resourcesFetched:true});
         
