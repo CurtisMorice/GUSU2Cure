@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import Nav from '../../Global/Nav/Nav';
-
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
+import DropdownSearch from './Local/DropdownSearch';
+import SearchBar from './Local/SearchBar';
+import Grid from '@material-ui/core/Grid';
 
 
 const mapStateToProps = state => ({
@@ -28,25 +29,20 @@ class Landing extends Component {
   }
 
   render() {
-    let content = null;
-
-    if(true){
-    // if (this.props.user.user) {
-      content = (
-        <div>
-          <h1
-            id="welcome"
-          >
-            Landing page. User!
-          </h1>
-        </div>
-      );
-    }
-
     return (
       <div>
         <Nav />
-        { content }
+        <div>
+          <Grid container spacing={24}>
+            <Grid item xs={12} />
+            <Grid item xs={6}>
+              <DropdownSearch />
+            </Grid>
+            <Grid item xs={6}>
+              <SearchBar />  
+            </Grid>
+          </Grid>
+        </div>
       </div>
     );
   }
