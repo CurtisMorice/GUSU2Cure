@@ -7,6 +7,20 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import Icon from '@material-ui/core/Icon';
 import Grid from '@material-ui/core/Grid';
+import { connect } from 'react-redux';
+import { LOGIN_ACTIONS } from '../../../redux/actions/loginActions';
+import { compose } from 'recompose';
+
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+const logout = () => {
+  this.props.dispatch({
+    type: LOGIN_ACTIONS.LOGOUT
+  });
+  this.props.history.push('home');
+}
 
 const styles = theme => ({
   root: {
@@ -25,6 +39,16 @@ const styles = theme => ({
 
 function Nav(props) {
   const { classes } = props;
+  const loginButton = props.isLogin ? (
+    <Button component={Link} onClick={logout} to="/" variant="contained" className={classes.button} color="secondary" aria-label="Log Out">
+      Log Out
+      <Icon className={classes.rightIcon}>lock_closed</Icon>
+    </Button>
+    ) : (<Button component={Link} to="/login" variant="contained" className={classes.button} color="primary" aria-label="Log in" style={{ flex: 1 }}>
+          Login
+          <Icon className={classes.rightIcon}>lock_open</Icon>
+        </Button>);
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -57,10 +81,7 @@ function Nav(props) {
               </Button>  
             </Grid>
             <Grid item>
-              <Button component={Link} to="/login" variant="contained" className={classes.button} color="primary" aria-label="Log in" style={{ flex: 1 }}>
-                Login
-                <Icon className={classes.rightIcon}>lock_open</Icon>
-              </Button>
+              { loginButton }  
             </Grid>
           </Grid>
         </Toolbar>
@@ -73,4 +94,7 @@ Nav.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Nav);
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps)
+)(Nav);
