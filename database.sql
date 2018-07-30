@@ -49,7 +49,7 @@ CREATE TABLE "research_phase" (
 	);
 
 --create location table
-CREATE TABLE "location"(
+CREATE TABLE "locations"(
 	"id" SERIAL PRIMARY KEY,
 	"address" varchar(200), 
 	"lat" DECIMAL(9,6),
