@@ -61,7 +61,7 @@ function* updateResource(action) {
 function* resourceSaga() {
     yield takeLatest (RESOURCE_ACTIONS.FETCH_RESOURCES, fetchResources)
     yield takeLatest (RESOURCE_ACTIONS.POST_RESOURCE, addResource)
-    yield takeLatest (RESOURCE_ACTIONS.DELETE_RESOURCE, deleteResource)
+    yield takeLatest (RESOURCE_ACTIONS.DELETE_RESOURCE, removeResource)
     yield takeLatest (RESOURCE_ACTIONS.UPDATE_RESOURCE, updateResource)
   }
   
