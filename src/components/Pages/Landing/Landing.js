@@ -5,6 +5,7 @@ import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 import DropdownSearch from './Local/DropdownSearch';
 import SearchBar from './Local/SearchBar';
+import Grid from '@material-ui/core/Grid';
 
 
 const mapStateToProps = state => ({
@@ -32,8 +33,15 @@ class Landing extends Component {
       <div>
         <Nav />
         <div>
-          <DropdownSearch />
-          <SearchBar />
+          <Grid container spacing={24}>
+            <Grid item xs={12} />
+            <Grid item xs={6}>
+              <DropdownSearch />
+            </Grid>
+            <Grid item xs={6}>
+              <SearchBar />  
+            </Grid>
+          </Grid>
         </div>
       </div>
     );
