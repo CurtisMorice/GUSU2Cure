@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from '../../../../../../../../Library/Caches/typescript/2.8/node_modules/@types/redux-logger/node_modules/redux';
+import { compose } from 'redux';
 
 //components
 
@@ -24,7 +24,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
-import { compose } from 'redux';
 
 //ReduxStore
 const mapStateToProps = state => ({
