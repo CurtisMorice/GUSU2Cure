@@ -8,7 +8,15 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', (req, res) => {
-    
+    let queryText = 'SELECT * FROM profiles;';
+    pool.query(queryText)
+    .then((result) => {
+        console.log('got profiles from database', result.rows);
+        res.send(result.rows);   
+    }).catch((error) => {
+        console.log('error getting profiles from database', error);
+        res.sendStatus(500);    
+    })
 });
 
 /**
