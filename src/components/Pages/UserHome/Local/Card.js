@@ -22,6 +22,10 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+//ReduxStore
+const mapStateToProps = state => ({
+    user: state.user
+})
 
 const styles = theme => ({
     card: {
@@ -50,18 +54,22 @@ const styles = theme => ({
     avatar: {
       backgroundColor: red[500],
     },
-  });
+});
   
-  class ProfileCard extends React.Component {
-    state = { expanded: false };
+class ProfileCard extends React.Component {
+    state = { 
+        expanded: false 
+    
+    };
   
     handleExpandClick = () => {
       this.setState(state => ({ expanded: !state.expanded }));
     };
   
     render() {
-      const { classes } = this.props;
-  
+        const { classes } = this.props;
+        console.log(this.props.user);
+        
       return (
         <div>
           <Card className={classes.card}>
@@ -124,7 +132,7 @@ const styles = theme => ({
         </div>
       );
     }
-  }
+}
   
   ProfileCard.propTypes = {
     classes: PropTypes.object.isRequired,
