@@ -60,10 +60,10 @@ router.put('/:id', (req, res) => {
     const articleQueryText = `UPDATE articles SET research_date = $1, research_title = $2, research_type = $3,
         research_phase = $4, institution_name = $5, institution_url = $6, funding_source = $7, related_articles = $8 WHERE id = $9;`;
         pool.query(articleQueryText, [req.body.research_date, req.body.research_title, req.body.research_type, req.body.research_phase, req.body.institution_name, req.body.institution_url, req.body.funding_source, req.body.related_articles, id])
-        .then(()=>{
+        .then(() => {
             console.log('article successfully updated');
             res.sendStatus(201);
-        }).catch((error)=>{
+        }).catch((error) =>{
             console.log('error updating article:', error);
             res.sendStatus(500);
         }) 

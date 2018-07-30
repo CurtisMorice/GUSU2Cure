@@ -3,8 +3,8 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    let queryText = 'SELECT * FROM profiles;';
-    pool.query(queryText)
+    let queryText = 'SELECT * FROM profiles where user_id = $1;';
+    pool.query(queryText, [req.body.user_id])
     .then((result) => {
         console.log('got profiles from database', result.rows);
         res.send(result.rows);   
