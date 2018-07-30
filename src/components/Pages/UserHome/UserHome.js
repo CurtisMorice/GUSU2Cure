@@ -47,7 +47,6 @@ class UserHome extends Component {
             Log Out
           </button>
           <UserHomeProfile/>
-          <p>hello</p>
         </div>
       );
     }
@@ -56,7 +55,6 @@ class UserHome extends Component {
       <div>
         <Nav />
         { content }
-        <UserHomeProfile/>
       </div>
     );
   }
