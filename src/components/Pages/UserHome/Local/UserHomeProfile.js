@@ -21,8 +21,15 @@ class UserHomeProfile extends Component{
     render(){
         return(
             <div className="container">
-                <div className="grid"> grid 1</div>
-                <div className="grid"> grid 2</div>
+                <div className="grid"> grid 1 Profile card goes here</div>
+                <div className="grid"> 
+                    <p>grid 2 User History/Post Status goes here</p>
+                    <h3>History</h3>
+                    <br/>
+                    <p>cards go here</p>
+                
+                
+                </div>
                 <div className="grid"> grid 3</div>
             </div>
         )
