@@ -59,22 +59,32 @@ const styles = theme => ({
   
 class ProfileCard extends React.Component {
     state = { 
-        expanded: false 
+        expanded: false,
+        
     
     };
   
+    componentDidMount(){
+        this.getUserProfile();
+    }
+
     handleExpandClick = () => {
       this.setState(state => ({ expanded: !state.expanded }));
     };
+
+    getUserProfile = (id) => {
+        id = this.props.user.user.id;
+        console.log(id);
+        // this.props.dispatch({type: , payload: id})
+    }
   
     render() {
-        const { classes } = this.props;
-        console.log(this.props.user);
-        
+        const { classes } = this.props;        
       return (
         <div>
         {JSON.stringify(this.props.user.user.username)}
         {/* {this.props.user} */}
+
           <Card className={classes.card}>
             <CardHeader
               avatar={
@@ -87,7 +97,7 @@ class ProfileCard extends React.Component {
             //       <MoreVertIcon />
             //     </IconButton>
             //   }
-              title="UserName Goes Here"
+              title={this.props.user.user.username}
             //   subheader="September 14, 2016"
             />
             {/* <CardMedia
@@ -97,10 +107,10 @@ class ProfileCard extends React.Component {
             /> */}
             <CardContent>
               <Typography component="p">
-                Email:
+                Email: {this.props.user.user.email}
               </Typography>
               <Typography component="p">
-                Contact:
+                Contact: {this.props.user.user.contact_info}
               </Typography>
             </CardContent>
             <CardActions className={classes.actions} disableActionSpacing>
