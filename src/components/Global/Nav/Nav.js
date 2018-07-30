@@ -37,8 +37,8 @@ function Nav(props) {
               </Button>  
             </Grid>
             <Grid item>
-              <Button component={Link} to="/about" variant="contained" className={classes.button} color="primary" aria-label="About">
-                About
+              <Button component={Link} to="/user-profile" variant="contained" className={classes.button} color="primary" aria-label="UserProfile">
+                User Profile
                 <Icon className={classes.rightIcon}>info</Icon>  
               </Button>  
             </Grid>

@@ -19,13 +19,13 @@ CREATE TABLE "profiles" (
 	);
 
 --create resources table
--- CREATE TABLE "resources" (
---     "id" SERIAL PRIMARY KEY,
---     "name" VARCHAR (200),
---     "url" VARCHAR (300),
---     "summary" VARCHAR (500),
---     "date_created" DATE DEFAULT current_date
--- );
+CREATE TABLE "resources" (
+    "id" SERIAL PRIMARY KEY,
+    "name" VARCHAR (200),
+    "url" VARCHAR (300),
+    "summary" VARCHAR (500),
+    "date_created" DATE DEFAULT current_date
+);
 
 --create status table
 CREATE TABLE "statuses" (
@@ -57,32 +57,32 @@ CREATE TABLE "location"(
 	);
 
 
---create article table. date_posted is automatically inserted every time new article is inserted. up to five related articles are accepted. commented out due to linter errors.
--- CREATE TABLE "articles"(
--- 	"id" SERIAL PRIMARY KEY,
--- 	"location_id" INT NOT NULL REFERENCES locations,
--- 	"user_id" INT NOT NULL REFERENCES users,
--- 	"date_posted" DATE DEFAULT current_date,
--- 	"research_date" date NOT NULL,
--- 	"research_title" VARCHAR(200) NOT NULL,
--- 	"research_type" INT NOT NULL REFERENCES research_type,
--- 	"research_phase" INT NOT NULL REFERENCES research_phase,
--- 	"institution_name" VARCHAR(100) NOT NULL,
--- 	"institution_url" VARCHAR(300) NOT NULL,
--- 	"status" INT NOT NULL REFERENCES statuses,
--- 	"funding_source" VARCHAR(100),
--- 	"related_articles" text[5],
--- 	"admin_comment" VARCHAR(500)
--- 	);
+-- create article table. date_posted is automatically inserted every time new article is inserted. up to five related articles are accepted. commented out due to linter errors.
+CREATE TABLE "articles"(
+	"id" SERIAL PRIMARY KEY,
+	"location_id" INT NOT NULL REFERENCES locations,
+	"user_id" INT NOT NULL REFERENCES users,
+	"date_posted" DATE DEFAULT current_date,
+	"research_date" date NOT NULL,
+	"research_title" VARCHAR(200) NOT NULL,
+	"research_type" INT NOT NULL REFERENCES research_type,
+	"research_phase" INT NOT NULL REFERENCES research_phase,
+	"institution_name" VARCHAR(100) NOT NULL,
+	"institution_url" VARCHAR(300) NOT NULL,
+	"status" INT NOT NULL REFERENCES statuses,
+	"funding_source" VARCHAR(100),
+	"related_articles" text[5],
+	"admin_comment" VARCHAR(500)
+	);
 	
 --create comments table. date will be automatically inserted. commented out due to linter errors
--- CREATE TABLE "comments"(
--- 	"id" SERIAL PRIMARY KEY,
--- 	"comment" VARCHAR(300) NOT NULL,
--- 	"user_id" INT NOT NULL REFERENCES users,
--- 	"article_id" INT NOT NULL REFERENCES articles,
--- 	"date_created" DATE DEFAULT current_date
--- 	);
+CREATE TABLE "comments"(
+	"id" SERIAL PRIMARY KEY,
+	"comment" VARCHAR(300) NOT NULL,
+	"user_id" INT NOT NULL REFERENCES users,
+	"article_id" INT NOT NULL REFERENCES articles,
+	"date_created" DATE DEFAULT current_date
+	);
 	
 -- insert into comments table
 INSERT INTO comments(comment, user_id, article_id) VALUES ('Fascinating', 1, 1);

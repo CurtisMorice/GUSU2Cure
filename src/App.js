@@ -31,7 +31,7 @@ const App = () => (
           component={LoginPage}
         />
         <Route
-          path="/user"
+          path="/user-profile"
           component={UserHome}
         />
         <Route
