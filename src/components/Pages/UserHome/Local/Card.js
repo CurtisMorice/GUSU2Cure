@@ -21,6 +21,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { compose } from '../../../../../../../../Library/Caches/typescript/2.8/node_modules/@types/redux-logger/node_modules/redux';
 
 //ReduxStore
 const mapStateToProps = state => ({
@@ -72,6 +73,8 @@ class ProfileCard extends React.Component {
         
       return (
         <div>
+        {JSON.stringify(this.props.user.user.username)}
+        {/* {this.props.user} */}
           <Card className={classes.card}>
             <CardHeader
               avatar={
@@ -102,7 +105,7 @@ class ProfileCard extends React.Component {
             </CardContent>
             <CardActions className={classes.actions} disableActionSpacing>
                 <Typography>
-                    Details
+                    User Bio
                 </Typography>
               {/* <IconButton aria-label="Add to favorites">
                 <FavoriteIcon />
@@ -124,7 +127,7 @@ class ProfileCard extends React.Component {
             <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
               <CardContent>
                 <Typography>
-                  Email
+                  Bio
                 </Typography>
               </CardContent>
             </Collapse>
@@ -138,4 +141,8 @@ class ProfileCard extends React.Component {
     classes: PropTypes.object.isRequired,
   };
   
-  export default withStyles(styles)(ProfileCard);
+//   export default withStyles(styles)(ProfileCard);
+  export default compose(
+      withStyles(styles),
+      connect(mapStateToProps)
+  )(ProfileCard);
