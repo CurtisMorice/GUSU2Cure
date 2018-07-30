@@ -4,6 +4,7 @@ import Nav from '../../Global/Nav/Nav';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 import DropdownSearch from './Local/DropdownSearch';
+import SearchBar from './Local/SearchBar';
 
 
 const mapStateToProps = state => ({
@@ -32,6 +33,7 @@ class Landing extends Component {
         <Nav />
         <div>
           <DropdownSearch />
+          <SearchBar />
         </div>
       </div>
     );
