@@ -6,6 +6,9 @@ import Nav from '../../Global/Nav/Nav';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 
+// Components
+import ArticleList from './Local/ArticleList';
+import UserHomeProfile from './Local/UserHomeProfile';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -18,7 +21,7 @@ class UserHome extends Component {
 
   componentDidUpdate() {
     if (!this.props.user.isLoading && this.props.user.user === null) {
-      this.props.history.push('home');
+      // this.props.history.push('home');
     }
   }
 
@@ -33,7 +36,6 @@ class UserHome extends Component {
     if (this.props.user.user) {
       content = (
         <div>
-
           <h1
             id="welcome"
           >
@@ -44,6 +46,8 @@ class UserHome extends Component {
           >
             Log Out
           </button>
+          <UserHomeProfile/>
+          <p>hello</p>
         </div>
       );
     }
@@ -52,6 +56,7 @@ class UserHome extends Component {
       <div>
         <Nav />
         { content }
+        <UserHomeProfile/>
       </div>
     );
   }
