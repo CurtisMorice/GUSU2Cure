@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from '../../../../../../../../Library/Caches/typescript/2.8/node_modules/@types/redux-logger/node_modules/redux';
 
 //components
 
@@ -21,7 +22,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { compose } from '../../../../../../../../Library/Caches/typescript/2.8/node_modules/@types/redux-logger/node_modules/redux';
+import Button from '@material-ui/core/Button';
+import EditIcon from '@material-ui/icons/Edit';
 
 //ReduxStore
 const mapStateToProps = state => ({
@@ -65,26 +67,22 @@ class ProfileCard extends React.Component {
     };
   
     componentDidMount(){
-        this.getUserProfile();
+
     }
 
     handleExpandClick = () => {
       this.setState(state => ({ expanded: !state.expanded }));
     };
 
-    getUserProfile = (id) => {
-        id = this.props.user.user.id;
-        console.log(id);
-        // this.props.dispatch({type: , payload: id})
+    editProfile = () => {
+        console.log('hello')
     }
-  
+
     render() {
         const { classes } = this.props;        
       return (
         <div>
-        {JSON.stringify(this.props.user.user.username)}
-        {/* {this.props.user} */}
-
+        {/* {JSON.stringify(this.props.user.user.username)} */}
           <Card className={classes.card}>
             <CardHeader
               avatar={
@@ -97,14 +95,14 @@ class ProfileCard extends React.Component {
             //       <MoreVertIcon />
             //     </IconButton>
             //   }
+            action={
+                <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={this.editProfile}>
+                <EditIcon/>
+                </IconButton>
+            }
               title={this.props.user.user.username}
             //   subheader="September 14, 2016"
             />
-            {/* <CardMedia
-              className={classes.media}
-              image="/static/images/cards/paella.jpg"
-              title="Contemplative Reptile"
-            /> */}
             <CardContent>
               <Typography component="p">
                 Email: {this.props.user.user.email}
@@ -137,7 +135,7 @@ class ProfileCard extends React.Component {
             <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
               <CardContent>
                 <Typography>
-                  Bio
+                    {this.props.user.user.bio}
                 </Typography>
               </CardContent>
             </Collapse>
