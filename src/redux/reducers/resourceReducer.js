@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import {RESOURCE_ACTIONS} from '../actions/resourceActions';
 
 const resource = (state=[], action) => {
-    switch(aciton.type) {
+    switch(action.type) {
         case RESOURCE_ACTIONS.SHOW_RESOURCES:
             console.log('in resource reducer for GET', action.payload);
             return action.payload;

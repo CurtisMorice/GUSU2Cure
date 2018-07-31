@@ -5,7 +5,7 @@ import {getResources, postResource, deleteResource, putResource} from '../reques
 function* fetchResources() {
     try {
         let resources = yield getResources();
-        console.log('in resource saga to get resources');
+        console.log('in resource saga to get resources', resources);
         yield put({
             type: RESOURCE_ACTIONS.SHOW_RESOURCES,
             payload: resources
