@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export function getResources() {
-    return axios.get('/api/resource')
+    return axios.get('/api/resources')
     .then(response => response.data)
     .catch((error)=>{
         console.log('error getting resources', error);
@@ -10,7 +10,7 @@ export function getResources() {
 }
 
 export function postResource(resource){
-    return axios.post('/api/resource', resource)
+    return axios.post('/api/resources', resource)
     .then((response) => {
         console.log('successfully posted resource');
     })
@@ -21,7 +21,7 @@ export function postResource(resource){
 }
 
 export function deleteResource(id){
-    return axios.delete(`/api/resource/${id}`)
+    return axios.delete(`/api/resources/${id}`)
     .then((response) => {
         console.log('successfully deleted resource');
     })
@@ -32,7 +32,7 @@ export function deleteResource(id){
 }
 
 export function putResource(resource, id){
-    return axios.put(`/api/resource/${id}`, resource)
+    return axios.put(`/api/resources/${id}`, resource)
     .then((response) => {
         console.log('successfully updated resource', response);
     })

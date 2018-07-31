@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 import Nav from '../../Global/Nav/Nav';
-
+import {RESOURCE_ACTIONS} from '../../../redux/actions/resourceActions';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 
 
 const mapStateToProps = state => ({
   user: state.user,
+  resources: state.resourceReducer.resource
 });
 
 class UserHome extends Component {
@@ -18,14 +19,14 @@ class UserHome extends Component {
         super(props);
     
         this.state = {
-          resources: ['l'],
+          resources: [],
           resourcesFetched: false
         };
       }
   
     componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.getResources();
+    this.props.dispatch({ type: RESOURCE_ACTIONS.FETCH_RESOURCES});
   }
 
   componentDidUpdate() {
@@ -39,26 +40,6 @@ class UserHome extends Component {
     // this.props.history.push('home');
   }
 
-  getResources = async () =>{
-    axios.get('api/resources').then((response)=>{
-        console.log('got resources successfully:', response.data);
-        this.setState({...this.state, resources: response.data, resourcesFetched:true});
-        
-        return response.data;  
-      })
-      .catch((error)=>{
-          console.log('error getting resources:', error);
-          return error
-      });
-    //   console.log('resources:',resources);
-    //   await this.setState({...this.state, resources: [...resources], resourcesFetched:true});
-    //   console.log('this.state:', this.state);
-  }
-
-  getCall = async ()=>{
-   
-  }
-
   render() {
     let content = null;
 
@@ -66,9 +47,10 @@ class UserHome extends Component {
       content = (
         <div>
           <h1>Resources</h1>
-          {this.state.resourcesFetched && <ol>
-              {this.state.resources.map((resource, i)=><li key={i}>{resource.name}</li>)}
-          </ol>}
+          {JSON.stringify(this.props.resources)}
+          {this.state.resourcesFetched && <ul>
+              {this.props.resources.map((resource, i)=><li key={i}>{resource.name}, {resource.url}, {resource.summary}</li>)}
+          </ul>}
         </div>
       );
     }
