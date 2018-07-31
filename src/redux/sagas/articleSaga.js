@@ -5,7 +5,7 @@ import {getArticles, postArticle, deleteArticle, putArticle} from '../requests/a
 function* fetchArticles(action) {
     try {
         let articles = yield getArticles(action.payload);
-        console.log('in article saga to get articles');
+        console.log('in article saga to get articles', articles);
         yield put({
             type: ARTICLE_ACTIONS.SHOW_ARTICLES,
             payload: articles

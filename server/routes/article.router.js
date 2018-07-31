@@ -7,7 +7,7 @@ const router = express.Router();
 router.get(`/:id`, (req, res) => {
     let id = req.params.id
     console.log('this is id',id);
-    const queryText = `SELECT * FROM articles WHERE user_id = $1`;
+    const queryText = `SELECT * FROM articles JOIN statuses ON articles.status = statuses.id WHERE user_id = $1`;
     pool.query(queryText, [id])
     .then((result)=>{
         console.log('back from database with articles', result.rows);

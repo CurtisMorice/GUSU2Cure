@@ -29,11 +29,10 @@ import EditIcon from '@material-ui/icons/Edit';
 import { USER_ACTIONS } from '../../../../redux/actions/userActions';
 import { ARTICLE_ACTIONS } from '../../../../redux/actions/articleActions';
 
-
-
 //ReduxStore
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.user,
+    articles: state.articleReducer.article
 })
 
 const styles = theme => ({
@@ -68,12 +67,10 @@ const styles = theme => ({
 class ArticleCard extends React.Component {
     state = { 
         expanded: false,
-        
-    
     };
   
     componentDidMount(){
-
+        this.getArticleDetail();
     }
 
     handleExpandClick = () => {
@@ -94,64 +91,66 @@ class ArticleCard extends React.Component {
         const { classes } = this.props;        
       return (
         <div>
-        {JSON.stringify(this.props.user.user.id)}
-          <Card className={classes.card}>
-            <CardHeader
-            //   avatar={
-            //     <Avatar aria-label="Recipe" className={classes.avatar}>
-            //       img
-            //     </Avatar>
-            //   }
-            //   action={
-            //     <IconButton>
-            //       <MoreVertIcon />
-            //     </IconButton>
-            //   }
-            action={
-                <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={this.getArticleDetail}>
-                <EditIcon/>
-                </IconButton>
-            }
-              title="Article Title Goes Here"
-            //   subheader="September 14, 2016"
-            />
-            <CardContent>
-              <Typography component="p">
-                Date Submitted:
-              </Typography>
-              <Typography component="p">
-                Status:
-              </Typography>
-            </CardContent>
-            <CardActions className={classes.actions} disableActionSpacing>
-                <Typography>
-                    Article
-                </Typography>
-              {/* <IconButton aria-label="Add to favorites">
-                <FavoriteIcon />
-              </IconButton>
-              <IconButton aria-label="Share">
-                <ShareIcon />
-              </IconButton> */}
-              <IconButton
-                className={classnames(classes.expand, {
-                  [classes.expandOpen]: this.state.expanded,
-                })}
-                onClick={this.handleExpandClick}
-                aria-expanded={this.state.expanded}
-                aria-label="Show more"
-              >
-                <ExpandMoreIcon />
-              </IconButton>
-            </CardActions>
-            <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-              <CardContent>
-                <Typography>
-                    {this.props.user.user.bio}
-                </Typography>
-              </CardContent>
-            </Collapse>
-          </Card>
+            {this.props.articles.map((detail) => 
+                <Card className={classes.card}>
+                <CardHeader
+                //   avatar={
+                //     <Avatar aria-label="Recipe" className={classes.avatar}>
+                //       img
+                //     </Avatar>
+                //   }
+                //   action={
+                //     <IconButton>
+                //       <MoreVertIcon />
+                //     </IconButton>
+                //   }
+                action={
+                    <IconButton variant="fab" color="secondary" aria-label="Edit" >
+                    <EditIcon/>
+                    </IconButton>
+                }
+                  title={detail.research_title}
+                //   subheader="September 14, 2016"
+                />
+    
+                <CardContent>
+                  <Typography component="p">
+                    Date Submitted: {detail.date_posted}
+                  </Typography>
+                  <Typography component="p">
+                    Status: <h3>{detail.status}</h3>
+                  </Typography>
+                </CardContent>
+                <CardActions className={classes.actions} disableActionSpacing>
+                    <Typography>
+                        Article
+                    </Typography>
+                  {/* <IconButton aria-label="Add to favorites">
+                    <FavoriteIcon />
+                  </IconButton>
+                  <IconButton aria-label="Share">
+                    <ShareIcon />
+                  </IconButton> */}
+                  <IconButton
+                    className={classnames(classes.expand, {
+                      [classes.expandOpen]: this.state.expanded,
+                    })}
+                    onClick={this.handleExpandClick}
+                    aria-expanded={this.state.expanded}
+                    aria-label="Show more"
+                  >
+                    <ExpandMoreIcon />
+                  </IconButton>
+                </CardActions>
+                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+                  <CardContent>
+                    <Typography>
+                        {this.props.user.user.bio}
+                    </Typography>
+                  </CardContent>
+                </Collapse>
+              </Card>
+            )}
         </div>
       );
     }
