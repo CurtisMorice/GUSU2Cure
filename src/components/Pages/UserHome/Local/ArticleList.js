@@ -110,10 +110,8 @@ class ArticleCard extends React.Component {
                     </IconButton>
                 }
                   title={detail.research_title}
-                //   subheader="September 14, 2016"
                 />
-    
-                <CardContent>
+                <CardContent id="articleStatus">
                   <Typography component="p">
                     Date Submitted: {detail.date_posted}
                   </Typography>
@@ -121,16 +119,16 @@ class ArticleCard extends React.Component {
                     Status: <h3>{detail.status}</h3>
                   </Typography>
                 </CardContent>
-                <CardActions className={classes.actions} disableActionSpacing>
+                {/* <CardActions className={classes.actions} disableActionSpacing>
                     <Typography>
                         Article
                     </Typography>
-                  {/* <IconButton aria-label="Add to favorites">
+                  <IconButton aria-label="Add to favorites">
                     <FavoriteIcon />
                   </IconButton>
                   <IconButton aria-label="Share">
                     <ShareIcon />
-                  </IconButton> */}
+                  </IconButton>
                   <IconButton
                     className={classnames(classes.expand, {
                       [classes.expandOpen]: this.state.expanded,
@@ -148,7 +146,7 @@ class ArticleCard extends React.Component {
                         {this.props.user.user.bio}
                     </Typography>
                   </CardContent>
-                </Collapse>
+                </Collapse> */}
               </Card>
             )}
         </div>

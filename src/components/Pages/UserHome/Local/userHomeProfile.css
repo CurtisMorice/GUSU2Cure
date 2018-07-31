@@ -12,7 +12,11 @@
     border: 1px solid #fff;
     padding: 20px;
     font-size: 30px;
-    text-align: center;
+    text-align: left;
+}
+
+#articleStatus {
+    text-align: left;
 }
 
 .article {
