@@ -2,20 +2,27 @@
     display: grid;
     /* grid-template-columns: auto auto 150px; */
     grid-template-columns: 300px auto 150px;
-    background-color: #ff320d;
+    background-color: #ffffff;
     padding: 10px;
     border-radius: 10px;
   }
 
 .grid {
-    background-color: #80cbc4;
+    background-color: #ffffff;
     border: 1px solid #fff;
     padding: 20px;
     font-size: 30px;
-    text-align: center;
+    text-align: left;
+}
+
+#articleStatus {
+    text-align: left;
 }
 
 .article {
     justify-self: center;
+}
 
+.actionButton {
+    float: right;
 }
