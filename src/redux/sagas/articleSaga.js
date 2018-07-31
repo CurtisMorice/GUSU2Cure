@@ -2,10 +2,10 @@ import {put, takeLatest} from 'redux-saga/effects';
 import {ARTICLE_ACTIONS} from '../actions/articleActions';
 import {getArticles, postArticle, deleteArticle, putArticle} from '../requests/articleRequests';
 
-function* fetchArticles() {
+function* fetchArticles(action) {
     try {
-        let articles = yield getArticles();
-        console.log('in article saga to get articles');
+        let articles = yield getArticles(action.payload);
+        console.log('in article saga to get articles', articles);
         yield put({
             type: ARTICLE_ACTIONS.SHOW_ARTICLES,
             payload: articles
