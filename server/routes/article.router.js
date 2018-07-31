@@ -4,11 +4,13 @@ const router = express.Router();
 
 // LEAVE THIS HERE FOR NOW FOR USE AS TEMPLATE
 
-router.get('/', (req, res) => {
-    const queryText = `SELECT * FROM articles`;
-    pool.query(queryText)
+router.get(`/:id`, (req, res) => {
+    let id = req.params.id
+    console.log('this is id',id);
+    const queryText = `SELECT * FROM articles WHERE user_id = $1`;
+    pool.query(queryText, [id])
     .then((result)=>{
-        console.log('back from database with articles');
+        console.log('back from database with articles', result.rows);
         res.send(result.rows);
     })
     .catch((error)=>{
