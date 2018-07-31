@@ -25,6 +25,12 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
 
+//actions
+import { USER_ACTIONS } from '../../../../redux/actions/userActions';
+import { ARTICLE_ACTIONS } from '../../../../redux/actions/articleActions';
+
+
+
 //ReduxStore
 const mapStateToProps = state => ({
     user: state.user
@@ -78,11 +84,17 @@ class ArticleCard extends React.Component {
         console.log('hello')
     }
 
+    getArticleDetail = (id) => {
+        id = this.props.user.user.id;
+        console.log(id);
+        this.props.dispatch({type: ARTICLE_ACTIONS.FETCH_ARTICLES, payload: id});
+    }
+
     render() {
         const { classes } = this.props;        
       return (
         <div>
-        {/* {JSON.stringify(this.props.user.user.username)} */}
+        {JSON.stringify(this.props.user.user.id)}
           <Card className={classes.card}>
             <CardHeader
             //   avatar={
@@ -96,24 +108,24 @@ class ArticleCard extends React.Component {
             //     </IconButton>
             //   }
             action={
-                <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={this.editProfile}>
+                <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={this.getArticleDetail}>
                 <EditIcon/>
                 </IconButton>
             }
-              title={this.props.user.user.username}
+              title="Article Title Goes Here"
             //   subheader="September 14, 2016"
             />
             <CardContent>
               <Typography component="p">
-                Email: {this.props.user.user.email}
+                Date Submitted:
               </Typography>
               <Typography component="p">
-                Contact: {this.props.user.user.contact_info}
+                Status:
               </Typography>
             </CardContent>
             <CardActions className={classes.actions} disableActionSpacing>
                 <Typography>
-                    User Bio
+                    Article
                 </Typography>
               {/* <IconButton aria-label="Add to favorites">
                 <FavoriteIcon />

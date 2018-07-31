@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export function getArticles() {
-    return axios.get('/api/article')
+    return axios.get('/api/articles')
     .then(response => response.data)
     .catch((error)=>{
         console.log('error getting articles', error);
