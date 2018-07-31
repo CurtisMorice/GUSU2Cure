@@ -24,6 +24,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 
 //actions
 import { USER_ACTIONS } from '../../../../redux/actions/userActions';
@@ -104,11 +105,6 @@ class ArticleCard extends React.Component {
                 //       <MoreVertIcon />
                 //     </IconButton>
                 //   }
-                action={
-                    <IconButton variant="fab" color="secondary" aria-label="Edit" >
-                    <EditIcon/>
-                    </IconButton>
-                }
                   title={detail.research_title}
                 />
                 <CardContent id="articleStatus">
@@ -116,7 +112,7 @@ class ArticleCard extends React.Component {
                     Date Submitted: {detail.date_posted}
                   </Typography>
                   <Typography component="p">
-                    Status: <h3>{detail.status}</h3>
+                    <h3>Status: {detail.status}</h3>
                   </Typography>
                 </CardContent>
                 {/* <CardActions className={classes.actions} disableActionSpacing>
@@ -147,6 +143,14 @@ class ArticleCard extends React.Component {
                     </Typography>
                   </CardContent>
                 </Collapse> */}
+                <CardActions className="actionButton">
+                    <IconButton variant="fab" color="primary" aria-label="Edit">
+                        <EditIcon/>
+                    </IconButton>
+                    <IconButton variant="fab" color="secondary" aria-label="Edit">
+                        <DeleteRoundedIcon/>
+                    </IconButton>
+                </CardActions>
               </Card>
             )}
         </div>
