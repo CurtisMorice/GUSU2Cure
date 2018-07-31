@@ -5,7 +5,7 @@ const router = express.Router();
 // LEAVE THIS HERE FOR NOW FOR USE AS TEMPLATE
 
 router.get('/', (req, res) => {
-    const queryText = `SELECT * FROM articles;`;
+    const queryText = `SELECT * FROM articles`;
     pool.query(queryText)
     .then((result)=>{
         console.log('back from database with articles');
