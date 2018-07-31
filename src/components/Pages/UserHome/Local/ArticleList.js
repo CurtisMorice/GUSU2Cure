@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from '../../../../../../../../Library/Caches/typescript/2.8/node_modules/@types/redux-logger/node_modules/redux';
+import { compose } from 'redux';
 
 //components
 
