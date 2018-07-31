@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 //components
 import ProfileCard from './Card';
+import ArticleCard from './ArticleList';
 
 //stylesheets
 import './userHomeProfile.css';
@@ -29,11 +30,10 @@ class UserHomeProfile extends Component{
 
                 {/* GRID 2 */}
                 <div className="grid"> 
-                    <p>grid 2 User History/Post Status goes here</p>
                     <h3>History</h3>
                     <br/>
-                    <div>
-                    <p>cards go here</p>
+                    <div className="article">
+                    <ArticleCard/>
                     </div>
                 </div>
 

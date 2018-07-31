@@ -7,7 +7,7 @@ import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 
 // Components
-import ArticleList from './Local/ArticleList';
+import ArticleCard from './Local/ArticleList';
 import UserHomeProfile from './Local/UserHomeProfile';
 
 const mapStateToProps = state => ({
