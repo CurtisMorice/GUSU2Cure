@@ -35,10 +35,10 @@ class Landing extends Component {
         <div>
           <Grid container spacing={24}>
             <Grid item xs={12} />
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <DropdownSearch />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={8}>
               <SearchBar />  
             </Grid>
           </Grid>
