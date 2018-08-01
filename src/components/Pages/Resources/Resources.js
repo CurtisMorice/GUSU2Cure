@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import './Resources.css'
 
 import Nav from '../../Global/Nav/Nav';
 import {RESOURCE_ACTIONS} from '../../../redux/actions/resourceActions';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
+
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
+import LoginModal from '../../Global/Modals/LoginModal';
 
 
 const mapStateToProps = state => ({
@@ -17,10 +25,7 @@ class UserHome extends Component {
   
     constructor(props) {
         super(props);
-    
         this.state = {
-          resources: [],
-          resourcesFetched: false
         };
       }
   
@@ -47,10 +52,18 @@ class UserHome extends Component {
       content = (
         <div>
           <h1>Resources</h1>
-          {JSON.stringify(this.props.resources)}
-          {this.state.resourcesFetched && <ul>
-              {this.props.resources.map((resource, i)=><li key={i}>{resource.name}, {resource.url}, {resource.summary}</li>)}
-          </ul>}
+          {this.props.resources.resourcesFetched && <div className="resourceDiv">
+              {this.props.resources.articles.map((resource, i) => 
+                <Card key={i} className="resourceCards">
+                  <CardContent>
+                  <Typography>
+                  <p>{resource.name}</p>
+                  <p>{resource.url}</p>
+                  <p>{resource.summary}</p>
+                  </Typography>
+                  </CardContent>
+                </Card>)}
+          </div>}
         </div>
       );
     }
@@ -58,6 +71,7 @@ class UserHome extends Component {
     return (
       <div>
         <Nav />
+        {/* <LoginModal/> */}
         { content }
       </div>
     );
