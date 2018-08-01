@@ -13,6 +13,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
+import LoginModal from '../../Global/Modals/LoginModal';
+
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -23,7 +25,6 @@ class UserHome extends Component {
   
     constructor(props) {
         super(props);
-    
         this.state = {
         };
       }
@@ -70,6 +71,7 @@ class UserHome extends Component {
     return (
       <div>
         <Nav />
+        {/* <LoginModal/> */}
         { content }
       </div>
     );
