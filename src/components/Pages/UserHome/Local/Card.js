@@ -96,8 +96,8 @@ class ProfileCard extends React.Component {
             //     </IconButton>
             //   }
             action={
-                <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={this.editProfile}>
-                <EditIcon/>
+                <IconButton variant="fab" color="primary" aria-label="Edit" onClick={this.editProfile}>
+                  <EditIcon/>
                 </IconButton>
             }
               title={this.props.user.user.username}

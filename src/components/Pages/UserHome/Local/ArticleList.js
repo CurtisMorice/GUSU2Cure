@@ -112,7 +112,7 @@ class ArticleCard extends React.Component {
                     Date Submitted: {detail.date_posted}
                   </Typography>
                   <Typography component="p">
-                    <h3>Status: {detail.status}</h3>
+                    Status: {detail.status}
                   </Typography>
                 </CardContent>
                 {/* <CardActions className={classes.actions} disableActionSpacing>
