@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from '../../../../../../../../Library/Caches/typescript/2.8/node_modules/@types/redux-logger/node_modules/redux';
+import { compose } from 'redux';
 
 //components
 
@@ -24,6 +24,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 
 //actions
 import { USER_ACTIONS } from '../../../../redux/actions/userActions';
@@ -104,33 +105,26 @@ class ArticleCard extends React.Component {
                 //       <MoreVertIcon />
                 //     </IconButton>
                 //   }
-                action={
-                    <IconButton variant="fab" color="secondary" aria-label="Edit" >
-                    <EditIcon/>
-                    </IconButton>
-                }
                   title={detail.research_title}
-                //   subheader="September 14, 2016"
                 />
-    
-                <CardContent>
+                <CardContent id="articleStatus">
                   <Typography component="p">
                     Date Submitted: {detail.date_posted}
                   </Typography>
                   <Typography component="p">
-                    Status: <h3>{detail.status}</h3>
+                    <h3>Status: {detail.status}</h3>
                   </Typography>
                 </CardContent>
-                <CardActions className={classes.actions} disableActionSpacing>
+                {/* <CardActions className={classes.actions} disableActionSpacing>
                     <Typography>
                         Article
                     </Typography>
-                  {/* <IconButton aria-label="Add to favorites">
+                  <IconButton aria-label="Add to favorites">
                     <FavoriteIcon />
                   </IconButton>
                   <IconButton aria-label="Share">
                     <ShareIcon />
-                  </IconButton> */}
+                  </IconButton>
                   <IconButton
                     className={classnames(classes.expand, {
                       [classes.expandOpen]: this.state.expanded,
@@ -148,7 +142,15 @@ class ArticleCard extends React.Component {
                         {this.props.user.user.bio}
                     </Typography>
                   </CardContent>
-                </Collapse>
+                </Collapse> */}
+                <CardActions className="actionButton">
+                    <IconButton variant="fab" color="primary" aria-label="Edit">
+                        <EditIcon/>
+                    </IconButton>
+                    <IconButton variant="fab" color="secondary" aria-label="Edit">
+                        <DeleteRoundedIcon/>
+                    </IconButton>
+                </CardActions>
               </Card>
             )}
         </div>

@@ -1,75 +1,67 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import FormControl from '@material-ui/core/FormControl';
+import '../Landing.css';
 
 const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  flex: {
+    flexGrow: 1,
+  },
+  searchButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
   },
-  margin: {
+  input: {
     margin: theme.spacing.unit,
+    color: 'white',
   },
-  cssFocused: {},
-
-  bootstrapRoot: {
-    padding: 0,
-    'label + &': {
-      marginTop: theme.spacing.unit * 3,
-    },
+  textField: {
+    flexBasis: 200,
   },
-  bootstrapInput: {
-    borderRadius: 4,
-    backgroundColor: theme.palette.common.white,
-    border: '1px solid #ced4da',
-    fontSize: 16,
-    padding: '10px 12px',
-    width: '100%',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-    '&:focus': {
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-    },
-  },
-  bootstrapFormLabel: {
-    fontSize: 18,
+  button: {
+    margin: theme.spacing.unit,
   },
 });
 
 function SearchBar(props) {
   const { classes } = props;
-
   return (
-    <div className={classes.container}>
-      <TextField
-        defaultValue="Search Google Maps"
-        label="Search"
-        id="search-input"
-        InputProps={{
-          disableUnderline: true,
-          classes: {
-            root: classes.bootstrapRoot,
-            input: classes.bootstrapInput,
-          },
-        }}
-        InputLabelProps={{
-          shrink: true,
-          className: classes.bootstrapFormLabel,
-        }}
-      />
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton className={classes.searchButton} color="inherit" aria-label="search icon">
+            <SearchIcon />
+          </IconButton>
+          <FormControl inputTypeSearch fullWidth  className={classes.margin}>
+            <Input
+                type="search"
+                id="full-width"
+                disableUnderline="true"
+                placeholder="Search Google Maps"
+                className={classes.input}
+                color="white"
+                inputProps={{
+                  'aria-label': 'Search Input',
+                }}
+              />
+          </FormControl>
+          <Button variant="contained" className={classes.button} aria-label="search" color="primary">Search</Button>
+        </Toolbar>
+      </AppBar>
     </div>
   );
 }
