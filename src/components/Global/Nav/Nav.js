@@ -11,10 +11,12 @@ import { connect } from 'react-redux';
 import { LOGIN_ACTIONS } from '../../../redux/actions/loginActions';
 import { compose } from 'recompose';
 import LoginModal from '../Modals/LoginModal';
-import RegisterModal from '../Modals/RegisterModal';
+import { triggerLogout } from '../../../redux/actions/loginActions';
+import { USER_ACTIONS } from '../../../redux/actions/userActions';
 
 const mapStateToProps = state => ({
   user: state.user,
+  login: state.login
 });
 
 const logout = () => {
@@ -39,19 +41,31 @@ const styles = theme => ({
   },
 });
 
-function Nav(props) {
-  const { classes } = props;
-  const loginButton = props.isLogin ? (
-    <Button component={Link} onClick={logout} to="/" variant="contained" className={classes.button} color="secondary" aria-label="Log Out">
+class Nav extends React.Component {
+  componentDidMount() {
+    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+  }
+
+  componentDidUpdate() {
+    if (!this.props.user.isLoading && this.props.user.user === null) {
+      // this.props.history.push('home');
+    }
+  }
+
+  logout = () => {
+    this.props.dispatch(triggerLogout());
+  }
+
+  render() {
+  let content = null;
+  const { classes } = this.props;
+
+  const loginButton = this.props.user.user ? (
+    <Button onClick={this.logout} variant="contained" className={classes.button} color="secondary" aria-label="Log Out">
       Log Out
       <Icon className={classes.rightIcon}>lock_closed</Icon>
     </Button>
     ) : (<LoginModal />);
-    
-    // (<Button component={Link} to="/login" variant="contained" className={classes.button} color="primary" aria-label="Log in" style={{ flex: 1 }}>
-    //       Login
-    //       <Icon className={classes.rightIcon}>lock_open</Icon>
-    //     </Button>);
 
   return (
     <div className={classes.root}>
@@ -65,41 +79,37 @@ function Nav(props) {
               </Button>  
             </Grid>
             <Grid item>
-              <Button component={Link} to="/user-profile" variant="contained" className={classes.button} color="primary" aria-label="UserProfile">
-                User Profile
-                <Icon className={classes.rightIcon}>info</Icon>  
-              </Button>  
-            </Grid>
-            <Grid item>
               <Button component={Link} to="/resources" variant="contained" className={classes.button} color="primary" aria-label="Resources">
                 Resources
                 <Icon className={classes.rightIcon}>library_books</Icon>
               </Button>  
             </Grid>
-          </Grid>
-          <Grid container justify='flex-end'>
             <Grid item>
-              {/* <Button component={Link} to="/register" variant="contained" className={classes.button} color="primary" aria-label="Register" style={{ flex: 1 }}>
+              {this.props.user.user && <Button component={Link} to="/user-profile" variant="contained" className={classes.button} color="primary" aria-label="UserProfile">
+                User Profile
+                <Icon className={classes.rightIcon}>info</Icon>  
+              </Button>}  
+            </Grid>
+          </Grid>
+          {/* <Grid container justify='flex-end'>
+            <Grid item>
+            {!this.props.user.user && <Button component={Link} to="/register" variant="contained" className={classes.button} color="primary" aria-label="Register" style={{ flex: 1 }}>
                 Register
                 <Icon className={classes.rightIcon}>person_add</Icon>
-              </Button>   */}
-              <RegisterModal />
+            </Button>}  
             </Grid>
             <Grid item>
               { loginButton }  
             </Grid>
-          </Grid>
+          </Grid> */}
         </Toolbar>
       </AppBar>
     </div>
-  )
+  )}
 };
 
 Nav.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default compose(
-  withStyles(styles),
-  connect(mapStateToProps)
-)(Nav);
+export default compose(withStyles(styles),connect(mapStateToProps))(Nav);

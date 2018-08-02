@@ -54,9 +54,11 @@ class UserHome extends Component {
                 <Card key={i} className="resourceCards">
                   <CardContent>
                   <Typography>
-                  <p>{resource.name}</p>
-                  <p>{resource.url}</p>
-                  <p>{resource.summary}</p>
+                  {resource.name}
+                  <br/>
+                  {resource.url}
+                  <br/>
+                  {resource.summary}
                   </Typography>
                   </CardContent>
                 </Card>)}
