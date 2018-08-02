@@ -8,25 +8,9 @@
   }
 
 .grid {
-    background-color: #da0f0f;
+    background-color: #f40000;
     border: 1px solid #fff;
     padding: 20px;
     font-size: 30px;
     text-align: left;
-}
-
-#articleStatus {
-    text-align: left;
-}
-
-.article {
-    justify-self: center;
-}
-
-.actionButton {
-    float: right;
-}
-
-#articleHeader {
-    text-align: center;
 }

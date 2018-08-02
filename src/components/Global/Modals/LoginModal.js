@@ -61,6 +61,7 @@ class LoginModal extends React.Component {
         this.props.dispatch(formError());
     } else if (this.state.username != this.props.username || this.state.password != this.props.password) {
         this.props.dispatch(formError2());
+
     } else {
       this.props.dispatch(triggerLogin(this.state.username, this.state.password));
       this.handleClose();
@@ -104,7 +105,8 @@ class LoginModal extends React.Component {
                 onChange={this.handleInputChangeFor('username')}/>
             </label>
             <label htmlFor="password">
-              Password: <input type="password"
+
+              Password: <input type="text"
                 name="password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}/>

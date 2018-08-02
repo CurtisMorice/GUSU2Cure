@@ -15,6 +15,9 @@ import UserHome from './components/Pages/UserHome/UserHome';
 import RegisterPage from './components/Pages/RegisterPage/RegisterPage';
 import Resources from './components/Pages/Resources/Resources';
 
+import Admin from './components/Pages/Admin/Admin';
+
+
 import './styles/main.css';
 
 const theme = createMuiTheme({
@@ -34,7 +37,6 @@ const theme = createMuiTheme({
   },
 });
 
-const App = () => (
   <MuiThemeProvider theme={theme}>
     <div>
       <Header />
@@ -62,6 +64,11 @@ const App = () => (
             component={Resources}
           />
           
+        <Route 
+          path="/admin"
+          component={Admin}
+        />
+              
           {/* OTHERWISE (no path!) */}
           <Route render={() => <h1>404</h1>} />
 
