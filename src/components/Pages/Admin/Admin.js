@@ -7,14 +7,16 @@ import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 
 // Components
-import ArticleCard from './Local/ArticleList';
-import UserHomeProfile from './Local/UserHomeProfile';
+import AdminHomeProfile from './Local/AdminHomeProfile';
+
+
+// styles
 
 const mapStateToProps = state => ({
   user: state.user,
 });
 
-class UserHome extends Component {
+class AdminHome extends Component {
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
@@ -36,12 +38,17 @@ class UserHome extends Component {
     if (this.props.user.user) {
       content = (
         <div>
-          <h1
+          {/* <h1
             id="welcome"
           >
             Welcome, { this.props.user.user.username }!
-          </h1>
-          <UserHomeProfile/>
+          </h1> */}
+          <button
+            onClick={this.logout}
+          >
+            Log Out
+          </button>
+          <AdminHomeProfile/>
         </div>
       );
     }
@@ -56,5 +63,4 @@ class UserHome extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(UserHome);
-
+export default connect(mapStateToProps)(AdminHome);
