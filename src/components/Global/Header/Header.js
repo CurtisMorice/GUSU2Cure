@@ -6,14 +6,16 @@ import { Link } from 'react-router-dom';
 import Icon from '@material-ui/core/Icon';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
-import { LOGIN_ACTIONS} from '../../../redux/actions/loginActions';
+import { LOGIN_ACTIONS, triggerLogout} from '../../../redux/actions/loginActions';
 import { compose } from 'recompose';
 import LoginModal from '../Modals/LoginModal';
 import RegisterModal from '../Modals/RegisterModal';
+import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import './Header.css';
 
 const mapStateToProps = state => ({
   user: state.user,
+  login: state.login,
 });
 
 const logout = () => {
@@ -39,10 +41,26 @@ const styles = theme => ({
 });
 
 class Header extends React.Component {
+  componentDidMount() {
+    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+  }
+
+  componentDidUpdate() {
+    if (!this.props.user.isLoading && this.props.user.user === null) {
+      // this.props.history.push('home');
+    }
+  }
+
+  logout = () => {
+    this.props.dispatch(triggerLogout());
+  }
+
   render() {
+    let content = null;
     const { classes } = this.props;
-    const loginButton = this.props.isLogin ? (
-      <Button onClick={logout} variant="contained" className={classes.button} color="secondary" aria-label="Log Out">
+
+    const loginButton = this.props.user.user ? (
+      <Button onClick={this.logout} variant="contained" className={classes.button} color="secondary" aria-label="Log Out">
         Log Out
         <Icon className={classes.rightIcon}>lock_closed</Icon>
       </Button>
@@ -69,6 +87,11 @@ class Header extends React.Component {
     );
   }
  }
+
+Header.proptypes = {
+  classes: PropTypes.object.isRequired,
+};
+
 export default compose(
   withStyles(styles),
   connect(mapStateToProps)
