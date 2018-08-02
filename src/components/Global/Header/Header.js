@@ -73,13 +73,16 @@ class Header extends React.Component {
 
             <Grid item xs={10}>
               <div className="App-header">
-                <h1 className="App-title"><br />Spinal Cord Injury Research Map Database</h1>
+                <h1 className="App-title"><br /><br />Spinal Cord Injury Research Map Database</h1>
               </div> 
             </Grid>
-            <Grid item xs={2}>
-              <br /><br />
-              { loginButton }
-              <RegisterModal />
+            <Grid item xs={2} alignItems="center" justify="flex-end">
+              <div className="App-header">
+                <br />
+                { loginButton }
+                <RegisterModal />
+              
+              </div>
             </Grid>
           </Grid>
         </div> 
