@@ -20,18 +20,22 @@ class AdminHomeProfile extends Component{
         return(
             <div className="container">
                 <div className="grid"> 
-
+                    1
                 </div>
 
                 {/* GRID 2 */}
                 <div className="grid" id="articleHeader"> 
-
+                    2
                 </div>
 
                 {/* GRID 3 */}
                 <div className="grid">  
-                
+                    3
                 </div>
+
+                <div className='grid'>4</div>
+                <div className='grid'>5</div>
+                <div className='grid'>6</div>
             </div>
         )
     }
