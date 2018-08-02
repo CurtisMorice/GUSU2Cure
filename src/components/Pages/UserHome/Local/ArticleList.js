@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 //components
+import DeleteArticle from '../../../Global/Article/Article';
 
 //material-ui
 import PropTypes from 'prop-types';
@@ -147,9 +148,10 @@ class ArticleCard extends React.Component {
                     <IconButton variant="fab" color="primary" aria-label="Edit">
                         <EditIcon/>
                     </IconButton>
-                    <IconButton variant="fab" color="secondary" aria-label="Edit">
+                    <IconButton variant="fab" color="secondary" aria-label="Edit" >
                         <DeleteRoundedIcon/>
                     </IconButton>
+                    {/* <DeleteArticle /> */}
                 </CardActions>
               </Card>
             )}
