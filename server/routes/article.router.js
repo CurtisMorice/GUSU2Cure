@@ -19,6 +19,19 @@ router.get(`/:id`, (req, res) => {
     })
 });
 
+router.get('/', (req, res) => {
+    const queryText = `SELECT articles.*, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id;`;
+    pool.query(queryText)
+    .then((result)=>{
+        console.log('back from database with articles');
+        res.send(result.rows);
+    })
+    .catch((error)=>{
+        console.log('error getting articles:', error);
+        res.sendStatus(500);
+    })
+});
+
 // first has to insert into locations and return id, then inserts that into articles
 router.post('/', (req, res) => {
     const address = req.body.address;

@@ -1,0 +1,4 @@
+export const MAP_ACTIONS = {
+    SET_ADDRESS: 'SET_ADDRESS',
+    RECENTER: 'RECENTER'
+}
