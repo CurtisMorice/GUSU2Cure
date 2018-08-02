@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { LOGIN_ACTIONS } from '../../../redux/actions/loginActions';
 import { compose } from 'recompose';
 import LoginModal from '../Modals/LoginModal';
+import RegisterModal from '../Modals/RegisterModal';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 
@@ -91,8 +92,9 @@ class Nav extends React.Component {
               </Button>}  
             </Grid>
           </Grid>
-          {/* <Grid container justify='flex-end'>
+         <Grid container justify='flex-end'>
             <Grid item>
+              <RegisterModal />
             {!this.props.user.user && <Button component={Link} to="/register" variant="contained" className={classes.button} color="primary" aria-label="Register" style={{ flex: 1 }}>
                 Register
                 <Icon className={classes.rightIcon}>person_add</Icon>

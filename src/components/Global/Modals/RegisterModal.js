@@ -122,24 +122,28 @@ class RegisterModal extends React.Component {
                 onChange={this.handleInputChangeFor('username')}/>
             </label>
             <label htmlFor="password">
-              Password: <input type="text"
+              Password: <input type="password"
+
                 name="password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}/>
             </label>
             <label htmlFor="email">
+
               Email: <input type="text"
                 name="email"
                 value={this.state.email}
                 onChange={this.handleInputChangeFor('email')}/>
             </label>
             <label htmlFor="bio">
+
               Biography: <input type="text"
                 name="bio"
                 value={this.state.bio}
                 onChange={this.handleInputChangeFor('bio')}/>
             </label>
             <label htmlFor="contact_info">
+
               Contact Information: <input type="text"
                 name="contact_info"
                 value={this.state.contact_info}
