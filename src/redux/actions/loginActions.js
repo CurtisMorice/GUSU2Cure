@@ -31,3 +31,10 @@ export function formError() {
     payload: 'Enter your username and password!',
   };
 }
+
+export function formError2() {
+  return {
+    type: LOGIN_ACTIONS.INPUT_ERROR,
+    payload: 'You entered the wrong username or password.'
+  };
+}

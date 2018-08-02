@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux';
 import {RESOURCE_ACTIONS} from '../actions/resourceActions';
 
-const resource = (state=[], action) => {
+const resource = (state={articles: [],resourcesFetched: false}, action) => {
     switch(action.type) {
         case RESOURCE_ACTIONS.SHOW_RESOURCES:
             console.log('in resource reducer for GET', action.payload);
-            return action.payload;
+            return {...state, articles: action.payload, resourcesFetched: true};
         case RESOURCE_ACTIONS.POST_RESOURCE:
             console.log('in resource reducer for POST', action.payload);
             return [action.payload]
