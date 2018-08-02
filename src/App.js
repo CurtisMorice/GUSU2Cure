@@ -37,6 +37,7 @@ const theme = createMuiTheme({
   },
 });
 
+const App = () => (
   <MuiThemeProvider theme={theme}>
     <div>
       <Header />
@@ -76,7 +77,6 @@ const theme = createMuiTheme({
       </Router>
     </div>
   </MuiThemeProvider>
-
 );
 
 export default App;
