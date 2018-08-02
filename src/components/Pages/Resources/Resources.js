@@ -12,6 +12,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import AddResourceModal from '../../Global/Modals/AddResourceModal';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -49,6 +50,7 @@ class UserHome extends Component {
       content = (
         <div>
           <h1>Resources</h1>
+          <AddResourceModal />
           {this.props.resources.resourcesFetched && <div className="resourceDiv">
               {this.props.resources.articles.map((resource, i) => 
                 <Card key={i} className="resourceCards">
