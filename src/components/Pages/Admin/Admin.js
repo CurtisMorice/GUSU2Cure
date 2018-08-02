@@ -9,7 +9,6 @@ import { triggerLogout } from '../../../redux/actions/loginActions';
 // Components
 import AdminHomeProfile from './Local/AdminHomeProfile';
 
-
 // styles
 
 const mapStateToProps = state => ({

@@ -8,6 +8,10 @@ import Button from '@material-ui/core/Button';
 
 import './adminHomeProfile.css';
 
+//Components
+import ProfileCard from '../../UserHome/Local/Card';
+import { Typography } from '@material-ui/core';
+
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -20,18 +24,22 @@ class AdminHomeProfile extends Component{
         return(
             <div className="container">
                 <div className="grid"> 
-
+                    <ProfileCard/>
                 </div>
 
                 {/* GRID 2 */}
                 <div className="grid" id="articleHeader"> 
-
+                    <h3>Administrator Home</h3>
                 </div>
 
                 {/* GRID 3 */}
                 <div className="grid">  
-                
+                    3
                 </div>
+
+                <div className='grid'>4</div>
+                <div className='grid'>5</div>
+                <div className='grid'>6</div>
             </div>
         )
     }
