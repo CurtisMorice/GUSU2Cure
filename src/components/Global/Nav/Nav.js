@@ -103,7 +103,7 @@ class Nav extends React.Component {
             <Grid item>
               { loginButton }  
             </Grid>
-          </Grid> */}
+          </Grid>
         </Toolbar>
       </AppBar>
     </div>
