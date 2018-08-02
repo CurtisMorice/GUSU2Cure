@@ -83,7 +83,7 @@ class LoginModal extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Button className={classes.button} onClick={this.handleClickOpen}>Login<Icon>lock_open</Icon></Button>
+        <Button className={classes.button} variant="contained" color="primary" aria-label="Log In" onClick={this.handleClickOpen}>Login<Icon>lock_open</Icon></Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}

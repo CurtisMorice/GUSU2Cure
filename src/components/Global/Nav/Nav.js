@@ -14,6 +14,7 @@ import LoginModal from '../Modals/LoginModal';
 import RegisterModal from '../Modals/RegisterModal';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
+import SearchBar from '../../Pages/Landing/Local/SearchBar';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -91,8 +92,11 @@ class Nav extends React.Component {
                 <Icon className={classes.rightIcon}>info</Icon>  
               </Button>}  
             </Grid>
+            {/* <Grid item xs={8}>
+              <SearchBar />
+            </Grid> */}
           </Grid>
-         <Grid container justify='flex-end'>
+         {/* <Grid container justify='flex-end'>
             <Grid item>
               <RegisterModal />
             {!this.props.user.user && <Button component={Link} to="/register" variant="contained" className={classes.button} color="primary" aria-label="Register" style={{ flex: 1 }}>
@@ -103,7 +107,7 @@ class Nav extends React.Component {
             <Grid item>
               { loginButton }  
             </Grid>
-          </Grid>
+          </Grid> */}
         </Toolbar>
       </AppBar>
     </div>
