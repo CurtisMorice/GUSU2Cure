@@ -8,6 +8,12 @@ import ArticleCard from './ArticleList';
 //stylesheets
 import './userHomeProfile.css';
 
+//materiaul-ui
+import AddCircle from '@material-ui/icons/Add';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+
+
 const mapStateToProps = state => ({
 
 });
@@ -26,10 +32,13 @@ class UserHomeProfile extends Component{
                 {/* GRID 1 */}
                 <div className="grid"> 
                     <ProfileCard/>
+                    <Button variant="contained" color="primary" aria-label="Add">
+                        Add a New Resource
+                    </Button>
                 </div>
 
                 {/* GRID 2 */}
-                <div className="grid"> 
+                <div className="grid" id="articleHeader"> 
                     <h3>History</h3>
                     <br/>
                     <div className="article">
@@ -38,7 +47,7 @@ class UserHomeProfile extends Component{
                 </div>
 
                 {/* GRID 3 */}
-                <div className="grid"> grid 3</div>
+                <div className="grid">  </div>
             </div>
         )
     }

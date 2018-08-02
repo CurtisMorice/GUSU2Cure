@@ -1,0 +1,8 @@
+.resourceCards {
+    text-align: center;
+    width: 500px;
+    margin: auto;
+    overflow: auto;
+    display: block;
+    background-size:auto;
+}
