@@ -7,9 +7,10 @@ import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 
 // Components
+import AdminHomeProfile from './Local/AdminHomeProfile';
+
 
 // styles
-import 'admin.css';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -47,7 +48,7 @@ class AdminHome extends Component {
           >
             Log Out
           </button>
-
+          <AdminHomeProfile/>
         </div>
       );
     }
