@@ -81,26 +81,10 @@ class LoginModal extends React.Component {
     this.setState({ open: false });
   };
 
-//   renderAlert() {
-//     if (this.props.login.message !== '') {
-//       return (
-//         <h2
-//           className="alert"
-//           role="alert"
-//         >
-//           { this.props.login.message }
-//         </h2>
-//       );
-//     }
-//     return (<span />);
-//   }
-
   render() {
     const { classes } = this.props;
     return (
       <div>
-        {/* { this.renderAlert() } */}
-       
         <Button className={classes.button} onClick={this.handleClickOpen}>Login<Icon>lock_open</Icon></Button>
         <Dialog
           open={this.state.open}
@@ -128,7 +112,7 @@ class LoginModal extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <input type="submit" value="LOGIN" color="primary" autoFocus/>
+            <input type="submit" value="Login" color="primary" autoFocus/>
             <input onClick={this.handleClose}  type="button" value="Cancel"/> 
           </DialogActions>
           </form>
