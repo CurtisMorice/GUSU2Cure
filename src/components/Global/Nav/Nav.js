@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { LOGIN_ACTIONS } from '../../../redux/actions/loginActions';
 import { compose } from 'recompose';
 import LoginModal from '../Modals/LoginModal';
+import RegisterModal from '../Modals/RegisterModal';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -78,10 +79,11 @@ function Nav(props) {
           </Grid>
           <Grid container justify='flex-end'>
             <Grid item>
-              <Button component={Link} to="/register" variant="contained" className={classes.button} color="primary" aria-label="Register" style={{ flex: 1 }}>
+              {/* <Button component={Link} to="/register" variant="contained" className={classes.button} color="primary" aria-label="Register" style={{ flex: 1 }}>
                 Register
                 <Icon className={classes.rightIcon}>person_add</Icon>
-              </Button>  
+              </Button>   */}
+              <RegisterModal />
             </Grid>
             <Grid item>
               { loginButton }  
