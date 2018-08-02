@@ -59,9 +59,6 @@ class LoginModal extends React.Component {
     event.preventDefault();
     if (this.state.username === '' || this.state.password === '') {
         this.props.dispatch(formError());
-    } else if (this.state.username != this.props.username || this.state.password != this.props.password) {
-        this.props.dispatch(formError2());
-
     } else {
       this.props.dispatch(triggerLogin(this.state.username, this.state.password));
       this.handleClose();
