@@ -20,6 +20,21 @@ const mapStateToProps = state => ({
     resources: state.resourceReducer.resource
 })
 
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+    },
+    flex: {
+        flexGrow: 1,
+    },
+    button: {
+        margin: theme.spacing.unit,
+    },
+    rightIcon: {
+        marginRight: theme.spacing.unit,
+    },
+    });
+
 class AddResourceModal extends React.Component {
     constructor(props) {
         super(props);
@@ -45,11 +60,12 @@ class AddResourceModal extends React.Component {
             .then((response) => {
                 if (response.status === 201) {
                 this.handleClose();
-                } else {
-                this.setState({
-                    message: 'Ooops! We were not able ',
-                });
-                }
+                } 
+                // else {
+                // this.setState({
+                //     message: 'Ooops! We were not able to post that resource.',
+                // });
+                // }
             })
             .catch(() => {
                 this.setState({
@@ -77,7 +93,7 @@ class AddResourceModal extends React.Component {
         const { classes } = this.props;
         return (
           <div>
-            <Button className={classes.button} onClick={this.handleClickOpen}>Register<Icon>person_add</Icon></Button>
+            <Button className={classes.button} onClick={this.handleClickOpen}>Add a resource</Button>
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
