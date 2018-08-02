@@ -1,0 +1,16 @@
+.container {
+    display: grid;
+    /* grid-template-columns: auto auto 150px; */
+    grid-template-columns: 300px auto 150px;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+.grid {
+    background-color: #ffffff;
+    border: 1px solid #fff;
+    padding: 20px;
+    font-size: 30px;
+    text-align: left;
+}
