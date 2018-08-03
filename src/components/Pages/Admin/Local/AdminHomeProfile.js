@@ -12,6 +12,7 @@ import './adminHomeProfile.css';
 import ProfileCard from '../../UserHome/Local/Card';
 import { Typography } from '@material-ui/core';
 
+import AdminNav from '../Local/AdminNav';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -30,6 +31,7 @@ class AdminHomeProfile extends Component{
                 {/* GRID 2 */}
                 <div className="grid" id="articleHeader"> 
                     <h3>Administrator Home</h3>
+                    <AdminNav/>
                 </div>
 
                 {/* GRID 3 */}

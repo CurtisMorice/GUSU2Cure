@@ -8,6 +8,7 @@ import { triggerLogout } from '../../../redux/actions/loginActions';
 
 // Components
 import AdminHomeProfile from './Local/AdminHomeProfile';
+// import AdminNav from './Local/AdminNav';
 
 // styles
 
@@ -42,11 +43,12 @@ class AdminHome extends Component {
           >
             Welcome, { this.props.user.user.username }!
           </h1> */}
-          <button
+          {/* <button
             onClick={this.logout}
           >
             Log Out
-          </button>
+          </button> */}
+          {/* <AdminNav/> */}
           <AdminHomeProfile/>
         </div>
       );
