@@ -13,6 +13,8 @@ import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import '../Landing.css';
 import { MAP_ACTIONS } from '../../../../redux/actions/mapActions';
+import Autocomplete from 'react-google-autocomplete';
+
 
 const styles = theme => ({
   root: {
@@ -99,17 +101,40 @@ class SearchBar extends React.Component{
             <SearchIcon />
           </IconButton>
           <FormControl inputTypeSearch fullWidth  className={classes.margin}>
-            <Input
-                type="search"
-                id="full-width"
-                disableUnderline="true"
-                placeholder="Search Google Maps"
-                className={classes.input}
-                color="white"
-                inputProps={{
-                  'aria-label': 'Search Input',
-                }}
-                onChange={this.handleInputChangeFor("searchAddress")}
+          <Autocomplete
+           id="full-width"
+           className={classes.input}
+          inputProps={{
+            'aria-label': 'Search Input',
+          }}
+          onChange={this.handleInputChangeFor("searchAddress")}
+           style={{width: '99%',
+            height:'50px',
+            fontSize:'18px',
+            disableUnderline:"true",
+            placeholder:"Search Google Maps",
+            color:"white",
+            backgroundColor: "#475c87",
+
+          }}
+          onPlaceSelected={(place) => {
+            console.log(place);
+          }}
+          types={['(regions)']}
+          componentRestrictions={{country: "ru"}}
+
+            // <Input
+            //     type="search"
+            //     id="full-width"
+            //     disableUnderline="true"
+            //     placeholder="Search Google Maps"
+            //     className={classes.input}
+            //     color="white"
+            //     inputProps={{
+            //       'aria-label': 'Search Input',
+            //     }}
+            //     onChange={this.handleInputChangeFor("searchAddress")}
+            //   />
               />
           </FormControl>
           <Button variant="contained" onClick={()=>this.googleApiCall(this.state.searchAddress)} className={classes.button} aria-label="search" color="primary">Search</Button>
