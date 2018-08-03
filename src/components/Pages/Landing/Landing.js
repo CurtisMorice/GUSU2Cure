@@ -57,7 +57,7 @@ class Landing extends Component {
               <DropdownSearch />
             </Grid>
             <Grid item xs={8}>
-              <div>
+              <div style={{ height: `800px`, width: `auto`, flex: 'auto' }}>
             <Map /> 
             </div>
             </Grid>

@@ -63,7 +63,7 @@ const mapStateToProps = state => ({
       let MyMap = (withScriptjs(withGoogleMap(()=>{
         return <GoogleMap
         defaultZoom={12}
-        defaultCenter={{ lat:44.9778, lng:-93.258133}}
+        center={{ lat:this.props.mapReducer.mapReducer.location.lat, lng:this.props.mapReducer.mapReducer.location.lng}}
         // center={this.props.mapReducer.mapReducer.location === null ? null : {lat:this.props.mapReducer.mapReducer.location.lat, lng:this.props.map.mapReducer.location.lng}}
         >
         {this.state.articles.map((article, i)=> <Marker key={i} lat={article.lat} lng={article.lng}/>)}

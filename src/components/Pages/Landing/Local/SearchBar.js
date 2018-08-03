@@ -98,13 +98,10 @@ class SearchBar extends React.Component{
           <IconButton className={classes.searchButton} color="inherit" aria-label="search icon">
             <SearchIcon />
           </IconButton>
-          <FormControl inputTypeSearch fullWidth  className={classes.margin}>
+          <FormControl fullWidth  className={classes.margin}>
           <Autocomplete
            id="full-width"
            className={classes.input}
-          inputProps={{
-            'aria-label': 'Search Input',
-          }}
           placeholder="Search Google Maps"
           onChange={this.handleInputChangeFor("searchAddress")}
            style={{width: '99%',
