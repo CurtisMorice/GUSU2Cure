@@ -8,7 +8,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
-
 import { LOGIN_ACTIONS } from '../../../redux/actions/loginActions';
 import { triggerLogin, formError, clearError, formError2 } from '../../../redux/actions/loginActions';
 import Icon from '@material-ui/core/Icon';
@@ -103,7 +102,7 @@ class RegisterModal extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Button className={classes.button} variant="contained" color="grey" aria-label="Register" onClick={this.handleClickOpen}>Register<Icon>person_add</Icon></Button>
+        <Button className={classes.button} variant="contained" aria-label="Register" onClick={this.handleClickOpen}>Register<Icon>person_add</Icon></Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
