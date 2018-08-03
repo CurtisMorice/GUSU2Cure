@@ -18,10 +18,10 @@ import Autocomplete from 'react-google-autocomplete';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 'auto',
   },
   flex: {
-    flexGrow: 1,
+    flexGrow: 'auto',
   },
   searchButton: {
     marginLeft: -12,
@@ -109,6 +109,7 @@ class SearchBar extends React.Component{
           }}
           onChange={this.handleInputChangeFor("searchAddress")}
            style={{width: '99%',
+            flex:'auto',
             height:'50px',
             fontSize:'18px',
             disableUnderline:"true",
