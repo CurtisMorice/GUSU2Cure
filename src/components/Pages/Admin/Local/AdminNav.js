@@ -6,6 +6,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
+//components
+import UserTable from './UserTable';
+
 function TabContainer(props) {
   return (
     <Typography component="div" style={{ padding: 8 * 3 }}>
@@ -51,7 +54,7 @@ class SimpleTabs extends React.Component {
         {value === 0 && <TabContainer>New articles waiting for reviews go here - Cards</TabContainer>}
         {value === 1 && <TabContainer>Modified articles awaiting review go here - Cards</TabContainer>}
         {value === 2 && <TabContainer>Catalogue of all articles go here - Sortable Table</TabContainer>}
-        {value === 3 && <TabContainer>All registered users go here - Table</TabContainer>}
+        {value === 3 && <TabContainer> <UserTable /> </TabContainer>}
       </div>
     );
   }
