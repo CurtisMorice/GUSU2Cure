@@ -13,6 +13,7 @@ const resourceRouter = require('./routes/resource.router');
 const articleRouter = require('./routes/article.router');
 const profileRouter = require('./routes/profile.router');
 const commentRouter = require('./routes/comment.router');
+const adminRouter = require('./routes/admin.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +32,7 @@ app.use('/api/resources', resourceRouter);
 app.use('/api/articles', articleRouter);
 app.use('/api/profiles', profileRouter);
 app.use('/api/comments', commentRouter);
+app.use('/api/admin', adminRouter);
 
 // Serve static files
 app.use(express.static('build'));
