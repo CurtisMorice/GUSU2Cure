@@ -69,14 +69,13 @@ class Header extends React.Component {
     return (
       <div className={classes.root}>
         <div className="App">
-          <Grid container spacing={12}>
-
+          <Grid container>
             <Grid item xs={10}>
               <div className="App-header">
                 <h1 className="App-title"><br /><br />Spinal Cord Injury Research Map Database</h1>
               </div> 
             </Grid>
-            <Grid item xs={2} alignItems="center" justify="flex-end">
+            <Grid item xs={2} >
               <div className="App-header">
                 <br />
                 { loginButton }
