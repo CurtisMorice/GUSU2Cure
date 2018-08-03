@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import {MAP_ACTIONS} from '../actions/mapActions';
 
-const mapReducer = (state={location: null}, action) => {
+const mapReducer = (state={location: {lat:44.9778, lng:-93.258133}}, action) => {
     switch(action.type) {
         case MAP_ACTIONS.SET_ADDRESS:
             console.log('in mapReducer with payload', action.payload);
