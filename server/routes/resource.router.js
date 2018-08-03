@@ -35,7 +35,7 @@ router.put('/:id', (req, res) =>{
     const id = req.params.id;
     const name = req.body.name;
     const url = req.body.url;
-    const summary = req.body.name;
+    const summary = req.body.summary;
     const queryText = `UPDATE resources SET name=$1, url=$2, summary=$3 WHERE id=$4;`
     pool.query(queryText, [name, url, summary, id])
     .then(()=>{

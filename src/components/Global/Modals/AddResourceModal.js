@@ -10,6 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 
 import { LOGIN_ACTIONS } from '../../../redux/actions/loginActions';
+import {RESOURCE_ACTIONS} from '../../../redux/actions/resourceActions';
 import { triggerLogin, formError, clearError, formError2 } from '../../../redux/actions/loginActions';
 import Icon from '@material-ui/core/Icon';
 import { compose } from 'recompose';
@@ -39,41 +40,32 @@ class AddResourceModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            resource: {
             name: '',
             url: '',
             summary: '',
             date_created: ''
+            }
         }
     }
     addResource = (event) => {
         event.preventDefault();
-        if (this.state.user.user.type === 'admin') {
+        // if (this.state.user.user.type === 'admin') {
             const body = {
             name: this.state.name,
             url: this.state.url,
             summary: this.state.summary,
             date_created: this.state.date_created
             };
-    
-            // making the request to the server to post the new user's registration
-            axios.post('/api/resources', body)
-            .then((response) => {
-                if (response.status === 201) {
-                this.handleClose();
-                } 
-                // else {
-                // this.setState({
-                //     message: 'Ooops! We were not able to post that resource.',
-                // });
-                // }
+            console.log('body:',body);
+            const action = ({
+                type: RESOURCE_ACTIONS.POST_RESOURCE,
+                payload: body
             })
-            .catch(() => {
-                this.setState({
-                message: 'Ooops! Something went wrong! Is the server running?',
-                });
-            });
-        }
-        } // end registerUser
+            this.props.dispatch(action);
+            this.handleClose();
+        // }
+    }
         
         handleInputChangeFor = propertyName => (event) => {
             this.setState({
@@ -93,7 +85,7 @@ class AddResourceModal extends React.Component {
         const { classes } = this.props;
         return (
           <div>
-            <Button className={classes.button} onClick={this.handleClickOpen}>Add a resource</Button>
+            <Button className={classes.button} onClick={this.handleClickOpen} variant="contained" color="primary">Add a new resource</Button>
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
@@ -102,7 +94,7 @@ class AddResourceModal extends React.Component {
             >
             <DialogTitle id="alert-dialog-title">{"Register"}</DialogTitle>
               {this.state.message}
-              <form onSubmit={this.registerUser}>
+              <form onSubmit={this.addResource}>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
                 <label htmlFor="name">
@@ -115,7 +107,7 @@ class AddResourceModal extends React.Component {
                   Url: <input type="text"
                     name="url"
                     value={this.state.url}
-                    onChange={this.handleInputChangeFor('password')}/>
+                    onChange={this.handleInputChangeFor('url')}/>
                 </label>
                 <label htmlFor="summary">
                   Summary: <input type="text"

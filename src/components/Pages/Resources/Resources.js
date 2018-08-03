@@ -13,6 +13,14 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import AddResourceModal from '../../Global/Modals/AddResourceModal';
+import EditResource from '../../Global/Modals/EditResourceModal'
+
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -43,6 +51,15 @@ class UserHome extends Component {
     // this.props.history.push('home');
   }
 
+  removeResource = (id) => {
+    console.log('in removeResource');
+    const action = ({
+      type: RESOURCE_ACTIONS.DELETE_RESOURCE,
+      payload: id
+    })
+    this.props.dispatch(action);
+  }
+
   render() {
     let content = null;
 
@@ -56,16 +73,19 @@ class UserHome extends Component {
                 <Card key={i} className="resourceCards">
                   <CardContent>
                   <Typography>
-
-                  {resource.name}
+                  Title: {resource.name}
                   <br/>
-                  {resource.url}
+                  Url: {resource.url}
                   <br/>
-                  {resource.summary}
+                  Summary: {resource.summary}
                   </Typography>
+                  <EditResource resource={resource}/>
+                  <IconButton size="small" variant="contained" color="primary" onClick={() => this.removeResource(resource.id)}><DeleteIcon/></IconButton>
                   </CardContent>
                 </Card>)}
+      
           </div>}
+          <br/>
         </div>
       );
     }
