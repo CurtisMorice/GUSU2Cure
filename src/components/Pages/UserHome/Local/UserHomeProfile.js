@@ -32,9 +32,6 @@ class UserHomeProfile extends Component{
                 {/* GRID 1 */}
                 <div className="grid"> 
                     <ProfileCard/>
-                    <Button variant="contained" color="primary" aria-label="Add">
-                        Add a New Resource
-                    </Button>
                 </div>
 
                 {/* GRID 2 */}
