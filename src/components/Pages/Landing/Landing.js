@@ -16,6 +16,7 @@ import  {
 import axios from 'axios';
 
 
+
 const mapStateToProps = state => ({
   user: state.user,
   mapReducer: state.mapReducer
@@ -85,7 +86,7 @@ class Landing extends Component {
             <MyMap
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHHRhTzzE5wUoHuZKmTJdTzD7sBFxvXB0&v=3.exp&libraries=geometry,drawing,places"
             loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `800px`, width: `1000px`, position:"relative", left: '500px' }} />}
+            containerElement={<div style={{ height: `800px`, width: `auto`, flex: 'auto' }} />}
             mapElement={<div style={{ height: `100%` }} />}
             />
             </div>
