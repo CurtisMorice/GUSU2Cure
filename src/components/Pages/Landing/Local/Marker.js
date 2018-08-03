@@ -36,9 +36,7 @@ import  {
         render( ) {
   
             let parsedLat = parseFloat(this.props.lat);
-            let parsedLng = parseFloat(this.props.lng);
-            console.log('parsedLat:', parsedLat);
-            
+            let parsedLng = parseFloat(this.props.lng);            
 
           return (
             <Marker

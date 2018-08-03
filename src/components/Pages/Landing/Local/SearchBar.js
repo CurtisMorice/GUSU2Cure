@@ -60,19 +60,19 @@ class SearchBar extends React.Component{
     }
   }
 
-  googleApiCall = (searchAddress) => async(event) => {
+  googleApiCall = (event) => {
     event.preventDefault();
     console.log('googleApiCall');
-    console.log('searchAddress:',searchAddress);
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${searchAddress}&key=AIzaSyD9e9e4rYBfPVZsPiKNBvQ8Ciu5yGPlfq8&`
+    console.log('searchAddress:', this.state.searchAddress);
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.searchAddress}&key=AIzaSyD9e9e4rYBfPVZsPiKNBvQ8Ciu5yGPlfq8&`
     console.log('url:', url);
     
-    await axios.get(url)
-    .then(async (response) => {
+    axios.get(url)
+    .then((response) => {
         const latLng = {...response.data.results[0]}
         console.log('latLng:', latLng);
-         await this.props.dispatch({type: MAP_ACTIONS.SET_ADDRESS, payload: latLng})
-        await this.props.dispatch({type: MAP_ACTIONS.RECENTER})
+        this.props.dispatch({type: MAP_ACTIONS.SET_ADDRESS, payload: latLng})
+        this.props.dispatch({type: MAP_ACTIONS.RECENTER})
     })
          .catch(err => {
            console.log(err)                     //Axios entire error message
@@ -105,6 +105,7 @@ class SearchBar extends React.Component{
           inputProps={{
             'aria-label': 'Search Input',
           }}
+          placeholder="Search Google Maps"
           onChange={this.handleInputChangeFor("searchAddress")}
            style={{width: '99%',
             flex:'auto',
@@ -120,7 +121,7 @@ class SearchBar extends React.Component{
             console.log(place);
           }}
           types={['(regions)']}
-          componentRestrictions={{country: "ru"}}
+          // componentRestrictions={{country: "ru"}}
 
             // <Input
             //     type="search"
@@ -136,7 +137,7 @@ class SearchBar extends React.Component{
             //   />
               />
           </FormControl>
-          <Button variant="contained" onClick={this.googleApiCall(this.state.searchAddress)} className={classes.button} aria-label="search" color="primary">Search</Button>
+          <Button variant="contained" onClick={this.googleApiCall} className={classes.button} aria-label="search" color="primary">Search</Button>
         </Toolbar>
       </AppBar>
     </div>
