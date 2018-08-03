@@ -58,7 +58,8 @@ class SearchBar extends React.Component{
     }
   }
 
-  googleApiCall = async (searchAddress) => {
+  googleApiCall = (searchAddress) => async(event) => {
+    event.preventDefault();
     console.log('googleApiCall');
     console.log('searchAddress:',searchAddress);
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${searchAddress}&key=AIzaSyD9e9e4rYBfPVZsPiKNBvQ8Ciu5yGPlfq8&`
@@ -68,7 +69,7 @@ class SearchBar extends React.Component{
     .then(async (response) => {
         const latLng = {...response.data.results[0]}
         console.log('latLng:', latLng);
-        await this.props.dispatch({type: MAP_ACTIONS.SET_ADDRESS, payload: latLng})
+         await this.props.dispatch({type: MAP_ACTIONS.SET_ADDRESS, payload: latLng})
         await this.props.dispatch({type: MAP_ACTIONS.RECENTER})
     })
          .catch(err => {
@@ -80,10 +81,7 @@ class SearchBar extends React.Component{
 
   handleInputChangeFor = propName => (event) => {
     event.preventDefault();
-    console.log('propName:', propName);
-    console.log('event.target.value:', event.target.value);
     this.setState({...this.state, [propName]: event.target.value})
-    console.log(this.state.searchAddress);
   }
 
   render( ) {
@@ -112,7 +110,7 @@ class SearchBar extends React.Component{
                 onChange={this.handleInputChangeFor("searchAddress")}
               />
           </FormControl>
-          <Button variant="contained" onClick={()=>this.googleApiCall(this.state.searchAddress)} className={classes.button} aria-label="search" color="primary">Search</Button>
+          <Button variant="contained" onClick={this.googleApiCall(this.state.searchAddress)} className={classes.button} aria-label="search" color="primary">Search</Button>
         </Toolbar>
       </AppBar>
     </div>
