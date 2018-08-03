@@ -63,6 +63,7 @@ class Landing extends Component {
   }
 
   render() {
+    // try to put this into its own component and put that into the return below
     let MyMap = (withScriptjs(withGoogleMap(()=>{
       return <GoogleMap
       defaultZoom={12}
