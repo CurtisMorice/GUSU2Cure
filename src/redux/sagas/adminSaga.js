@@ -6,9 +6,9 @@ import {getAllUsers} from '../requests/adminRequest';
 function* fetchAllUser(action) {
     try {
         let allUsers = yield getAllUsers(action.payload);
-        console.log('in article saga to get articles', allUsers);
+        console.log('in article saga to get all users', allUsers);
         yield put({
-            type: ADMIN_ACTIONS.SHOW_ALL_USER,
+            type: ADMIN_ACTIONS.SET_ALL_USER,
             payload: allUsers
         });
     } catch (error) {

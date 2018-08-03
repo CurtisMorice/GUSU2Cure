@@ -32,7 +32,7 @@ app.use('/api/resources', resourceRouter);
 app.use('/api/articles', articleRouter);
 app.use('/api/profiles', profileRouter);
 app.use('/api/comments', commentRouter);
-// app.use('/api/admin', adminRouter);
+app.use('/api/admin', adminRouter);
 
 // Serve static files
 app.use(express.static('build'));
