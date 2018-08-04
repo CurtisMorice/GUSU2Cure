@@ -92,7 +92,7 @@ class AddResourceModal extends React.Component {
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">{"Register"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Add a new resource!"}</DialogTitle>
               {this.state.message}
               <form onSubmit={this.addResource}>
               <DialogContent>

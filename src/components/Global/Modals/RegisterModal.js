@@ -102,7 +102,7 @@ class RegisterModal extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Button className={classes.button} variant="contained" aria-label="Register" onClick={this.handleClickOpen}>Register<Icon>person_add</Icon></Button>
+        {!this.props.user.user && <Button className={classes.button} variant="contained" aria-label="Register" onClick={this.handleClickOpen}>Register<Icon>person_add</Icon></Button>}
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}

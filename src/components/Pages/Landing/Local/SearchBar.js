@@ -51,7 +51,6 @@ const mapStateToProps = state => ({
 
 class SearchBar extends React.Component{
 
-
   constructor(props){
     super(props);
     this.state = {
@@ -92,18 +91,19 @@ class SearchBar extends React.Component{
 
 
   return (
-         <div className={classes.root}>
+    <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <IconButton className={classes.searchButton} color="inherit" aria-label="search icon">
             <SearchIcon />
           </IconButton>
           <FormControl fullWidth  className={classes.margin}>
-          <Autocomplete
-           id="full-width"
-           className={classes.input}
-          placeholder="Search Google Maps"
-          onChange={this.handleInputChangeFor("searchAddress")}
+          {/* TODO STRETCH GOAL  */}
+          {/* <Autocomplete
+            id="full-width"
+            className={classes.input}
+            placeholder="Search Google Maps"
+            onChange={this.handleInputChangeFor("searchAddress")}
            style={{width: '99%',
             flex:'auto',
             height:'50px',
@@ -118,21 +118,21 @@ class SearchBar extends React.Component{
             console.log(place);
           }}
           types={['(regions)']}
-          // componentRestrictions={{country: "ru"}}
+          // componentRestrictions={{country: "ru"}} */}
 
-            // <Input
-            //     type="search"
-            //     id="full-width"
-            //     disableUnderline="true"
-            //     placeholder="Search Google Maps"
-            //     className={classes.input}
-            //     color="white"
-            //     inputProps={{
-            //       'aria-label': 'Search Input',
-            //     }}
-            //     onChange={this.handleInputChangeFor("searchAddress")}
-            //   />
-              />
+          <Input
+            type="search"
+            id="full-width"
+            disableUnderline="true"
+            placeholder="Search Google Maps"
+            className={classes.input}
+            color="white"
+            inputProps={{
+              'aria-label': 'Search Input',
+            }}
+            onChange={this.handleInputChangeFor("searchAddress")}
+
+            />
           </FormControl>
           <Button variant="contained" onClick={this.googleApiCall} className={classes.button} aria-label="search" color="primary">Search</Button>
         </Toolbar>
