@@ -44,7 +44,7 @@ handleUpdate = (resource) => (event) => {
     console.log('event happened', event.target.value);
     this.setState({
         updatedResource: {
-            ...this.state.updatedResource,
+            ...this.props.resource,
             [resource]: event.target.value
         }
     })
