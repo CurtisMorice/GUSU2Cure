@@ -9,3 +9,13 @@ export function getAllUsers() {
             throw error.response || error;
         }))
 }
+
+export function getApprovedArticles() {
+    console.log('in get approved articles request in the admin');
+    return axios.get('/api/admin/articles')
+        .then(response => response.data)
+        .catch((error) => {
+            console.log('error getting approved articles', error);
+            throw error.response || error;
+        })
+}   

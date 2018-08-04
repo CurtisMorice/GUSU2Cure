@@ -24,13 +24,14 @@ import { compose } from 'redux';
 // import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 //components
-import UserList from './UserList';
+
+
 
 //Actions
 import { ADMIN_ACTIONS } from '../../../../redux/actions/adminActions';
 
 const mapStateToProps = state => ({
-  allUsers: state.adminReducer
+  allUsers: state.adminReducer.allUser
 })
 
 class UserTable extends Component{

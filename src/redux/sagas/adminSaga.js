@@ -1,6 +1,6 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import {ADMIN_ACTIONS} from '../actions/adminActions';
-import {getAllUsers} from '../requests/adminRequest';
+import { getAllUsers, getApprovedArticles } from '../requests/adminRequest';
 
 
 function* fetchAllUser(action) {
@@ -12,13 +12,26 @@ function* fetchAllUser(action) {
             payload: allUsers
         });
     } catch (error) {
-        console.log('error in article saga on GET', error);   
+        console.log('error in admin saga on GET', error);   
     }
 }
 
+function* fetchArticlesApproved(action) {
+    try {
+        let approvedArticles = yield getApprovedArticles(action.payload);
+        console.log(approvedArticles);
+        yield put({
+            type: ADMIN_ACTIONS.SET_APPROVED_ARTICLE,
+            payload: approvedArticles
+        })
+    } catch (error) {
+        console.log('error in admin saga getting approved articles');
+    }
+}
 
 function* adminSaga() {
     yield takeLatest(ADMIN_ACTIONS.FETCH_ALL_USER, fetchAllUser);
-  }
+    yield takeLatest(ADMIN_ACTIONS.FETCH_APPROVED_ARTICLE, fetchArticlesApproved);
+}
   
   export default adminSaga;
