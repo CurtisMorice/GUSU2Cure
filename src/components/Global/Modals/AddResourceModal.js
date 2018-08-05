@@ -85,14 +85,14 @@ class AddResourceModal extends React.Component {
         const { classes } = this.props;
         return (
           <div>
-            <Button className={classes.button} onClick={this.handleClickOpen} variant="contained" color="primary">Add a new resource</Button>
+            <Button className={classes.button} onClick={this.handleClickOpen}>Add a new resource</Button>
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">{"Add a new resource!"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Register"}</DialogTitle>
               {this.state.message}
               <form onSubmit={this.addResource}>
               <DialogContent>
