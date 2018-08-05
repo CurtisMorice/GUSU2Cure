@@ -34,6 +34,7 @@ router.post('/register', (req, res, next) => {
       const profileQueryText = `INSERT INTO profiles (user_id, bio, contact_info) VALUES ($1, $2, $3)`
       pool.query(profileQueryText, [user_id, bio, contact_info]).then(()=>{
         console.log('user profile created');
+        //registration email here?
         res.sendStatus(201);
       }).catch((error)=>{
         console.log('error creating user profile:', error);
