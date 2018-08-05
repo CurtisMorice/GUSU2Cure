@@ -12,6 +12,8 @@ import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import { renderComponent } from 'recompose';
 
+import DeleteSnackbar from '../Snackbars/DeleteSnackbar';
+
 const mapStateToProps = state => ({
     user: state.user,
     resources: state.resourceReducer.resource
@@ -22,7 +24,7 @@ class EditResource extends React.Component {
         super();
         this.state = {
             updatedResource: {
-        
+          
             }
         }
     }
@@ -40,12 +42,13 @@ handleClose = () => {
     this.setState({ open: false });
 };
 
-handleUpdate = (resource) => (event) => {
+handleUpdate = (propertyName) => (event) => {
     console.log('event happened', event.target.value);
     this.setState({
         updatedResource: {
-            ...this.props.resource,
-            [resource]: event.target.value
+            ...this.state.updatedResource,
+            id: this.props.resource.id,
+            [propertyName]: event.target.value
         }
     })
 }
