@@ -58,6 +58,7 @@ class UserHome extends Component {
       payload: id
     })
     this.props.dispatch(action);
+    
   }
 
   render() {
@@ -80,7 +81,7 @@ class UserHome extends Component {
                   Summary: {resource.summary}
                   </Typography>
                   <EditResource resource={resource}/>
-                  <IconButton size="small" variant="contained" color="primary" onClick={() => this.removeResource(resource.id)}><DeleteIcon/></IconButton>
+                  <IconButton size="small" variant="contained" color="primary" onClick={() => this.removeResource(resource.id)}><DeleteIcon /></IconButton>
                   </CardContent>
                 </Card>)}
       
