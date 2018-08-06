@@ -4,11 +4,25 @@ const router = express.Router();
 
 // LEAVE THIS HERE FOR NOW FOR USE AS TEMPLATE
 
-router.get(`/:id`, (req, res) => {
-    let id = req.params.id
-    console.log('this is id',id);
-    const queryText = `SELECT articles.id, location_id, user_id, date_posted, research_date, research_title, research_type, research_phase, institution_name, institution_url, funding_source, related_articles, admin_comment, statuses.status FROM articles JOIN statuses ON articles.status = statuses.id WHERE user_id = $1`;
-    pool.query(queryText, [id])
+// router.get(`/:id`, (req, res) => {
+//     let id = req.params.id
+//     console.log('this is id',id);
+//     const queryText = `SELECT research_type.type, research_phase.phase, articles.id, location_id, user_id, date_posted, research_date, research_title, research_type, research_phase, institution_name, institution_url, funding_source, related_articles, admin_comment, statuses.status FROM articles JOIN statuses ON articles.status = statuses.id JOIN research_type on articles.research_type=research_type.id JOIN research_phase ON articles.research_phase=research_phase.id WHERE user_id = $1`;
+//     pool.query(queryText, [id])
+//     .then((result)=>{
+//         console.log('back from database with articles', result.rows);
+//         res.send(result.rows);
+//     })
+//     .catch((error)=>{
+//         console.log('error getting articles:', error);
+//         res.sendStatus(500);
+//     })
+// });
+
+router.get('/', (req, res) => {
+    // const queryText = `SELECT articles.*, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id;`;
+    const queryText = 'SELECT * FROM articles'
+    pool.query(queryText)
     .then((result)=>{
         console.log('back from database with articles', result.rows);
         res.send(result.rows);
@@ -19,15 +33,28 @@ router.get(`/:id`, (req, res) => {
     })
 });
 
-router.get('/', (req, res) => {
-    const queryText = `SELECT articles.*, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id;`;
+router.get('/type', (req, res) => {
+    const queryText = `SELECT * FROM research_type`;
     pool.query(queryText)
     .then((result)=>{
-        console.log('back from database with articles');
+        console.log('back from database with research types', result.rows);
         res.send(result.rows);
     })
     .catch((error)=>{
-        console.log('error getting articles:', error);
+        console.log('error getting research types:', error);
+        res.sendStatus(500);
+    })
+});
+
+router.get('/phase', (req, res) => {
+    const queryText = `SELECT * FROM research_phase`;
+    pool.query(queryText)
+    .then((result)=>{
+        console.log('back from database with research phases', result.rows);
+        res.send(result.rows);
+    })
+    .catch((error)=>{
+        console.log('error getting research phases:', error);
         res.sendStatus(500);
     })
 });

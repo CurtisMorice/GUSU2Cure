@@ -29,3 +29,13 @@ export function getNewArticles() {
         throw error.response || error;
         })
 }
+
+export function getModifiedArticles() {
+    console.log('in get modified articles request in the admin');
+    return axios.get('/api/admin/articles')
+    .then(response => response.data)
+    .catch((error)=>{
+        console.log('error in the getModifiedArticles');
+        throw error.response || error;
+        })
+}

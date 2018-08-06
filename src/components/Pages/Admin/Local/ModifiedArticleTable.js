@@ -6,22 +6,22 @@ import { ADMIN_ACTIONS } from '../../../../redux/actions/adminActions';
 
 
 const mapStateToProps = state => ({
-    adminReducer :state.adminReducer.newArticles,
+    adminReducer :state.adminReducer.modifiedArticles,
 })
 
 
-class NewArticleTable extends Component{
+class ModifiedArticleTable extends Component{
     state={
         value: 'New'
     }
 
     componentDidMount(){
-        this.fetchNewArticles();
+        this.fetchModifiedArticles();
     }
 
-    fetchNewArticles = () => {
+    fetchModifiedArticles = () => {
         console.log('hello, is it me your looking for ');
-        this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
+        this.props.dispatch({type: ADMIN_ACTIONS.FETCH_MODIFIED_ARTICLE});
     }
 
     render(){
@@ -34,4 +34,4 @@ class NewArticleTable extends Component{
     }
 }
 
-export default connect(mapStateToProps)(NewArticleTable);
+export default connect(mapStateToProps)(ModifiedArticleTable);

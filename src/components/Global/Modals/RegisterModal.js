@@ -13,6 +13,7 @@ import { triggerLogin, formError, clearError, formError2 } from '../../../redux/
 import Icon from '@material-ui/core/Icon';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -85,6 +86,7 @@ class RegisterModal extends React.Component {
     } // end registerUser
     
     handleInputChangeFor = propertyName => (event) => {
+        console.log('event.target.value', event.target.value, this.state);
         this.setState({
             [propertyName]: event.target.value,
         });
@@ -114,45 +116,66 @@ class RegisterModal extends React.Component {
           <form onSubmit={this.registerUser}>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-            <label htmlFor="username">
-              Username: <input type="text"
-                name="username"
+            <TextField 
+                type="text"
                 value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}/>
-            </label>
-            <label htmlFor="password">
-              Password: <input type="password"
-
-                name="password"
+                onChange={this.handleInputChangeFor('username')}
+                name="username"
+                autoFocus
+                margin="dense"
+                label="Username"
+                fullWidth
+                multiline
+            />
+             <TextField 
+                type="text"
                 value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}/>
-            </label>
-            <label htmlFor="email">
-
-              Email: <input type="text"
-                name="email"
+                onChange={this.handleInputChangeFor('password')}
+                name="password"
+                autoFocus
+                margin="dense"
+                label="Password"
+                fullWidth
+                multiline
+            />
+            <TextField 
+                type="text"
                 value={this.state.email}
-                onChange={this.handleInputChangeFor('email')}/>
-            </label>
-            <label htmlFor="bio">
-
-              Biography: <input type="text"
-                name="bio"
+                onChange={this.handleInputChangeFor('email')}
+                name="email"
+                autoFocus
+                margin="dense"
+                label="Email"
+                fullWidth
+                multiline
+            />
+            <TextField 
+                type="text"
                 value={this.state.bio}
-                onChange={this.handleInputChangeFor('bio')}/>
-            </label>
-            <label htmlFor="contact_info">
-
-              Contact Information: <input type="text"
-                name="contact_info"
+                onChange={this.handleInputChangeFor('bio')}
+                name="bio"
+                autoFocus
+                margin="dense"
+                label="Biography"
+                fullWidth
+                multiline
+            />
+            <TextField 
+                type="text"
                 value={this.state.contact_info}
-                onChange={this.handleInputChangeFor('contact_info')}/>
-            </label>
+                onChange={this.handleInputChangeFor('contact_info')}
+                name="contact_info"
+                autoFocus
+                margin="dense"
+                label="Contact Information"
+                fullWidth
+                multiline
+            />
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <input type="submit" value="Register" color="primary" autoFocus/>
-            <input onClick={this.handleClose}  type="button" value="Cancel"/> 
+            <Button type="submit" variant="contained" color="primary" autoFocus>Register</Button>
+            <Button onClick={this.handleClose}  type="button">Cancel</Button>
           </DialogActions>
           </form>
         </Dialog>

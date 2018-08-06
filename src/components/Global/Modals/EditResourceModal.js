@@ -12,7 +12,8 @@ import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import { renderComponent } from 'recompose';
 
-import DeleteSnackbar from '../Snackbars/DeleteSnackbar';
+
+// import DeleteSnackbar from '../Snackbars/DeleteSnackbar';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -111,11 +112,11 @@ updateResource = () => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} variant="contained" color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.updateResource} variant ="contained" color="primary">
+          <Button onClick={this.updateResource} variant ="contained" color="primary">
               Edit Resource
+            </Button>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
             </Button>
           </DialogActions>
         </Dialog>
