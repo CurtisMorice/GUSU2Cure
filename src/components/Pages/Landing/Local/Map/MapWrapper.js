@@ -8,6 +8,7 @@ import { MAP_ACTIONS } from '../../../../../redux/actions/mapActions';
 import { triggerLogout } from '../../../../../redux/actions/loginActions';
 import axios from 'axios';
 import Marker from './Marker';
+import {KEYS} from '../../../../../Key';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -71,6 +72,6 @@ render(){
 
 
 export default compose(connect(mapStateToProps),GoogleApiWrapper({
-  apiKey: "AIzaSyDHHRhTzzE5wUoHuZKmTJdTzD7sBFxvXB0",
+  apiKey: KEYS.GOOGLE_API_KEY,
   v: "3"
 }))(Container);

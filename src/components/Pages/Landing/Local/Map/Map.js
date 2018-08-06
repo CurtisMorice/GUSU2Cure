@@ -118,7 +118,6 @@ export class Map extends Component {
         <SearchBar setCurrentLocation={this.setCurrentLocation} />
         <div style={style} ref="map">
           Loading map...
-          {/* {this.state.articles.map((article, i)=> <Marker key={i} lat={article.lat} lng={article.lng}/>)} */}
           {this.renderChildren()}
         </div>
         </div>
