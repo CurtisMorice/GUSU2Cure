@@ -4,7 +4,7 @@ const router = express.Router();
 
 // GET all users
 router.get('/', (req, res) => {
-    const queryText = `SELECT user_id, username, email, contact_info, type FROM profiles JOIN users ON users.id = users.id;`;
+    const queryText = `SELECT user_id, username, email, contact_info, type FROM users JOIN profiles ON users.id = user_id ORDER BY users.type ASC;`;
     pool.query(queryText)
         .then((result) => {
             console.log('back from the database with all users');

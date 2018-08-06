@@ -34,8 +34,7 @@ class AdminHome extends Component {
 
   render() {
     let content = null;
-
-    if (this.props.user.user) {
+    if (this.props.user.user.type == 'admin') {
       content = (
         <div>
           {/* <h1
@@ -51,11 +50,21 @@ class AdminHome extends Component {
           {/* <AdminNav/> */}
           <AdminHomeProfile/>
         </div>
-      );
+      )
     }
+        else {
+          return(
+            content = (
+              <div>
+                {/* <h3>User Unauthorized ---> </h3> */}
+              </div>
+            )
+          )
+        }
 
     return (
       <div>
+        {JSON.stringify(this.props.user.user.type)}
         <Nav />
         { content }
       </div>
