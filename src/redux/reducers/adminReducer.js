@@ -15,13 +15,34 @@ const approvedArticle = (state = [], action) => {
     console.log('In the approve Article Reducer');
     switch(action.type) {
         case ADMIN_ACTIONS.SET_APPROVED_ARTICLE:
-            console.log(' in admin reduer for approved articles', action.payload);
+            console.log(' in admin reducer for approved articles', action.payload);
             return action.payload
         default:
             return state;
     }
 }
 
+const newArticles = (state=[], action) => {
+    console.log('In the new Article Reducer');
+    switch(action.type) {
+    case ADMIN_ACTIONS.SET_NEW_ARTICLE:
+    console.log(' in admin reducer for new articles', action.payload);
+            return action.payload
+        default: 
+            return state;
+    }
+}
+
+const modifiedArticles = (state=[], action) => {
+    console.log('In the modified Article Reducer');
+    switch(action.type) {
+    case ADMIN_ACTIONS.SET_MODIFIED_ARTICLE:
+    console.log(' in admin reducer for new articles', action.payload);
+            return action.payload
+        default: 
+            return state;
+    }
+}
 export default combineReducers({
-    allUser, approvedArticle
+    allUser, approvedArticle, newArticles, modifiedArticles,
 })

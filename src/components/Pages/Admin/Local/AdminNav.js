@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 //components
 import UserTable from './UserTable';
 import CatalogueTable from './CatalogueTable';
+import NewArticleTable from './NewArticleTable';
+import ModifiedArticleTable from './ModifiedArticleTable';
 
 function TabContainer(props) {
   return (
@@ -52,8 +54,8 @@ class SimpleTabs extends React.Component {
             <Tab label="Users" />
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer>New articles waiting for reviews go here - Cards</TabContainer>}
-        {value === 1 && <TabContainer>Modified articles awaiting review go here - Cards</TabContainer>}
+        {value === 0 && <TabContainer> <NewArticleTable /> </TabContainer>}
+        {value === 1 && <TabContainer> <ModifiedArticleTable /> </TabContainer>}
         {value === 2 && <TabContainer> <CatalogueTable /> </TabContainer>}
         {value === 3 && <TabContainer> <UserTable /> </TabContainer>}
       </div>

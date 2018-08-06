@@ -34,6 +34,7 @@ app.use('/api/profiles', profileRouter);
 app.use('/api/comments', commentRouter);
 app.use('/api/admin', adminRouter);
 
+
 // Serve static files
 app.use(express.static('build'));
 

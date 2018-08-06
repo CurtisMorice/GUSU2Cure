@@ -19,3 +19,23 @@ export function getApprovedArticles() {
             throw error.response || error;
         })
 }   
+
+export function getNewArticles() {
+    console.log('in get new articles request in the admin');
+    return axios.get('/api/admin/articles')
+    .then(response => response.data)
+    .catch((error)=>{
+        console.log('error in the getNewArticles');
+        throw error.response || error;
+        })
+}
+
+export function getModifiedArticles() {
+    console.log('in get modified articles request in the admin');
+    return axios.get('/api/admin/articles')
+    .then(response => response.data)
+    .catch((error)=>{
+        console.log('error in the getModifiedArticles');
+        throw error.response || error;
+        })
+}
