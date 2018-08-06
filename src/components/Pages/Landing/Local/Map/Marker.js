@@ -1,58 +1,3 @@
-// import React, {Component} from 'react';
-// import {InfoWindow, Marker} from 'google-maps-react';
-
-
-// export class MyMarker extends Component{
-
-//   constructor(props){
-//     super(props);
-//     this.state = {
-//       isOpen: false,
-//       markers: []
-//     }
-//   }
-  
-  
-
-//     onToggleOpen = () => {
-//       console.log('onToggleOpen');
-//       console.log('this.props:', this.props);
-//       this.setState({...this.state, isOpen: !this.state.isOpen})
-//     }
-
-//     componentWillMount() {
-//         this.setState({ markers: [] })
-//       }
-    
-//       componentDidMount() {
-        
-//       }
-
-
-//   render(){
-
-// let parsedLat = parseFloat(this.props.lat);
-//             let parsedLng = parseFloat(this.props.lng);   
-
-//     return(
-//         <div>
-//         <Marker onClick={this.onToggleOpen}
-//                 position={{ lat: parsedLat, lng: parsedLng }}
-//         />
-              
-//         <InfoWindow onClose={this.onToggleOpen}>
-//             <div>
-//               <h1>Hello</h1>
-//             </div>
-//         </InfoWindow>
-//         </div>
-//     )
-//   }
-
-// }
-
-
-
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
@@ -104,7 +49,6 @@ export class MyMarker extends Component {
       
 
       return (
-          // div MUST have width and height defined here AND in map container
         <div>
         
         </div>

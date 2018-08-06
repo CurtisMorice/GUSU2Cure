@@ -166,7 +166,7 @@ INSERT INTO comments(comment, user_id, article_id) VALUES ('Fascinating', 1, 1);
 -- 	"institution_url": "www.osaka-university-lasers.com",
 -- 	"funding_source": "The Japanese Government",
 -- 	"related_articles": ["www.osaka.com", "www.okonomiyaki.com", "www.nandeyanen.com"]
--- }
+-- },
 
 -- {
 -- 	"address": "１-2 Yamadaoka, Suita-shi, Ōsaka-fu 565-0871, Japan",
@@ -181,7 +181,7 @@ INSERT INTO comments(comment, user_id, article_id) VALUES ('Fascinating', 1, 1);
 -- 	"institution_url": "www.osaka-university-humans.com",
 -- 	"funding_source": "The Japanese Government",
 -- 	"related_articles": ["www.osaka.com", "www.okonomiyaki.com", "www.nandeyanen.com"]
--- }
+-- },
 -- {
 -- 	"address": "7 Chome-3-1 Hongō, Bunkyō-ku, Tōkyō-to 113-8654, Japan",
 -- 	"lat": 35.712765,

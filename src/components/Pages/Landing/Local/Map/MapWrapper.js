@@ -21,7 +21,7 @@ export class Container extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-          articles: [], // articles to be rendered on the map
+          articles: [{lat: 37.759703, lng: -122.428093}], // articles to be rendered on the map
           markers: [],
           searchAddress: '',
         }
@@ -59,16 +59,20 @@ render(){
     const pos = {lat: 37.759703, lng: -122.428093}
 
     return (
-      <div style={style}>
+      <div>
         <Map google={this.props.google}>
-          {this.state.articles.length !== 0 && this.state.articles.map((article,i) =><Marker position={{lat: article.lat, lng: article.lng}} />)}
+          {this.state.articles.map((article,i) =><Marker key={i} position={{lat: article.lat, lng: article.lng}} />)}
           {/* <Marker />
           <Marker position={pos} /> */}
         </Map>
       </div>
-    )
+    
+  )
   }
 }
+
+{/* 
+          {/* <Marker position={pos} /> */}
 
 
 export default compose(connect(mapStateToProps),GoogleApiWrapper({
