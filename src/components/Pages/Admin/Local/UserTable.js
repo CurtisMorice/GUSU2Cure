@@ -224,6 +224,7 @@ class UserTable extends Component{
             </TableFooter>
           </Table>
         </paper>
+
       </div>
 
     )

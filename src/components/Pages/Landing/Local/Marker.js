@@ -44,8 +44,8 @@ import  {
             onClick={this.onToggleOpen}>
         {this.state.isOpen && 
         <InfoWindow onCloseClick={this.onToggleOpen}>
-        <div>"HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"
-        <p>Goodbye</p>
+        <div>
+        {this.props.markers}
         </div> 
         </InfoWindow>}
           </Marker>
