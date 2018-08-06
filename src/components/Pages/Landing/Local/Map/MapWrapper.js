@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { GoogleApiWrapper} from 'google-maps-react';
+import { GoogleApiWrapper } from 'google-maps-react';
 import Map from './Map';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -9,6 +9,7 @@ import { triggerLogout } from '../../../../../redux/actions/loginActions';
 import axios from 'axios';
 import Marker from './Marker';
 import {KEYS} from '../../../../../Key';
+import InfoWindow from './InfoWindow';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -21,9 +22,10 @@ export class Container extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-          articles: [{lat: 37.759703, lng: -122.428093}], // articles to be rendered on the map
-          markers: [],
+          articles: [], // articles to be rendered on the map
+          activeMarker: {},
           searchAddress: '',
+          showingInfoWindow: false
         }
       }
       
@@ -48,28 +50,50 @@ export class Container extends React.Component{
         .catch((error)=>{
           console.log('error getting articles in client:', error);
         })
+      }
+      onMarkerClick = async (props, marker) =>{
+        console.log('markerClick');
+        console.log('props:', props);
+        console.log('marker:', marker);
+        
+        
+        await this.setState({
+          ...this.state,
+          selectedPlace: props,
+          activeMarker: marker,
+          showingInfoWindow: true
+        });
+        console.log('wrapper state:', this.state);
         
       }
   
-render(){
-    const style = {
-      width: '100vw',
-      height: '100vh'
-    }
-    const pos = {lat: 37.759703, lng: -122.428093}
+      render(){
+          const style = {
+            width: '100vw',
+            height: '100vh'
+          }
+          return (
+            <div>
+              <Map google={this.props.google}>
+                {this.state.articles.map((article,i) =>
+                <Marker name="meow" onClick={this.onMarkerClick} key={i} position={{lat: article.lat, lng: article.lng}} />
+                  )}
+              
+              <InfoWindow
+                  marker={this.state.activeMarker}
+                  visible={this.state.showingInfoWindow}
+                  >
+                    <div>
+                      <h1>Hello</h1>
+                    </div>
+              </InfoWindow>
 
-    return (
-      <div>
-        <Map google={this.props.google}>
-          {this.state.articles.map((article,i) =><Marker key={i} position={{lat: article.lat, lng: article.lng}} />)}
-          {/* <Marker />
-          <Marker position={pos} /> */}
-        </Map>
-      </div>
-    
-  )
-  }
-}
+              </Map>
+            </div>
+          
+        )
+        }
+      }
 
 {/* 
           {/* <Marker position={pos} /> */}

@@ -20,7 +20,7 @@ export class Map extends Component {
   
     renderChildren = () =>{
         const {children} = this.props;
-        console.log('children:', children);
+        // console.log('children:', children);
       
         if(!children) return;
 
