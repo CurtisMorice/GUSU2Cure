@@ -3,11 +3,11 @@ import React, {Component} from 'react';
 // const FaAnchor = "@fortawesome/react-fontawesome";
 
 import  {
-    Marker,
+    // Marker,
     InfoWindow,
-  } from "react-google-maps";
+  } from "google-maps-react";
 
-  class ExportMarker extends Component {
+  class Marker extends Component {
     
     constructor(props){
       super(props);
@@ -56,5 +56,5 @@ import  {
       
       
   
-  export default ExportMarker;
+  export default Marker;
   

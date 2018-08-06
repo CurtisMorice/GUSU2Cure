@@ -63,16 +63,17 @@ class SearchBar extends React.Component{
     event.preventDefault();
     console.log('googleApiCall');
     console.log('searchAddress:', this.state.searchAddress);
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.searchAddress}&key=AIzaSyD9e9e4rYBfPVZsPiKNBvQ8Ciu5yGPlfq8`
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.searchAddress}&key=API_KEY`
     console.log('url:', url);
     
     axios.get(url)
     .then((response) => {
       console.log('response', response)
-        const latLng = {...response.data.results}
+        const latLng = {...response.data.results[0].geometry.location}
         console.log('latLng:', latLng);
-        this.props.dispatch({type: MAP_ACTIONS.SET_ADDRESS, payload: latLng})
-        this.props.dispatch({type: MAP_ACTIONS.RECENTER})
+        this.props.setCurrentLocation(latLng)
+        // this.props.dispatch({type: MAP_ACTIONS.SET_ADDRESS, payload: latLng})
+        // this.props.dispatch({type: MAP_ACTIONS.RECENTER})
     })
          .catch(err => {
            console.log('in googleApicall',err);                     //Axios entire error message
