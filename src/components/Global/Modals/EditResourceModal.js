@@ -12,6 +12,7 @@ import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import { renderComponent } from 'recompose';
 
+
 // import DeleteSnackbar from '../Snackbars/DeleteSnackbar';
 
 const mapStateToProps = state => ({
