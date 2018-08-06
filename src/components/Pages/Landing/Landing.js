@@ -9,6 +9,7 @@ import SearchBar from './Local/SearchBar';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import Map from './Local/Map';
+import MapWrapper from './Local/Map/MapWrapper';
 
 
 const mapStateToProps = state => ({
@@ -58,7 +59,7 @@ class Landing extends Component {
             </Grid>
             <Grid item xs={8}>
               <div style={{ height: `800px`, width: `auto`, flex: 'auto' }}>
-            <Map /> 
+            <MapWrapper /> 
             </div>
             </Grid>
           </Grid>
