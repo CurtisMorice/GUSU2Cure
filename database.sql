@@ -63,6 +63,7 @@ CREATE TABLE "locations"(
 
 -- create article table. date_posted is automatically inserted every time new article is inserted. up to five related articles are accepted. commented out due to linter errors.
 CREATE TABLE "articles"(
+
     "id" SERIAL PRIMARY KEY,
     "location_id" INT NOT NULL REFERENCES locations,
     "user_id" INT NOT NULL REFERENCES users,
@@ -152,36 +153,45 @@ INSERT INTO articles(location_id, user_id, research_date, research_title, resear
 -- insert into comments table
 INSERT INTO comments(comment, user_id, article_id) VALUES ('Fascinating', 1, 1);
 
--- POSTMAN ARTICLE POSTS
--- {
--- 	"address": "2-６ Yamadaoka, Suita-shi, Ōsaka-fu 565-0871, Japan",
--- 	"lat": 34.820442,
--- 	"lng": 135.523665,
--- 	"user_id": 1,
--- 	"research_date": "8/3/2018",
--- 	"research_title": "Laser stuff",
--- 	"research_type": 1,
--- 	"research_phase": 1,
--- 	"institution_name": "Osaka University Laser Energy Research Center",
--- 	"institution_url": "www.osaka-university-lasers.com",
--- 	"funding_source": "The Japanese Government",
--- 	"related_articles": ["www.osaka.com", "www.okonomiyaki.com", "www.nandeyanen.com"]
--- },
+-- Get Call for New Articles Table in Aadmin.
+SELECT articles.id,research_date,research_title, institution_name, institution_url, funding_source, related_articles, admin_comment, statuses.status, research_type.type, username, email FROM articles
+JOIN statuses ON articles.status = statuses.id
+RIGHT JOIN research_type ON articles.research_type = research_type.id
+JOIN research_phase ON articles.research_phase = research_phase.id
+LEFT JOIN users ON user_id = users.id
+ORDER BY research_date ASC;
 
--- {
--- 	"address": "１-2 Yamadaoka, Suita-shi, Ōsaka-fu 565-0871, Japan",
--- 	"lat": 34.817923,
--- 	"lng": 135.526226,
--- 	"user_id": 1,
--- 	"research_date": "8/3/2018",
--- 	"research_title": "Human research",
--- 	"research_type": 1,
--- 	"research_phase": 1,
--- 	"institution_name": "Osaka University Graduate School of Human Sciences, Human Sciences",
--- 	"institution_url": "www.osaka-university-humans.com",
--- 	"funding_source": "The Japanese Government",
--- 	"related_articles": ["www.osaka.com", "www.okonomiyaki.com", "www.nandeyanen.com"]
--- },
+
+-- POSTMAN ARTICLE POSTS
+{
+	"address": "2-６ Yamadaoka, Suita-shi, Ōsaka-fu 565-0871, Japan",
+	"lat": 34.820442,
+	"lng": 135.523665,
+	"user_id": 1,
+	"research_date": "8/3/2018",
+	"research_title": "Laser stuff",
+	"research_type": 1,
+	"research_phase": 1,
+	"institution_name": "Osaka University Laser Energy Research Center",
+	"institution_url": "www.osaka-university-lasers.com",
+	"funding_source": "The Japanese Government",
+	"related_articles": ["www.osaka.com", "www.okonomiyaki.com", "www.nandeyanen.com"]
+}
+
+{
+	"address": "１-2 Yamadaoka, Suita-shi, Ōsaka-fu 565-0871, Japan",
+	"lat": 34.817923,
+	"lng": 135.526226,
+	"user_id": 1,
+	"research_date": "8/3/2018",
+	"research_title": "Human research",
+	"research_type": 1,
+	"research_phase": 1,
+	"institution_name": "Osaka University Graduate School of Human Sciences, Human Sciences",
+	"institution_url": "www.osaka-university-humans.com",
+	"funding_source": "The Japanese Government",
+	"related_articles": ["www.osaka.com", "www.okonomiyaki.com", "www.nandeyanen.com"]
+}
 -- {
 -- 	"address": "7 Chome-3-1 Hongō, Bunkyō-ku, Tōkyō-to 113-8654, Japan",
 -- 	"lat": 35.712765,
