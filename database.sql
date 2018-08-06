@@ -149,6 +149,15 @@ INSERT INTO articles(location_id, user_id, research_date, research_title, resear
 -- insert into comments table
 INSERT INTO comments(comment, user_id, article_id) VALUES ('Fascinating', 1, 1);
 
+-- Get Call for New Articles Table in Aadmin.
+SELECT articles.id,research_date,research_title, institution_name, institution_url, funding_source, related_articles, admin_comment, statuses.status, research_type.type, username, email FROM articles
+JOIN statuses ON articles.status = statuses.id
+RIGHT JOIN research_type ON articles.research_type = research_type.id
+JOIN research_phase ON articles.research_phase = research_phase.id
+LEFT JOIN users ON user_id = users.id
+ORDER BY research_date ASC;
+
+
 -- POSTMAN ARTICLE POSTS
 -- {
 -- 	"address": "2-６ Yamadaoka, Suita-shi, Ōsaka-fu 565-0871, Japan",
