@@ -1,17 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+
 import { Link } from 'react-router-dom';
-import Icon from '@material-ui/core/Icon';
+
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { LOGIN_ACTIONS, triggerLogout} from '../../../redux/actions/loginActions';
 import { compose } from 'recompose';
-import LoginModal from '../Modals/LoginModal';
-import RegisterModal from '../Modals/RegisterModal';
+
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import './Header.css';
+
+// header App Bar
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import LoginModal from '../Modals/LoginModal';
+import RegisterModal from '../Modals/RegisterModal';
+import Typography from '@material-ui/core/Typography';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -38,9 +51,26 @@ const styles = theme => ({
   rightIcon: {
     marginRight: theme.spacing.unit,
   },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+  list: {
+    width: 250,
+  },
 });
 
 class Header extends React.Component {
+  state={
+    left: false,
+  };
+
+  toggleDrawer = (side, open) => () => {
+    this.setState({
+      [side]: open,
+    });
+  };
+
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
@@ -59,6 +89,14 @@ class Header extends React.Component {
     let content = null;
     const { classes } = this.props;
 
+    const sideList = (
+      <div className={classes.list}>
+        <List>...</List>
+        <Divider />
+        <List>...</List>
+      </div>
+    );
+
     const loginButton = this.props.user.user ? (
       <Button onClick={this.logout} variant="contained" className={classes.button} color="secondary" aria-label="Log Out">
         Log Out
@@ -69,22 +107,44 @@ class Header extends React.Component {
     return (
       <div className={classes.root}>
         <div className="App">
+          <AppBar color="primary" position='static'>
+            <Toolbar>
+              <IconButton className={classes.menuButton} color='inherit' aria-label='Open drawer' onClick={this.toggleDrawer('left', true)}>
+                <MenuIcon />
+              </IconButton>
+              <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
+                <div
+                  tabIndex={0}
+                  role='button'
+                  onClick={this.toggleDrawer('left', false)}
+                  onKeyDown={this.toggleDrawer('left', false)}
+                >
+                  {sideList}
+                </div>
+              </Drawer>
+              <Typography variant='title' color='inherit' className={classes.flex}>
+                Spinal Cord Injury Resource Database
+              </Typography>
+              { loginButton }
+              <RegisterModal />
+            </Toolbar>
+          </AppBar>
           <Grid container>
-            <Grid item xs={10}>
+            <Grid item xs={14}>
               <div className="App-header">
                 <h1 className="App-title"><br /><br />Spinal Cord Injury Research Map Database</h1>
               </div> 
             </Grid>
-            <Grid item xs={2} >
+            {/* <Grid item xs={2} >
               <div className="App-header">
                 <br />
                 { loginButton }
                 <RegisterModal />
               
               </div>
-            </Grid>
+            </Grid> */}
           </Grid>
-        </div> 
+        </div>
       </div>
     );
   }
