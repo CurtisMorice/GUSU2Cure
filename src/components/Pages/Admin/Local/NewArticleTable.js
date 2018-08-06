@@ -170,6 +170,7 @@ class NewArticleTable extends React.Component{
                     <TableCell> Date Posted </TableCell>
                     <TableCell> Research Title </TableCell>
                     <TableCell> Research Type </TableCell>
+                    <TableCell> Research Phase </TableCell>
                     <TableCell> Institution Name </TableCell>
                     <TableCell> Institution URL </TableCell>
                     <TableCell> Funding Source</TableCell>
@@ -183,9 +184,10 @@ class NewArticleTable extends React.Component{
                       return (
                         <TableRow key={newArticle.id}>
 
-                          <TableCell component="th" scope="row">{newArticle.research_date}</TableCell>
+                          <TableCell component="th" scope="row">{newArticle.date_posted}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.research_title}</TableCell> 
-                          <TableCell component="th" scope="row">{newArticle.type}</TableCell> 
+                          <TableCell component="th" scope="row">{newArticle.type}</TableCell>
+                          <TableCell component="th" scope="row">{newArticle.phase}</TableCell> 
                           <TableCell component="th" scope="row">{newArticle.institution_name}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.institution_url}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.funding_source}</TableCell>
@@ -198,14 +200,14 @@ class NewArticleTable extends React.Component{
                     })}
                     {emptyRows > 0 && (
                       <TableRow style={{ height: 48 * emptyRows }}>
-                        <TableCell colSpan={6} />
+                        <TableCell colSpan={10} />
                       </TableRow>
                     )}
                   </TableBody>
                   <TableFooter>
                     <TableRow>
                       <TablePagination
-                        colSpan={9}
+                        colSpan={10}
                         count={this.props.adminReducer.length}
                         rowsPerPage={rowsPerPage}
                         page={page}

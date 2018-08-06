@@ -63,21 +63,24 @@ CREATE TABLE "locations"(
 
 -- create article table. date_posted is automatically inserted every time new article is inserted. up to five related articles are accepted. commented out due to linter errors.
 CREATE TABLE "articles"(
-	"id" SERIAL PRIMARY KEY,
-	"location_id" INT NOT NULL REFERENCES locations,
-	"user_id" INT NOT NULL REFERENCES users,
-	-- "date_posted" DATE DEFAULT current_date,
-	"research_date" date NOT NULL,
-	"research_title" VARCHAR(200) NOT NULL,
-	"research_type" INT NOT NULL REFERENCES research_type,
-	"research_phase" INT NOT NULL REFERENCES research_phase,
-	"institution_name" VARCHAR(100) NOT NULL,
-	"institution_url" VARCHAR(300) NOT NULL,
-	"status" INT NOT NULL REFERENCES statuses,
-	"funding_source" VARCHAR(100),
-	-- "related_articles" text[5],
-	-- "admin_comment" VARCHAR(500)
-	);
+    "id" SERIAL PRIMARY KEY,
+    "location_id" INT NOT NULL REFERENCES locations,
+    "user_id" INT NOT NULL REFERENCES users,
+    "date_posted" DATE DEFAULT current_date,
+    "research_date" date NOT NULL,
+    "research_title" VARCHAR(200) NOT NULL,
+    "research_type" INT NOT NULL REFERENCES research_type,
+    "research_phase" INT NOT NULL REFERENCES research_phase,
+    "institution_name" VARCHAR(100) NOT NULL,
+    "institution_url" VARCHAR(300) NOT NULL,
+    "status" INT NOT NULL REFERENCES statuses,
+    "funding_source" VARCHAR(100),
+    "related_articles" text[5],
+    "admin_comment" VARCHAR(500),
+    "brief_description" VARCHAR(500),
+    "summary" VARCHAR(500),
+    "user_story" VARCHAR(500)
+    );
 	
 --create comments table. date will be automatically inserted. commented out due to linter errors
 CREATE TABLE "comments"(
@@ -159,35 +162,35 @@ ORDER BY research_date ASC;
 
 
 -- POSTMAN ARTICLE POSTS
--- {
--- 	"address": "2-６ Yamadaoka, Suita-shi, Ōsaka-fu 565-0871, Japan",
--- 	"lat": 34.820442,
--- 	"lng": 135.523665,
--- 	"user_id": 1,
--- 	"research_date": "8/3/2018",
--- 	"research_title": "Laser stuff",
--- 	"research_type": 1,
--- 	"research_phase": 1,
--- 	"institution_name": "Osaka University Laser Energy Research Center",
--- 	"institution_url": "www.osaka-university-lasers.com",
--- 	"funding_source": "The Japanese Government",
--- 	"related_articles": ["www.osaka.com", "www.okonomiyaki.com", "www.nandeyanen.com"]
--- },
+{
+	"address": "2-６ Yamadaoka, Suita-shi, Ōsaka-fu 565-0871, Japan",
+	"lat": 34.820442,
+	"lng": 135.523665,
+	"user_id": 1,
+	"research_date": "8/3/2018",
+	"research_title": "Laser stuff",
+	"research_type": 1,
+	"research_phase": 1,
+	"institution_name": "Osaka University Laser Energy Research Center",
+	"institution_url": "www.osaka-university-lasers.com",
+	"funding_source": "The Japanese Government",
+	"related_articles": ["www.osaka.com", "www.okonomiyaki.com", "www.nandeyanen.com"]
+}
 
--- {
--- 	"address": "１-2 Yamadaoka, Suita-shi, Ōsaka-fu 565-0871, Japan",
--- 	"lat": 34.817923,
--- 	"lng": 135.526226,
--- 	"user_id": 1,
--- 	"research_date": "8/3/2018",
--- 	"research_title": "Human research",
--- 	"research_type": 1,
--- 	"research_phase": 1,
--- 	"institution_name": "Osaka University Graduate School of Human Sciences, Human Sciences",
--- 	"institution_url": "www.osaka-university-humans.com",
--- 	"funding_source": "The Japanese Government",
--- 	"related_articles": ["www.osaka.com", "www.okonomiyaki.com", "www.nandeyanen.com"]
--- },
+{
+	"address": "１-2 Yamadaoka, Suita-shi, Ōsaka-fu 565-0871, Japan",
+	"lat": 34.817923,
+	"lng": 135.526226,
+	"user_id": 1,
+	"research_date": "8/3/2018",
+	"research_title": "Human research",
+	"research_type": 1,
+	"research_phase": 1,
+	"institution_name": "Osaka University Graduate School of Human Sciences, Human Sciences",
+	"institution_url": "www.osaka-university-humans.com",
+	"funding_source": "The Japanese Government",
+	"related_articles": ["www.osaka.com", "www.okonomiyaki.com", "www.nandeyanen.com"]
+}
 -- {
 -- 	"address": "7 Chome-3-1 Hongō, Bunkyō-ku, Tōkyō-to 113-8654, Japan",
 -- 	"lat": 35.712765,
