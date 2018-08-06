@@ -20,6 +20,28 @@ const article = (state=[], action) => {
     }
 }
 
+const research_type = (state=[], action) => {
+    switch(action.type) {
+        case ARTICLE_ACTIONS.SHOW_RESEARCH_TYPE:
+            console.log('in article reducer for GET research type', action.payload);
+            return action.payload
+        default:
+            return state; 
+    }
+}
+
+const research_phase = (state=[], action) => {
+    switch(action.type) {
+        case ARTICLE_ACTIONS.SHOW_RESEARCH_PHASE:
+            console.log('in article reducer for GET research phase', action.payload);
+            return action.payload
+        default:
+            return state; 
+    }
+}
+
 export default combineReducers({
-    article
+    article,
+    research_type,
+    research_phase
 })

@@ -15,7 +15,7 @@ import SearchBar from './SearchBar';
 
 const mapStateToProps = state => ({
     user: state.user,
-    mapReducer: state.mapReducer
+    mapReducer: state.mapReducer,
   });
   
   class Map extends Component {
@@ -45,7 +45,7 @@ const mapStateToProps = state => ({
       axios.get('/api/articles')
       .then(async(response)=>{
          await this.setState({...this.state, articles: [...response.data]})
-         console.log('this.state:', this.state);
+         console.log('this.state.articles:', this.state.articles);
       })
       .catch((error)=>{
         console.log('error getting articles in client:', error);

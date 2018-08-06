@@ -13,6 +13,7 @@ import { triggerLogin, formError, clearError, formError2 } from '../../../redux/
 import Icon from '@material-ui/core/Icon';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -95,24 +96,33 @@ class LoginModal extends React.Component {
           <form onSubmit={this.login}>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-            <label htmlFor="username">
-              Username: <input type="text"
-                name="username"
+            <TextField 
+                type="text"
                 value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}/>
-            </label>
-            <label htmlFor="password">
-
-              Password: <input type="text"
-                name="password"
+                onChange={this.handleInputChangeFor('username')}
+                name="username"
+                autoFocus
+                margin="dense"
+                label="Username"
+                fullWidth
+                multiline
+            />
+            <TextField 
+                type="text"
                 value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}/>
-            </label>
+                onChange={this.handleInputChangeFor('password')}
+                name="password"
+                autoFocus
+                margin="dense"
+                label="Password"
+                fullWidth
+                multiline
+            />
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <input type="submit" value="Login" color="primary" autoFocus/>
-            <input onClick={this.handleClose}  type="button" value="Cancel"/> 
+            <Button type="submit" variant="contained" color="primary" autoFocus>Login</Button>
+            <Button onClick={this.handleClose}  type="button" value="Cancel">Cancel</Button>
           </DialogActions>
           </form>
         </Dialog>

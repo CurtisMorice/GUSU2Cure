@@ -15,6 +15,7 @@ import { triggerLogin, formError, clearError, formError2 } from '../../../redux/
 import Icon from '@material-ui/core/Icon';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -34,6 +35,7 @@ const styles = theme => ({
     rightIcon: {
         marginRight: theme.spacing.unit,
     },
+    
     });
 
 class AddResourceModal extends React.Component {
@@ -85,48 +87,66 @@ class AddResourceModal extends React.Component {
         const { classes } = this.props;
         return (
           <div>
-            <Button className={classes.button} onClick={this.handleClickOpen}>Add a new resource</Button>
+            <Button className={classes.button} onClick={this.handleClickOpen} variant="contained" color="primary">Add a new resource</Button>
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">{"Register"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Add a new resource:"}</DialogTitle>
               {this.state.message}
               <form onSubmit={this.addResource}>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                <label htmlFor="name">
-                  Name: <input type="text"
-                    name="name"
+                <TextField 
+                    type="text"
                     value={this.state.name}
-                    onChange={this.handleInputChangeFor('name')}/>
-                </label>
-                <label htmlFor="url">
-                  Url: <input type="text"
-                    name="url"
+                    onChange={this.handleInputChangeFor('name')}
+                    name="name"
+                    autoFocus
+                    margin="dense"
+                    label="Name"
+                    fullWidth
+                    multiline
+                    />
+                <TextField 
+                    type="text"
                     value={this.state.url}
-                    onChange={this.handleInputChangeFor('url')}/>
-                </label>
-                <label htmlFor="summary">
-                  Summary: <input type="text"
-                    name="summary"
+                    onChange={this.handleInputChangeFor('url')}
+                    name="url"
+                    autoFocus
+                    margin="dense"
+                    label="Url"
+                    fullWidth
+                    multiline
+                    />
+                <TextField 
+                    type="text"
                     value={this.state.summary}
-                    onChange={this.handleInputChangeFor('summary')}/>
-                </label>
-                <label htmlFor="date_created">
-                  Date Created: <input type="text"
-                    name="date_created"
+                    onChange={this.handleInputChangeFor('summary')}
+                    name="summary"
+                    autoFocus
+                    margin="dense"
+                    label="Summary"
+                    fullWidth
+                    multiline
+                    />
+                 <TextField 
+                    type="date"
                     value={this.state.date_created}
-                    onChange={this.handleInputChangeFor('date_created')}/>
-                </label>
-              
+                    onChange={this.handleInputChangeFor('date_created')}
+                    name="date_created"
+                    autoFocus
+                    margin="dense"
+                    // label="Date Created"
+                    fullWidth  
+                    />
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <input type="submit" value="Add Resource" color="primary" autoFocus/>
-                <input onClick={this.handleClose}  type="button" value="Cancel"/> 
+                <Button type="submit" value="Add Resource" color="primary" variant="contained" autoFocus>Add</Button>
+                <Button onClick={this.handleClose}  type="button" value="Cancel">Cancel</Button>
               </DialogActions>
               </form>
             </Dialog>

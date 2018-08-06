@@ -9,11 +9,16 @@ import SearchBar from './Local/SearchBar';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import Map from './Local/Map';
+import AddArticleModal from '../../Global/Modals/AddArticleModal';
+import { ARTICLE_ACTIONS } from '../../../redux/actions/articleActions';
 
 
 const mapStateToProps = state => ({
   user: state.user,
-  mapReducer: state.mapReducer
+  mapReducer: state.mapReducer,
+  articles: state.articleReducer.article,
+  research_type: state.articleReducer.research_type,
+  research_phase: state.articleReducer.research_phase
 });
 
 class Landing extends Component {
@@ -29,6 +34,9 @@ class Landing extends Component {
   
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+    this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_ARTICLES});
+    this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_TYPE});
+    this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_PHASE});
   }
 
   componentDidUpdate() {
@@ -55,6 +63,7 @@ class Landing extends Component {
             <Grid item xs={12} />
             <Grid item xs={4}>
               <DropdownSearch />
+              {this.props.user.user&& <AddArticleModal />}
             </Grid>
             <Grid item xs={8}>
               <div style={{ height: `800px`, width: `auto`, flex: 'auto' }}>
