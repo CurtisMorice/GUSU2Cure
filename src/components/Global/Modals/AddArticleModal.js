@@ -6,9 +6,14 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
+
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -31,27 +36,159 @@ const styles = theme => ({
   },
 });
 
-function getSteps() {
-  return ['Select master blaster campaign settings', 'Create an ad group', 'Create an ad'];
-}
-
-function getStepContent(stepIndex) {
-  switch (stepIndex) {
-    case 0:
-      return 'Select campaign settings...';
-    case 1:
-      return 'What is an ad group anyways?';
-    case 2:
-      return 'This is the bit I really care about!';
-    default:
-      return 'Uknown stepIndex';
-  }
-}
 
 class AddArticleModal extends React.Component {
-  state = {
-    activeStep: 0,
-  };
+  constructor(props) {
+            super(props);
+            this.state = {
+                  article: {},
+                  activeStep: 0,
+                  date_posted: '08/06/2018',
+                  research_date: '08/06/2018'
+                  
+            }
+          }
+  
+ 
+
+  getSteps = () => {
+    return ['Basic Information', 'Summary', 'Confirm'];
+  }
+
+  getStepContent = (stepIndex) => {
+    switch (stepIndex) {
+      case 0:
+        return <div>
+          <InputLabel htmlFor="research_phase-simple">Research Type</InputLabel>
+          <Select
+            value={this.state.research_type}
+            onChange={this.handleInputChangeFor('research_type')}
+            inputProps={{
+            name: 'research_type',
+            id: 'research_type-simple',
+            }}
+          >
+            <MenuItem value="">
+            <em>None</em>
+            </MenuItem>
+            {this.props.research_type.map(research_type => {
+                return (
+                    <MenuItem value={research_type.type}>{research_type.type}</MenuItem>
+                )
+            })}
+          </Select>
+          <br/>
+          <InputLabel htmlFor="research_phase-simple">Research Phase</InputLabel>
+          <Select
+            value={this.state.research_phase}
+            onChange={this.handleInputChangeFor('research_phase')}
+            inputProps={{
+            name: 'research_phase',
+            id: 'research_phase-simple',
+            }}
+          >
+            <MenuItem value="">
+            <em>None</em>
+            </MenuItem>
+            {this.props.research_phase.map(research_phase => {
+                return (
+                    <MenuItem value={research_phase.phase}>{research_phase.phase}</MenuItem>
+                )
+            })}
+          </Select>
+          <TextField 
+            type="text"
+            value={this.state.research_title}
+            onChange={this.handleInputChangeFor('reasearch_title')}
+            name="reasearch_title"
+            autoFocus
+            margin="dense"
+            label="Research Title"
+            fullWidth
+            multiline
+          />
+          <TextField 
+            type="text"
+            value={this.state.institution_name}
+            onChange={this.handleInputChangeFor('institution_name')}
+            name="institution_name"
+            autoFocus
+            margin="dense"
+            label="Institution Name"
+            fullWidth  
+          />
+          <TextField 
+            type="text"
+            // value={this.state.}
+            onChange={this.handleInputChangeFor('address')}
+            name="address"
+            autoFocus
+            margin="dense"
+            label="Institution Address"
+            fullWidth  
+          />
+          <TextField 
+            type="date"
+            value={this.state.date_posted}
+            onChange={this.handleInputChangeFor('date_posted')}
+            name="date_posted"
+            autoFocus
+            margin="dense"
+            label="Date Published"
+            fullWidth
+            />
+            </div>;
+      case 1:
+        return (
+        <div>
+          <TextField 
+            type="text"
+            value={this.state.brief_description}
+            onChange={this.handleInputChangeFor('brief_description')}
+            name="brief_description"
+            autoFocus
+            margin="dense"
+            label="Brief Description"
+            fullWidth
+            multiline
+            />
+            <TextField 
+            type="text"
+            value={this.state.summary}
+            onChange={this.handleInputChangeFor('summary')}
+            name="summary"
+            autoFocus
+            margin="dense"
+            label="Summary"
+            fullWidth
+            multiline
+            />
+            <TextField 
+            type="text"
+            value={this.state.user_story}
+            onChange={this.handleInputChangeFor('user_story')}
+            name="user_story"
+            autoFocus
+            margin="dense"
+            label="User Story"
+            fullWidth
+            multiline
+            />
+        </div>);
+      default:
+        return 'blah';
+    }
+  }
+
+  handleInputChangeFor = propertyName => (event) => {
+      console.log('user id', this.props.user.user.id);
+      this.setState({
+          [propertyName]: event.target.value,
+          user_id: this.props.user.user.id,
+      
+      });
+      console.log('this.state:', this.state);
+  }
 
   handleNext = () => {
     const { activeStep } = this.state;
@@ -75,7 +212,7 @@ class AddArticleModal extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const steps = getSteps();
+    const steps = this.getSteps();
     const { activeStep } = this.state;
 
     return (
@@ -97,7 +234,7 @@ class AddArticleModal extends React.Component {
             </div>
           ) : (
             <div>
-              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+              <Typography className={classes.instructions}>{this.getStepContent(activeStep)}</Typography>
               <div>
                 <Button
                   disabled={activeStep === 0}
@@ -142,7 +279,7 @@ export default compose(connect(mapStateToProps), withStyles(styles))(AddArticleM
 // import Icon from '@material-ui/core/Icon';
 // import { compose } from 'recompose';
 // import { withStyles } from '@material-ui/core/styles';
-// import TextField from '@material-ui/core/TextField';
+
 // import SearchBar from '../../Pages/Landing/Local/SearchBar'
 
 // import Input from '@material-ui/core/Input';
@@ -189,20 +326,24 @@ export default compose(connect(mapStateToProps), withStyles(styles))(AddArticleM
 //     constructor(props) {
 //         super(props);
 //         this.state = {
-//             article: {
-//             location_id: '',
-//             user_id: '',
-//             date_posted: '',
-//             research_date: '',
-//             reasearch_title: '',
-//             research_type: '',
-//             research_phase: '',
-//             institution_name: '',
-//             instutution_url: '',
-//             funding_source: '',
-//             related_articles: '',
-//             status: ''
+  //             article: {
+  //             location_id: '',
+  //             user_id: '',
+  //             date_posted: '',
+  //             research_date: '',
+  //             reasearch_title: '',
+  //             research_type: '',
+  //             research_phase: '',
+  //             institution_name: '',
+  //             instutution_url: '',
+  //             funding_source: '',
+  //             related_articles: '',
+  //             status: '',
+  // address: '',
+//              lat: '',
+//              lng: ''
 //             }
+//            
 //         }
 //     }
 
@@ -310,7 +451,7 @@ export default compose(connect(mapStateToProps), withStyles(styles))(AddArticleM
 //                     label="Research Date"
 //                     fullWidth
 //                     />
-//                 <TextField 
+    //                 <TextField 
 //                     type="text"
 //                     value={this.state.reasearch_title}
 //                     onChange={this.handleInputChangeFor('reasearch_title')}
