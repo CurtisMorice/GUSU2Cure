@@ -16,15 +16,14 @@ router.get('/', (req, res) => {
 })
 
 router.get('/articles', (req, res) => {
-    // const queryText = `SELECT articles.id, date_posted, research_date, 
-    //     research_title, institution_name, institution_url, funding_source, related_articles, 
-    //     admin_comment, statuses.status, research_type, username, email FROM articles
-    //     JOIN statuses ON articles.status = statuses.id
-    //     RIGHT JOIN research_type ON articles.research_type = research_type.id
-    //     JOIN research_phase ON articles.research_phase = research_phase.id
-    //     LEFT JOIN users ON user_id = users.id
-    //     ORDER BY date_posted ASC;`
-    const queryText = `SELECT * FROM articles`;
+    const queryText = `SELECT articles.id, date_posted, research_date, research_title, institution_name, institution_url, 
+                        funding_source, related_articles, admin_comment, statuses.status, research_type, username, email FROM articles
+                        JOIN statuses ON articles.status = statuses.id
+                        RIGHT JOIN research_type ON articles.research_type = research_type.id
+                        JOIN research_phase ON articles.research_phase = research_phase.id
+                        LEFT JOIN users ON user_id = users.id
+                        WHERE statuses.status = 'approved'
+                        ORDER BY date_posted ASC;`
     pool.query(queryText)
         .then((result) => {
             console.log('back from the databse with all the approved articles', result);

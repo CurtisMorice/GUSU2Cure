@@ -4,6 +4,7 @@ const router = express.Router();
 
 // LEAVE THIS HERE FOR NOW FOR USE AS TEMPLATE
 
+// GET call for user's submitted articles
 router.get(`/userArticle/:id`, (req, res) => {
     let id = req.params.id
     console.log('this is id',id);
