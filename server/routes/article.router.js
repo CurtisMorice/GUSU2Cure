@@ -20,8 +20,8 @@ const router = express.Router();
 // });
 
 router.get('/', (req, res) => {
-    // const queryText = `SELECT articles.*, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id;`;
-    const queryText = 'SELECT * FROM articles'
+    const queryText = `SELECT articles.*, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id;`;
+    // const queryText = 'SELECT * FROM articles'
     pool.query(queryText)
     .then((result)=>{
         console.log('back from database with articles', result.rows);
@@ -79,11 +79,14 @@ router.post('/', (req, res) => {
         const status = 1;
         const funding_source = req.body.funding_source;
         const related_articles = req.body.related_articles;
+        const brief_description = req.body.brief_description;
+        const summary = req.body.summary;
+        const user_story = req.body.user_story;
         const articleQueryText = `INSERT INTO articles(location_id, user_id, research_date, research_title, research_type,
-        research_phase, institution_name, institution_url, status, funding_source, related_articles)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
+        research_phase, institution_name, institution_url, status, funding_source, related_articles, brief_description, summary, user_story)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);`;
         pool.query(articleQueryText, [location_id, user_id, research_date, research_title, research_type,
-        research_phase, institution_name, institution_url, status, funding_source, related_articles])
+        research_phase, institution_name, institution_url, status, funding_source, related_articles, brief_description, summary, user_story])
         .then(()=>{
             console.log('article successfully created');
             res.sendStatus(201);
