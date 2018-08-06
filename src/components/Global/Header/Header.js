@@ -22,6 +22,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import LoginModal from '../Modals/LoginModal';
 import RegisterModal from '../Modals/RegisterModal';
 import Typography from '@material-ui/core/Typography';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -52,9 +55,22 @@ const styles = theme => ({
     marginLeft: -12,
     marginRight: 20,
   },
+  list: {
+    width: 250,
+  },
 });
 
 class Header extends React.Component {
+  state={
+    left: false,
+  };
+
+  toggleDrawer = (side, open) => () => {
+    this.setState({
+      [side]: open,
+    });
+  };
+
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
@@ -73,6 +89,14 @@ class Header extends React.Component {
     let content = null;
     const { classes } = this.props;
 
+    const sideList = (
+      <div className={classes.list}>
+        <List>...</List>
+        <Divider />
+        <List>...</List>
+      </div>
+    );
+
     const loginButton = this.props.user.user ? (
       <Button onClick={this.logout} variant="contained" className={classes.button} color="secondary" aria-label="Log Out">
         Log Out
@@ -85,9 +109,19 @@ class Header extends React.Component {
         <div className="App">
           <AppBar color="primary" position='static'>
             <Toolbar>
-              <IconButton className={classes.menuButton} color='inherit' aria-label='Menu'>
+              <IconButton className={classes.menuButton} color='inherit' aria-label='Open drawer' onClick={this.toggleDrawer('left', true)}>
                 <MenuIcon />
-              </IconButton>  
+              </IconButton>
+              <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
+                <div
+                  tabIndex={0}
+                  role='button'
+                  onClick={this.toggleDrawer('left', false)}
+                  onKeyDown={this.toggleDrawer('left', false)}
+                >
+                  {sideList}
+                </div>
+              </Drawer>
               <Typography variant='title' color='inherit' className={classes.flex}>
                 Spinal Cord Injury Resource Database
               </Typography>
@@ -110,7 +144,7 @@ class Header extends React.Component {
               </div>
             </Grid> */}
           </Grid>
-        </div> 
+        </div>
       </div>
     );
   }
