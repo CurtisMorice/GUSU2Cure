@@ -28,7 +28,7 @@ class CatalogueTable extends Component{
         return(
             <div>
                 {JSON.stringify(this.props.x)}
-                <p>hello</p>
+                
             </div>
         )
     }
