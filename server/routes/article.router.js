@@ -21,8 +21,7 @@ router.get(`/userArticle/:id`, (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    // const queryText = `SELECT articles.*, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id;`;
-    const queryText = 'SELECT * FROM articles'
+    const queryText = `SELECT articles.*, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id;`;
     pool.query(queryText)
     .then((result)=>{
         console.log('back from database with articles', result.rows);
