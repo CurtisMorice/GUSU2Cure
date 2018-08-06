@@ -83,9 +83,9 @@ class DropdownSearch extends Component {
                             <MenuItem value="">
                                 <em>None</em>
                             </MenuItem>
-                            {this.props.research_type.map(research_type => {
+                            {this.props.research_type.map((research_type, i) => {
                             return (
-                                <MenuItem value={research_type.type}>{research_type.type}</MenuItem>
+                                <MenuItem key={i} value={research_type.type}>{research_type.type}</MenuItem>
                             )
                             })}
                         </Select>
@@ -112,9 +112,9 @@ class DropdownSearch extends Component {
                             <MenuItem value="">
                                 <em>None</em>
                             </MenuItem>
-                            {this.props.research_phase.map(research_phase => {
+                            {this.props.research_phase.map((research_phase, i) => {
                             return (
-                                <MenuItem value={research_phase.phase}>{research_phase.phase}</MenuItem>
+                                <MenuItem key={i} value={research_phase.phase}>{research_phase.phase}</MenuItem>
                             )
                             })}
                         </Select>
