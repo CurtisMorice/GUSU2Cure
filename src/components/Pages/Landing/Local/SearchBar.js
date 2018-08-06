@@ -14,7 +14,7 @@ import FormControl from '@material-ui/core/FormControl';
 import '../Landing.css';
 import { MAP_ACTIONS } from '../../../../redux/actions/mapActions';
 import Autocomplete from 'react-google-autocomplete';
-
+import {KEYS} from '../../../../Key';
 
 const styles = theme => ({
   root: {
@@ -63,7 +63,7 @@ class SearchBar extends React.Component{
     event.preventDefault();
     console.log('googleApiCall');
     console.log('searchAddress:', this.state.searchAddress);
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.searchAddress}&key=API_KEY`
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.searchAddress}&key=${KEYS.GOOGLE_API_KEY}`
     console.log('url:', url);
     
     axios.get(url)
