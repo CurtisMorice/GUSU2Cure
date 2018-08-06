@@ -10,8 +10,13 @@ export function getArticles() {
 }
 
 export function getUserArticles(id) {
-    console.log('this is id',id);
-    
+    console.log('this is id', id);
+    return axios.get(`/api/articles/userArticle/${id}`)
+    .then(response => response.data)
+    .catch((error) => {
+        console.log('error getting users articles', error);
+        throw error.response || error;      
+    })
 }
 
 export function getResearchType() {

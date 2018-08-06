@@ -1,11 +1,10 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import {ARTICLE_ACTIONS} from '../actions/articleActions';
-import {getArticles, postArticle, deleteArticle, putArticle} from '../requests/articleRequests';
+import {getArticles, postArticle, deleteArticle, putArticle, getUserArticles} from '../requests/articleRequests';
 import {getResearchPhase, getResearchType} from '../requests/articleRequests';
 
 function* fetchArticles(action) {
     try {
-        console.log(action);
         let articles = yield getArticles(action.payload);
         console.log('in article saga to get articles', articles);
         yield put({
@@ -13,11 +12,26 @@ function* fetchArticles(action) {
             payload: articles
         });
     } catch (error) {
-        console.log('error in article saga on GET', error);   
+        console.log('error in article saga on GET', error);    
     }
 }
 
-
+function* fetchUserArticles(action) {
+   try{
+    console.log('FETCH USERS ARTICLES', action.payload);
+    let id = action.payload;
+    let userArticles = yield getUserArticles(id);
+    // yield put{(
+    //     type: USER_ACTIONS.FETCH_USER,
+    // )}
+    yield put({
+        type: ARTICLE_ACTIONS.SHOW_ARTICLES,
+        payload: userArticles
+    }) 
+    } catch (error) {
+        console.log('error', error);
+    }
+}
 
 function* fetchResearchType(action) {
     try {
@@ -90,6 +104,7 @@ function* updateArticle(action) {
 
 function* articleSaga() {
     yield takeLatest (ARTICLE_ACTIONS.FETCH_ARTICLES, fetchArticles)
+    yield takeLatest (ARTICLE_ACTIONS.FETCH_USER_ARTICLES, fetchUserArticles)
     yield takeLatest (ARTICLE_ACTIONS.FETCH_RESEARCH_TYPE, fetchResearchType)
     yield takeLatest (ARTICLE_ACTIONS.FETCH_RESEARCH_PHASE, fetchResearchPhase)
     yield takeLatest (ARTICLE_ACTIONS.POST_ARTICLE, addArticle)

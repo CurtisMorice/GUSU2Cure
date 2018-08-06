@@ -72,7 +72,10 @@ class ArticleCard extends React.Component {
     };
   
     componentDidMount(){
+      this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+
         this.getArticleDetail();
+        
     }
 
     handleExpandClick = () => {
@@ -85,8 +88,8 @@ class ArticleCard extends React.Component {
 
     getArticleDetail = (id) => {
         id = this.props.user.user.id;
-        console.log(id);
-        this.props.dispatch({type: ARTICLE_ACTIONS.FETCH_ARTICLES, payload: id});
+        console.log('THIS IS THE USERS ID',id);
+        this.props.dispatch({type: ARTICLE_ACTIONS.FETCH_USER_ARTICLES, payload: id});
     }
 
     render() {
