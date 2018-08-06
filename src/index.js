@@ -8,7 +8,7 @@ import reducer from './redux/reducers';
 
 import App from './App';
 import rootSaga from './redux/sagas';
-import NewArticleTable from './components/Pages/Admin/Local/NewArticleTable';
+
 
 // Initializing to an empty object, but here is where you could
 // preload your redux state with initial values (from localStorage, perhaps)
