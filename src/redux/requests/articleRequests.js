@@ -9,6 +9,11 @@ export function getArticles() {
     })
 }
 
+export function getUserArticles(id) {
+    console.log('this is id',id);
+    
+}
+
 export function getResearchType() {
     return axios.get('/api/articles/type')
     .then(response => response.data)

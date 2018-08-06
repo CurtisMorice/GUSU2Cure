@@ -5,6 +5,7 @@ import {getResearchPhase, getResearchType} from '../requests/articleRequests';
 
 function* fetchArticles(action) {
     try {
+        console.log(action);
         let articles = yield getArticles(action.payload);
         console.log('in article saga to get articles', articles);
         yield put({
@@ -15,6 +16,8 @@ function* fetchArticles(action) {
         console.log('error in article saga on GET', error);   
     }
 }
+
+
 
 function* fetchResearchType(action) {
     try {
