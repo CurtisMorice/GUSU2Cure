@@ -28,7 +28,7 @@ class NewArticleTable extends Component{
         return(
             <div>
                 {JSON.stringify(this.props.adminReducer)}
-                <p>hello</p>
+               
             </div>
         )
     }
