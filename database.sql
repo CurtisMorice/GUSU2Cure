@@ -63,24 +63,25 @@ CREATE TABLE "locations"(
 
 -- create article table. date_posted is automatically inserted every time new article is inserted. up to five related articles are accepted. commented out due to linter errors.
 CREATE TABLE "articles"(
-    "id" SERIAL PRIMARY KEY,
-    "location_id" INT NOT NULL REFERENCES locations,
-    "user_id" INT NOT NULL REFERENCES users,
-    "date_posted" DATE DEFAULT current_date,
-    "research_date" date NOT NULL,
-    "research_title" VARCHAR(200) NOT NULL,
-    "research_type" INT NOT NULL REFERENCES research_type,
-    "research_phase" INT NOT NULL REFERENCES research_phase,
-    "institution_name" VARCHAR(100) NOT NULL,
-    "institution_url" VARCHAR(300) NOT NULL,
-    "status" INT NOT NULL REFERENCES statuses,
-    "funding_source" VARCHAR(100),
-    "related_articles" text[5],
-    "admin_comment" VARCHAR(500),
-    "brief_description" VARCHAR(500),
-    "summary" VARCHAR(500),
-    "user_story" VARCHAR(500)
-    );
+
+    "id" SERIAL PRIMARY KEY,
+    "location_id" INT NOT NULL REFERENCES locations,
+    "user_id" INT NOT NULL REFERENCES users,
+    "date_posted" DATE DEFAULT current_date,
+    "research_date" date NOT NULL,
+    "research_title" VARCHAR(200) NOT NULL,
+    "research_type" INT NOT NULL REFERENCES research_type,
+    "research_phase" INT NOT NULL REFERENCES research_phase,
+    "institution_name" VARCHAR(100) NOT NULL,
+    "institution_url" VARCHAR(300) NOT NULL,
+    "status" INT NOT NULL REFERENCES statuses,
+    "funding_source" VARCHAR(100),
+    "related_articles" text[5],
+    "admin_comment" VARCHAR(500),
+	"brief_description" VARCHAR(500),
+	"summary" VARCHAR(500),
+	"user_story" VARCHAR(500)
+    );
 	
 --create comments table. date will be automatically inserted. commented out due to linter errors
 CREATE TABLE "comments"(

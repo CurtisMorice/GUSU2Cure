@@ -14,8 +14,6 @@ import AddArticleModal from '../../Global/Modals/AddArticleModal';
 import { ARTICLE_ACTIONS } from '../../../redux/actions/articleActions';
 import MapWrapper from './Local/Map/MapWrapper';
 
-
-
 const mapStateToProps = state => ({
   user: state.user,
   mapReducer: state.mapReducer,

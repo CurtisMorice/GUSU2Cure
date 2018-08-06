@@ -120,7 +120,6 @@ class SearchBar extends React.Component{
             console.log(place);
           }}
           types={['(regions)']}
-          componentRestrictions={{country: "us"}}
           />
           {/* <Input
             type="search"
