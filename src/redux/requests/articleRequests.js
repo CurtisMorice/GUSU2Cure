@@ -1,11 +1,28 @@
 import axios from 'axios';
 
-export function getArticles(id) {
-    console.log('id', id);
-    return axios.get(`/api/articles/${id}`)
+export function getArticles() {
+    return axios.get('/api/articles')
     .then(response => response.data)
     .catch((error)=>{
         console.log('error getting articles', error);
+        throw error.response || error;      
+    })
+}
+
+export function getResearchType() {
+    return axios.get('/api/articles/type')
+    .then(response => response.data)
+    .catch((error)=>{
+        console.log('error getting research type', error);
+        throw error.response || error;      
+    })
+}
+
+export function getResearchPhase() {
+    return axios.get('/api/articles/phase')
+    .then(response => response.data)
+    .catch((error)=>{
+        console.log('error getting research phase', error);
         throw error.response || error;      
     })
 }

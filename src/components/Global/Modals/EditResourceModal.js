@@ -111,11 +111,11 @@ updateResource = () => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} variant="contained" color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.updateResource} variant ="contained" color="primary">
+          <Button onClick={this.updateResource} variant ="contained" color="primary">
               Edit Resource
+            </Button>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
             </Button>
           </DialogActions>
         </Dialog>
