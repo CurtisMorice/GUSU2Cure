@@ -138,7 +138,7 @@ class AddArticleModal extends React.Component {
         return <div>
           <InputLabel htmlFor="research_phase-simple">Research Type</InputLabel>
           <Select
-            value={this.props.articleReducer.research_type}
+            // value={this.props.articleReducer.research_type}
             onChange={this.handleInputChangeFor('research_type')}
             inputProps={{
             name: 'research_type',
