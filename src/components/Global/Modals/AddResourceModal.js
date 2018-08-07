@@ -42,11 +42,12 @@ class AddResourceModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            open: false,
             resource: {
             name: '',
             url: '',
             summary: '',
-            date_created: ''
+            date_created: '',
             }
         }
     }
@@ -77,17 +78,17 @@ class AddResourceModal extends React.Component {
     
         handleClickOpen = () => {
             this.setState({ open: true });
-        };
-    
-        handleClose = () => {
+          };
+        
+          handleClose = () => {
             this.setState({ open: false });
-        };
+          };
     
       render() {
         const { classes } = this.props;
         return (
           <div>
-            <Button className={classes.button} onClick={this.handleClickOpen} variant="contained" color="primary">Add a new resource</Button>
+            <Button className={classes.button} onClick={()=>this.handleClickOpen} variant="contained" color="primary">Add a new resource</Button>
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}

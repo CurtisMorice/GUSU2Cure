@@ -44,7 +44,8 @@ class AddArticleModal extends React.Component {
                   article: {},
                   activeStep: 0,
                   date_posted: '08/06/2018',
-                  research_date: '08/06/2018'
+                  research_date: '08/06/2018',
+                  
                   
             }
           }
@@ -61,7 +62,7 @@ class AddArticleModal extends React.Component {
         return <div>
           <InputLabel htmlFor="research_phase-simple">Research Type</InputLabel>
           <Select
-            value={this.state.research_type}
+            value={this.props.articleReducer.research_type}
             onChange={this.handleInputChangeFor('research_type')}
             inputProps={{
             name: 'research_type',
