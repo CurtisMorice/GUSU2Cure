@@ -88,7 +88,7 @@ class AddResourceModal extends React.Component {
         const { classes } = this.props;
         return (
           <div>
-            <Button className={classes.button} onClick={()=>this.handleClickOpen} variant="contained" color="primary">Add a new resource</Button>
+            <Button className={classes.button} onClick={this.handleClickOpen} variant="contained" color="primary">Add a new resource</Button>
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
