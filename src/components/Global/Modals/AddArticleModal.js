@@ -20,6 +20,7 @@ import { compose } from 'recompose';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import {ARTICLE_ACTIONS} from '../../../redux/actions/articleActions';
 
 import Map from '../../Pages/Landing/Local/Map/Map';
 
@@ -59,6 +60,54 @@ class AddArticleModal extends React.Component {
     open: false,
   };
 
+  //     // googleApiCall = (event) => {
+//     //     event.preventDefault();
+//     //     console.log('googleApiCall');
+//     //     console.log('searchAddress:', this.state.searchAddress);
+//     //     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.searchAddress}&key=AIzaSyD9e9e4rYBfPVZsPiKNBvQ8Ciu5yGPlfq8`
+//     //     console.log('url:', url);
+        
+//     //     axios.get(url)
+//     //     .then((response) => {
+//     //       console.log('response', response)
+//     //         const latLng = {...response.data.results}
+//     //         console.log('latLng:', latLng);
+//     //         this.props.dispatch({type: MAP_ACTIONS.SET_ADDRESS, payload: latLng})
+//     //         this.props.dispatch({type: MAP_ACTIONS.RECENTER})
+//     //     })
+//     //     .catch(err => {
+//     //     console.log('in googleApicall',err);                     
+        
+//     //     });
+//     //   }
+
+    addArticle = (event) => {
+        event.preventDefault();
+        // if (this.state.user.user.type === 'admin') {
+            const body = {
+                location_id: this.state.location_id,
+                user_id: this.state.user_id,
+                date_posted: this.state.date_posted,
+                research_date: this.state.research_date,
+                reasearch_title: this.state.reasearch_title,
+                research_type: this.state.research_type,
+                research_phase: this.state.research_phase,
+                institution_name: this.state.institution_name,
+                institution_url: this.state.institution_url,
+                funding_source: this.state.funding_source,
+                related_articles: this.state.related_articles,
+                status: this.state.status
+            };
+            console.log('body:',body);
+            const action = ({
+                type: ARTICLE_ACTIONS.POST_ARTICLE,
+                payload: body
+            })
+            this.props.dispatch(action);
+            this.handleClose();
+        // }
+    }
+
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -69,6 +118,17 @@ class AddArticleModal extends React.Component {
 
   getSteps = () => {
     return ['Basic Information', 'Summary', 'Confirm'];
+  }
+
+  handleInputChangeFor = propertyName => (event) => {
+      console.log('user id', this.props.user.user.id);  
+      this.setState({
+          [propertyName]: event.target.value,
+          user_id: this.props.user.user.id,
+          location_id: 6,
+          status: 1,
+      
+      });
   }
 
   getStepContent = (stepIndex) => {
