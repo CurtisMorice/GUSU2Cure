@@ -21,6 +21,7 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import { Typography } from '../../../../../node_modules/@material-ui/core';
 
 
 const mapStateToProps = state => ({
@@ -157,7 +158,7 @@ class NewArticleTable extends React.Component{
       
         render() {
           const { classes } = this.props;
-          const { data, rowsPerPage, page } = this.state;
+          const {rowsPerPage, page } = this.state;
           const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.adminReducer.length - page * rowsPerPage);
       
           return (
@@ -165,8 +166,13 @@ class NewArticleTable extends React.Component{
               <div className={classes.tableWrapper}>
               {/* {JSON.stringify(this.props.adminReducer)} */}
         <Table className={classes.table}>
-            <TableHead>
-                <TableRow>
+          <TableHead>
+            <TableRow>
+              <TableCell>
+                <Typography variant="display3">New Article</Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow>
                     <TableCell> Date Posted </TableCell>
                     <TableCell> Research Title </TableCell>
                     <TableCell> Research Type </TableCell>

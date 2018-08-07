@@ -21,19 +21,18 @@ const mapStateToProps = state => ({
   });
 
 class EditResource extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            updatedResource: {
+          open: false,
+          updatedResource: {
           
             }
         }
     }
 
 
-state = {
-    open: false
-}
+
 
 handleClickOpen = () => {
     this.setState({ open: true });
@@ -98,12 +97,14 @@ updateResource = () => {
               margin="dense"
               label="Url"
               fullWidth
-              multiLine={true}
+              
             />
             <TextField 
               value={this.state.updatedResource.summary} 
               defaultValue={this.props.resource.summary}
               onChange={this.handleUpdate('summary')}
+              multiline
+              rowsMax="5"
               name="summary"
               autoFocus
               margin="dense"

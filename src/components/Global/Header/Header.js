@@ -130,7 +130,7 @@ class Header extends React.Component {
             </Toolbar>
           </AppBar>
           <Grid container>
-            <Grid item xs={14}>
+            <Grid item xs={12}>
               <div className="App-header">
                 <h1 className="App-title"><br /><br />Spinal Cord Injury Research Map Database</h1>
               </div> 
