@@ -146,6 +146,8 @@ class NewArticleTable extends React.Component{
           this.state = {
             page: 0,
             rowsPerPage: 5,
+            approved: 2,
+            rejected: 3,
           };
         }
       
@@ -157,6 +159,25 @@ class NewArticleTable extends React.Component{
           this.setState({ rowsPerPage: event.target.value });
         };
       
+        approveNewArticle = (action) => {   
+           let approved = this.state.approved
+           console.log('in approve click', approved);
+            this.props.dispatch({
+                type: ADMIN_ACTIONS.APPROVED_ARTICLE,
+                payload: action, approved
+            })
+
+        }
+        rejectNewArticle = (action) => {
+            console.log('rejectNewArticle ',action);
+            let rejected = this.state.rejected
+            console.log('in rejected click', rejected);
+             this.props.dispatch({
+                 type: ADMIN_ACTIONS.REJECTED_ARTICLE,
+                 payload: action, rejected
+             })
+            
+        }
         render() {
           const { classes } = this.props;
           const {rowsPerPage, page } = this.state;
@@ -205,7 +226,7 @@ class NewArticleTable extends React.Component{
                           <TableCell component="th" scope="row">{newArticle.email}</TableCell>
                        <TableCell> 
                         <Tooltip title="Approved">
-                         <IconButton aria-label="Approved" color="primary">
+                         <IconButton aria-label="Approved" color="primary" onClick={()=>this.approveNewArticle(newArticle.id)}>
                           <i className="material-icons">
                             thumb_up
                           </i>
@@ -213,8 +234,8 @@ class NewArticleTable extends React.Component{
                         </Tooltip> 
                        </TableCell>
                        <TableCell> 
-                         <Tooltip title="Rejected">
-                          <IconButton aria-label="Rejected" color="primary">
+                         <Tooltip id="rejected" title="Rejected">
+                          <IconButton aria-label="Rejected" color="primary" value="2" onClick={()=>this.rejectNewArticle(newArticle.id)}>
                            <i className="material-icons" style={{color: "red"}}>
                             thumb_down
                            </i>
