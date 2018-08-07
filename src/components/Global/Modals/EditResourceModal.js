@@ -25,7 +25,8 @@ class EditResource extends React.Component {
         super();
         this.state = {
             updatedResource: {
-          
+
+              
             }
         }
     }
@@ -36,22 +37,31 @@ state = {
 }
 
 handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({ 
+      open: true,
+      updatedResource: {
+        name: this.props.resource.name,
+        url: this.props.resource.url,
+        summary: this.props.resource.summary
+      } 
+    });
 };
 
 handleClose = () => {
     this.setState({ open: false });
 };
 
-handleUpdate = (propertyName) => (event) => {
+handleUpdate = (propertyName) => async(event) => {
     console.log('event happened', event.target.value);
-    this.setState({
+    await this.setState({
         updatedResource: {
             ...this.state.updatedResource,
             id: this.props.resource.id,
             [propertyName]: event.target.value
         }
     })
+    console.log('state:', this.state);
+    
 }
 
 updateResource = () => {
