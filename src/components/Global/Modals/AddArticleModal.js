@@ -368,7 +368,7 @@ class AddArticleModal extends React.Component {
         </div>
       </div>
           </DialogContent>
-          </Dialog>
+           </Dialog>
       </div>
     );
   }
