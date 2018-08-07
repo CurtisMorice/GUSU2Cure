@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Nav from '../../Global/Nav/Nav';
+// import Nav from '../../Global/Nav/Nav';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 // Components
@@ -45,7 +45,7 @@ class UserHome extends Component {
 
     return (
       <div>
-        <Nav />
+        {/* <Nav /> */}
         { content }
       </div>
     );
