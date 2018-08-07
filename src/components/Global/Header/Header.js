@@ -22,6 +22,7 @@ import ListItem from '@material-ui/core/ListItem';
 import HomeIcon from '@material-ui/icons/Home';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import PersonIcon from '@material-ui/icons/Person';
+import SecurityIcon from '@material-ui/icons/Security';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import LoginModal from '../Modals/LoginModal';
@@ -147,7 +148,6 @@ class Header extends Component {
             </ListItemIcon>
             <ListItemText primary="Resources" />
           </ListItem>
-        </List>
         <ListItem component={props => (
             <ListItem button>
               <Link style={{
@@ -167,6 +167,8 @@ class Header extends Component {
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
+          { adminHomeListItem }
+        </List>
       </div>
     );
 
@@ -176,6 +178,28 @@ class Header extends Component {
         <Icon className={classes.rightIcon}>lock_closed</Icon>
       </Button>
     ) : (<LoginModal />);
+
+    const adminHomeListItem = this.props.user.type == 'admin' ? (
+      <ListItem component={props => (
+        <ListItem button>
+          <Link style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0
+          }}
+          to={"/admin"}>
+          </Link>
+          {props.children}
+        </ListItem>
+      )}>
+        <ListItemIcon>
+          <SecurityIcon />
+        </ListItemIcon>
+        <ListItemText primary="Admin Home" />
+      </ListItem>
+    ) : '';
 
     return (
       <div className={classes.root}>
@@ -202,21 +226,6 @@ class Header extends Component {
               <RegisterModal />
             </Toolbar>
           </AppBar>
-          {/* <Grid container>
-            <Grid item xs={14}>
-              <div className="App-header">
-                <h1 className="App-title"><br /><br />Spinal Cord Injury Research Map Database</h1>
-              </div> 
-            </Grid>
-            <Grid item xs={2} >
-              <div className="App-header">
-                <br />
-                { loginButton }
-                <RegisterModal />
-              
-              </div>
-            </Grid>
-          </Grid> */}
         </div>
       </div>
     );
