@@ -21,37 +21,44 @@ const mapStateToProps = state => ({
   });
 
 class EditResource extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            updatedResource: {
-          
+          open: false,
+          updatedResource: {
             }
         }
     }
 
 
-state = {
-    open: false
-}
+
 
 handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({ 
+      open: true,
+      updatedResource: {
+        name: this.props.resource.name,
+        url: this.props.resource.url,
+        summary: this.props.resource.summary
+      } 
+    });
 };
 
 handleClose = () => {
     this.setState({ open: false });
 };
 
-handleUpdate = (propertyName) => (event) => {
+handleUpdate = (propertyName) => async(event) => {
     console.log('event happened', event.target.value);
-    this.setState({
+    await this.setState({
         updatedResource: {
             ...this.state.updatedResource,
             id: this.props.resource.id,
             [propertyName]: event.target.value
         }
     })
+    console.log('state:', this.state);
+    
 }
 
 updateResource = () => {
@@ -98,12 +105,14 @@ updateResource = () => {
               margin="dense"
               label="Url"
               fullWidth
-              multiLine={true}
+              
             />
             <TextField 
               value={this.state.updatedResource.summary} 
               defaultValue={this.props.resource.summary}
               onChange={this.handleUpdate('summary')}
+              multiline
+              rowsMax="5"
               name="summary"
               autoFocus
               margin="dense"

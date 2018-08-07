@@ -20,7 +20,8 @@ export class Map extends Component {
   
     renderChildren = () =>{
         const {children} = this.props;
-
+        // console.log('children:', children);
+      
         if(!children) return;
 
         return React.Children.map(children, c =>{
@@ -108,7 +109,7 @@ export class Map extends Component {
       }
   
       const style = {
-        width: '100vw',
+        width: '100%',
         height: '100vh'
       }
 

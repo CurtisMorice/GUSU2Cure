@@ -8,7 +8,7 @@ import { triggerLogout } from '../../../redux/actions/loginActions';
 
 // Components
 import AdminHomeProfile from './Local/AdminHomeProfile';
-// import AdminNav from './Local/AdminNav';
+import AdminNav from './Local/AdminNav';
 
 // styles
 
@@ -34,8 +34,7 @@ class AdminHome extends Component {
 
   render() {
     let content = null;
-
-    if (this.props.user.user) {
+    if (this.props.user.user != null && this.props.user.user.type == 'admin') {
       content = (
         <div>
           {/* <h1
@@ -48,11 +47,20 @@ class AdminHome extends Component {
           >
             Log Out
           </button> */}
-          {/* <AdminNav/> */}
-          <AdminHomeProfile/>
+          <AdminNav/>
+          {/* <AdminHomeProfile/> */}
         </div>
-      );
+      )
     }
+        else {
+          return(
+            content = (
+              <div>
+                <h3>User Unauthorized ---> </h3>
+              </div>
+            )
+          )
+        }
 
     return (
       <div>

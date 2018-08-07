@@ -20,18 +20,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import LoginModal from '../Modals/LoginModal';
 import RegisterModal from '../Modals/RegisterModal';
 import Typography from '@material-ui/core/Typography';
-import createPalette from '@material-ui/core/styles/createPalette';
 import Drawer from '@material-ui/core/Drawer';
 // import MenuList from '@material-ui/core/MenuList';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import HomeIcon from '@material-ui/icons/Home';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
-import InfoIcon from '@material-ui/icons/Info';
 import Divider from '@material-ui/core/Divider';
-// import HeaderList from './HeaderList';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -108,6 +100,7 @@ class Header extends Component {
     const { classes } = this.props;
 
     const sideList = (
+<<<<<<< HEAD
       <div>
         {/* <HeaderList /> */}
         <List component="nav">
@@ -132,6 +125,12 @@ class Header extends Component {
           </ListItem>
         </List>
         
+=======
+      <div className={classes.list}>
+        <List>...</List>
+        <Divider />
+        <List>...</List>
+>>>>>>> a6bb40a96f78614a96847ddda24fea9a580ce627
       </div>
     );
 
@@ -167,8 +166,13 @@ class Header extends Component {
               <RegisterModal />
             </Toolbar>
           </AppBar>
+<<<<<<< HEAD
           {/* <Grid container>
             <Grid item xs={14}>
+=======
+          <Grid container>
+            <Grid item xs={12}>
+>>>>>>> a6bb40a96f78614a96847ddda24fea9a580ce627
               <div className="App-header">
                 <h1 className="App-title"><br /><br />Spinal Cord Injury Research Map Database</h1>
               </div> 

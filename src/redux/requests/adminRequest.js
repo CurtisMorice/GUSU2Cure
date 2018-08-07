@@ -22,7 +22,7 @@ export function getApprovedArticles() {
 
 export function getNewArticles() {
     console.log('in get new articles request in the admin');
-    return axios.get('/api/admin/articles')
+    return axios.get('/api/admin/newArticles')
     .then(response => response.data)
     .catch((error)=>{
         console.log('error in the getNewArticles');
