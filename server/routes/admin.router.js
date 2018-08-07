@@ -51,7 +51,7 @@ router.get('/newArticles', (req, res) => {
     })
 })
 
-// router.put(`/acceptArticle/${id}`, (req,res)=>{
+// router.put(`/acceptArticle/${id}`, (req)=>{
 //     console.log('this is the action',id)
 //     const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`
 //     pool.query(queryText, [1, 2])
