@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { GoogleApiWrapper} from 'google-maps-react';
+import { GoogleApiWrapper } from 'google-maps-react';
 import Map from './Map';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -9,6 +9,7 @@ import { triggerLogout } from '../../../../../redux/actions/loginActions';
 import axios from 'axios';
 import Marker from './Marker';
 import {KEYS} from '../../../../../Key';
+import InfoWindow from './InfoWindow';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -21,9 +22,11 @@ export class Container extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-          articles: [{lat: 37.759703, lng: -122.428093}], // articles to be rendered on the map
-          markers: [],
+          articles: this.props.mapReducer.mapReducer.locations, // articles to be rendered on the map
+          activeMarker: {},
           searchAddress: '',
+          showingInfoWindow: false,
+          articlesFetched: false
         }
       }
       
@@ -40,36 +43,65 @@ export class Container extends React.Component{
     
       // gets locations from the database to render markers on the google map
       getLocations = () =>{
-        axios.get('/api/articles')
-        .then(async(response)=>{
-           await this.setState({...this.state, articles: [...response.data]})
-           console.log('this.state:', this.state);
-        })
-        .catch((error)=>{
-          console.log('error getting articles in client:', error);
-        })
+        console.log('getLocations');
+        
+        this.props.dispatch({type:MAP_ACTIONS.FETCH_LOCATIONS})
+        // axios.get('/api/articles')
+        // .then(async(response)=>{
+        //    await this.setState({...this.state, articles: [...response.data]})
+        //    console.log('this.state:', this.state);
+        // })
+        // .catch((error)=>{
+        //   console.log('error getting articles in client:', error);
+        // })
+        // this.setState({
+        //   ...this.state,
+        //   articlesFetched: true
+        // })
+      }
+      onMarkerClick = async (props, marker) =>{
+        console.log('markerClick');
+        console.log('props:', props);
+        console.log('marker:', marker);
+        
+        
+        await this.setState({
+          ...this.state,
+          selectedPlace: props,
+          activeMarker: marker,
+          showingInfoWindow: true
+        });
+        console.log('wrapper state:', this.state);
         
       }
   
-render(){
-    const style = {
-      width: '100vw',
-      height: '100vh'
-    }
-    const pos = {lat: 37.759703, lng: -122.428093}
+      render(){
+          const style = {
+            width: '100vw',
+            height: '100vh'
+          }
+          return (
+            <div>
+              {this.props.mapReducer.mapReducer.locations.length !== 0 && <Map google={this.props.google}>
+                {this.props.mapReducer.mapReducer.locations.length !== 0 && this.props.mapReducer.mapReducer.locations.map((article,i) =>
+                <Marker name={article.institution_name} onClick={this.onMarkerClick} key={i} position={{lat: article.lat, lng: article.lng}} />
+                  )}
+              
+              <InfoWindow
+                  marker={this.state.activeMarker}
+                  visible={this.state.showingInfoWindow}
+                  >
+                    <div>
+                      <h1>Hello</h1>
+                    </div>
+              </InfoWindow>
 
-    return (
-      <div>
-        <Map google={this.props.google}>
-          {this.state.articles.map((article,i) =><Marker key={i} position={{lat: article.lat, lng: article.lng}} />)}
-          {/* <Marker />
-          <Marker position={pos} /> */}
-        </Map>
-      </div>
-    
-  )
-  }
-}
+              </Map>}
+            </div>
+          
+        )
+        }
+      }
 
 {/* 
           {/* <Marker position={pos} /> */}
