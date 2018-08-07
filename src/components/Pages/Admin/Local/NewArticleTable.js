@@ -21,6 +21,8 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import { Typography } from '../../../../../node_modules/@material-ui/core';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 const mapStateToProps = state => ({
@@ -157,7 +159,7 @@ class NewArticleTable extends React.Component{
       
         render() {
           const { classes } = this.props;
-          const { data, rowsPerPage, page } = this.state;
+          const {rowsPerPage, page } = this.state;
           const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.adminReducer.length - page * rowsPerPage);
       
           return (
@@ -165,8 +167,13 @@ class NewArticleTable extends React.Component{
               <div className={classes.tableWrapper}>
               {/* {JSON.stringify(this.props.adminReducer)} */}
         <Table className={classes.table}>
-            <TableHead>
-                <TableRow>
+          <TableHead>
+            <TableRow>
+              <TableCell>
+                <Typography variant="display3">New Article</Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow>
                     <TableCell> Date Posted </TableCell>
                     <TableCell> Research Title </TableCell>
                     <TableCell> Research Type </TableCell>
@@ -177,6 +184,8 @@ class NewArticleTable extends React.Component{
                     <TableCell> Research Date </TableCell>
                     <TableCell> User Name </TableCell>
                     <TableCell> User Email </TableCell>
+                    <TableCell> Approved </TableCell>
+                    <TableCell> Rejected </TableCell>
                 </TableRow>
             </TableHead>
         <TableBody>
@@ -194,7 +203,24 @@ class NewArticleTable extends React.Component{
                           <TableCell component="th" scope="row">{newArticle.research_date}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.username}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.email}</TableCell>
-                  
+                       <TableCell> 
+                        <Tooltip title="Approved">
+                         <IconButton aria-label="Approved" color="primary">
+                          <i className="material-icons">
+                            thumb_up
+                          </i>
+                         </IconButton>
+                        </Tooltip> 
+                       </TableCell>
+                       <TableCell> 
+                         <Tooltip title="Rejected">
+                          <IconButton aria-label="Rejected" color="primary">
+                           <i className="material-icons" style={{color: "red"}}>
+                            thumb_down
+                           </i>
+                          </IconButton>
+                         </Tooltip>
+                        </TableCell>
                         </TableRow>
                       );
                     })}
