@@ -21,8 +21,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import {ARTICLE_ACTIONS} from '../../../redux/actions/articleActions';
+import {MAP_ACTIONS} from '../../../redux/actions/mapActions';
 
-import Map from '../../Pages/Landing/Local/Map/Map';
+import MapWrapper from '../../Pages/Landing/Local/Map/MapWrapper';
+import SearchBar from '../../Pages/Landing/Local/SearchBar';
+import axios from 'axios';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -34,7 +37,8 @@ const mapStateToProps = state => ({
 
 const styles = theme => ({
 root: {
-  width: '90%',
+  width: '100%',
+  maxWidth: 'none',
 },
 backButton: {
   marginRight: theme.spacing.unit,
@@ -46,40 +50,52 @@ instructions: {
 });
 
 class AddArticleModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-          article: {},
-          activeStep: 0,
-          date_posted: '08/06/2018',
-          research_date: '08/06/2018'
-          
+    constructor(props) {
+      super(props);
+      this.state = {
+            article: {},
+            location: {},
+            activeStep: 0,
+            date_posted: '08/06/2018',
+            research_date: '08/06/2018'
+            
+      }
     }
-  }
-  state = {
-    open: false,
-  };
+    state = {
+      open: false,
+    };
 
-  //     // googleApiCall = (event) => {
-//     //     event.preventDefault();
-//     //     console.log('googleApiCall');
-//     //     console.log('searchAddress:', this.state.searchAddress);
-//     //     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.searchAddress}&key=AIzaSyD9e9e4rYBfPVZsPiKNBvQ8Ciu5yGPlfq8`
-//     //     console.log('url:', url);
-        
-//     //     axios.get(url)
-//     //     .then((response) => {
-//     //       console.log('response', response)
-//     //         const latLng = {...response.data.results}
-//     //         console.log('latLng:', latLng);
-//     //         this.props.dispatch({type: MAP_ACTIONS.SET_ADDRESS, payload: latLng})
-//     //         this.props.dispatch({type: MAP_ACTIONS.RECENTER})
-//     //     })
-//     //     .catch(err => {
-//     //     console.log('in googleApicall',err);                     
-        
-//     //     });
-//     //   }
+    googleApiCall = (event) => {
+      event.preventDefault();
+      console.log('googleApiCall');
+      console.log('searchAddress:', this.state.address);
+      const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address}&key=AIzaSyD9e9e4rYBfPVZsPiKNBvQ8Ciu5yGPlfq8`
+      console.log('url:', url);
+      axios.get(url)
+      .then((response) => {
+        console.log('response', response)
+          const latLng = {...response.data.results}
+          console.log('latLng:', latLng);
+          this.props.dispatch({type: MAP_ACTIONS.SET_ADDRESS, payload: latLng})
+          // this.props.dispatch({type: MAP_ACTIONS.RECENTER});
+          this.setState({
+            ...this.state,
+            lat: this.props.mapReducer.mapReducer.location.lat,
+            lng: this.props.mapReducer.mapReducer.location.lng,
+          });
+          console.log('');
+          
+      })
+      .catch(err => {
+      console.log('in googleApicall',err);                     
+      });
+    }
+
+    addLocation = () => {
+      const body = {
+        address:this.state.address
+      }
+    }
 
     addArticle = (event) => {
         event.preventDefault();
@@ -114,6 +130,7 @@ class AddArticleModal extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false });
+    this.handleReset();
   };
 
 
@@ -126,9 +143,6 @@ class AddArticleModal extends React.Component {
       this.setState({
           [propertyName]: event.target.value,
           user_id: this.props.user.user.id,
-          location_id: 6,
-          status: 1,
-      
       });
   }
 
@@ -138,7 +152,7 @@ class AddArticleModal extends React.Component {
         return <div>
           <InputLabel htmlFor="research_phase-simple">Research Type</InputLabel>
           <Select
-            value={this.props.articleReducer.research_type}
+            value={this.state.research_type}
             onChange={this.handleInputChangeFor('research_type')}
             inputProps={{
             name: 'research_type',
@@ -194,9 +208,9 @@ class AddArticleModal extends React.Component {
             label="Institution Name"
             fullWidth  
           />
-          <TextField 
+          <TextField
             type="text"
-            // value={this.state.}
+            value={this.state.address}
             onChange={this.handleInputChangeFor('address')}
             name="address"
             autoFocus
@@ -252,6 +266,12 @@ class AddArticleModal extends React.Component {
             multiline
             />
         </div>);
+      case 2:
+        return (
+        <div>
+          <MapWrapper />
+        </div>);
+      
       default:
         return 'blah';
     }
@@ -267,11 +287,15 @@ class AddArticleModal extends React.Component {
       console.log('this.state:', this.state);
   }
 
-  handleNext = () => {
+  handleNext = (event) => {
     const { activeStep } = this.state;
     this.setState({
       activeStep: activeStep + 1,
     });
+    if (this.state.activeStep === 0){
+      this.googleApiCall(event);
+    }
+    
   };
 
   handleBack = () => {
@@ -295,6 +319,7 @@ class AddArticleModal extends React.Component {
       <div>
         <Button onClick={this.handleClickOpen} variant="contained" color="primary">Add Article</Button>
         <Dialog
+          fullScreen
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="alert-dialog-title"
@@ -303,8 +328,8 @@ class AddArticleModal extends React.Component {
           <DialogTitle id="alert-dialog-title">{"Add an article:"}</DialogTitle>
           <DialogContent>
             
-          </DialogContent>
-          <DialogActions>
+          
+         
           <div className={classes.root}>
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map(label => {
@@ -315,11 +340,13 @@ class AddArticleModal extends React.Component {
             );
           })}
         </Stepper>
+        <br/>
+        <br/>
         <div>
           {this.state.activeStep === steps.length ? (
             <div>
-              <Typography className={classes.instructions}>All steps completed</Typography>
-              <Button onClick={this.handleReset}>Reset</Button>
+              <Typography className={classes.instructions}>Thank you for submitting your article</Typography>
+              <Button color="primary" variant="contained" onClick={this.handleClose}>Done</Button>
             </div>
           ) : (
             <div>
@@ -340,7 +367,7 @@ class AddArticleModal extends React.Component {
           )}
         </div>
       </div>
-          </DialogActions>
+          </DialogContent>
           </Dialog>
       </div>
     );
