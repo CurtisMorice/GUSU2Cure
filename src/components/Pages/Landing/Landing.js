@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Nav from '../../Global/Nav/Nav';
+// import Nav from '../../Global/Nav/Nav';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { MAP_ACTIONS } from '../../../redux/actions/mapActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
@@ -58,7 +58,7 @@ class Landing extends Component {
     
     return (
       <div>
-        <Nav />
+        {/* <Nav /> */}
         <div>
           <Grid container spacing={24}>
             <Grid item xs={12} />
