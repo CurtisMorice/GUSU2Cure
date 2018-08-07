@@ -157,6 +157,11 @@ class UserTable extends Component{
     this.props.dispatch({type: ADMIN_ACTIONS.FETCH_ALL_USER});
   }
 
+  deleteUser = (id) => {
+    console.log('hello', id);
+    // this.props.dispatch({type: ADMIN_ACTIONS.DELETE_USER})
+  }
+
   render(){
 
     const { classes } = this.props;
@@ -192,8 +197,8 @@ class UserTable extends Component{
                       </Tooltip>
                     </TableCell>
                     <TableCell component="th" scope="row"> 
-                      <Tooltip title="Delete">
-                        <IconButton aria-label="Delete" color="secondary" >
+                      <Tooltip title="Delete" >
+                        <IconButton aria-label="Delete" color="secondary" onClick={ ()=>this.deleteUser(n.user_id) }>
                           <DeleteIcon />
                         </IconButton>
                       </Tooltip>
@@ -217,7 +222,6 @@ class UserTable extends Component{
                   ActionsComponent={TablePaginationActionsWrapped}
                 />
               </TableRow>
-
             </TableFooter>
           </Table>
         </paper>
