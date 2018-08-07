@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
 import SearchBar from '../SearchBar'
-import Marker from './Marker';
-import axios from 'axios'
 
 export class Map extends Component {
     constructor(props) {
@@ -24,13 +22,16 @@ export class Map extends Component {
       
         if(!children) return;
 
+        console.log('children:', children);
+        
         return React.Children.map(children, c =>{
+          console.log('c is:', c);
+          if (c.key !== null){
             return React.cloneElement(c, {
                 map: this.map,
                 google: this.props.google,
                 mapCenter: this.state.currentLocation
-
-            })
+            })}
         })
     }
 
@@ -118,8 +119,8 @@ export class Map extends Component {
         <div>
         <SearchBar setCurrentLocation={this.setCurrentLocation} />
         <div style={style} ref="map">
-          Loading map...
-          {this.renderChildren()}
+          Loading map...          
+            {this.renderChildren()}
         </div>
         </div>
       );

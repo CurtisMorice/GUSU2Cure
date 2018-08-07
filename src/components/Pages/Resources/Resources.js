@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import './Resources.css'
 
-import Nav from '../../Global/Nav/Nav';
+// import Nav from '../../Global/Nav/Nav';
 import {RESOURCE_ACTIONS} from '../../../redux/actions/resourceActions';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
@@ -93,7 +93,7 @@ class UserHome extends Component {
 
     return (
       <div>
-        <Nav />
+        {/* <Nav /> */}
         { content }
       </div>
     );
