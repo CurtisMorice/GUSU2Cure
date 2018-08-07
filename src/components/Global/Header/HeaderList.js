@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -13,7 +13,12 @@ import PersonIcon from '@material-ui/icons/Person';
 import MemoryRouter from 'react-router/MemoryRouter';
 import Route from 'react-router/Route';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 
+const mapStateToProps = state => ({
+  user: state.user,
+})
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -25,7 +30,7 @@ const styles = theme => ({
   },
 });
 
-class ListItemLink extends React.Component {
+class ListItemLink extends Component {
   renderLink = itemProps => <Link to={this.props.to} {...itemProps} />;
 
   render() {
@@ -33,8 +38,8 @@ class ListItemLink extends React.Component {
     return (
       <li>
         <ListItem button component={this.renderLink}>
-          {icon && <ListItemIcon>{icon}</ListItemIcon>}
-          <ListItemText inset primary={primary} />
+          <ListItemIcon>{icon}</ListItemIcon>
+          <ListItemText primary={primary} />
         </ListItem>
       </li>
     );
@@ -77,4 +82,7 @@ HeaderList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(HeaderList);
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps)
+)(HeaderList);
