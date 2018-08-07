@@ -39,3 +39,30 @@ export function getModifiedArticles() {
         throw error.response || error;
         })
 }
+
+// export function deleteBadArticle(id) {
+//     console.log('in deleteBadArticle Request');
+//     return axios.put('api/admin/rejectArticle', id)
+//     .then(response => response.data).catch((error)=>{
+//         console.log('error in the deleteBadArticle adminRequest', error);
+//         throw error.response || error;
+//     })
+// }
+
+export function rejectedArticle(id) {
+    console.log('in rejectedArticleRequest', id);
+    return axios.put(`api/admin/rejectedArticle/${id}`)
+    .then(response => response.data).catch((error)=>{
+        console.log('error in the rejectedArticle adminRequest', error);
+        throw error.response || error;
+    })
+}
+
+export function approvedArticle(id) {
+    console.log('in approved Request');
+    return axios.put('api/admin/approvedArticle', id)
+    .then(response => response.data).catch((error)=>{
+        console.log('error in the approved adminRequest', error);
+        throw error.response || error;
+    })
+}
