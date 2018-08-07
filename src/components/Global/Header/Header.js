@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { Component }from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-
 import { Link } from 'react-router-dom';
-
-import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { LOGIN_ACTIONS, triggerLogout} from '../../../redux/actions/loginActions';
 import { compose } from 'recompose';
@@ -13,17 +10,25 @@ import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import './Header.css';
 
 // header App Bar
+import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItem from '@material-ui/core/ListItem';
+import HomeIcon from '@material-ui/icons/Home';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import PersonIcon from '@material-ui/icons/Person';
+import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import LoginModal from '../Modals/LoginModal';
 import RegisterModal from '../Modals/RegisterModal';
 import Typography from '@material-ui/core/Typography';
 import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
+// import MenuList from '@material-ui/core/MenuList';
 import Divider from '@material-ui/core/Divider';
 
 const mapStateToProps = state => ({
@@ -41,6 +46,7 @@ const logout = () => {
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    width: '100%',
   },
   flex: {
     flexGrow: 1,
@@ -58,9 +64,19 @@ const styles = theme => ({
   list: {
     width: 250,
   },
+  menuItem: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary.main,
+      '& $primary, & $icon': {
+        color: theme.palette.common.white,
+      },
+    },
+  },
+  primary: {},
+  icon: {},
 });
 
-class Header extends React.Component {
+class Header extends Component {
   state={
     left: false,
   };
@@ -90,10 +106,67 @@ class Header extends React.Component {
     const { classes } = this.props;
 
     const sideList = (
-      <div className={classes.list}>
-        <List>...</List>
-        <Divider />
-        <List>...</List>
+      <div>
+        {/* <HeaderList /> */}
+        <List component="nav">
+          <ListItem component={props => (
+            <ListItem button>
+              <Link style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0
+              }}
+              to={"/home"}>
+              </Link>
+              {props.children}
+            </ListItem>
+          )}>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem component={props => (
+            <ListItem button>
+              <Link style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0
+              }}
+              to={"/resources"}>
+              </Link>
+              {props.children}
+            </ListItem>
+          )}>
+            <ListItemIcon>
+              <LibraryBooksIcon />
+            </ListItemIcon>
+            <ListItemText primary="Resources" />
+          </ListItem>
+        </List>
+        <ListItem component={props => (
+            <ListItem button>
+              <Link style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0
+              }}
+              to={"/user-profile"}>
+              </Link>
+              {props.children}
+            </ListItem>
+          )}>
+            <ListItemIcon>
+              <PersonIcon />
+            </ListItemIcon>
+            <ListItemText primary="Profile" />
+          </ListItem>
       </div>
     );
 
@@ -129,21 +202,21 @@ class Header extends React.Component {
               <RegisterModal />
             </Toolbar>
           </AppBar>
-          <Grid container>
-            <Grid item xs={12}>
+          {/* <Grid container>
+            <Grid item xs={14}>
               <div className="App-header">
                 <h1 className="App-title"><br /><br />Spinal Cord Injury Research Map Database</h1>
               </div> 
             </Grid>
-            {/* <Grid item xs={2} >
+            <Grid item xs={2} >
               <div className="App-header">
                 <br />
                 { loginButton }
                 <RegisterModal />
               
               </div>
-            </Grid> */}
-          </Grid>
+            </Grid>
+          </Grid> */}
         </div>
       </div>
     );
