@@ -206,7 +206,7 @@ class NewArticleTable extends React.Component{
                        <TableCell> 
                         <Tooltip title="Approved">
                          <IconButton aria-label="Approved" color="primary">
-                          <i class="material-icons">
+                          <i className="material-icons">
                             thumb_up
                           </i>
                          </IconButton>
@@ -215,7 +215,7 @@ class NewArticleTable extends React.Component{
                        <TableCell> 
                          <Tooltip title="Rejected">
                           <IconButton aria-label="Rejected" color="primary">
-                           <i class="material-icons" style={{color: "red"}}>
+                           <i className="material-icons" style={{color: "red"}}>
                             thumb_down
                            </i>
                           </IconButton>
