@@ -22,7 +22,7 @@ export class Container extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-          articles: [], // articles to be rendered on the map
+          articles: this.props.mapReducer.mapReducer.locations, // articles to be rendered on the map
           activeMarker: {},
           searchAddress: '',
           showingInfoWindow: false,
@@ -43,18 +43,21 @@ export class Container extends React.Component{
     
       // gets locations from the database to render markers on the google map
       getLocations = () =>{
-        axios.get('/api/articles')
-        .then(async(response)=>{
-           await this.setState({...this.state, articles: [...response.data]})
-           console.log('this.state:', this.state);
-        })
-        .catch((error)=>{
-          console.log('error getting articles in client:', error);
-        })
-        this.setState({
-          ...this.state,
-          articlesFetched: true
-        })
+        console.log('getLocations');
+        
+        this.props.dispatch({type:MAP_ACTIONS.FETCH_LOCATIONS})
+        // axios.get('/api/articles')
+        // .then(async(response)=>{
+        //    await this.setState({...this.state, articles: [...response.data]})
+        //    console.log('this.state:', this.state);
+        // })
+        // .catch((error)=>{
+        //   console.log('error getting articles in client:', error);
+        // })
+        // this.setState({
+        //   ...this.state,
+        //   articlesFetched: true
+        // })
       }
       onMarkerClick = async (props, marker) =>{
         console.log('markerClick');
@@ -79,9 +82,9 @@ export class Container extends React.Component{
           }
           return (
             <div>
-              <Map google={this.props.google}>
-                {this.state.articles.map((article,i) =>
-                <Marker name="meow" onClick={this.onMarkerClick} key={i} position={{lat: article.lat, lng: article.lng}} />
+              {this.props.mapReducer.mapReducer.locations.length !== 0 && <Map google={this.props.google}>
+                {this.props.mapReducer.mapReducer.locations.length !== 0 && this.props.mapReducer.mapReducer.locations.map((article,i) =>
+                <Marker name={article.institution_name} onClick={this.onMarkerClick} key={i} position={{lat: article.lat, lng: article.lng}} />
                   )}
               
               <InfoWindow
@@ -93,7 +96,7 @@ export class Container extends React.Component{
                     </div>
               </InfoWindow>
 
-              </Map>
+              </Map>}
             </div>
           
         )

@@ -3,34 +3,15 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
 import SearchBar from '../SearchBar'
 
-
-// let marker = new google.maps.Marker({
-//   position: somePosition,
-//   map: map
-// })
-
-const wrappedPromise = function() {
-  let wrappedPromise = {},
-      promise = new Promise(function (resolve, reject) {
-          wrappedPromise.resolve = resolve;
-          wrappedPromise.reject = reject;
-      });
-  wrappedPromise.then = promise.then.bind(promise);
-  wrappedPromise.catch = promise.catch.bind(promise);
-  wrappedPromise.promise = promise;
-  return wrappedPromise;
-}
-
 const evtNames = [
   'click'
 ]
 
-
 export class MyMarker extends Component {
     
     componentDidMount(){
-      this.markerPromise = wrappedPromise();
-      console.log('this.markerPromise:', this.markerPromise);
+      // this.markerPromise = wrappedPromise();
+      // console.log('this.markerPromise:', this.markerPromise);
       
     }
 
@@ -50,12 +31,16 @@ export class MyMarker extends Component {
     }
 
     renderMarker = () =>{
+      // sets these variables equal to the matching properties in the props
       let {
         map, google, position, mapCenter
-      } = this.props;
+      } = this.props;      
+
+
 
       let pos = position || mapCenter;
-      position = new google.maps.LatLng(pos.lat, pos.lng)
+      // sets position to a google maps LagLng object
+      position = new google.maps.LatLng(pos.lat, pos.lng)      
 
       const pref = {
         map: map,
@@ -63,13 +48,14 @@ export class MyMarker extends Component {
       };
       this.marker = new google.maps.Marker(pref);
 
+      // adds event listners to markers. only adds onClick for now
       evtNames.forEach(e => {
         this.marker.addListener(e, this.handleEvent(e))
       })
       
       // this.marker.addListener('click', this.props.onMarkerClick)
 
-      this.markerPromise.resolve(this.marker);
+      // this.markerPromise.resolve(this.marker);
     }
 
     camelize = (str) => {
