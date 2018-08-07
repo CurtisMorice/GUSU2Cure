@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import Nav from '../../Global/Nav/Nav';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
+import {ADMIN_ACTIONS} from '../../../redux/actions/adminActions';
 import { MAP_ACTIONS } from '../../../redux/actions/mapActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 import DropdownSearch from './Local/DropdownSearch';
@@ -14,10 +15,17 @@ import AddArticleModal from '../../Global/Modals/AddArticleModal';
 import { ARTICLE_ACTIONS } from '../../../redux/actions/articleActions';
 import MapWrapper from './Local/Map/MapWrapper';
 
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import './Landing.css'
+
 const mapStateToProps = state => ({
   user: state.user,
   mapReducer: state.mapReducer,
   articles: state.articleReducer.article,
+  catalogue: state.adminReducer.approvedArticle,
   research_type: state.articleReducer.research_type,
   research_phase: state.articleReducer.research_phase
 });
@@ -35,15 +43,13 @@ class Landing extends Component {
   
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_ARTICLES});
+    this.props.dispatch({ type: ADMIN_ACTIONS.FETCH_APPROVED_ARTICLE});
     this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_TYPE});
     this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_PHASE});
-  }
-
-  componentDidUpdate() {
     if (!this.props.user.isLoading && this.props.user.user === null) {
       // this.props.history.push('home');
     }
+  
   }
 
   // gets locations from the database to render markers on the google map
@@ -65,14 +71,41 @@ class Landing extends Component {
             <Grid item xs={4}>
               <DropdownSearch />
               {this.props.user.user&& <AddArticleModal />}
+              {this.props.catalogue.map((article, i) => {
+                return (
+                  <Card key={i} value={article}>
+                  <CardContent>
+                  <Typography variant="title">
+                  {article.research_title}
+                  </Typography>
+                  <Typography>
+                  <br/>
+                  {article.institution_name}
+                  <br/>
+                  {article.institution_url}
+                  <br/>
+                  {article.funding_source}
+                  <br/>
+                  {article.related_articles}
+                  <br/>
+                  {article.date_posted}
+                  </Typography>
+                  </CardContent>
+                  </Card>
+                   )
+                })}
             </Grid>
             <Grid item xs={8}>
               <div style={{ height: `800px`, width: `auto`, flex: 'auto' }}>
             <MapWrapper /> 
             </div>
+            
             </Grid>
+            
           </Grid>
+          
         </div>
+        
       </div>
     );
   }
