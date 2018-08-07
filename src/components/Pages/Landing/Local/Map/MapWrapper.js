@@ -25,7 +25,8 @@ export class Container extends React.Component{
           articles: [], // articles to be rendered on the map
           activeMarker: {},
           searchAddress: '',
-          showingInfoWindow: false
+          showingInfoWindow: false,
+          articlesFetched: false
         }
       }
       
@@ -49,6 +50,10 @@ export class Container extends React.Component{
         })
         .catch((error)=>{
           console.log('error getting articles in client:', error);
+        })
+        this.setState({
+          ...this.state,
+          articlesFetched: true
         })
       }
       onMarkerClick = async (props, marker) =>{
