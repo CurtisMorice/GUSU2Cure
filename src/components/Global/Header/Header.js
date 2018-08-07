@@ -16,13 +16,19 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItem from '@material-ui/core/ListItem';
+import HomeIcon from '@material-ui/icons/Home';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import PersonIcon from '@material-ui/icons/Person';
+import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import LoginModal from '../Modals/LoginModal';
 import RegisterModal from '../Modals/RegisterModal';
 import Typography from '@material-ui/core/Typography';
 import Drawer from '@material-ui/core/Drawer';
 // import MenuList from '@material-ui/core/MenuList';
-import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 
 const mapStateToProps = state => ({
@@ -100,7 +106,6 @@ class Header extends Component {
     const { classes } = this.props;
 
     const sideList = (
-<<<<<<< HEAD
       <div>
         {/* <HeaderList /> */}
         <List component="nav">
@@ -123,14 +128,45 @@ class Header extends Component {
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
+          <ListItem component={props => (
+            <ListItem button>
+              <Link style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0
+              }}
+              to={"/resources"}>
+              </Link>
+              {props.children}
+            </ListItem>
+          )}>
+            <ListItemIcon>
+              <LibraryBooksIcon />
+            </ListItemIcon>
+            <ListItemText primary="Resources" />
+          </ListItem>
         </List>
-        
-=======
-      <div className={classes.list}>
-        <List>...</List>
-        <Divider />
-        <List>...</List>
->>>>>>> a6bb40a96f78614a96847ddda24fea9a580ce627
+        <ListItem component={props => (
+            <ListItem button>
+              <Link style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0
+              }}
+              to={"/user-profile"}>
+              </Link>
+              {props.children}
+            </ListItem>
+          )}>
+            <ListItemIcon>
+              <PersonIcon />
+            </ListItemIcon>
+            <ListItemText primary="Profile" />
+          </ListItem>
       </div>
     );
 
@@ -166,13 +202,8 @@ class Header extends Component {
               <RegisterModal />
             </Toolbar>
           </AppBar>
-<<<<<<< HEAD
           {/* <Grid container>
             <Grid item xs={14}>
-=======
-          <Grid container>
-            <Grid item xs={12}>
->>>>>>> a6bb40a96f78614a96847ddda24fea9a580ce627
               <div className="App-header">
                 <h1 className="App-title"><br /><br />Spinal Cord Injury Research Map Database</h1>
               </div> 

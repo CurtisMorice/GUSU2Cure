@@ -40,40 +40,41 @@ const theme = createMuiTheme({
 const App = () => (
   <MuiThemeProvider theme={theme}>
     <div>
-      <Header />
       <Router>
-        <Switch>
-          <Redirect exact from="/" to="/home" />
-          <Route
-            path="/home"
-            component={Landing}
-          />
-          <Route
-            path="/login"
-            component={LoginPage}
-          />
-          <Route
-            path="/user-profile"
-            component={UserHome}
-          />
-          <Route
-            path="/register"
-            component={RegisterPage}
-          />
-          <Route 
-            path="/resources"
-            component={Resources}
-          />
-          
-        <Route 
-          path="/admin"
-          component={Admin}
-        />
-              
-          {/* OTHERWISE (no path!) */}
-          <Route render={() => <h1>404</h1>} />
+        <div>
+         <Header />
+          <Switch>
+            <Redirect exact from="/" to="/home" />
+            <Route
+              path="/home"
+              component={Landing}
+            />
+            <Route
+              path="/login"
+              component={LoginPage}
+            />
+            <Route
+              path="/user-profile"
+              component={UserHome}
+            />
+            <Route
+              path="/register"
+              component={RegisterPage}
+            />
+            <Route 
+              path="/resources"
+              component={Resources}
+            />
+            <Route 
+              path="/admin"
+              component={Admin}
+            />
+                
+            {/* OTHERWISE (no path!) */}
+            <Route render={() => <h1>404</h1>} />
 
-        </Switch>
+          </Switch>
+        </div>
       </Router>
     </div>
   </MuiThemeProvider>
