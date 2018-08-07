@@ -26,7 +26,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 // redux Store
 const mapStateToProps = state => ({
-    catalogue:state.adminReducer.approvedArticle
+    catalogue:state.adminReducer.approvedArticle,
 })
 
 const actionsStyles = theme => ({
@@ -202,8 +202,8 @@ class CatalogueTable extends Component{
                                         <TableCell component="th" scope="row"> {article.email} </TableCell>
                                         <TableCell component="th" scope="row"> 
                                             <Tooltip title="Delete">
-                                                <IconButton aria-label="Delete" color="secondary" >
-                                                <DeleteIcon />
+                                                <IconButton aria-label="Delete" color="secondary" onClick={this.deleteArticle}>
+                                                    <DeleteIcon />
                                                 </IconButton>
                                             </Tooltip>
                                         </TableCell>
