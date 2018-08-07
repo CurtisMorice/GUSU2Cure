@@ -64,7 +64,6 @@ class AdminHome extends Component {
 
     return (
       <div>
-        {JSON.stringify(this.props.user.user)}
         <Nav />
         { content }
       </div>

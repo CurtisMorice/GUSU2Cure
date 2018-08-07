@@ -181,9 +181,9 @@ class AddArticleModal extends React.Component {
             <MenuItem value="">
             <em>None</em>
             </MenuItem>
-            {this.props.research_phase.map(research_phase => {
+            {this.props.research_phase.map((research_phase, i) => {
                 return (
-                    <MenuItem value={research_phase.phase}>{research_phase.phase}</MenuItem>
+                    <MenuItem key={i} value={research_phase.phase}>{research_phase.phase}</MenuItem>
                 )
             })}
           </Select>

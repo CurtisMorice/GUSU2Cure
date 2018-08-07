@@ -165,9 +165,6 @@ class UserTable extends Component{
 
     return(
       <div>
-        {JSON.stringify(this.props.allUsers)}
-        <p>users table goes here</p>
-      
         <paper>
           <Table>
             <TableHead>
