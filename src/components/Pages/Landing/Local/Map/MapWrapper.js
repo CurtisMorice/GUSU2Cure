@@ -3,10 +3,7 @@ import { GoogleApiWrapper } from 'google-maps-react';
 import Map from './Map';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { USER_ACTIONS } from '../../../../../redux/actions/userActions';
 import { MAP_ACTIONS } from '../../../../../redux/actions/mapActions';
-import { triggerLogout } from '../../../../../redux/actions/loginActions';
-import axios from 'axios';
 import Marker from './Marker';
 import {KEYS} from '../../../../../Key';
 import InfoWindow from './InfoWindow';
@@ -17,27 +14,37 @@ const mapStateToProps = state => ({
     articleReducer: state.articleReducer
   });
 
+
+// this is the componen that goes around the google map. this component is curried at the bottom with
+// the GoogleApiWrapper. this feeds it the prop 'google' which is necessary for the rest of the components
 export class Container extends React.Component{
 
     constructor(props){
         super(props);
         this.state = {
-          articles: this.props.mapReducer.mapReducer.locations, // articles to be rendered on the map
+          // articles: this.props.mapReducer.mapReducer.locations, // articles to be rendered on the map
           activeMarker: {},
           searchAddress: '',
           showingInfoWindow: false,
-          articlesFetched: false
+          articlesFetched: false,
+          selectedPlace: {},
         }
       }
       
       componentDidMount() {
-        this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-        this.getLocations();
+        // use this dispatch  
+        this.props.dispatch({type:MAP_ACTIONS.FETCH_LOCATIONS})
+        // for testing purposes
+        // this.props.dispatch({type:MAP_ACTIONS.FETCH_LOCATIONS, payload: {param: 'phase', value: 2}})
+
       }
     
-      componentDidUpdate() {
-        if (!this.props.user.isLoading && this.props.user.user === null) {
-          // this.props.history.push('home');
+      componentDidUpdate(prevProps, prevState) {
+        
+        // this conditional is what causes all of the markers to appear on the map. without this,
+        // only the first location got from the database will render on the map
+        if (prevProps.mapReducer.mapReducer !== this.props.mapReducer.mapReducer){
+          this.forceUpdate();
         }
       }
     
@@ -45,27 +52,15 @@ export class Container extends React.Component{
       getLocations = () =>{
         console.log('getLocations');
         
-        this.props.dispatch({type:MAP_ACTIONS.FETCH_LOCATIONS})
-        // axios.get('/api/articles')
-        // .then(async(response)=>{
-        //    await this.setState({...this.state, articles: [...response.data]})
-        //    console.log('this.state:', this.state);
-        // })
-        // .catch((error)=>{
-        //   console.log('error getting articles in client:', error);
-        // })
-        // this.setState({
-        //   ...this.state,
-        //   articlesFetched: true
-        // })
       }
       onMarkerClick = async (props, marker) =>{
         console.log('markerClick');
         console.log('props:', props);
         console.log('marker:', marker);
         
-        
-        await this.setState({
+        // sets the state of this component to the marker clicked on. necessary for displaying
+        // the info window with the correct information
+         await this.setState({
           ...this.state,
           selectedPlace: props,
           activeMarker: marker,
@@ -82,17 +77,18 @@ export class Container extends React.Component{
           }
           return (
             <div>
-              {this.props.mapReducer.mapReducer.locations.length !== 0 && <Map google={this.props.google}>
-                {this.props.mapReducer.mapReducer.locations.length !== 0 && this.props.mapReducer.mapReducer.locations.map((article,i) =>
+              {this.props.mapReducer.mapReducer.length !== 0 && <Map google={this.props.google}>
+                {this.props.mapReducer.mapReducer.length !== 0 && this.props.mapReducer.mapReducer.map((article,i) =>
                 <Marker name={article.institution_name} onClick={this.onMarkerClick} key={i} position={{lat: article.lat, lng: article.lng}} />
                   )}
               
               <InfoWindow
                   marker={this.state.activeMarker}
                   visible={this.state.showingInfoWindow}
+                  name="info-window"
                   >
                     <div>
-                      <h1>Hello</h1>
+                      <h1>{console.log('selectedPlace:', this.state.selectedPlace)}{this.state.selectedPlace && this.state.selectedPlace.name}</h1>
                     </div>
               </InfoWindow>
 

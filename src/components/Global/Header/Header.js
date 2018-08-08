@@ -101,85 +101,12 @@ class Header extends Component {
   logout = () => {
     this.props.dispatch(triggerLogout());
   }
-
+  
   render() {
     let content = null;
     const { classes } = this.props;
-
-    const sideList = (
-      <div>
-        {/* <HeaderList /> */}
-        <List component="nav">
-          <ListItem component={props => (
-            <ListItem button>
-              <Link style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0
-              }}
-              to={"/home"}>
-              </Link>
-              {props.children}
-            </ListItem>
-          )}>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItem>
-          <ListItem component={props => (
-            <ListItem button>
-              <Link style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0
-              }}
-              to={"/resources"}>
-              </Link>
-              {props.children}
-            </ListItem>
-          )}>
-            <ListItemIcon>
-              <LibraryBooksIcon />
-            </ListItemIcon>
-            <ListItemText primary="Resources" />
-          </ListItem>
-        <ListItem component={props => (
-            <ListItem button>
-              <Link style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0
-              }}
-              to={"/user-profile"}>
-              </Link>
-              {props.children}
-            </ListItem>
-          )}>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary="Profile" />
-          </ListItem>
-          { adminHomeListItem }
-        </List>
-      </div>
-    );
-
-    const loginButton = this.props.user.user ? (
-      <Button onClick={this.logout} variant="contained" className={classes.button} color="secondary" aria-label="Log Out">
-        Log Out
-        <Icon className={classes.rightIcon}>lock_closed</Icon>
-      </Button>
-    ) : (<LoginModal />);
-
-    const adminHomeListItem = this.props.user.type == 'admin' ? (
+    
+    const adminHomeListItem = this.props.user.user != null && this.props.user.user.type == 'admin' ? (
       <ListItem component={props => (
         <ListItem button>
           <Link style={{
@@ -201,14 +128,93 @@ class Header extends Component {
       </ListItem>
     ) : '';
 
+    const sideList = (
+      <div>
+        <List component="nav">
+          <Divider />
+          <ListItem component={props => (
+            <ListItem button>
+              <Link style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0
+              }}
+              to={"/home"}>
+              </Link>
+              {props.children}
+            </ListItem>
+          )}>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <Divider />
+          <ListItem component={props => (
+            <ListItem button>
+              <Link style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0
+              }}
+              to={"/resources"}>
+              </Link>
+              {props.children}
+            </ListItem>
+          )}>
+            <ListItemIcon>
+              <LibraryBooksIcon />
+            </ListItemIcon>
+            <ListItemText primary="Resources" />
+          </ListItem>
+          <Divider />
+          <ListItem component={props => (
+            <ListItem button>
+                <Link style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0
+                }}
+                to={"/user-profile"}>
+                </Link>
+                {props.children}
+              </ListItem>
+            )}>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary="Profile" />
+            </ListItem>
+            <Divider />
+            { adminHomeListItem }
+            <Divider />
+          </List>
+      </div>
+    );
+    
+    const loginButton = this.props.user.user ? (
+      <Button onClick={this.logout} variant="contained" className={classes.button} color="secondary" aria-label="Log Out">
+        Log Out
+        <Icon className={classes.rightIcon}>lock_closed</Icon>
+      </Button>
+    ) : (<LoginModal />);
+
+
     return (
       <div className={classes.root}>
         <div className="App">
           <AppBar color="primary" position='static'>
             <Toolbar>
-              <IconButton className={classes.menuButton} color='inherit' aria-label='Open drawer' onClick={this.toggleDrawer('left', true)}>
+              <Button variant="outlined" className={classes.menuButton} color='inherit' aria-label='Open drawer' onClick={this.toggleDrawer('left', true)}>
                 <MenuIcon />
-              </IconButton>
+                Menu
+              </Button>
               <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
                 <div
                   tabIndex={0}

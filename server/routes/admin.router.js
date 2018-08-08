@@ -51,6 +51,21 @@ router.get('/newArticles', (req, res) => {
     })
 })
 
+router.put(`/articles/:id`,(req,res) =>{
+    const id = req.params.id;
+    const status = req.body.approved
+    const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`
+    pool.query(queryText, [status,id])
+    .then((result) => {
+        console.log(result);
+        res.sendStatus(201)
+    })
+    .catch((error) => {
+        console.log('error getting', error);
+        res.sendStatus(500);
+    })
+}) 
+
 router.delete('/deleteUser/:id', (req, res) => {
     let id = req.params.id
     console.log('this is is the id in the router', id);

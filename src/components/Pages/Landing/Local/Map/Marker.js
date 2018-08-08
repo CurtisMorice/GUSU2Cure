@@ -7,22 +7,14 @@ const evtNames = [
   'click'
 ]
 
+
 export class MyMarker extends Component {
     
     componentDidMount(){
-      // this.markerPromise = wrappedPromise();
-      // console.log('this.markerPromise:', this.markerPromise);
       
     }
-
-    onMarkerClick(props, marker, e) {
-      this.setState({
-        selectedPlace: props,
-        activeMarker: marker,
-        showingInfoWindow: true
-      });
-    }
   
+    // renders marker on the map
     componentDidUpdate(prevProps){
       if ((this.props.map !== prevProps.map) ||
       (this.props.position !== prevProps.position)) {
@@ -31,16 +23,12 @@ export class MyMarker extends Component {
     }
 
     renderMarker = () =>{
-      // sets these variables equal to the matching properties in the props
       let {
         map, google, position, mapCenter
-      } = this.props;      
-
-
+      } = this.props;
 
       let pos = position || mapCenter;
-      // sets position to a google maps LagLng object
-      position = new google.maps.LatLng(pos.lat, pos.lng)      
+      position = new google.maps.LatLng(pos.lat, pos.lng)
 
       const pref = {
         map: map,
@@ -48,37 +36,29 @@ export class MyMarker extends Component {
       };
       this.marker = new google.maps.Marker(pref);
 
-      // adds event listners to markers. only adds onClick for now
+      // adds onClick event listener for markers
       evtNames.forEach(e => {
         this.marker.addListener(e, this.handleEvent(e))
       })
       
-      // this.marker.addListener('click', this.props.onMarkerClick)
-
-      // this.markerPromise.resolve(this.marker);
     }
 
+    // sets first letter of string to upper case
     camelize = (str) => {
       return str.split(' ').map(function(word) {
         return word.charAt(0).toUpperCase() + word.slice(1);
       }).join('');
     }
 
+
     handleEvent = (evt) => {
       return (e) => {
         const evtName = `on${this.camelize(evt)}`
-        console.log('evtName:', evtName);
         
         if (this.props[evtName]){
           this.props[evtName](this.props, this.marker, e)
         }
       }
-    }
-
-      
-
-    getMarker() {
-      return this.markerPromise;
     }
 
     render() {

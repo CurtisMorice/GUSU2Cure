@@ -6,10 +6,7 @@ import {ADMIN_ACTIONS} from '../../../redux/actions/adminActions';
 import { MAP_ACTIONS } from '../../../redux/actions/mapActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 import DropdownSearch from './Local/DropdownSearch';
-import SearchBar from './Local/SearchBar';
 import Grid from '@material-ui/core/Grid';
-import axios from 'axios';
-import Map from './Local/Map';
 
 import AddArticleModal from '../../Global/Modals/AddArticleModal';
 import { ARTICLE_ACTIONS } from '../../../redux/actions/articleActions';
@@ -43,7 +40,6 @@ class Landing extends Component {
   
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.props.dispatch({ type: ADMIN_ACTIONS.FETCH_APPROVED_ARTICLE});
     this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_TYPE});
     this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_PHASE});
     if (!this.props.user.isLoading && this.props.user.user === null) {

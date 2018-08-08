@@ -43,14 +43,7 @@ class NewArticleTable extends React.Component{
         this.props.onChangePage(event, 0);
       };
 
-    componentDidMount(){
-            this.fetchNewArticles();
-    };
 
-    fetchNewArticles = () => {
-            console.log('hello, is it me your looking for ');
-            this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
-    };
 
     handleBackButtonClick = event => {
         this.props.onChangePage(event, this.props.page - 1);
@@ -150,7 +143,14 @@ class NewArticleTable extends React.Component{
             rejected: 3,
           };
         }
-      
+          componentDidMount(){
+          this.fetchNewArticles();
+        };
+
+        fetchNewArticles = () => {
+                console.log('hello, is it me your looking for ');
+                this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
+        };
         handleChangePage = (event, page) => {
           this.setState({ page });
         };
@@ -159,14 +159,18 @@ class NewArticleTable extends React.Component{
           this.setState({ rowsPerPage: event.target.value });
         };
       
-        approveNewArticle = (action) => {   
+        approveNewArticle = (id) => {   
            let approved = this.state.approved
            console.log('in approve click', approved);
-            this.props.dispatch({
+           let newObj = {approved: approved, id: id};
+           console.log('NEW', newObj)
+            const action =({
                 type: ADMIN_ACTIONS.APPROVED_ARTICLE,
-                payload: action, approved
+                payload: newObj
             })
-
+            this.props.dispatch(action);
+            this.fetchNewArticles();
+            
         }
         rejectNewArticle = (action) => {
             console.log('rejectNewArticle ',action);

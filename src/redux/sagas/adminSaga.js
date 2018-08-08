@@ -67,44 +67,14 @@ function* deleteUserAccount(action){
     }
 }
 
-// function* deleteArticle (action){
-//     try{
-//         let articleX = yield deleteBadArticle();
-//         console.log('in admin saga deleteArticle', articleX);
-//         yield put({
-//         type: ADMIN_ACTIONS.DELETE_ARTICLE,
-//         payload: articleX,
-//         })
-//     }catch(error) {
-//         console.log('error in admin saga deleting article', error)
-//     }
-// }
-
-function* rejectArticle (action){
-    try{
-        console.log('action', action);
-        
-        let rejected = yield rejectedArticle(action);
-        console.log('in admin saga rejectedArticle', rejected);
-        yield put({
-        type: ADMIN_ACTIONS.REJECTED_ARTICLE,
-        payload: rejected,
-        })
-    }catch(error) {
-        console.log('error in admin saga deleting article', error)
-    }
-}
 
 function* approveArticle (action){
+    console.log('action in approvedArticle in adminSaga', action);
     try{
-        let approved = yield approvedArticle();
-        console.log('in admin saga approvedArticle', approved);
-        yield put({
-        type: ADMIN_ACTIONS.APPROVED_ARTICLE,
-        payload: approved,
-        })
+        yield approvedArticle(action);
+
     }catch(error) {
-        console.log('error in admin saga deleting article', error)
+        console.log('error in admin saga approving article', error)
     }
 }
 
@@ -115,8 +85,6 @@ function* adminSaga() {
     yield takeLatest(ADMIN_ACTIONS.FETCH_NEW_ARTICLE, fetchNewArticles);
     yield takeLatest(ADMIN_ACTIONS.FETCH_MODIFIED_ARTICLE, fetchModifiedArticles);
     yield takeLatest(ADMIN_ACTIONS.DELETE_USER, deleteUserAccount);
-    // yield takeLatest(ADMIN_ACTIONS.DELETE_ARTICLE, deleteArticle);
-    yield takeLatest(ADMIN_ACTIONS.REJECTED_ARTICLE, rejectArticle);
     yield takeLatest(ADMIN_ACTIONS.APPROVED_ARTICLE, approveArticle);
 }
   
