@@ -22,7 +22,7 @@ export class Container extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-          articles: this.props.mapReducer.mapReducer.locations, // articles to be rendered on the map
+          // articles: this.props.mapReducer.mapReducer.locations, // articles to be rendered on the map
           activeMarker: {},
           searchAddress: '',
           showingInfoWindow: false,
@@ -31,8 +31,8 @@ export class Container extends React.Component{
       }
       
       componentDidMount() {
-        this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.getLocations();
+        this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
       }
     
       componentDidUpdate() {
@@ -65,7 +65,7 @@ export class Container extends React.Component{
         console.log('marker:', marker);
         
         
-        await this.setState({
+         await this.setState({
           ...this.state,
           selectedPlace: props,
           activeMarker: marker,

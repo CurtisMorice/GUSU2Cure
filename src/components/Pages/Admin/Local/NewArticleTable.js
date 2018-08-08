@@ -159,14 +159,16 @@ class NewArticleTable extends React.Component{
           this.setState({ rowsPerPage: event.target.value });
         };
       
-        approveNewArticle = (action) => {   
+        approveNewArticle = (id) => {   
            let approved = this.state.approved
            console.log('in approve click', approved);
-            this.props.dispatch({
+           let newObj = {approved: approved, id: id};
+           console.log('NEW', newObj)
+            const action =({
                 type: ADMIN_ACTIONS.APPROVED_ARTICLE,
-                payload: action, approved
+                payload: newObj
             })
-
+            this.props.dispatch(action);
         }
         rejectNewArticle = (action) => {
             console.log('rejectNewArticle ',action);

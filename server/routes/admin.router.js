@@ -51,19 +51,22 @@ router.get('/newArticles', (req, res) => {
     })
 })
 
-// router.put(`/acceptArticle/${id}`, (req)=>{
-//     console.log('this is the action',id)
-//     const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`
-//     pool.query(queryText, [1, 2])
-//     .then((result) => {
-//         console.log(result.rows);
-//         res.send(result.rows)
-//     })
-//     .catch((error) => {
-//         console.log('error getting', error);
-//         res.sendStatus(500);
-//     })
-// }) 
+router.put(`/articles/:id`,(req,res) =>{
+    console.log('THIS is the put in admin router',req.params, req.body)
+    const id = req.params.id;
+    const status = req.body.approved
+    console.log('PUT in ROuter',id, status);
+    const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`
+    pool.query(queryText, [status,id])
+    .then((result) => {
+        console.log(result, req.params.id);
+        res.sendStatus(201)
+    })
+    .catch((error) => {
+        console.log('error getting', error);
+        res.sendStatus(500);
+    })
+}) 
 
 
 module.exports = router;
