@@ -51,4 +51,21 @@ router.get('/newArticles', (req, res) => {
     })
 })
 
+router.delete('/deleteUser/:id', (req, res) => {
+    let id = req.params.id
+    console.log('this is is the id in the router', id);
+    const queryText = `DELETE FROM users WHERE id = $1`;
+    pool.query(queryText, [id])
+        .then((result) => {
+            console.log('successfull delete of user');
+            
+            res.sendStatus(200)
+        })
+        .catch((error) => {
+            console.log('Error deleting the user', error);
+            
+            res.sendStatus(500)
+        })
+})
+
 module.exports = router;

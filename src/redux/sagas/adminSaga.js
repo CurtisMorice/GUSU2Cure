@@ -1,6 +1,6 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import {ADMIN_ACTIONS} from '../actions/adminActions';
-import { getAllUsers, getApprovedArticles, getNewArticles , getModifiedArticles} from '../requests/adminRequest';
+import { getAllUsers, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser} from '../requests/adminRequest';
 
 
 function* fetchAllUser(action) {
@@ -55,11 +55,24 @@ function* fetchModifiedArticles(action){
     }
 }
 
+function* deleteUserAccount(action){
+    try{
+        console.log('id to delete', action.payload);
+        let id = action.payload
+        yield deleteUser(id);
+    }
+    catch (error) {
+        console.log('Error deleting user account');
+        
+    }
+}
+
 function* adminSaga() {
     yield takeLatest(ADMIN_ACTIONS.FETCH_ALL_USER, fetchAllUser);
     yield takeLatest(ADMIN_ACTIONS.FETCH_APPROVED_ARTICLE, fetchArticlesApproved);
     yield takeLatest(ADMIN_ACTIONS.FETCH_NEW_ARTICLE, fetchNewArticles);
     yield takeLatest(ADMIN_ACTIONS.FETCH_MODIFIED_ARTICLE, fetchModifiedArticles);
+    yield takeLatest(ADMIN_ACTIONS.DELETE_USER, deleteUserAccount);
 }
   
   export default adminSaga;
