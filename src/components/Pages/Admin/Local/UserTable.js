@@ -24,6 +24,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 //components
 import EditUserModal from '../../../Global/Modals/UserProfileModal';
+import Swal from 'sweetalert2'
 
 
 //Actions
@@ -157,7 +158,14 @@ class UserTable extends Component{
     this.props.dispatch({type: ADMIN_ACTIONS.FETCH_ALL_USER});
   }
 
+  // deletes user
   deleteUser = (id) => {
+    Swal({
+      title: 'Confirm User Deletion',
+      test: 'The user profile will be permanentely deleted',
+      type: 'warning',
+      showCancelButton: true
+    })
     console.log('hello', id);
     this.props.dispatch({type: ADMIN_ACTIONS.DELETE_USER, payload: id});
     this.fetchAllUsers();
