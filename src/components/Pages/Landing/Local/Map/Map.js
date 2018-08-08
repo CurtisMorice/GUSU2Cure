@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
 import SearchBar from '../SearchBar'
-import Marker from './Marker';
-import axios from 'axios'
 
 export class Map extends Component {
     constructor(props) {
