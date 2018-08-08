@@ -55,7 +55,7 @@ export class Container extends React.Component{
         console.log('marker:', marker);
         
         
-        await this.setState({
+         await this.setState({
           ...this.state,
           selectedPlace: props,
           activeMarker: marker,

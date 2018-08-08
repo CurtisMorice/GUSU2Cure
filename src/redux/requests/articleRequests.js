@@ -59,8 +59,9 @@ export function deleteArticle(id){
     })
 }
 
-export function putArticle(article, id){
-    return axios.put(`/api/articles/${id}`, article)
+export function putArticle(id, article){
+    console.log('articleRequest', id, article);
+    return axios.put(`/api/articles/${id}, article`)
     .then((response) => {
         console.log('successfully updated article', response);
     })
