@@ -40,7 +40,6 @@ class Landing extends Component {
   
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.props.dispatch({ type: ADMIN_ACTIONS.FETCH_APPROVED_ARTICLE});
     this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_TYPE});
     this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_PHASE});
     if (!this.props.user.isLoading && this.props.user.user === null) {

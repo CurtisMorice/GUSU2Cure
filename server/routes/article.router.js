@@ -21,16 +21,56 @@ router.get(`/userArticle/:id`, (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    const queryText = `SELECT articles.*, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id ORDER BY id;`;
-    pool.query(queryText)
-    .then((result)=>{
-        console.log('back from database with articles', result.rows);
-        res.send(result.rows);
-    })
-    .catch((error)=>{
-        console.log('error getting articles:', error);
-        res.sendStatus(500);
-    })
+    let param = req.query.param;
+    let value = req.query.value;
+    
+    console.log('param:', param, 'value:', value);
+    
+    // for filtering by research type
+    if (param === 'type'){
+        const queryText = `SELECT articles.*, research_type.type, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id JOIN research_type on articles.research_type = research_type.id WHERE research_type.id = ${value} ORDER BY id;`;
+        pool.query(queryText)
+        .then((result)=>{
+            // console.log('back from database with articles', result.rows);
+            res.send(result.rows);
+        })
+        .catch((error)=>{
+            console.log('error getting articles:', error);
+            res.sendStatus(500);
+        })
+    }
+
+    // for filtering by research phase
+
+    else if (param === 'phase') {
+        const queryText = `SELECT articles.*, research_phase.phase, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id JOIN research_phase
+        on articles.research_phase = research_phase.id WHERE research_phase.id = ${value} ORDER BY id;`;
+        
+        pool.query(queryText)
+        .then((result)=>{
+            // console.log('back from database with articles', result.rows);
+            res.send(result.rows);
+        })
+        .catch((error)=>{
+            console.log('error getting articles:', error);
+            res.sendStatus(500);
+        })
+    }
+
+    // for getting all articles
+    else {
+        const queryText = `SELECT articles.*, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id ORDER BY id;`;
+        pool.query(queryText)
+        .then((result)=>{
+            // console.log('back from database with articles', result.rows);
+            res.send(result.rows);
+        })
+        .catch((error)=>{
+            console.log('error getting articles:', error);
+            res.sendStatus(500);
+        })
+    }
+   
 });
 
 router.get('/type', (req, res) => {

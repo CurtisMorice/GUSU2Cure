@@ -32,7 +32,11 @@ export class Container extends React.Component{
       }
       
       componentDidMount() {
+        // use this dispatch  
         this.props.dispatch({type:MAP_ACTIONS.FETCH_LOCATIONS})
+        // for testing purposes
+        // this.props.dispatch({type:MAP_ACTIONS.FETCH_LOCATIONS, payload: {param: 'phase', value: 2}})
+
       }
     
       componentDidUpdate(prevProps, prevState) {
