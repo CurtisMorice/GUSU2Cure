@@ -159,7 +159,8 @@ class UserTable extends Component{
 
   deleteUser = (id) => {
     console.log('hello', id);
-    // this.props.dispatch({type: ADMIN_ACTIONS.DELETE_USER})
+    this.props.dispatch({type: ADMIN_ACTIONS.DELETE_USER, payload: id});
+    this.fetchAllUsers();
   }
 
   render(){
@@ -206,9 +207,9 @@ class UserTable extends Component{
                   </TableRow>
                 )
               })}
-              {emptyRows > 0 && (
+              {/* {emptyRows > 0 && (
                 <TableRow style={{ height: 10 * emptyRows}}> <TableCell colSpan={6}/> </TableRow>
-              )}
+              )} */}
             </TableBody>
             <TableFooter>
               <TableRow>

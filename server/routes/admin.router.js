@@ -67,6 +67,35 @@ router.put(`/articles/:id`,(req,res) =>{
         res.sendStatus(500);
     })
 }) 
+router.delete('/deleteUser/:id', (req, res) => {
+    let id = req.params.id
+    console.log('this is is the id in the router', id);
+    const queryText = `DELETE FROM users WHERE id = $1`;
+    pool.query(queryText, [id])
+        .then((result) => {
+            console.log('successfull delete of user');
+            
+            res.sendStatus(200)
+        })
+        .catch((error) => {
+            console.log('Error deleting the user', error);
+            
+            res.sendStatus(500)
+        })
+})
+// router.put(`/acceptArticle/${id}`, (req,res)=>{
+//     console.log('this is the action',id)
+//     const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`
+//     pool.query(queryText, [1, 2])
+//     .then((result) => {
+//         console.log(result.rows);
+//         res.send(result.rows)
+//     })
+//     .catch((error) => {
+//         console.log('error getting', error);
+//         res.sendStatus(500);
+//     })
+// }) 
 
 
 module.exports = router;

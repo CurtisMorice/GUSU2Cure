@@ -26,18 +26,21 @@ export class Container extends React.Component{
           activeMarker: {},
           searchAddress: '',
           showingInfoWindow: false,
-          articlesFetched: false
+          articlesFetched: false,
+          selectedPlace: {},
         }
       }
       
       componentDidMount() {
-        this.getLocations();
-        this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+        this.props.dispatch({type:MAP_ACTIONS.FETCH_LOCATIONS})
       }
     
-      componentDidUpdate() {
-        if (!this.props.user.isLoading && this.props.user.user === null) {
-          // this.props.history.push('home');
+      componentDidUpdate(prevProps, prevState) {
+        
+        if (prevProps.mapReducer.mapReducer !== this.props.mapReducer.mapReducer){
+          console.log('did this work?');
+          
+          this.forceUpdate();
         }
       }
     
@@ -45,19 +48,6 @@ export class Container extends React.Component{
       getLocations = () =>{
         console.log('getLocations');
         
-        this.props.dispatch({type:MAP_ACTIONS.FETCH_LOCATIONS})
-        // axios.get('/api/articles')
-        // .then(async(response)=>{
-        //    await this.setState({...this.state, articles: [...response.data]})
-        //    console.log('this.state:', this.state);
-        // })
-        // .catch((error)=>{
-        //   console.log('error getting articles in client:', error);
-        // })
-        // this.setState({
-        //   ...this.state,
-        //   articlesFetched: true
-        // })
       }
       onMarkerClick = async (props, marker) =>{
         console.log('markerClick');
@@ -82,17 +72,18 @@ export class Container extends React.Component{
           }
           return (
             <div>
-              {this.props.mapReducer.mapReducer.locations.length !== 0 && <Map google={this.props.google}>
-                {this.props.mapReducer.mapReducer.locations.length !== 0 && this.props.mapReducer.mapReducer.locations.map((article,i) =>
+              {this.props.mapReducer.mapReducer.length !== 0 && <Map google={this.props.google}>
+                {this.props.mapReducer.mapReducer.length !== 0 && this.props.mapReducer.mapReducer.map((article,i) =>
                 <Marker name={article.institution_name} onClick={this.onMarkerClick} key={i} position={{lat: article.lat, lng: article.lng}} />
                   )}
               
               <InfoWindow
                   marker={this.state.activeMarker}
                   visible={this.state.showingInfoWindow}
+                  name="info-window"
                   >
                     <div>
-                      <h1>Hello</h1>
+                      <h1>{console.log('selectedPlace:', this.state.selectedPlace)}{this.state.selectedPlace && this.state.selectedPlace.name}</h1>
                     </div>
               </InfoWindow>
 

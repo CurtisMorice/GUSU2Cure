@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { actionChannel } from 'redux-saga/effects';
 
 export function getAllUsers() {
     console.log('in get all users request')
@@ -40,6 +41,15 @@ export function getModifiedArticles() {
         })
 }
 
+export function deleteUser(id) {
+    console.log('In the delete user account request');
+    return axios.delete(`/api/admin/deleteUser/${id}`)
+    .then(response => response)
+    .catch((error) => {
+        console.log('Error deleting the user');
+        throw error.response || error;
+    })
+}
 // export function deleteBadArticle(id) {
 //     console.log('in deleteBadArticle Request');
 //     return axios.put('api/admin/rejectArticle', id)
