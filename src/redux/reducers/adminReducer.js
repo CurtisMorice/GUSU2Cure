@@ -43,6 +43,36 @@ const modifiedArticles = (state=[], action) => {
             return state;
     }
 }
+
+const deleteArticle = (state=[], action) => {
+    console.log('In the deleteArticle Reducer');
+    switch(action.type){
+    case ADMIN_ACTIONS.DELETE_ARTICLE:
+    console.log(' in admin reducer for deleteArticle', action.payload);
+      return action.payload
+    }
+    return state;
+}
+
+const rejectBadArticle = (state=[], action) => {
+    console.log('In the deleteArticle Reducer');
+    switch(action.type){
+    case ADMIN_ACTIONS.REJECTED_ARTICLE:
+    console.log(' in admin reducer for rejectedArticle', action.payload);
+      return action.payload
+    }
+    return state;
+}
+const approveGoodArticle = (state=[], action) => {
+    console.log('In the approvedArticle Reducer');
+    switch(action.type){
+    case ADMIN_ACTIONS.APPROVED_ARTICLE:
+    console.log(' in admin reducer for deleteArticle', action.payload);
+      return action.payload
+    }
+    return state;
+}
+
 export default combineReducers({
-    allUser, approvedArticle, newArticles, modifiedArticles,
+    allUser, approvedArticle, newArticles, modifiedArticles, deleteArticle, rejectBadArticle, approveGoodArticle,
 })
