@@ -17,6 +17,9 @@ const mapStateToProps = state => ({
     articleReducer: state.articleReducer
   });
 
+
+// this is the componen that goes around the google map. this component is curried at the bottom with
+// the GoogleApiWrapper. this feeds it the prop 'google' which is necessary for the rest of the components
 export class Container extends React.Component{
 
     constructor(props){
@@ -37,9 +40,9 @@ export class Container extends React.Component{
     
       componentDidUpdate(prevProps, prevState) {
         
+        // this conditional is what causes all of the markers to appear on the map. without this,
+        // only the first location got from the database will render on the map
         if (prevProps.mapReducer.mapReducer !== this.props.mapReducer.mapReducer){
-          console.log('did this work?');
-          
           this.forceUpdate();
         }
       }
@@ -54,7 +57,8 @@ export class Container extends React.Component{
         console.log('props:', props);
         console.log('marker:', marker);
         
-        
+        // sets the state of this component to the marker clicked on. necessary for displaying
+        // the info window with the correct information
          await this.setState({
           ...this.state,
           selectedPlace: props,
