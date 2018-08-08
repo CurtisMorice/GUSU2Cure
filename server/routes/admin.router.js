@@ -52,14 +52,12 @@ router.get('/newArticles', (req, res) => {
 })
 
 router.put(`/articles/:id`,(req,res) =>{
-    console.log('THIS is the put in admin router',req.params, req.body)
     const id = req.params.id;
     const status = req.body.approved
-    console.log('PUT in ROuter',id, status);
     const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`
     pool.query(queryText, [status,id])
     .then((result) => {
-        console.log(result, req.params.id);
+        console.log(result);
         res.sendStatus(201)
     })
     .catch((error) => {
@@ -67,6 +65,7 @@ router.put(`/articles/:id`,(req,res) =>{
         res.sendStatus(500);
     })
 }) 
+
 router.delete('/deleteUser/:id', (req, res) => {
     let id = req.params.id
     console.log('this is is the id in the router', id);

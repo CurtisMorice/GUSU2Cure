@@ -63,18 +63,7 @@ const rejectBadArticle = (state=[], action) => {
     }
     return state;
 }
-
-// const approveGoodArticle = (state=[], action) => {
-//     console.log('In the approvedArticle Reducer');
-//     switch(action.type){
-//         case ADMIN_ACTIONS.APPROVED_ARTICLE:
-//             console.log(' in admin reducer for ApproveGoodArticle', action.payload);
-//         default:
-//                 return state;
-//     }
-// }
-
-
+ 
 export default combineReducers({
     allUser, approvedArticle, newArticles, modifiedArticles, deleteArticle, rejectBadArticle, 
 })

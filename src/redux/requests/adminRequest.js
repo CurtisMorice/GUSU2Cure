@@ -69,7 +69,7 @@ export function rejectedArticle(article) {
 }
 
 export function approvedArticle(article) {
-    console.log('IN APPROVED Request', article);
+    // console.log('IN APPROVED Request', article.payload.id);
     return axios.put(`api/admin/articles/${article.payload.id}`, article.payload)
     .then((response)=> {
 console.log('response from approvedArticle PUT', response)
