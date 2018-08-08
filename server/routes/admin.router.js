@@ -67,6 +67,8 @@ router.delete('/deleteUser/:id', (req, res) => {
             res.sendStatus(500)
         })
 })
+
+
 // router.put(`/acceptArticle/${id}`, (req,res)=>{
 //     console.log('this is the action',id)
 //     const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`

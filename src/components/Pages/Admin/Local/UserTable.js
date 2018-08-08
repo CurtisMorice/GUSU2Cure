@@ -23,7 +23,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import EditIcon from '@material-ui/icons/Edit';
 
 //components
-
+import EditUserModal from '../../../Global/Modals/UserProfileModal';
 
 
 //Actions
@@ -178,8 +178,8 @@ class UserTable extends Component{
               <TableCell>Email</TableCell>
               <TableCell>Contact Info</TableCell>
               <TableCell>User Type</TableCell>
-              <TableCell>Edit</TableCell>
-              <TableCell>Delete</TableCell>
+              <TableCell>Edit User Type</TableCell>
+              <TableCell>Delete User</TableCell>
             </TableHead>
 
             <TableBody>
@@ -190,13 +190,8 @@ class UserTable extends Component{
                     <TableCell component="th" scope="row"> {n.email} </TableCell>
                     <TableCell component="th" scope="row"> {n.contact_info} </TableCell>
                     <TableCell component="th" scope="row"> {n.type} </TableCell>
-                    <TableCell component="th" scope="row"> 
-                      <Tooltip title="Edit">
-                        <IconButton aria-label="Edit" color="primary">
-                          <EditIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </TableCell>
+                    <TableCell component="th" scope="row"> <EditUserModal id={n}/> </TableCell>
+
                     <TableCell component="th" scope="row"> 
                       <Tooltip title="Delete" >
                         <IconButton aria-label="Delete" color="secondary" onClick={ ()=>this.deleteUser(n.user_id) }>
