@@ -166,7 +166,6 @@ class CatalogueTable extends Component{
 
         return(
             <div>
-                {JSON.stringify(this.props.catalogue)}
                 <Paper className={classes.root}>
                     <Table className={classes.table}>
                         <TableHead>

@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
 import SearchBar from '../SearchBar'
-import Marker from './Marker';
-import axios from 'axios'
 
 export class Map extends Component {
     constructor(props) {
@@ -18,12 +16,14 @@ export class Map extends Component {
       };
     }
   
+    // renders the children onto the map
     renderChildren = () =>{
         const {children} = this.props;
         // console.log('children:', children);
       
         if(!children) return;
 
+        // children is the array, c is the object at each array index
         return React.Children.map(children, c =>{
             return React.cloneElement(c, {
                 map: this.map,
@@ -44,9 +44,11 @@ export class Map extends Component {
       }
       if (prevState.currentLocation !== this.state.currentLocation){
           this.recenterMap();
+          
       }
     }
   
+    // recenters the map when prevState.currentLocation is different from this.state.currentLocation
     recenterMap = () => {
         const map = this.map;
         const currentLocation = this.state.currentLocation;
@@ -62,22 +64,28 @@ export class Map extends Component {
     }
 
     componentDidMount(){
+      // this puts the map into the div with ref="map" in the render function
       this.loadMap();
     }
   
     loadMap = () => {
       if (this.props && this.props.google){
-        console.log('hello');
 
+        // google is fed through proprs from the GoogleApiWrapper
         const {google} = this.props;
         const maps = google.maps;
   
         const mapRef = this.refs.map;
         const node = ReactDOM.findDOMNode(mapRef);
   
+        // these are from the bottom of the page in Map.defaultProps
         let {initialCenter, zoom} = this.props;
+        console.log('initialCenter:', initialCenter);
+        
         let {lat, lng} = initialCenter;
-        const center = new maps.LatLng(lat, lng);
+        const center = new maps.LatLng(lat, lng);1 
+        
+        // sets the map configurations. i.e. what the zoom should be and where the center should be
         const mapConfig = Object.assign({}, {
           center: center,
           zoom: zoom
@@ -86,22 +94,11 @@ export class Map extends Component {
       }
     }
   
+    // this is fed to the searchbar component. it allows the searchbar to set the state
+    // of this component so the map can recenter
     setCurrentLocation = async(location) =>{
-        console.log('in setCurrentLocation with location:', location);
-        
-        await this.setState({...this.state, currentLocation: location})
-        console.log('this.state.currentLocation:', this.state.currentLocation);
-        
+        await this.setState({...this.state, currentLocation: location})        
     }
-
-    onMarkerClick(props, marker, e) {
-      this.setState({
-        selectedPlace: props,
-        activeMarker: marker,
-        showingInfoWindow: true
-      });
-    }
-  
   
     render() {
       if (!this.props.google) {
@@ -119,6 +116,9 @@ export class Map extends Component {
         <SearchBar setCurrentLocation={this.setCurrentLocation} />
         <div style={style} ref="map">
           Loading map...
+          {/* calling renderChildren here is what renders the children fed into the map in the Container
+          component on the map (i.e. the markers and the info window)
+           */}
           {this.renderChildren()}
         </div>
         </div>

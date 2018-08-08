@@ -39,7 +39,7 @@ router.get('/newArticles', (req, res) => {
     JOIN statuses ON articles.status = statuses.id
     RIGHT JOIN research_type ON articles.research_type = research_type.id
     JOIN research_phase ON articles.research_phase = research_phase.id
-    LEFT JOIN users ON user_id = users.id
+    LEFT JOIN users ON user_id = users.id WHERE statuses.status = 'pending'
     ORDER BY research_date ASC;`
     pool.query(queryText)
     .then((result) => {
@@ -50,5 +50,51 @@ router.get('/newArticles', (req, res) => {
         res.sendStatus(500);
     })
 })
+
+router.put(`/articles/:id`,(req,res) =>{
+    const id = req.params.id;
+    const status = req.body.approved
+    const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`
+    pool.query(queryText, [status,id])
+    .then((result) => {
+        console.log(result);
+        res.sendStatus(201)
+    })
+    .catch((error) => {
+        console.log('error getting', error);
+        res.sendStatus(500);
+    })
+}) 
+
+router.delete('/deleteUser/:id', (req, res) => {
+    let id = req.params.id
+    console.log('this is is the id in the router', id);
+    const queryText = `DELETE FROM users WHERE id = $1`;
+    pool.query(queryText, [id])
+        .then((result) => {
+            console.log('successfull delete of user');
+            
+            res.sendStatus(200)
+        })
+        .catch((error) => {
+            console.log('Error deleting the user', error);
+            
+            res.sendStatus(500)
+        })
+})
+// router.put(`/acceptArticle/${id}`, (req,res)=>{
+//     console.log('this is the action',id)
+//     const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`
+//     pool.query(queryText, [1, 2])
+//     .then((result) => {
+//         console.log(result.rows);
+//         res.send(result.rows)
+//     })
+//     .catch((error) => {
+//         console.log('error getting', error);
+//         res.sendStatus(500);
+//     })
+// }) 
+
 
 module.exports = router;

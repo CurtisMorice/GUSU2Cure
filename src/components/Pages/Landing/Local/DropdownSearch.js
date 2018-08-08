@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { MAP_ACTIONS } from '../../../../redux/actions/mapActions';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -39,6 +40,10 @@ class DropdownSearch extends Component {
     handleChange = event => {
       this.setState({ [event.target.name]: event.target.value });
     };
+
+    filterLocations = (param, value) => {
+        this.props.dispatch({type:MAP_ACTIONS.FETCH_LOCATIONS, payload: {param: param, value: value}});
+    }
     
     handleCloseType = () => {
       this.setState({ openType: false });

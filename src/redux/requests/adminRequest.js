@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { actionChannel } from 'redux-saga/effects';
 
 export function getAllUsers() {
     console.log('in get all users request')
@@ -38,4 +39,42 @@ export function getModifiedArticles() {
         console.log('error in the getModifiedArticles');
         throw error.response || error;
         })
+}
+
+export function deleteUser(id) {
+    console.log('In the delete user account request');
+    return axios.delete(`/api/admin/deleteUser/${id}`)
+    .then(response => response)
+    .catch((error) => {
+        console.log('Error deleting the user');
+        throw error.response || error;
+    })
+}
+// export function deleteBadArticle(id) {
+//     console.log('in deleteBadArticle Request');
+//     return axios.put('api/admin/rejectArticle', id)
+//     .then(response => response.data).catch((error)=>{
+//         console.log('error in the deleteBadArticle adminRequest', error);
+//         throw error.response || error;
+//     })
+// }
+
+export function rejectedArticle(article) {
+    console.log('in rejectedArticleRequest', article);
+    return axios.put(`api/admin/rejectedArticle`, article)
+    .then(response => response.data).catch((error)=>{
+        console.log('error in the rejectedArticle adminRequest', error);
+        throw error.response || error;
+    })
+}
+
+export function approvedArticle(article) {
+    // console.log('IN APPROVED Request', article.payload.id);
+    return axios.put(`api/admin/articles/${article.payload.id}`, article.payload)
+    .then((response)=> {
+console.log('response from approvedArticle PUT', response)
+    }).catch((error)=>{
+        console.log('error in the approved adminRequest', error);
+        throw error.response || error;
+    })
 }

@@ -1,6 +1,6 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import {ADMIN_ACTIONS} from '../actions/adminActions';
-import { getAllUsers, getApprovedArticles, getNewArticles , getModifiedArticles} from '../requests/adminRequest';
+import { getAllUsers, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser, deleteBadArticle, rejectedArticle, approvedArticle} from '../requests/adminRequest';
 
 
 function* fetchAllUser(action) {
@@ -38,7 +38,7 @@ function* fetchNewArticles(action){
             payload: newArticle
         })
     }catch (error) {
-        console.log('error in admin saga getting new Article ');
+        console.log('error in admin saga getting new Article ', error);
     }
 }
 
@@ -51,15 +51,41 @@ function* fetchModifiedArticles(action){
             payload: modifiedArticle,
         })
     }catch (error) {
-        console.log('error in admin saga getting modified Article ');
+        console.log('error in admin saga getting modified Article ',error);
     }
 }
+
+function* deleteUserAccount(action){
+    try{
+        console.log('id to delete', action.payload);
+        let id = action.payload
+        yield deleteUser(id);
+    }
+    catch (error) {
+        console.log('Error deleting user account');
+        
+    }
+}
+
+
+function* approveArticle (action){
+    console.log('action in approvedArticle in adminSaga', action);
+    try{
+        yield approvedArticle(action);
+
+    }catch(error) {
+        console.log('error in admin saga approving article', error)
+    }
+}
+
 
 function* adminSaga() {
     yield takeLatest(ADMIN_ACTIONS.FETCH_ALL_USER, fetchAllUser);
     yield takeLatest(ADMIN_ACTIONS.FETCH_APPROVED_ARTICLE, fetchArticlesApproved);
     yield takeLatest(ADMIN_ACTIONS.FETCH_NEW_ARTICLE, fetchNewArticles);
     yield takeLatest(ADMIN_ACTIONS.FETCH_MODIFIED_ARTICLE, fetchModifiedArticles);
+    yield takeLatest(ADMIN_ACTIONS.DELETE_USER, deleteUserAccount);
+    yield takeLatest(ADMIN_ACTIONS.APPROVED_ARTICLE, approveArticle);
 }
   
   export default adminSaga;

@@ -43,14 +43,7 @@ class NewArticleTable extends React.Component{
         this.props.onChangePage(event, 0);
       };
 
-    componentDidMount(){
-            this.fetchNewArticles();
-    };
 
-    fetchNewArticles = () => {
-            console.log('hello, is it me your looking for ');
-            this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
-    };
 
     handleBackButtonClick = event => {
         this.props.onChangePage(event, this.props.page - 1);
@@ -146,9 +139,18 @@ class NewArticleTable extends React.Component{
           this.state = {
             page: 0,
             rowsPerPage: 5,
+            approved: 2,
+            rejected: 3,
           };
         }
-      
+          componentDidMount(){
+          this.fetchNewArticles();
+        };
+
+        fetchNewArticles = () => {
+                console.log('hello, is it me your looking for ');
+                this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
+        };
         handleChangePage = (event, page) => {
           this.setState({ page });
         };
@@ -157,6 +159,29 @@ class NewArticleTable extends React.Component{
           this.setState({ rowsPerPage: event.target.value });
         };
       
+        approveNewArticle = (id) => {   
+           let approved = this.state.approved
+           console.log('in approve click', approved);
+           let newObj = {approved: approved, id: id};
+           console.log('NEW', newObj)
+            const action =({
+                type: ADMIN_ACTIONS.APPROVED_ARTICLE,
+                payload: newObj
+            })
+            this.props.dispatch(action);
+            this.fetchNewArticles();
+            
+        }
+        rejectNewArticle = (action) => {
+            console.log('rejectNewArticle ',action);
+            let rejected = this.state.rejected
+            console.log('in rejected click', rejected);
+             this.props.dispatch({
+                 type: ADMIN_ACTIONS.REJECTED_ARTICLE,
+                 payload: action, rejected
+             })
+            
+        }
         render() {
           const { classes } = this.props;
           const {rowsPerPage, page } = this.state;
@@ -205,7 +230,7 @@ class NewArticleTable extends React.Component{
                           <TableCell component="th" scope="row">{newArticle.email}</TableCell>
                        <TableCell> 
                         <Tooltip title="Approved">
-                         <IconButton aria-label="Approved" color="primary">
+                         <IconButton aria-label="Approved" color="primary" onClick={()=>this.approveNewArticle(newArticle.id)}>
                           <i className="material-icons">
                             thumb_up
                           </i>
@@ -213,8 +238,8 @@ class NewArticleTable extends React.Component{
                         </Tooltip> 
                        </TableCell>
                        <TableCell> 
-                         <Tooltip title="Rejected">
-                          <IconButton aria-label="Rejected" color="primary">
+                         <Tooltip id="rejected" title="Rejected">
+                          <IconButton aria-label="Rejected" color="primary" value="2" onClick={()=>this.rejectNewArticle(newArticle.id)}>
                            <i className="material-icons" style={{color: "red"}}>
                             thumb_down
                            </i>

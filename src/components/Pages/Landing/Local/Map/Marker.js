@@ -3,24 +3,6 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
 import SearchBar from '../SearchBar'
 
-
-// let marker = new google.maps.Marker({
-//   position: somePosition,
-//   map: map
-// })
-
-const wrappedPromise = function() {
-  let wrappedPromise = {},
-      promise = new Promise(function (resolve, reject) {
-          wrappedPromise.resolve = resolve;
-          wrappedPromise.reject = reject;
-      });
-  wrappedPromise.then = promise.then.bind(promise);
-  wrappedPromise.catch = promise.catch.bind(promise);
-  wrappedPromise.promise = promise;
-  return wrappedPromise;
-}
-
 const evtNames = [
   'click'
 ]
@@ -29,19 +11,10 @@ const evtNames = [
 export class MyMarker extends Component {
     
     componentDidMount(){
-      this.markerPromise = wrappedPromise();
-      console.log('this.markerPromise:', this.markerPromise);
       
     }
-
-    onMarkerClick(props, marker, e) {
-      this.setState({
-        selectedPlace: props,
-        activeMarker: marker,
-        showingInfoWindow: true
-      });
-    }
   
+    // renders marker on the map
     componentDidUpdate(prevProps){
       if ((this.props.map !== prevProps.map) ||
       (this.props.position !== prevProps.position)) {
@@ -63,36 +36,29 @@ export class MyMarker extends Component {
       };
       this.marker = new google.maps.Marker(pref);
 
+      // adds onClick event listener for markers
       evtNames.forEach(e => {
         this.marker.addListener(e, this.handleEvent(e))
       })
       
-      // this.marker.addListener('click', this.props.onMarkerClick)
-
-      this.markerPromise.resolve(this.marker);
     }
 
+    // sets first letter of string to upper case
     camelize = (str) => {
       return str.split(' ').map(function(word) {
         return word.charAt(0).toUpperCase() + word.slice(1);
       }).join('');
     }
 
+
     handleEvent = (evt) => {
       return (e) => {
         const evtName = `on${this.camelize(evt)}`
-        console.log('evtName:', evtName);
         
         if (this.props[evtName]){
           this.props[evtName](this.props, this.marker, e)
         }
       }
-    }
-
-      
-
-    getMarker() {
-      return this.markerPromise;
     }
 
     render() {
