@@ -17,6 +17,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
+//components
+import swal from 'sweetalert2'
+
+
+
 //ReduxStore
 const mapStateToProps = state => ({
     user: state.user,
@@ -51,24 +56,37 @@ const styles = theme => ({
 
 class EditUserModal extends React.Component {
   state = {
-    open: false,
     type: ''
   };
 
-  handleOpen = () => {
-    this.setState({ open: true,
-            type: this.props.user.type
-    });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
   handleUpdateUser = (type) => (event) => {
-    console.log(event.target.value);
-    this.setState({
-        type: event.target.value
+    swal({
+      title: 'Please Confirm Change',
+      text: 'Are you sure you want to change the user type?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'Cancel',
+      reverseButtons: true
+    }).then((result) => {
+      if(result.value) {
+        console.log(event.target.value);
+        this.setState({
+          type: event.target.value
+        })
+        console.log('user type is', this.state.type);
+        swal(
+          'User Type Has been Modified',
+          'Sucess',
+          'success'
+        )
+      } else if (result.dismiss === swal.DismissReason.cancel) {
+        swal(
+          'Cancelled',
+          'User',
+          'error'
+        )
+      }
     })
   }
 

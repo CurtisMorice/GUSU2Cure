@@ -29,6 +29,7 @@ import Swal from 'sweetalert2'
 
 //Actions
 import { ADMIN_ACTIONS } from '../../../../redux/actions/adminActions';
+import swal from 'sweetalert2';
 
 
 const mapStateToProps = state => ({
@@ -154,22 +155,45 @@ class UserTable extends Component{
 
   //Get all user info
   fetchAllUsers = () => {
-    console.log('hello');
     this.props.dispatch({type: ADMIN_ACTIONS.FETCH_ALL_USER});
   }
 
   // deletes user
   deleteUser = (id) => {
-    Swal({
-      title: 'Confirm User Deletion',
-      test: 'The user profile will be permanentely deleted',
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
       type: 'warning',
-      showCancelButton: true
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.props.dispatch({type: ADMIN_ACTIONS.DELETE_USER, payload: id});
+        swal(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        this.fetchAllUsers()
+      } else if (result.dismiss === swal.DismissReason.cancel) {
+        swal(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
+      }
     })
-    console.log('hello', id);
-    this.props.dispatch({type: ADMIN_ACTIONS.DELETE_USER, payload: id});
     this.fetchAllUsers();
   }
+
+
+
+    // console.log('hello', id);
+    // this.props.dispatch({type: ADMIN_ACTIONS.DELETE_USER, payload: id});
+    // this.fetchAllUsers();
+  
 
   render(){
 
