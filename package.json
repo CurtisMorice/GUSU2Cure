@@ -5,7 +5,6 @@
   "proxy": "http://localhost:5000",
   "dependencies": {
     "@material-ui/core": "^1.4.3",
-
     "@material-ui/icons": "^2.0.1",
     "axios": "^0.17.1",
     "bcrypt": "^2.0.1",
@@ -32,7 +31,8 @@
     "recompose": "^0.28.2",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "sweetalert2": "^7.26.10"
   },
   "scripts": {
     "start": "node server/server.js",
