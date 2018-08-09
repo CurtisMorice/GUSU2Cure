@@ -128,7 +128,7 @@ class AddArticleModal extends React.Component {
                 institution_name: this.state.institution_name,
                 institution_url: this.state.institution_url,
                 funding_source: this.state.funding_source,
-                related_articles: this.state.related_articles,
+                related_articles: [this.state.related_articles],
                 user_story: this.state.user_story,
                 summary: this.state.summary,
                 brief_description: this.state.brief_description,
@@ -172,16 +172,17 @@ class AddArticleModal extends React.Component {
   getStepContent = (stepIndex) => {
     switch (stepIndex) {
       case 0:
-        return <div>
-          <InputLabel htmlFor="research_phase-simple">Research Type</InputLabel>
-          <Select
-            value={this.state.research_type}
-            onChange={this.handleInputChangeFor('research_type')}
-            inputProps={{
-            name: 'research_type',
-            id: 'research_type-simple',
-            }}
-          >
+        return (
+          <div>
+            <InputLabel htmlFor="research_phase-simple">Research Type</InputLabel>
+            <Select
+              value={this.state.research_type}
+              onChange={this.handleInputChangeFor('research_type')}
+              inputProps={{
+              name: 'research_type',
+              id: 'research_type-simple',
+              }}
+            >
             <MenuItem>
             <em>None</em>
             </MenuItem>
@@ -273,7 +274,7 @@ class AddArticleModal extends React.Component {
             label="Funding Source"
             fullWidth  
           />
-            </div>;
+        </div>);
       case 1:
         return (
         <div>
@@ -416,7 +417,7 @@ class AddArticleModal extends React.Component {
             </div>
           ) : (
             <div>
-              <Typography className={classes.instructions}>{this.getStepContent(activeStep)}</Typography>
+              <div className={classes.instructions}>{this.getStepContent(activeStep)}</div>
               <div>
                 <Button
                   disabled={activeStep === 0}
@@ -428,7 +429,7 @@ class AddArticleModal extends React.Component {
                 <Button variant="contained" color="primary" onClick={this.handleNext}>
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
-                <Button></Button>
+      
               </div>
             </div>
           )}
