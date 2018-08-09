@@ -1,6 +1,6 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import {ADMIN_ACTIONS} from '../actions/adminActions';
-import { getAllUsers, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser, deleteBadArticle, rejectedArticle, approvedArticle, setUser} from '../requests/adminRequest';
+import { getAllUsers, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser, deleteTargetArticle, rejectedArticle, approvedArticle, setUser} from '../requests/adminRequest';
 
 
 function* fetchAllUser(action) {
@@ -101,6 +101,17 @@ function* rejectArticle (action){
     }
 }
 
+function* deleteBadArticle (action){
+    console.log('In deleteBadArticle in adminSaga', action);
+    try{
+        yield deleteTargetArticle(action);
+        yield fetchNewArticles();
+    }catch(error) {
+        console.log('error in the deletBadArticle in adminSage', error);
+
+    }
+}
+
 
 function* adminSaga() {
     yield takeLatest(ADMIN_ACTIONS.FETCH_ALL_USER, fetchAllUser);
@@ -111,6 +122,8 @@ function* adminSaga() {
     yield takeLatest(ADMIN_ACTIONS.APPROVED_ARTICLE, approveArticle);
     yield takeLatest(ADMIN_ACTIONS.SET_USER_TYPE, userType);
     yield takeLatest(ADMIN_ACTIONS.REJECTED_ARTICLE, rejectArticle);
+    yield takeLatest(ADMIN_ACTIONS.DELETE_TARGET_ARTICLE, deleteBadArticle)
+
 }
   
   export default adminSaga;

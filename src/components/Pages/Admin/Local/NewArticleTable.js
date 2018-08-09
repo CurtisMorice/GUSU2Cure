@@ -6,7 +6,7 @@ import { ADMIN_ACTIONS } from '../../../../redux/actions/adminActions';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-
+import DeleteIcon from '@material-ui/icons/Delete';
 //table imports
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -230,6 +230,34 @@ class NewArticleTable extends React.Component{
             })
         }
 
+        deleteArticle = (id) => {
+          swal({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Yes, delete it!',
+              cancelButtonText: 'No, cancel!',
+              reverseButtons: true
+            }).then((result) => {
+              if (result.value) {
+                  console.log(id);
+                this.props.dispatch({type: ADMIN_ACTIONS.DELETE_TARGET_ARTICLE, payload: id});
+                swal(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success'
+                )
+              } else if (result.dismiss === swal.DismissReason.cancel) {
+                swal(
+                  'Cancelled',
+                  'Your imaginary file is safe :)',
+                  'error'
+                )
+              }
+            })
+      }
+
         render() {
           const { classes } = this.props;
           const {rowsPerPage, page } = this.state;
@@ -259,6 +287,7 @@ class NewArticleTable extends React.Component{
                     <TableCell> User Email </TableCell>
                     <TableCell> Approved </TableCell>
                     <TableCell> Rejected </TableCell>
+                    <TableCell> Delete </TableCell>
                 </TableRow>
             </TableHead>
         <TableBody>
@@ -287,11 +316,18 @@ class NewArticleTable extends React.Component{
                        </TableCell>
                        <TableCell> 
                          <Tooltip id="rejected" title="Rejected">
-                          <IconButton aria-label="Rejected" color="primary" value="2" onClick={()=>this.rejectNewArticle(newArticle.id)}>
-                           <i className="material-icons" style={{color: "red"}}>
+                          <IconButton aria-label="Rejected" color="secondary"  onClick={()=>this.rejectNewArticle(newArticle.id)}>
+                           <i className="material-icons" >
                             thumb_down
                            </i>
                           </IconButton>
+                         </Tooltip>
+                        </TableCell>
+                        <TableCell>
+                         <Tooltip id="delete "title="Delete" >
+                           <IconButton aria-label="Delete" onClick={()=>this.deleteArticle(newArticle.id)}>
+                             <DeleteIcon style={{color: "crimson"}} />
+                           </IconButton>
                          </Tooltip>
                         </TableCell>
                         </TableRow>
@@ -299,7 +335,7 @@ class NewArticleTable extends React.Component{
                     })}
                     {emptyRows > 0 && (
                       <TableRow style={{ height: 48 * emptyRows }}>
-                        <TableCell colSpan={10} />
+                        <TableCell colSpan={11} />
                       </TableRow>
                     )}
                   </TableBody>
