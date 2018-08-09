@@ -84,6 +84,22 @@ class AddArticleModal extends React.Component {
       }
     }
 
+    async componentDidUpdate(prevProps){
+      if (prevProps.research_type !== this.props.research_type){
+        await this.setState({...this.state, research_type_array: this.props.research_type})
+      }
+      if (prevProps.research_phase !== this.props.research_phase){
+        await this.setState({...this.state, research_phase_array: this.props.research_phase})
+        
+      }
+    }
+
+    componentDidMount(){
+      // this.setState({...this.state, research_type_array: this.props.research_type})
+      console.log('this.props:', this.props);
+      
+    }
+
     googleApiCall = (event) => {
       event.preventDefault();
       console.log('googleApiCall');
@@ -179,7 +195,7 @@ class AddArticleModal extends React.Component {
               inputProps={{
               name: 'research_type',
               id: 'research_type-simple',
-              }}
+              }} 
             >
             <MenuItem>
             <em>None</em>
