@@ -1,10 +1,6 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import {ADMIN_ACTIONS} from '../actions/adminActions';
-<<<<<<< HEAD
 import { getAllUsers, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser, deleteBadArticle, rejectedArticle, approvedArticle, setUser} from '../requests/adminRequest';
-=======
-import { getAllUsers, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser, rejectedArticle, approvedArticle} from '../requests/adminRequest';
->>>>>>> master
 
 
 function* fetchAllUser(action) {
