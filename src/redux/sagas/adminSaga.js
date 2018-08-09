@@ -60,10 +60,10 @@ function* deleteUserAccount(action){
         console.log('id to delete', action.payload);
         let id = action.payload
         yield deleteUser(id);
+        yield fetchAllUser();
     }
     catch (error) {
         console.log('Error deleting user account');
-        
     }
 }
 
@@ -84,12 +84,12 @@ function* userType(action){
     console.log(action.payload, action.userId);
     try{
         yield setUser(action);
+        yield fetchAllUser();
     } catch(error){
         console.log('Error setting user type in the Admin Saga', error);  
     }
 }
 function* rejectArticle (action){
-
     console.log('action in approvedArticle in adminSaga', action);
     try{
         yield rejectedArticle(action);

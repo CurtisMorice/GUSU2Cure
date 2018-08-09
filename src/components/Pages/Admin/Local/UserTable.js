@@ -176,7 +176,6 @@ class UserTable extends Component{
           'Your file has been deleted.',
           'success'
         )
-        this.fetchAllUsers()
       } else if (result.dismiss === swal.DismissReason.cancel) {
         swal(
           'Cancelled',
@@ -185,15 +184,7 @@ class UserTable extends Component{
         )
       }
     })
-    this.fetchAllUsers();
   }
-
-
-
-    // console.log('hello', id);
-    // this.props.dispatch({type: ADMIN_ACTIONS.DELETE_USER, payload: id});
-    // this.fetchAllUsers();
-  
 
   render(){
 

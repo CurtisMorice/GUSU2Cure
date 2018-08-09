@@ -128,7 +128,6 @@ const actionsStyles = theme => ({
     },
     table: {
         minWidth: 500,
-        maxWidth: 500,
     },
     tableWrapper: {
         overflowX: 'auto',
