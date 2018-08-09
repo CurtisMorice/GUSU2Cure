@@ -23,11 +23,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 import EditIcon from '@material-ui/icons/Edit';
 
 //components
-
+import EditUserModal from '../../../Global/Modals/UserProfileModal';
+import Swal from 'sweetalert2'
 
 
 //Actions
 import { ADMIN_ACTIONS } from '../../../../redux/actions/adminActions';
+import swal from 'sweetalert2';
 
 
 const mapStateToProps = state => ({
@@ -153,15 +155,45 @@ class UserTable extends Component{
 
   //Get all user info
   fetchAllUsers = () => {
-    console.log('hello');
     this.props.dispatch({type: ADMIN_ACTIONS.FETCH_ALL_USER});
   }
 
+  // deletes user
   deleteUser = (id) => {
-    console.log('hello', id);
-    this.props.dispatch({type: ADMIN_ACTIONS.DELETE_USER, payload: id});
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.props.dispatch({type: ADMIN_ACTIONS.DELETE_USER, payload: id});
+        swal(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        this.fetchAllUsers()
+      } else if (result.dismiss === swal.DismissReason.cancel) {
+        swal(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
+      }
+    })
     this.fetchAllUsers();
   }
+
+
+
+    // console.log('hello', id);
+    // this.props.dispatch({type: ADMIN_ACTIONS.DELETE_USER, payload: id});
+    // this.fetchAllUsers();
+  
 
   render(){
 
@@ -178,8 +210,8 @@ class UserTable extends Component{
               <TableCell>Email</TableCell>
               <TableCell>Contact Info</TableCell>
               <TableCell>User Type</TableCell>
-              <TableCell>Edit</TableCell>
-              <TableCell>Delete</TableCell>
+              <TableCell>Edit User Type</TableCell>
+              <TableCell>Delete User</TableCell>
             </TableHead>
 
             <TableBody>
@@ -190,13 +222,8 @@ class UserTable extends Component{
                     <TableCell component="th" scope="row"> {n.email} </TableCell>
                     <TableCell component="th" scope="row"> {n.contact_info} </TableCell>
                     <TableCell component="th" scope="row"> {n.type} </TableCell>
-                    <TableCell component="th" scope="row"> 
-                      <Tooltip title="Edit">
-                        <IconButton aria-label="Edit" color="primary">
-                          <EditIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </TableCell>
+                    <TableCell component="th" scope="row"> <EditUserModal id={n}/> </TableCell>
+
                     <TableCell component="th" scope="row"> 
                       <Tooltip title="Delete" >
                         <IconButton aria-label="Delete" color="secondary" onClick={ ()=>this.deleteUser(n.user_id) }>

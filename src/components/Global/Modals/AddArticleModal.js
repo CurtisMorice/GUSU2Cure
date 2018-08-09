@@ -27,6 +27,12 @@ import MapWrapper from '../../Pages/Landing/Local/Map/MapWrapper';
 import SearchBar from '../../Pages/Landing/Local/SearchBar';
 import axios from 'axios';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
+
 const mapStateToProps = state => ({
   user: state.user,
   mapReducer: state.mapReducer,
@@ -49,16 +55,31 @@ instructions: {
 },
 });
 
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
+
 class AddArticleModal extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-            article: {},
-            location: {},
-            activeStep: 0,
-            date_posted: '08/06/2018',
-            research_date: '08/06/2018'
-            
+              user_id: '',
+              date_posted: '',
+              research_date: '',
+              research_title: '',
+              research_type: '',
+              research_phase: '',
+              institution_name: '',
+              institution_url: '',
+              funding_source: '',
+              related_articles: '',
+              brief_description: '',
+              summary: '',
+              user_story: '',
+              address: '',
+              lat: '',
+              lng: '',
+              activeStep: 0, 
       }
     }
     state = {
@@ -72,18 +93,16 @@ class AddArticleModal extends React.Component {
       const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address}&key=AIzaSyD9e9e4rYBfPVZsPiKNBvQ8Ciu5yGPlfq8`
       console.log('url:', url);
       axios.get(url)
-      .then((response) => {
+      .then(async(response) => {
         console.log('response', response)
           const latLng = {...response.data.results}
           console.log('latLng:', latLng);
-          this.props.dispatch({type: MAP_ACTIONS.SET_ADDRESS, payload: latLng})
-          // this.props.dispatch({type: MAP_ACTIONS.RECENTER});
-          this.setState({
+          await this.setState({
             ...this.state,
-            lat: this.props.mapReducer.mapReducer.location.lat,
-            lng: this.props.mapReducer.mapReducer.location.lng,
+            lat: latLng[0].geometry.location.lat,
+            lng: latLng[0].geometry.location.lng,
           });
-          console.log('');
+          console.log('this.state', this.state);
           
       })
       .catch(err => {
@@ -101,18 +120,21 @@ class AddArticleModal extends React.Component {
         event.preventDefault();
         // if (this.state.user.user.type === 'admin') {
             const body = {
-                location_id: this.state.location_id,
                 user_id: this.state.user_id,
-                date_posted: this.state.date_posted,
                 research_date: this.state.research_date,
-                reasearch_title: this.state.reasearch_title,
+                research_title: this.state.research_title,
                 research_type: this.state.research_type,
                 research_phase: this.state.research_phase,
                 institution_name: this.state.institution_name,
                 institution_url: this.state.institution_url,
                 funding_source: this.state.funding_source,
                 related_articles: this.state.related_articles,
-                status: this.state.status
+                user_story: this.state.user_story,
+                summary: this.state.summary,
+                brief_description: this.state.brief_description,
+                address: this.state.address,
+                lat: this.state.lat,
+                lng: this.state.lng
             };
             console.log('body:',body);
             const action = ({
@@ -141,8 +163,9 @@ class AddArticleModal extends React.Component {
   handleInputChangeFor = propertyName => (event) => {
       console.log('user id', this.props.user.user.id);  
       this.setState({
-          [propertyName]: event.target.value,
-          user_id: this.props.user.user.id,
+            ...this.state,
+            [propertyName]: event.target.value,
+            user_id: this.props.user.user.id,
       });
   }
 
@@ -159,16 +182,18 @@ class AddArticleModal extends React.Component {
             id: 'research_type-simple',
             }}
           >
-            <MenuItem value="">
+            <MenuItem>
             <em>None</em>
             </MenuItem>
             {this.props.research_type.map(research_type => {
                 return (
-                    <MenuItem key={research_type.id} value={research_type.type}>{research_type.type}</MenuItem>
+
+                    <MenuItem key={research_type.id} value={research_type.id}>{research_type.type}</MenuItem>
                 )
             })}
           </Select>
           <br/>
+
           <InputLabel htmlFor="research_phase-simple">Research Phase</InputLabel>
           <Select
             value={this.state.research_phase}
@@ -178,26 +203,36 @@ class AddArticleModal extends React.Component {
             id: 'research_phase-simple',
             }}
           >
-            <MenuItem value="">
+            <MenuItem>
             <em>None</em>
             </MenuItem>
             {this.props.research_phase.map((research_phase, i) => {
-                return (
-                    <MenuItem key={i} value={research_phase.phase}>{research_phase.phase}</MenuItem>
-                )
+              return (
+                  <MenuItem key={i} value={research_phase.id}>{research_phase.phase}</MenuItem>
+              )
             })}
           </Select>
           <TextField 
             type="text"
             value={this.state.research_title}
-            onChange={this.handleInputChangeFor('reasearch_title')}
-            name="reasearch_title"
+            onChange={this.handleInputChangeFor('research_title')}
+            name="research_title"
             autoFocus
             margin="dense"
             label="Research Title"
             fullWidth
             multiline
           />
+          <TextField 
+            type="date"
+            value={this.state.research_date}
+            onChange={this.handleInputChangeFor('research_date')}
+            name="research_date"
+            autoFocus
+            margin="dense"
+            label="Date Published"
+            fullWidth
+            />
           <TextField 
             type="text"
             value={this.state.institution_name}
@@ -210,6 +245,16 @@ class AddArticleModal extends React.Component {
           />
           <TextField
             type="text"
+            value={this.state.institution_url}
+            onChange={this.handleInputChangeFor('institution_url')}
+            name="institution_url"
+            autoFocus
+            margin="dense"
+            label="Institution Website"
+            fullWidth  
+          />
+          <TextField
+            type="text"
             value={this.state.address}
             onChange={this.handleInputChangeFor('address')}
             name="address"
@@ -218,16 +263,16 @@ class AddArticleModal extends React.Component {
             label="Institution Address"
             fullWidth  
           />
-          <TextField 
-            type="date"
-            value={this.state.date_posted}
-            onChange={this.handleInputChangeFor('date_posted')}
-            name="date_posted"
+          <TextField
+            type="text"
+            value={this.state.funding_source}
+            onChange={this.handleInputChangeFor('funding_source')}
+            name="funding_source"
             autoFocus
             margin="dense"
-            label="Date Published"
-            fullWidth
-            />
+            label="Funding Source"
+            fullWidth  
+          />
             </div>;
       case 1:
         return (
@@ -262,6 +307,17 @@ class AddArticleModal extends React.Component {
             autoFocus
             margin="dense"
             label="User Story"
+            fullWidth
+            multiline
+            />
+            <TextField 
+            type="text"
+            value={this.state.related_articles}
+            onChange={this.handleInputChangeFor('related_articles')}
+            name="related_articles"
+            autoFocus
+            margin="dense"
+            label="Related Articles"
             fullWidth
             multiline
             />
@@ -322,15 +378,25 @@ class AddArticleModal extends React.Component {
           fullScreen
           open={this.state.open}
           onClose={this.handleClose}
+          TransitionComponent={Transition}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{"Add an article:"}</DialogTitle>
+        <AppBar className={classes.appBar}>
+            <Toolbar>
+              <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+                <CloseIcon />
+              </IconButton>
+              <Typography variant="title" color="inherit" className={classes.flex}>
+                Add an article:
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <DialogTitle id="alert-dialog-title"></DialogTitle>
           <DialogContent>
-            
-          
-         
           <div className={classes.root}>
+          <br/>
+          <br/>
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map(label => {
             return (
@@ -346,7 +412,7 @@ class AddArticleModal extends React.Component {
           {this.state.activeStep === steps.length ? (
             <div>
               <Typography className={classes.instructions}>Thank you for submitting your article</Typography>
-              <Button color="primary" variant="contained" onClick={this.handleClose}>Done</Button>
+              <Button color="primary" variant="contained" onClick={this.addArticle}>Done</Button>
             </div>
           ) : (
             <div>
@@ -362,6 +428,7 @@ class AddArticleModal extends React.Component {
                 <Button variant="contained" color="primary" onClick={this.handleNext}>
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
+                <Button></Button>
               </div>
             </div>
           )}

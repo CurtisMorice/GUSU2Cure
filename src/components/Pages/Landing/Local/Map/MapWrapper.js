@@ -3,10 +3,7 @@ import { GoogleApiWrapper } from 'google-maps-react';
 import Map from './Map';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { USER_ACTIONS } from '../../../../../redux/actions/userActions';
 import { MAP_ACTIONS } from '../../../../../redux/actions/mapActions';
-import { triggerLogout } from '../../../../../redux/actions/loginActions';
-import axios from 'axios';
 import Marker from './Marker';
 import {KEYS} from '../../../../../Key';
 import InfoWindow from './InfoWindow';
@@ -35,7 +32,11 @@ export class Container extends React.Component{
       }
       
       componentDidMount() {
+        // use this dispatch  
         this.props.dispatch({type:MAP_ACTIONS.FETCH_LOCATIONS})
+        // for testing purposes
+        // this.props.dispatch({type:MAP_ACTIONS.FETCH_LOCATIONS, payload: {param: 'phase', value: 2}})
+
       }
     
       componentDidUpdate(prevProps, prevState) {
