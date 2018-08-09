@@ -38,9 +38,7 @@ const mapStateToProps = state => ({
   mapReducer: state.mapReducer,
   articles: state.articleReducer.article,
   research_type: state.articleReducer.research_type,
-  research_phase: state.articleReducer.research_phase,
-  lat: state.mapReducer.mapReducer.location.lat,
-  lng: state.mapReducer.mapReducer.location.lng,
+  research_phase: state.articleReducer.research_phase
 });
 
 const styles = theme => ({
@@ -65,8 +63,6 @@ class AddArticleModal extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-          
-              location_id: '',
               user_id: '',
               date_posted: '',
               research_date: '',
@@ -101,14 +97,12 @@ class AddArticleModal extends React.Component {
         console.log('response', response)
           const latLng = {...response.data.results}
           console.log('latLng:', latLng);
-          this.props.dispatch({type: MAP_ACTIONS.SET_ADDRESS, payload: latLng})
-          // this.props.dispatch({type: MAP_ACTIONS.RECENTER});
           await this.setState({
             ...this.state,
             lat: latLng[0].geometry.location.lat,
             lng: latLng[0].geometry.location.lng,
           });
-          console.log('this.state');
+          console.log('this.state', this.state);
           
       })
       .catch(err => {
@@ -194,7 +188,7 @@ class AddArticleModal extends React.Component {
             {this.props.research_type.map(research_type => {
                 return (
 
-                    <MenuItem key={research_type.id} value={research_type.type}>{research_type.type}</MenuItem>
+                    <MenuItem key={research_type.id} value={research_type.id}>{research_type.type}</MenuItem>
                 )
             })}
           </Select>
