@@ -22,7 +22,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import { Typography } from '../../../../../node_modules/@material-ui/core';
-
+import Tooltip from '@material-ui/core/Tooltip';
 
 const mapStateToProps = state => ({
     adminReducer :state.adminReducer.newArticles,
@@ -158,7 +158,39 @@ const mapStateToProps = state => ({
             handleChangeRowsPerPage = event => {
               this.setState({ rowsPerPage: event.target.value });
             };
-          
+            fetchNewArticles = () => {
+              console.log('hello, is it me your looking for ');
+              this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
+            }
+            
+              approveNewArticle = (id) => {   
+                let approved = this.state.approved;
+                console.log('in approve click', approved);
+                let approvedObj = {approved: approved, id: id};
+                
+                  const action = ({
+                      type: ADMIN_ACTIONS.APPROVED_ARTICLE,
+                      payload: approvedObj
+                  })
+                  this.props.dispatch(action);
+                  this.fetchNewArticles();
+                  
+              }
+              rejectNewArticle = (id) => {
+                  console.log('REEEejectNewArticle ',action);
+                  let rejected = this.state.rejected;
+                  console.log('in rejected click', rejected);
+                  let rejectedObj = {rejected: rejected , id: id };
+
+                  console.log('REJECTED', rejectedObj)
+                  
+                  const action = ({
+                      type: ADMIN_ACTIONS.REJECTED_ARTICLE,
+                      payload:rejectedObj
+                  })
+                  this.props.dispatch(action);
+                  this.fetchNewArticles();
+              }
             render() {
               const { classes } = this.props;
               const { rowsPerPage, page } = this.state;
@@ -186,6 +218,8 @@ const mapStateToProps = state => ({
                         <TableCell> Research Date </TableCell>
                         <TableCell> User Name </TableCell>
                         <TableCell> User Email </TableCell>
+                        <TableCell> Approved </TableCell>
+                        <TableCell> Rejected </TableCell>
                     </TableRow>
                 </TableHead>
             <TableBody>
@@ -203,35 +237,52 @@ const mapStateToProps = state => ({
                               <TableCell component="th" scope="row">{newArticle.research_date}</TableCell>
                               <TableCell component="th" scope="row">{newArticle.username}</TableCell>
                               <TableCell component="th" scope="row">{newArticle.email}</TableCell>
-                      
-                            </TableRow>
-                          );
-                        })}
-                        {emptyRows > 0 && (
-                          <TableRow style={{ height: 48 * emptyRows }}>
-                            <TableCell colSpan={10} />
-                          </TableRow>
-                        )}
-                      </TableBody>
-                      <TableFooter>
-                        <TableRow>
-                          <TablePagination
-                            colSpan={10}
-                            count={this.props.adminReducer.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onChangePage={this.handleChangePage}
-                            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                            ActionsComponent={TablePaginationActionsWrapped}
-                          />
-                        </TableRow>
-                      </TableFooter>
-                    </Table>
-                  </div>
-                </Paper>
-              );
-            }
-          }
+                              <TableCell> 
+                              <Tooltip title="Approved">
+                              <IconButton aria-label="Approved" color="primary" onClick={()=>this.approveNewArticle(newArticle.id)}>
+                                <i className="material-icons">
+                                  thumb_up
+                                </i>
+                              </IconButton>
+                              </Tooltip> 
+                            </TableCell>
+                            <TableCell> 
+                              <Tooltip id="rejected" title="Rejected">
+                                <IconButton aria-label="Rejected" color="primary" value="2" onClick={()=>this.rejectNewArticle(newArticle.id)}>
+                                <i className="material-icons" style={{color: "red"}}>
+                                  thumb_down
+                                </i>
+                                </IconButton>
+                              </Tooltip>
+                              </TableCell>
+                                  </TableRow>
+                                );
+                              })}
+                              {emptyRows > 0 && (
+                                <TableRow style={{ height: 48 * emptyRows }}>
+                                  <TableCell colSpan={12} />
+                                </TableRow>
+                              )}
+                            </TableBody>
+                            <TableFooter>
+                              <TableRow>
+                                <TablePagination
+                                  colSpan={10}
+                                  count={this.props.adminReducer.length}
+                                  rowsPerPage={rowsPerPage}
+                                  page={page}
+                                  onChangePage={this.handleChangePage}
+                                  onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                  ActionsComponent={TablePaginationActionsWrapped}
+                                />
+                              </TableRow>
+                            </TableFooter>
+                          </Table>
+                        </div>
+                      </Paper>
+                    );
+                  }
+                }
           
           ModifiedArticleTableBody.propTypes = {
             classes: PropTypes.object.isRequired,
