@@ -23,8 +23,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import {ARTICLE_ACTIONS} from '../../../../redux/actions/articleActions';
 import {MAP_ACTIONS} from '../../../../redux/actions/mapActions';
 
-import MapWrapper from '../../../Pages/Landing/Local/Map/MapWrapper';
-import SearchBar from '../../../Pages/Landing/Local/SearchBar';
+import MapWrapper from '../../../Global//Modals/AddArticle/Map/MapWrapper';
 import axios from 'axios';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -78,8 +77,8 @@ class AddArticleModal extends React.Component {
               summary: '',
               user_story: '',
               address: '',
-              lat: '',
-              lng: '',
+              lat: 0,
+              lng: 0,
               activeStep: 0, 
               open: false,
       }
@@ -330,9 +329,9 @@ class AddArticleModal extends React.Component {
           <li>{this.state.research_date}</li>
           <li>{this.state.research_phase}</li>
           </ul>
-          <Paper>
-          <MapWrapper />
-          </Paper>
+          <div style={{height: `20%`, width:`50%`, justifyContent: `center`}}>
+          <MapWrapper initialCenter={{lat:this.state.lat, lng: this.state.lng}} />
+          </div>
         </div>);
       
       default:
