@@ -53,9 +53,9 @@ router.get('/newArticles', (req, res) => {
 
 router.put(`/articles/:id`,(req,res) =>{
     const id = req.params.id;
-    const status = req.body.approved
+    const status = req.body.approved || req.body.rejected
     const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`
-    pool.query(queryText, [status,id])
+    pool.query(queryText, [status , id])
     .then((result) => {
         console.log(result);
         res.sendStatus(201)
@@ -72,7 +72,7 @@ router.delete('/deleteUser/:id', (req, res) => {
     const queryText = `DELETE FROM users WHERE id = $1`;
     pool.query(queryText, [id])
         .then((result) => {
-            console.log('successfull delete of user');
+            console.log('successfull delete of user', result);
             
             res.sendStatus(200)
         })
@@ -83,20 +83,6 @@ router.delete('/deleteUser/:id', (req, res) => {
         })
 })
 
-
-// router.put(`/acceptArticle/${id}`, (req,res)=>{
-//     console.log('this is the action',id)
-//     const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`
-//     pool.query(queryText, [1, 2])
-//     .then((result) => {
-//         console.log(result.rows);
-//         res.send(result.rows)
-//     })
-//     .catch((error) => {
-//         console.log('error getting', error);
-//         res.sendStatus(500);
-//     })
-// }) 
 
 
 module.exports = router;
