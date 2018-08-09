@@ -20,11 +20,11 @@ import { compose } from 'recompose';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
-import {ARTICLE_ACTIONS} from '../../../redux/actions/articleActions';
-import {MAP_ACTIONS} from '../../../redux/actions/mapActions';
+import {ARTICLE_ACTIONS} from '../../../../redux/actions/articleActions';
+import {MAP_ACTIONS} from '../../../../redux/actions/mapActions';
 
-import MapWrapper from '../../Pages/Landing/Local/Map/MapWrapper';
-import SearchBar from '../../Pages/Landing/Local/SearchBar';
+import MapWrapper from '../../../Pages/Landing/Local/Map/MapWrapper';
+import SearchBar from '../../../Pages/Landing/Local/SearchBar';
 import axios from 'axios';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -32,6 +32,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import Paper from '@material-ui/core/Paper';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -324,11 +325,18 @@ class AddArticleModal extends React.Component {
       case 2:
         return (
         <div>
+          <ul>
+          <li>{this.state.research_title}</li>
+          <li>{this.state.research_date}</li>
+          <li>{this.state.research_phase}</li>
+          </ul>
+          <Paper>
           <MapWrapper />
+          </Paper>
         </div>);
       
       default:
-        return 'blah';
+        return 'error';
     }
   }
 
