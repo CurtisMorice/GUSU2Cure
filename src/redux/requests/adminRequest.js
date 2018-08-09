@@ -50,14 +50,6 @@ export function deleteUser(id) {
         throw error.response || error;
     })
 }
-// export function deleteBadArticle(id) {
-//     console.log('in deleteBadArticle Request');
-//     return axios.put('api/admin/rejectArticle', id)
-//     .then(response => response.data).catch((error)=>{
-//         console.log('error in the deleteBadArticle adminRequest', error);
-//         throw error.response || error;
-//     })
-// }
 
 export function rejectedArticle(article) {
     console.log('in rejectedArticleRequest', article);
@@ -79,4 +71,18 @@ console.log('response from approvedArticle PUT in request', response)
         console.log('error in the approvedArticle adminRequest', error);
         throw error.response || error;
     })
+}
+
+export function setUser(type) {
+    console.log('user type request',type);
+    let id = type.userId;
+    let userType = type.payload;
+    return axios.put(`api/admin/usertype/${id}`, type)
+        .then((response) =>{
+            console.log('Successful user type change', response);  
+        })
+        .catch((error) => {
+            console.log('Error changing user type', error);
+            throw error.response || error;
+        })
 }
