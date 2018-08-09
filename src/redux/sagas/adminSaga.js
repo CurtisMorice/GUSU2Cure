@@ -60,6 +60,7 @@ function* deleteUserAccount(action){
         console.log('id to delete', action.payload);
         let id = action.payload
         yield deleteUser(id);
+        // yield fetchAllUser();
     }
     catch (error) {
         console.log('Error deleting user account');
