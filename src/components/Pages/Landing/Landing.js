@@ -24,7 +24,9 @@ const mapStateToProps = state => ({
   articles: state.articleReducer.article,
   catalogue: state.adminReducer.approvedArticle,
   research_type: state.articleReducer.research_type,
-  research_phase: state.articleReducer.research_phase
+  research_phase: state.articleReducer.research_phase,
+  lat: state.mapReducer.mapReducer.location.lat,
+  lng: state.mapReducer.mapReducer.location.lng,
 });
 
 class Landing extends Component {
@@ -40,7 +42,6 @@ class Landing extends Component {
   
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.props.dispatch({ type: ADMIN_ACTIONS.FETCH_APPROVED_ARTICLE});
     this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_TYPE});
     this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_PHASE});
     if (!this.props.user.isLoading && this.props.user.user === null) {

@@ -3,8 +3,10 @@ import {MAP_ACTIONS} from '../actions/mapActions';
 import {getLocations} from '../requests/mapRequests';
 
 function* fetchLocations(action) {
+    console.log('fetchLocations action:', action);
+    
     try {
-        let locations = yield getLocations();
+        let locations = yield getLocations(action);
         console.log('in map saga to get locations', locations);
         yield put({
             type: MAP_ACTIONS.SET_LOCATIONS,
