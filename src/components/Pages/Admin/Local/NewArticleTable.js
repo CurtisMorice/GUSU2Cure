@@ -23,6 +23,9 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import { Typography } from '../../../../../node_modules/@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
+//components
+import swal from 'sweetalert2';
+
 
 
 const mapStateToProps = state => ({
@@ -38,6 +41,17 @@ const actionsStyles = theme => ({
   });
 
 class NewArticleTable extends React.Component{
+  
+  
+
+  fetchNewArticles = () => {
+    console.log('hello, is it me your looking for ');
+    this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
+};
+  
+  componentDidMount(){
+    this.fetchNewArticles();
+}
   
     handleFirstPageButtonClick = event => {
         this.props.onChangePage(event, 0);
@@ -143,9 +157,7 @@ class NewArticleTable extends React.Component{
             rejected: 3,
           };
         }
-          componentDidMount(){
-          this.fetchNewArticles();
-        };
+       
 
         fetchNewArticles = () => {
                 console.log('hello, is it me your looking for ');
@@ -160,17 +172,27 @@ class NewArticleTable extends React.Component{
         };
       
         approveNewArticle = (id) => {   
-           let approved = this.state.approved;
-           console.log('in approve click', approved);
-           let approvedObj = {approved: approved, id: id};
+          let approved = this.state.approved;
+          console.log('in approve click', approved);
+          let approvedObj = {approved: approved, id: id};
+          swal({
+            title: 'Please Confirm Change',
+            text: 'Are you sure you want to approve?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel',
+            reverseButtons: true   }).then(()=>{
+       
            
             const action = ({
                 type: ADMIN_ACTIONS.APPROVED_ARTICLE,
                 payload: approvedObj
             })
             this.props.dispatch(action);
-            this.fetchNewArticles();
-            
+          
+          })
+         
         }
         rejectNewArticle = (id) => {
             console.log('REEEejectNewArticle ',action);
@@ -185,7 +207,8 @@ class NewArticleTable extends React.Component{
                  payload:rejectedObj
              })
              this.props.dispatch(action);
-             this.fetchNewArticles();
+             
+
         }
 
         render() {

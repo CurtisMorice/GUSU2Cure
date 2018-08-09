@@ -23,6 +23,9 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import { Typography } from '../../../../../node_modules/@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
+//components
+import swal from 'sweetalert2';
+
 
 const mapStateToProps = state => ({
     adminReducer :state.adminReducer.newArticles,
@@ -46,6 +49,7 @@ const mapStateToProps = state => ({
 
         componentDidMount(){
             this.fetchModifiedArticles();
+          
         }
     
         fetchModifiedArticles = () => {
@@ -148,6 +152,8 @@ const mapStateToProps = state => ({
               this.state = {
                 page: 0,
                 rowsPerPage: 5,
+                rejected: 3,
+                approved: 2,
               };
             }
           
