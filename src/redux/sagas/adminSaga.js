@@ -72,6 +72,8 @@ function* approveArticle (action){
     console.log('action in approvedArticle in adminSaga', action);
     try{
         yield approvedArticle(action);
+        yield fetchNewArticles();
+        yield fetchModifiedArticles();
 
     }catch(error) {
         console.log('error in admin saga approving article', error)
@@ -91,6 +93,8 @@ function* rejectArticle (action){
     console.log('action in approvedArticle in adminSaga', action);
     try{
         yield rejectedArticle(action);
+        yield  fetchNewArticles();
+        yield fetchModifiedArticles();
 
     }catch(error) {
         console.log('error in admin saga approving article', error)
