@@ -80,11 +80,9 @@ class AddArticleModal extends React.Component {
               lat: '',
               lng: '',
               activeStep: 0, 
+              open: false,
       }
     }
-    state = {
-      open: false,
-    };
 
     googleApiCall = (event) => {
       event.preventDefault();
@@ -393,10 +391,9 @@ class AddArticleModal extends React.Component {
               </Typography>
             </Toolbar>
           </AppBar>
-          <DialogTitle id="alert-dialog-title"></DialogTitle>
+          <DialogTitle id="alert-dialog-title">Add an article:</DialogTitle>
           <DialogContent>
           <div className={classes.root}>
-          <br/>
           <br/>
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map(label => {
