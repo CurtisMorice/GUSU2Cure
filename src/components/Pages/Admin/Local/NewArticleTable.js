@@ -158,7 +158,6 @@ class NewArticleTable extends React.Component{
           };
         }
        
-
         fetchNewArticles = () => {
                 console.log('hello, is it me your looking for ');
                 this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
@@ -173,42 +172,62 @@ class NewArticleTable extends React.Component{
       
         approveNewArticle = (id) => {   
           let approved = this.state.approved;
-          console.log('in approve click', approved);
           let approvedObj = {approved: approved, id: id};
           swal({
             title: 'Please Confirm Change',
-            text: 'Are you sure you want to approve?',
+            text: 'Are you sure you want to approve this article?',
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes',
             cancelButtonText: 'Cancel',
-            reverseButtons: true   }).then(()=>{
-       
-           
-            const action = ({
+            reverseButtons: true })
+            .then((result)=> {
+            if(result.value){
+              const action = ({
                 type: ADMIN_ACTIONS.APPROVED_ARTICLE,
                 payload: approvedObj
             })
             this.props.dispatch(action);
-          
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+              swal(
+                'Cancelled',
+                'Rejection has been stopped',
+                'error'
+              ) 
+            }
           })
-         
         }
         rejectNewArticle = (id) => {
-            console.log('REEEejectNewArticle ',action);
             let rejected = this.state.rejected;
-            console.log('in rejected click', rejected);
             let rejectedObj = {rejected: rejected , id: id };
-
-            console.log('REJECTED', rejectedObj)
-            
-             const action = ({
+            swal({
+              title: 'Please Confirm Change',
+              text: 'Are you sure you want to reject this article?',
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Yes',
+              cancelButtonText: 'Cancel',
+              reverseButtons: true 
+            }).then((result)=>{
+                if(result.value){
+                const action = ({
                  type: ADMIN_ACTIONS.REJECTED_ARTICLE,
                  payload:rejectedObj
-             })
+             });
              this.props.dispatch(action);
-             
-
+             swal(
+              'Rejected!',
+              'That file has been Rejected.',
+              'success'
+            )
+          } else if (result.dismiss === swal.DismissReason.cancel) {
+            swal(
+            'Cancelled',
+            'Rejection has been stopped',
+            'error'
+          )
+        }
+            })
         }
 
         render() {

@@ -24,7 +24,6 @@ import EditIcon from '@material-ui/icons/Edit';
 
 //components
 import EditUserModal from '../../../Global/Modals/UserProfileModal';
-import Swal from 'sweetalert2'
 
 
 //Actions
@@ -139,6 +138,7 @@ class UserTable extends Component{
   state={
     page: 0,
     rowsPerPage: 5,
+
   }
 
   componentDidMount(){
@@ -188,7 +188,7 @@ class UserTable extends Component{
 
   render(){
 
-    const { classes } = this.props;
+    // const { classes } = this.props;
     const { data, rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.allUsers.length - page * rowsPerPage);
 
@@ -206,9 +206,9 @@ class UserTable extends Component{
             </TableHead>
 
             <TableBody>
-              {this.props.allUsers.map(n => {
+              {this.props.allUsers.map((n, i) => {
                 return (
-                  <TableRow>
+                  <TableRow key={i}>
                     <TableCell component="th" scope="row"> {n.username} </TableCell>
                     <TableCell component="th" scope="row"> {n.email} </TableCell>
                     <TableCell component="th" scope="row"> {n.contact_info} </TableCell>

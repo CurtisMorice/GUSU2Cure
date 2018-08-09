@@ -84,19 +84,6 @@ router.delete('/deleteUser/:id', (req, res) => {
 })
 
 
-// router.put(`/acceptArticle/${id}`, (req,res)=>{
-//     console.log('this is the action',id)
-//     const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`
-//     pool.query(queryText, [1, 2])
-//     .then((result) => {
-//         console.log(result.rows);
-//         res.send(result.rows)
-//     })
-//     .catch((error) => {
-//         console.log('error getting', error);
-//         res.sendStatus(500);
-//     })
-// }) 
 
 router.put(`/usertype/:id`, (req, res) => {
     console.log('Changing user type in the admin Router, ID',  req.params.id);
