@@ -55,7 +55,7 @@ const deleteArticle = (state=[], action) => {
 }
 
 const rejectBadArticle = (state=[], action) => {
-    console.log('In the deleteArticle Reducer');
+    console.log('In the REJECTArticle Reducer');
     switch(action.type){
     case ADMIN_ACTIONS.REJECTED_ARTICLE:
     console.log(' in admin reducer for rejectedArticle', action.payload);
