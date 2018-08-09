@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import '../Landing.css';
+import './SearchBar.css';
 import { MAP_ACTIONS } from '../../../../redux/actions/mapActions';
 import Autocomplete from 'react-google-autocomplete';
 import {KEYS} from '../../../../Key';
@@ -34,6 +35,7 @@ const styles = theme => ({
   input: {
     margin: theme.spacing.unit,
     color: 'white',
+    
   },
   textField: {
     flexBasis: 200,
@@ -99,28 +101,24 @@ class SearchBar extends React.Component{
           <IconButton className={classes.searchButton} color="inherit" aria-label="search icon">
             <SearchIcon />
           </IconButton>
-          <FormControl fullWidth  className={classes.margin}>
-          {/* TODO STRETCH GOAL  */}
-          <Autocomplete
-            id="full-width"
-            className={classes.input}
-            placeholder="Search Google Maps"
-            onChange={this.handleInputChangeFor("searchAddress")}
-           style={{width: '99%',
-            flex:'auto',
-            height:'50px',
-            fontSize:'18px',
-            disableUnderline:"true",
-            placeholder:"Search Google Maps",
-            color:"white",
-            backgroundColor: "#475c87",
-
-          }}
-          onPlaceSelected={(place) => {
-            console.log(place);
-          }}
-          types={['(regions)']}
-          />
+          <FormControl fullWidth className={classes.input}>
+            <Autocomplete
+              placeholder="Search Google Maps"
+              onChange={this.handleInputChangeFor("searchAddress")}
+              style={{width: '99%',
+                flex: 'auto',
+                height:'30px',
+                fontSize:'18px',
+                disableUnderline:"true",
+                placeholder:"Search Google Maps",
+                color:"white",
+                backgroundColor: "#475c87",
+              }}
+              onPlaceSelected={(place) => {
+                console.log(place);
+              }}
+              types={['(regions)']}
+            />
           {/* <Input
             type="search"
             id="full-width"

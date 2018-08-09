@@ -79,10 +79,9 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
+    padding: 0,
     width: '100%',
-    height: 'calc(100% - 56px)',
-    marginTop: 56,
+    height: '100%',
     minWidth: 0, // So the Typography noWrap works
     'overflow-x': 'scroll',
   },
@@ -127,23 +126,23 @@ class Sidebar extends Component {
     
     return (
       <div className={classes.root}>
-        <AppBar position="absolute" className={classes.appBar}>
-          <Toolbar variant="dense">
-
-          </Toolbar>
-        </AppBar>
         <Drawer
           variant="permanent"
           classes={{
-            paper: classes.drawerPaper,
-          }}
+              paper: classes.drawerPaper,
+            }}
           >
           <div className={classes.toolbar} />
 
+            <AppBar position="absolute" className={classes.appBar}>
+              <Toolbar>
+    
+              </Toolbar>
+            </AppBar>
         </Drawer>
         <main className={classes.appFrame}>
           <div className={classes.content}>
-          
+            <MapWrapper />
           </div>
         </main>
       </div>
