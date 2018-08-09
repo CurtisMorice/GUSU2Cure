@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {compose} from 'redux';
 
+//Article Modal
+import ArticleModal from '../../../Global/Modals/ArticleModal';
+
 import { ADMIN_ACTIONS } from '../../../../redux/actions/adminActions';
 
 import PropTypes from 'prop-types';
@@ -277,12 +280,13 @@ class NewArticleTable extends React.Component{
             <TableRow>
                     <TableCell> Date Posted </TableCell>
                     <TableCell> Research Title </TableCell>
-                    <TableCell> Research Type </TableCell>
+                    <TableCell> More Info</TableCell>
+                    {/* <TableCell> Research Type </TableCell>
                     <TableCell> Research Phase </TableCell>
                     <TableCell> Institution Name </TableCell>
                     <TableCell> Institution URL </TableCell>
                     <TableCell> Funding Source</TableCell>
-                    <TableCell> Research Date </TableCell>
+                    <TableCell> Research Date </TableCell> */}
                     <TableCell> User Name </TableCell>
                     <TableCell> User Email </TableCell>
                     <TableCell> Approved </TableCell>
@@ -297,12 +301,13 @@ class NewArticleTable extends React.Component{
 
                           <TableCell component="th" scope="row">{newArticle.date_posted}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.research_title}</TableCell> 
-                          <TableCell component="th" scope="row">{newArticle.type}</TableCell>
+                          <TableCell> <ArticleModal/> </TableCell>
+                          {/* <TableCell component="th" scope="row">{newArticle.type}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.phase}</TableCell> 
                           <TableCell component="th" scope="row">{newArticle.institution_name}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.institution_url}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.funding_source}</TableCell>
-                          <TableCell component="th" scope="row">{newArticle.research_date}</TableCell>
+                          <TableCell component="th" scope="row">{newArticle.research_date}</TableCell> */}
                           <TableCell component="th" scope="row">{newArticle.username}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.email}</TableCell>
                        <TableCell> 
@@ -335,7 +340,7 @@ class NewArticleTable extends React.Component{
                     })}
                     {emptyRows > 0 && (
                       <TableRow style={{ height: 48 * emptyRows }}>
-                        <TableCell colSpan={11} />
+                        <TableCell colSpan={8} />
                       </TableRow>
                     )}
                   </TableBody>
