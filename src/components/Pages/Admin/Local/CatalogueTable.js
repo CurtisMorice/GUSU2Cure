@@ -227,7 +227,7 @@ class CatalogueTable extends Component{
                                         <TableCell component="th" scope="row"> {article.research_date} </TableCell>
                                         {/* <TableCell component="th" scope="row"> {article.related_articles} </TableCell> */}
                                         <TableCell component="th" scope="row"> {article.username} </TableCell>
-                                        <TableCell component="th" scope="row"> {article.email} {article.id}</TableCell>
+                                        <TableCell component="th" scope="row"> {article.email} </TableCell>
                                         <TableCell component="th" scope="row"> 
                                             <Tooltip title="Delete">
                                                 <IconButton aria-label="Delete" color="secondary" onClick={()=>this.deleteArticle(article.id)}>
