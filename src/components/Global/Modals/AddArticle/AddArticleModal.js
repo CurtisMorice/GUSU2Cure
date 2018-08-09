@@ -20,11 +20,11 @@ import { compose } from 'recompose';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
-import {ARTICLE_ACTIONS} from '../../../redux/actions/articleActions';
-import {MAP_ACTIONS} from '../../../redux/actions/mapActions';
+import {ARTICLE_ACTIONS} from '../../../../redux/actions/articleActions';
+import {MAP_ACTIONS} from '../../../../redux/actions/mapActions';
 
-import MapWrapper from '../../Pages/Landing/Local/Map/MapWrapper';
-import SearchBar from '../../Pages/Landing/Local/SearchBar';
+import MapWrapper from '../../../Pages/Landing/Local/Map/MapWrapper';
+import SearchBar from '../../../Pages/Landing/Local/SearchBar';
 import axios from 'axios';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -32,6 +32,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import Paper from '@material-ui/core/Paper';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -80,11 +81,9 @@ class AddArticleModal extends React.Component {
               lat: '',
               lng: '',
               activeStep: 0, 
+              open: false,
       }
     }
-    state = {
-      open: false,
-    };
 
     googleApiCall = (event) => {
       event.preventDefault();
@@ -128,7 +127,7 @@ class AddArticleModal extends React.Component {
                 institution_name: this.state.institution_name,
                 institution_url: this.state.institution_url,
                 funding_source: this.state.funding_source,
-                related_articles: this.state.related_articles,
+                related_articles: [this.state.related_articles],
                 user_story: this.state.user_story,
                 summary: this.state.summary,
                 brief_description: this.state.brief_description,
@@ -172,16 +171,17 @@ class AddArticleModal extends React.Component {
   getStepContent = (stepIndex) => {
     switch (stepIndex) {
       case 0:
-        return <div>
-          <InputLabel htmlFor="research_phase-simple">Research Type</InputLabel>
-          <Select
-            value={this.state.research_type}
-            onChange={this.handleInputChangeFor('research_type')}
-            inputProps={{
-            name: 'research_type',
-            id: 'research_type-simple',
-            }}
-          >
+        return (
+          <div>
+            <InputLabel htmlFor="research_phase-simple">Research Type</InputLabel>
+            <Select
+              value={this.state.research_type}
+              onChange={this.handleInputChangeFor('research_type')}
+              inputProps={{
+              name: 'research_type',
+              id: 'research_type-simple',
+              }}
+            >
             <MenuItem>
             <em>None</em>
             </MenuItem>
@@ -273,7 +273,7 @@ class AddArticleModal extends React.Component {
             label="Funding Source"
             fullWidth  
           />
-            </div>;
+        </div>);
       case 1:
         return (
         <div>
@@ -325,11 +325,18 @@ class AddArticleModal extends React.Component {
       case 2:
         return (
         <div>
+          <ul>
+          <li>{this.state.research_title}</li>
+          <li>{this.state.research_date}</li>
+          <li>{this.state.research_phase}</li>
+          </ul>
+          <Paper>
           <MapWrapper />
+          </Paper>
         </div>);
       
       default:
-        return 'blah';
+        return 'error';
     }
   }
 
@@ -392,10 +399,9 @@ class AddArticleModal extends React.Component {
               </Typography>
             </Toolbar>
           </AppBar>
-          <DialogTitle id="alert-dialog-title"></DialogTitle>
+          <DialogTitle id="alert-dialog-title">Add an article:</DialogTitle>
           <DialogContent>
           <div className={classes.root}>
-          <br/>
           <br/>
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map(label => {
@@ -416,7 +422,7 @@ class AddArticleModal extends React.Component {
             </div>
           ) : (
             <div>
-              <Typography className={classes.instructions}>{this.getStepContent(activeStep)}</Typography>
+              <div className={classes.instructions}>{this.getStepContent(activeStep)}</div>
               <div>
                 <Button
                   disabled={activeStep === 0}
@@ -428,7 +434,7 @@ class AddArticleModal extends React.Component {
                 <Button variant="contained" color="primary" onClick={this.handleNext}>
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
-                <Button></Button>
+      
               </div>
             </div>
           )}
