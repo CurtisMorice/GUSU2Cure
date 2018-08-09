@@ -72,8 +72,7 @@ router.delete('/deleteUser/:id', (req, res) => {
     const queryText = `DELETE FROM users WHERE id = $1`;
     pool.query(queryText, [id])
         .then((result) => {
-            console.log('successfull delete of user', result);
-            
+            console.log('successful delete of user', result);
             res.sendStatus(200)
         })
         .catch((error) => {
@@ -115,5 +114,19 @@ router.put(`/usertype/:id`, (req, res) => {
         })
 })
 
+router.delete(`/deleteArticle/:id`, (req, res) => {
+    console.log('id to delete', req.params.id);
+    let id = req.params.id;
+    const queryText = `DELETE FROM articles WHERE id = $1`;
+    pool.query(queryText, [id])
+        .then((result) => {
+            console.log('Successfull delete of article');
+            res.sendStatus(200)
+        })
+        .catch((error) => {
+            console.log('Error deleting article', error);
+            res.sendStatus(500);
+        })
+})
 
 module.exports = router;

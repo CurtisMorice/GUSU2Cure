@@ -23,6 +23,7 @@ import { withStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import swal from 'sweetalert2';
 
 // redux Store
 const mapStateToProps = state => ({
@@ -157,6 +158,35 @@ class CatalogueTable extends Component{
         this.props.dispatch({type: ADMIN_ACTIONS.FETCH_APPROVED_ARTICLE});
     }
 
+    deleteArticle = (id) => {
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.value) {
+                console.log(id);
+                
+              this.props.dispatch({type: ADMIN_ACTIONS.DELETE_TARGET_ARTICLE, payload: id});
+              swal(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+              swal(
+                'Cancelled',
+                'Your imaginary file is safe :)',
+                'error'
+              )
+            }
+          })
+    }
+
     render(){
 
         const { classes } = this.props;
@@ -187,7 +217,7 @@ class CatalogueTable extends Component{
                             {this.props.catalogue.map(article => {
                                 return(
                                     <TableRow key={article.id}>
-                                        <TableCell component="th" scope="row"> {article.date_posted} </TableCell>
+                                        <TableCell component="th" scope="row"> {article.date_posted.split('T')[0]} </TableCell>
                                         <TableCell component="th" scope="row"> {article.research_title} </TableCell>
                                         <TableCell component="th" scope="row"> {article.type} </TableCell>
                                         <TableCell component="th" scope="row"> {article.phase} </TableCell>
@@ -197,10 +227,10 @@ class CatalogueTable extends Component{
                                         <TableCell component="th" scope="row"> {article.research_date} </TableCell>
                                         {/* <TableCell component="th" scope="row"> {article.related_articles} </TableCell> */}
                                         <TableCell component="th" scope="row"> {article.username} </TableCell>
-                                        <TableCell component="th" scope="row"> {article.email} </TableCell>
+                                        <TableCell component="th" scope="row"> {article.email} {article.id}</TableCell>
                                         <TableCell component="th" scope="row"> 
                                             <Tooltip title="Delete">
-                                                <IconButton aria-label="Delete" color="secondary" onClick={this.deleteArticle}>
+                                                <IconButton aria-label="Delete" color="secondary" onClick={()=>this.deleteArticle(article.id)}>
                                                     <DeleteIcon />
                                                 </IconButton>
                                             </Tooltip>

@@ -86,3 +86,16 @@ export function setUser(type) {
             throw error.response || error;
         })
 }
+
+export function deleteTargetArticle(action) {
+    let id = action.payload;
+    console.log('target article to delete', id);
+    return axios.delete(`api/admin/deleteArticle/${id}`)
+        .then((response) => {
+            console.log('Sucessful deletion of article');
+        })
+        .catch((error)=> {
+            console.log('Error deleting article', error);
+            throw error.response || error;
+        })
+}

@@ -24,7 +24,6 @@ import EditIcon from '@material-ui/icons/Edit';
 
 //components
 import EditUserModal from '../../../Global/Modals/UserProfileModal';
-import Swal from 'sweetalert2'
 
 
 //Actions

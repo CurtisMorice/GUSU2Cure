@@ -1,8 +1,8 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import {ADMIN_ACTIONS} from '../actions/adminActions';
-import { getAllUsers, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser, deleteBadArticle, rejectedArticle, approvedArticle, setUser} from '../requests/adminRequest';
+import { getAllUsers, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser, deleteBadArticle, rejectedArticle, approvedArticle, setUser, deleteTargetArticle} from '../requests/adminRequest';
 
-
+//fetch all registered users
 function* fetchAllUser(action) {
     try {
         let allUsers = yield getAllUsers();
@@ -16,6 +16,7 @@ function* fetchAllUser(action) {
     }
 }
 
+//fetch all articles approved to be used in the catalogue table
 function* fetchArticlesApproved(action) {
     try {
         let approvedArticles = yield getApprovedArticles();
@@ -29,6 +30,7 @@ function* fetchArticlesApproved(action) {
     }
 }
 
+//fetch new articles for the new articles table 
 function* fetchNewArticles(action){
     try {
         let newArticle = yield getNewArticles();
@@ -42,6 +44,7 @@ function* fetchNewArticles(action){
     }
 }
 
+//fetches modified articles waiting for admin review
 function* fetchModifiedArticles(action){
     try{
         let modifiedArticle = yield getModifiedArticles();
@@ -55,6 +58,7 @@ function* fetchModifiedArticles(action){
     }
 }
 
+//deletes user accounts
 function* deleteUserAccount(action){
     try{
         console.log('id to delete', action.payload);
@@ -67,7 +71,7 @@ function* deleteUserAccount(action){
     }
 }
 
-
+//approves newly added articles
 function* approveArticle (action){
     console.log('action in approvedArticle in adminSaga', action);
     try{
@@ -80,6 +84,7 @@ function* approveArticle (action){
     }
 }
 
+//changes user types
 function* userType(action){
     console.log(action.payload, action.userId);
     try{
@@ -89,15 +94,27 @@ function* userType(action){
         console.log('Error setting user type in the Admin Saga', error);  
     }
 }
+
+//rejects newly added articles
 function* rejectArticle (action){
     console.log('action in approvedArticle in adminSaga', action);
     try{
         yield rejectedArticle(action);
         yield  fetchNewArticles();
         yield fetchModifiedArticles();
-
     }catch(error) {
         console.log('error in admin saga approving article', error)
+    }
+}
+
+// deletes target article
+function* deleteArticle(action){
+    try{
+        yield deleteTargetArticle(action)
+        yield fetchArticlesApproved();
+    }
+    catch (error) {
+        console.log('Error deleting target Article', error);
     }
 }
 
@@ -111,6 +128,7 @@ function* adminSaga() {
     yield takeLatest(ADMIN_ACTIONS.APPROVED_ARTICLE, approveArticle);
     yield takeLatest(ADMIN_ACTIONS.SET_USER_TYPE, userType);
     yield takeLatest(ADMIN_ACTIONS.REJECTED_ARTICLE, rejectArticle);
+    yield takeLatest(ADMIN_ACTIONS.DELETE_TARGET_ARTICLE, deleteArticle);
 }
   
   export default adminSaga;
