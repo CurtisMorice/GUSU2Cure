@@ -65,9 +65,9 @@ function* addArticle(action) {
         let article = action.payload
         yield postArticle(article);
         console.log('in article saga to add article', action.payload);
-        yield put ({
-            type: ARTICLE_ACTIONS.FETCH_ARTICLES
-        })
+        // yield put ({
+        //     type: ARTICLE_ACTIONS.FETCH_ARTICLES
+        // })
     } catch (error) {
         console.log('error in article saga on POST', error); 
     }  

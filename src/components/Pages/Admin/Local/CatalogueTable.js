@@ -187,7 +187,7 @@ class CatalogueTable extends Component{
                         <TableBody>
                             {this.props.catalogue.map(article => {
                                 return(
-                                    <TableRow>
+                                    <TableRow key={article.id}>
                                         <TableCell component="th" scope="row"> {article.date_posted} </TableCell>
                                         <TableCell component="th" scope="row"> {article.research_title} </TableCell>
                                         <TableCell component="th" scope="row"> {article.type} </TableCell>

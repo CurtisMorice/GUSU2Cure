@@ -107,7 +107,7 @@ router.post('/', (req, res) => {
     const queryText = `INSERT INTO locations(address, lat, lng) VALUES ($1, $2, $3) RETURNING id;`
     pool.query(queryText, [address, lat, lng])
     .then((result)=>{
-        console.log('inserted into location');
+        console.log('inserted into location', result);
         const location_id = result.rows[0].id;
         const user_id = req.body.user_id;
         const research_date = req.body.research_date;

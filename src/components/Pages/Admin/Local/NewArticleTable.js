@@ -160,28 +160,34 @@ class NewArticleTable extends React.Component{
         };
       
         approveNewArticle = (id) => {   
-           let approved = this.state.approved
+           let approved = this.state.approved;
            console.log('in approve click', approved);
-           let newObj = {approved: approved, id: id};
-           console.log('NEW', newObj)
-            const action =({
+           let approvedObj = {approved: approved, id: id};
+           
+            const action = ({
                 type: ADMIN_ACTIONS.APPROVED_ARTICLE,
-                payload: newObj
+                payload: approvedObj
             })
             this.props.dispatch(action);
             this.fetchNewArticles();
             
         }
-        rejectNewArticle = (action) => {
-            console.log('rejectNewArticle ',action);
-            let rejected = this.state.rejected
+        rejectNewArticle = (id) => {
+            console.log('REEEejectNewArticle ',action);
+            let rejected = this.state.rejected;
             console.log('in rejected click', rejected);
-             this.props.dispatch({
-                 type: ADMIN_ACTIONS.REJECTED_ARTICLE,
-                 payload: action, rejected
-             })
+            let rejectedObj = {rejected: rejected , id: id };
+
+            console.log('REJECTED', rejectedObj)
             
+             const action = ({
+                 type: ADMIN_ACTIONS.REJECTED_ARTICLE,
+                 payload:rejectedObj
+             })
+             this.props.dispatch(action);
+             this.fetchNewArticles();
         }
+
         render() {
           const { classes } = this.props;
           const {rowsPerPage, page } = this.state;

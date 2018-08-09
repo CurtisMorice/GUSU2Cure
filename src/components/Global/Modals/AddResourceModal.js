@@ -19,7 +19,8 @@ import TextField from '@material-ui/core/TextField';
 
 const mapStateToProps = state => ({
     user: state.user,
-    resources: state.resourceReducer.resource
+    resources: state.resourceReducer.resource,
+    status: state.mapReducer.status
 })
 
 const styles = theme => ({
@@ -149,6 +150,7 @@ class AddResourceModal extends React.Component {
                 <Button type="submit" value="Add Resource" color="primary" variant="contained" autoFocus>Add</Button>
                 <Button onClick={this.handleClose}  type="button" value="Cancel">Cancel</Button>
               </DialogActions>
+     
               </form>
             </Dialog>
           </div>
