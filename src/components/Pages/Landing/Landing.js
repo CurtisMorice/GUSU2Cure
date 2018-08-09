@@ -8,7 +8,7 @@ import { triggerLogout } from '../../../redux/actions/loginActions';
 import DropdownSearch from './Local/DropdownSearch';
 import Grid from '@material-ui/core/Grid';
 
-import AddArticleModal from '../../Global/Modals/AddArticleModal';
+import AddArticleModal from '../../Global/Modals/AddArticle/AddArticleModal';
 import { ARTICLE_ACTIONS } from '../../../redux/actions/articleActions';
 import MapWrapper from './Local/Map/MapWrapper';
 
