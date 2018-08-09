@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import {ADMIN_ACTIONS} from '../../../redux/actions/adminActions'
+import {ADMIN_ACTIONS} from '../../../redux/actions/adminActions';
+import {USER_ACTIONS} from '../../../redux/actions/userActions';
 
 
 // material ui
@@ -26,7 +27,7 @@ import swal from 'sweetalert2'
 
 //ReduxStore
 const mapStateToProps = state => ({
-    user: state.user,
+    user: state.user.user.id,
     allUsers: state.adminReducer.allUser,
 })
 
@@ -61,6 +62,9 @@ class EditUserModal extends React.Component {
     type: ''
   };
 
+  componentDidMount() {
+    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+  }
 
   //Handler to change user type
   handleUpdateUser = (type) => (event) => {
@@ -81,11 +85,8 @@ class EditUserModal extends React.Component {
           type: event.target.value
         })
         console.log('this is state.type', this.state.type);
-        
         this.props.dispatch({type: ADMIN_ACTIONS.SET_USER_TYPE, payload: this.state.type, userId })
-        this.props.dispatch({type: ADMIN_ACTIONS.FETCH_ALL_USER})
-
-
+        // this.props.dispatch({type: ADMIN_ACTIONS.FETCH_ALL_USER})
         swal(
           'User Type Has been Modified',
           'Sucess',
@@ -94,7 +95,7 @@ class EditUserModal extends React.Component {
       } else if (result.dismiss === swal.DismissReason.cancel) {
         swal(
           'Cancelled',
-          'User',
+          'User Type Changed Cancelled',
           'error'
         )
       }
@@ -106,6 +107,8 @@ class EditUserModal extends React.Component {
 
     return (
       <div>
+        {JSON.stringify(this.props.user)}
+        {JSON.stringify(this.props.id.user_id)}
             <FormHelperText> {this.props.id.type} </FormHelperText>
             <Select
                 value={this.state.type} 

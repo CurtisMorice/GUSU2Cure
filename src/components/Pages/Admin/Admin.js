@@ -37,18 +37,7 @@ class AdminHome extends Component {
     if (this.props.user.user != null && this.props.user.user.type == 'admin') {
       content = (
         <div>
-          {/* <h1
-            id="welcome"
-          >
-            Welcome, { this.props.user.user.username }!
-          </h1> */}
-          {/* <button
-            onClick={this.logout}
-          >
-            Log Out
-          </button> */}
           <AdminNav/>
-          {/* <AdminHomeProfile/> */}
         </div>
       )
     }
@@ -56,7 +45,7 @@ class AdminHome extends Component {
           return(
             content = (
               <div>
-                <h3>User Unauthorized ---> </h3>
+                <h3>User Unauthorized</h3>
               </div>
             )
           )
