@@ -84,7 +84,6 @@ router.delete('/deleteUser/:id', (req, res) => {
 })
 
 
-<<<<<<< HEAD
 // router.put(`/acceptArticle/${id}`, (req,res)=>{
 //     console.log('this is the action',id)
 //     const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`
@@ -116,7 +115,5 @@ router.put(`/usertype/:id`, (req, res) => {
         })
 })
 
-=======
->>>>>>> master
 
 module.exports = router;
