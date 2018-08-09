@@ -25,8 +25,6 @@ const mapStateToProps = state => ({
   catalogue: state.adminReducer.approvedArticle,
   research_type: state.articleReducer.research_type,
   research_phase: state.articleReducer.research_phase,
-  // lat: state.mapReducer.mapReducer.location.lat,
-  // lng: state.mapReducer.mapReducer.location.lng,
 });
 
 class Landing extends Component {
