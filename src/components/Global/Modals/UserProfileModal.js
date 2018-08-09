@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import {ADMIN_ACTIONS} from '../../../redux/actions/adminActions'
+
 
 // material ui
 import { withStyles } from '@material-ui/core/styles';
@@ -59,6 +61,8 @@ class EditUserModal extends React.Component {
     type: ''
   };
 
+
+  //Handler to change user type
   handleUpdateUser = (type) => (event) => {
     swal({
       title: 'Please Confirm Change',
@@ -71,10 +75,17 @@ class EditUserModal extends React.Component {
     }).then((result) => {
       if(result.value) {
         console.log(event.target.value);
+        console.log('id:',this.props.id.user_id);
+        let userId = this.props.id.user_id;
         this.setState({
           type: event.target.value
         })
-        console.log('user type is', this.state.type);
+        console.log('this is state.type', this.state.type);
+        
+        this.props.dispatch({type: ADMIN_ACTIONS.SET_USER_TYPE, payload: this.state.type, userId })
+        this.props.dispatch({type: ADMIN_ACTIONS.FETCH_ALL_USER})
+
+
         swal(
           'User Type Has been Modified',
           'Sucess',
