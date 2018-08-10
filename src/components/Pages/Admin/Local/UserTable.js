@@ -24,15 +24,18 @@ import EditIcon from '@material-ui/icons/Edit';
 
 //components
 import EditUserModal from '../../../Global/Modals/UserProfileModal';
+import swal from 'sweetalert2';
 
 
 //Actions
 import { ADMIN_ACTIONS } from '../../../../redux/actions/adminActions';
-import swal from 'sweetalert2';
+import {USER_ACTIONS} from '../../../../redux/actions/userActions';
+
 
 
 const mapStateToProps = state => ({
-  allUsers: state.adminReducer.allUser
+  allUsers: state.adminReducer.allUser,
+  thisUser: state.user
 })
 
 const actionsStyles = theme => ({
@@ -115,6 +118,7 @@ const TablePaginationActionsWrapped = withStyles(actionsStyles, { withTheme: tru
 );
 
 let counter = 0;
+
 function createData(name, calories, fat) {
   counter += 1;
   return { id: counter, name, calories, fat };
@@ -143,6 +147,7 @@ class UserTable extends Component{
 
   componentDidMount(){
     this.fetchAllUsers();
+    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
 
   handleChangePage = (event, page) => {
@@ -160,30 +165,38 @@ class UserTable extends Component{
 
   // deletes user
   deleteUser = (id) => {
-    swal({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.value) {
-        this.props.dispatch({type: ADMIN_ACTIONS.DELETE_USER, payload: id});
-        swal(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
-      } else if (result.dismiss === swal.DismissReason.cancel) {
-        swal(
-          'Cancelled',
-          'Your imaginary file is safe :)',
-          'error'
-        )
-      }
-    })
+    if (id !== this.props.thisUser.user.id){
+      swal({
+        title: 'Confirm',
+        text: "Permanently Delete User Account?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          this.props.dispatch({type: ADMIN_ACTIONS.DELETE_USER, payload: id});
+          swal(
+            'Deleted!',
+            'User Account Deleted',
+            'success'
+          )
+        } else if (result.dismiss === swal.DismissReason.cancel) {
+          swal(
+            'Cancelled',
+            'Delete Action Cancelled',
+            'error'
+          )
+        }
+      })
+    } else {
+      swal(
+        'INVALID',
+        `You Can't Modify Your Own Account`,
+        'error'
+      )
+    }
   }
 
   render(){
@@ -204,7 +217,6 @@ class UserTable extends Component{
               <TableCell>Edit User Type</TableCell>
               <TableCell>Delete User</TableCell>
             </TableHead>
-
             <TableBody>
               {this.props.allUsers.map((n, i) => {
                 return (
@@ -214,7 +226,6 @@ class UserTable extends Component{
                     <TableCell component="th" scope="row"> {n.contact_info} </TableCell>
                     <TableCell component="th" scope="row"> {n.type} </TableCell>
                     <TableCell component="th" scope="row"> <EditUserModal id={n}/> </TableCell>
-
                     <TableCell component="th" scope="row"> 
                       <Tooltip title="Delete" >
                         <IconButton aria-label="Delete" color="secondary" onClick={ ()=>this.deleteUser(n.user_id) }>
@@ -225,9 +236,6 @@ class UserTable extends Component{
                   </TableRow>
                 )
               })}
-              {/* {emptyRows > 0 && (
-                <TableRow style={{ height: 10 * emptyRows}}> <TableCell colSpan={6}/> </TableRow>
-              )} */}
             </TableBody>
             <TableFooter>
               <TableRow>
