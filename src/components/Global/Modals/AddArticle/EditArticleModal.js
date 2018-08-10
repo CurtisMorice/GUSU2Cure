@@ -215,7 +215,7 @@ updateResource = () => {
             />
             <TextField 
               value={this.state.updatedArticle.related_articles} 
-              defaultValue={this.props.article.related_articles}
+              defaultValue={this.props.article.related_articles[0]}
               onChange={this.handleUpdate('related_articles')}
               multiline
               rowsMax="5"
