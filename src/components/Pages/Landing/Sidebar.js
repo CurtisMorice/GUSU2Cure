@@ -85,10 +85,12 @@ const styles = theme => ({
     minWidth: 0, // So the Typography noWrap works
     'overflow-x': 'scroll',
   },
+  gridList: {
+    flexWrap: 'flex',
+    transform: 'translateZ(0)',
+  },
   toolbar: theme.mixins.toolbar,
 });
-
-
 
 class Sidebar extends Component {
   
@@ -132,13 +134,19 @@ class Sidebar extends Component {
               paper: classes.drawerPaper,
             }}
           >
-          <div className={classes.toolbar} />
+          <div className={classes.toolbar}>
 
             <AppBar position="absolute" className={classes.appBar}>
               <Toolbar>
-    
+                ...
               </Toolbar>
             </AppBar>
+          </div>
+
+          {/* <div className={classes.gridList} cols={1}>
+            {tileData.map(tile => 
+            )}
+          </div> */}
         </Drawer>
         <main className={classes.appFrame}>
           <div className={classes.content}>

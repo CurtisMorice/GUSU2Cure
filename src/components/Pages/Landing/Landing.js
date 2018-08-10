@@ -69,7 +69,10 @@ class Landing extends Component {
               {/* <Sidebar /> */}
             </Grid>
             <Grid item xs={4}>
-              {this.props.user.user&& <AddArticleModal />}
+              <DropdownSearch />
+              {this.props.user.user && <AddArticleModal />}
+
+
               {this.props.catalogue.map((article, i) => {
                 return (
                   <Card key={i} value={article}>
