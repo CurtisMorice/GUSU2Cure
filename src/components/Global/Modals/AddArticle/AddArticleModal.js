@@ -92,6 +92,8 @@ class AddArticleModal extends React.Component {
         await this.setState({...this.state, research_phase_array: this.props.research_phase})
         
       }
+      console.log('this.state:', this.state);
+      
     }
 
     componentDidMount(){
@@ -351,8 +353,8 @@ class AddArticleModal extends React.Component {
           <ul>
           <li>Title: {this.state.research_title}</li>
           <li>Date Published: {this.state.research_date}</li>
-          <li>Research Type: {this.state.research_type}</li>
-          <li>Research Phase: {this.state.research_phase}</li>
+          <li>Research Type: {this.props.research_type[this.state.research_type-2].type}</li>
+          <li>Research Phase: {this.props.research_phase[0].phase}</li>
           <li>Institution Name: {this.state.institution_name}</li>
           <li>Institution Url: {this.state.institution_url}</li>
           <li>Institution Address: {this.state.address}</li>

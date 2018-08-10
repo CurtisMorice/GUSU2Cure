@@ -100,7 +100,6 @@ class AddResourceModal extends React.Component {
               {this.state.message}
               <form onSubmit={this.addResource}>
               <DialogContent>
-                <DialogContentText id="alert-dialog-description">
                 <TextField 
                     type="text"
                     value={this.state.name}
@@ -144,7 +143,6 @@ class AddResourceModal extends React.Component {
                     // label="Date Created"
                     fullWidth  
                     />
-                </DialogContentText>
               </DialogContent>
               <DialogActions>
                 <Button type="submit" value="Add Resource" color="primary" variant="contained" autoFocus>Add</Button>

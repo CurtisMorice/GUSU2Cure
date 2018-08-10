@@ -30,6 +30,7 @@ import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 //actions
 import { USER_ACTIONS } from '../../../../redux/actions/userActions';
 import { ARTICLE_ACTIONS } from '../../../../redux/actions/articleActions';
+import EditArticleModal from '../../../Global/Modals/AddArticle/EditArticleModal';
 
 //ReduxStore
 const mapStateToProps = state => ({
@@ -73,8 +74,7 @@ class ArticleCard extends React.Component {
   
     componentDidMount(){
       this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-
-        this.getArticleDetail();
+      this.getArticleDetail();
         
     }
 
@@ -88,73 +88,37 @@ class ArticleCard extends React.Component {
 
     getArticleDetail = (id) => {
         id = this.props.user.user.id;
-        console.log('THIS IS THE USERS ID',id);
         this.props.dispatch({type: ARTICLE_ACTIONS.FETCH_USER_ARTICLES, payload: id});
+    }
+
+    requestDelete = (id) =>{
+      console.log('this is the article id,', id);
+      
     }
 
     render() {
         const { classes } = this.props;        
       return (
         <div>
-            {this.props.articles.map((detail) => 
+            {this.props.articles.map((article) => 
                 <Card className={classes.card}>
                 <CardHeader
-                //   avatar={
-                //     <Avatar aria-label="Recipe" className={classes.avatar}>
-                //       img
-                //     </Avatar>
-                //   }
-                //   action={
-                //     <IconButton>
-                //       <MoreVertIcon />
-                //     </IconButton>
-                //   }
-                  title={detail.research_title}
+                  title={article.research_title}
                 />
                 <CardContent id="articleStatus">
                   <Typography component="p">
-                    Date Submitted: {detail.date_posted}
+                    Date Submitted: {article.date_posted}
                   </Typography>
                   <Typography component="p">
-                    Status: {detail.status}
+                    Status: {article.status}
+
                   </Typography>
                 </CardContent>
-                {/* <CardActions className={classes.actions} disableActionSpacing>
-                    <Typography>
-                        Article
-                    </Typography>
-                  <IconButton aria-label="Add to favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label="Share">
-                    <ShareIcon />
-                  </IconButton>
-                  <IconButton
-                    className={classnames(classes.expand, {
-                      [classes.expandOpen]: this.state.expanded,
-                    })}
-                    onClick={this.handleExpandClick}
-                    aria-expanded={this.state.expanded}
-                    aria-label="Show more"
-                  >
-                    <ExpandMoreIcon />
-                  </IconButton>
-                </CardActions>
-                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                  <CardContent>
-                    <Typography>
-                        {this.props.user.user.bio}
-                    </Typography>
-                  </CardContent>
-                </Collapse> */}
                 <CardActions className="actionButton">
-                    <IconButton variant="fab" color="primary" aria-label="Edit">
-                        <EditIcon/>
-                    </IconButton>
-                    <IconButton variant="fab" color="secondary" aria-label="Edit" >
+                    <EditArticleModal article={article}/>
+                    <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={ ()=>this.requestDelete(article.id) }>
                         <DeleteRoundedIcon/>
                     </IconButton>
-                    {/* <DeleteArticle /> */}
                 </CardActions>
               </Card>
             )}

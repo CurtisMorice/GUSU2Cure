@@ -11,6 +11,7 @@ import Sidebar from './Sidebar';
 import AddArticleModal from '../../Global/Modals/AddArticle/AddArticleModal';
 import { ARTICLE_ACTIONS } from '../../../redux/actions/articleActions';
 import MapWrapper from './Local/Map/MapWrapper';
+import ArticleModal from '../../Global/Modals/ArticleModal';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -65,11 +66,13 @@ class Landing extends Component {
         <div>
           <Grid container spacing={24}>
             <Grid item xs={12}>
-              <Sidebar />
+              {/* <Sidebar /> */}
             </Grid>
             <Grid item xs={4}>
               <DropdownSearch />
               {this.props.user.user && <AddArticleModal />}
+
+
               {this.props.catalogue.map((article, i) => {
                 return (
                   <Card key={i} value={article}>
@@ -87,8 +90,9 @@ class Landing extends Component {
                   <br/>
                   {article.related_articles}
                   <br/>
-                  {article.date_posted}
+                  {article.date_posted.split('T')[0]}
                   </Typography>
+                  <ArticleModal article={article} />
                   </CardContent>
                   </Card>
                    )
