@@ -4,6 +4,7 @@ import {compose} from 'redux';
 
 //Article Modal
 import ArticleModal from '../../../Global/Modals/ArticleModal';
+import CommentsModal from '../../../Global/Modals/CommentsModal';
 
 import { ADMIN_ACTIONS } from '../../../../redux/actions/adminActions';
 
@@ -158,11 +159,11 @@ class NewArticleTable extends React.Component{
             rowsPerPage: 5,
             approved: 2,
             rejected: 3,
+           commentOpen:false,
           };
         }
        
         fetchNewArticles = () => {
-                console.log('hello, is it me your looking for ');
                 this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
         };
         handleChangePage = (event, page) => {
@@ -171,6 +172,14 @@ class NewArticleTable extends React.Component{
       
         handleChangeRowsPerPage = event => {
           this.setState({ rowsPerPage: event.target.value });
+        };
+
+        handleClickOpen = () => {
+          this.setState({ commentOpen: true });
+        };
+      
+        handleClose = () => {
+          this.setState({ commentOpen: false });
         };
       
         approveNewArticle = (id) => {   
@@ -200,38 +209,7 @@ class NewArticleTable extends React.Component{
             }
           })
         }
-        rejectNewArticle = (id) => {
-            let rejected = this.state.rejected;
-            let rejectedObj = {rejected: rejected , id: id };
-            swal({
-              title: 'Please Confirm Change',
-              text: 'Are you sure you want to reject this article?',
-              type: 'warning',
-              showCancelButton: true,
-              confirmButtonText: 'Yes',
-              cancelButtonText: 'Cancel',
-              reverseButtons: true 
-            }).then((result)=>{
-                if(result.value){
-                const action = ({
-                 type: ADMIN_ACTIONS.REJECTED_ARTICLE,
-                 payload:rejectedObj
-             });
-             this.props.dispatch(action);
-             swal(
-              'Rejected!',
-              'That file has been Rejected.',
-              'success'
-            )
-          } else if (result.dismiss === swal.DismissReason.cancel) {
-            swal(
-            'Cancelled',
-            'Rejection has been stopped',
-            'error'
-          )
-        }
-            })
-        }
+   
 
         deleteArticle = (id) => {
           swal({
@@ -320,14 +298,10 @@ class NewArticleTable extends React.Component{
                          </IconButton>
                         </Tooltip> 
                        </TableCell>
-                       <TableCell> 
-                         <Tooltip id="rejected" title="Rejected">
-                          <IconButton aria-label="Rejected" color="secondary"  onClick={()=>this.rejectNewArticle(newArticle.id)}>
-                           <i className="material-icons" >
-                            thumb_down
-                           </i>
-                          </IconButton>
-                         </Tooltip>
+                       <TableCell>
+
+                         <CommentsModal /> 
+
                         </TableCell>
                         <TableCell>
                          <Tooltip id="delete "title="Delete" >
@@ -359,6 +333,7 @@ class NewArticleTable extends React.Component{
                     </TableRow>
                   </TableFooter>
                 </Table>
+                {/* {this.state.commentOpen && <CommentsModal/>}  */}
               </div>
             </Paper>
           );

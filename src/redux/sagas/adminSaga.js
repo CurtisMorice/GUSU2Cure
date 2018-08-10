@@ -6,7 +6,6 @@ import { getAllUsers, getApprovedArticles, getNewArticles , getModifiedArticles,
 function* fetchAllUser(action) {
     try {
         let allUsers = yield getAllUsers();
-        console.log('in admin saga to get all users', allUsers);
         yield put({
             type: ADMIN_ACTIONS.SET_ALL_USER,
             payload: allUsers
@@ -20,7 +19,6 @@ function* fetchAllUser(action) {
 function* fetchArticlesApproved(action) {
     try {
         let approvedArticles = yield getApprovedArticles();
-        console.log('in admin saga to get approvedArticles:',approvedArticles);
         yield put({
             type: ADMIN_ACTIONS.SET_APPROVED_ARTICLE,
             payload: approvedArticles
@@ -34,7 +32,6 @@ function* fetchArticlesApproved(action) {
 function* fetchNewArticles(action){
     try {
         let newArticle = yield getNewArticles();
-        console.log('in admin saga to get new articles',newArticle);
         yield put ({
             type: ADMIN_ACTIONS.SET_NEW_ARTICLE,
             payload: newArticle
@@ -48,7 +45,6 @@ function* fetchNewArticles(action){
 function* fetchModifiedArticles(action){
     try{
         let modifiedArticle = yield getModifiedArticles();
-        console.log('in admin saga to get modified articles',modifiedArticle);
         yield put({
             type: ADMIN_ACTIONS.SET_MODIFIED_ARTICLE,
             payload: modifiedArticle,
@@ -61,7 +57,6 @@ function* fetchModifiedArticles(action){
 //deletes user accounts
 function* deleteUserAccount(action){
     try{
-        console.log('id to delete', action.payload);
         let id = action.payload
         yield deleteUser(id);
         yield fetchAllUser();
@@ -73,7 +68,6 @@ function* deleteUserAccount(action){
 
 //approves newly added articles
 function* approveArticle (action){
-    console.log('action in approvedArticle in adminSaga', action);
     try{
         yield approvedArticle(action);
         yield fetchNewArticles();
@@ -86,7 +80,6 @@ function* approveArticle (action){
 
 //changes user types
 function* userType(action){
-    console.log(action.payload, action.userId);
     try{
         yield setUser(action);
         yield fetchAllUser();
@@ -107,8 +100,8 @@ function* rejectArticle (action){
     }
 }
 
-// deletes target article
-function* deleteArticle(action){
+function* deleteBadArticle (action){
+
     try{
         yield deleteTargetArticle(action)
         yield fetchArticlesApproved();

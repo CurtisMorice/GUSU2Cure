@@ -32,7 +32,6 @@ export function deleteResource(id){
 }
 
 export function putResource(resource, id){
-    console.log('resource:', resource);
     return axios.put(`/api/resources/${id}`, resource)
     .then((response) => {
         console.log('successfully updated resource', response);

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { ADMIN_ACTIONS } from '../../../../redux/actions/adminActions';
+import CommentsModal from '../../../Global/Modals/CommentsModal';
 
 import PropTypes from 'prop-types';
 import { withStyles} from '@material-ui/core/styles';
@@ -188,38 +189,38 @@ const mapStateToProps = state => ({
               })
             }
 
-              rejectNewArticle = (id) => {            
-                let rejected = this.state.rejected;
-                let rejectedObj = {rejected: rejected , id: id };
-                swal({
-                  title: 'Please Confirm Change',
-                  text: 'Are you sure you want to reject this article?',
-                  type: 'warning',
-                  showCancelButton: true,
-                  confirmButtonText: 'Yes',
-                  cancelButtonText: 'Cancel',
-                  reverseButtons: true 
-                }).then((result)=>{
-                    if(result.value){
-                    const action = ({
-                     type: ADMIN_ACTIONS.REJECTED_ARTICLE,
-                     payload:rejectedObj
-                 });
-                 this.props.dispatch(action);
-                 swal(
-                  'Rejected!',
-                  'That file has been Rejected.',
-                  'success'
-                )
-              } else if (result.dismiss === swal.DismissReason.cancel) {
-                swal(
-                'Cancelled',
-                'Rejection has been stopped',
-                'error'
-              )
-            }
-                })
-            }
+            //   rejectNewArticle = (id) => {            
+            //     let rejected = this.state.rejected;
+            //     let rejectedObj = {rejected: rejected , id: id };
+            //     swal({
+            //       title: 'Please Confirm Change',
+            //       text: 'Are you sure you want to reject this article?',
+            //       type: 'warning',
+            //       showCancelButton: true,
+            //       confirmButtonText: 'Yes',
+            //       cancelButtonText: 'Cancel',
+            //       reverseButtons: true 
+            //     }).then((result)=>{
+            //         if(result.value){
+            //         const action = ({
+            //          type: ADMIN_ACTIONS.REJECTED_ARTICLE,
+            //          payload:rejectedObj
+            //      });
+            //      this.props.dispatch(action);
+            //      swal(
+            //       'Rejected!',
+            //       'That file has been Rejected.',
+            //       'success'
+            //     )
+            //   } else if (result.dismiss === swal.DismissReason.cancel) {
+            //     swal(
+            //     'Cancelled',
+            //     'Rejection has been stopped',
+            //     'error'
+            //   )
+            // }
+            //     })
+            // }
 
 
             render() {
@@ -278,13 +279,7 @@ const mapStateToProps = state => ({
                               </Tooltip> 
                             </TableCell>
                             <TableCell> 
-                              <Tooltip id="rejected" title="Rejected">
-                                <IconButton aria-label="Rejected" color="primary" value="2" onClick={()=>this.rejectNewArticle(newArticle.id)}>
-                                <i className="material-icons" style={{color: "red"}}>
-                                  thumb_down
-                                </i>
-                                </IconButton>
-                              </Tooltip>
+                              <CommentsModal />
                               </TableCell>
                                   </TableRow>
                                 );

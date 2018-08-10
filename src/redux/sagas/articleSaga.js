@@ -36,7 +36,6 @@ function* fetchUserArticles(action) {
 function* fetchResearchType(action) {
     try {
         let research_type = yield getResearchType(action.payload);
-        console.log('in article saga to get research type', research_type);
         yield put({
             type: ARTICLE_ACTIONS.SHOW_RESEARCH_TYPE,
             payload: research_type
@@ -49,7 +48,6 @@ function* fetchResearchType(action) {
 function* fetchResearchPhase(action) {
     try {
         let research_phase = yield getResearchPhase(action.payload);
-        console.log('in article saga to get research phase', research_phase);
         yield put({
             type: ARTICLE_ACTIONS.SHOW_RESEARCH_PHASE,
             payload: research_phase
@@ -60,25 +58,18 @@ function* fetchResearchPhase(action) {
 }
 
 function* addArticle(action) {
-    console.log('action.payload:', action.payload);
     try {
         let article = action.payload
         yield postArticle(article);
-        console.log('in article saga to add article', action.payload);
-        // yield put ({
-        //     type: ARTICLE_ACTIONS.FETCH_ARTICLES
-        // })
     } catch (error) {
         console.log('error in article saga on POST', error); 
     }  
 } 
 
 function* removeArticle(action) {
-    console.log('action.payload:', action.payload);
     try {
         let id = action.payload
         yield deleteArticle(id);
-        console.log('in article saga for delete', action.payload);
         yield put ({
             type: ARTICLE_ACTIONS.FETCH_ARTICLES
         })
@@ -88,7 +79,6 @@ function* removeArticle(action) {
 }
 
 function* updateArticle(action) {
-    console.log('action.payload:', action.payload);
     try {
         let article = action.payload
         let id = action.payload.id

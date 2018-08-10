@@ -2,7 +2,6 @@ import axios from 'axios';
 import { actionChannel } from 'redux-saga/effects';
 
 export function getAllUsers() {
-    console.log('in get all users request')
     return axios.get('/api/admin')
         .then(response => response.data)
         .catch((error => {
@@ -12,7 +11,6 @@ export function getAllUsers() {
 }
 
 export function getApprovedArticles() {
-    console.log('in get approved articles request in the admin');
     return axios.get('/api/admin/articles')
         .then(response => response.data)
         .catch((error) => {
@@ -22,7 +20,6 @@ export function getApprovedArticles() {
 }   
 
 export function getNewArticles() {
-    console.log('in get new articles request in the admin');
     return axios.get('/api/admin/newArticles')
     .then(response => response.data)
     .catch((error)=>{
@@ -32,7 +29,6 @@ export function getNewArticles() {
 }
 
 export function getModifiedArticles() {
-    console.log('in get modified articles request in the admin');
     return axios.get('/api/admin/articles')
     .then(response => response.data)
     .catch((error)=>{
@@ -42,7 +38,6 @@ export function getModifiedArticles() {
 }
 
 export function deleteUser(id) {
-    console.log('In the delete user account request');
     return axios.delete(`/api/admin/deleteUser/${id}`)
     .then(response => response)
     .catch((error) => {
@@ -52,7 +47,6 @@ export function deleteUser(id) {
 }
 
 export function rejectedArticle(article) {
-    console.log('in rejectedArticleRequest', article);
     return axios.put(`api/admin/articles/${article.payload.id}`, article.payload)
     .then(response => {
         console.log('response from rejectedArticle PUT in request', response)
@@ -63,7 +57,6 @@ export function rejectedArticle(article) {
 }
 
 export function approvedArticle(article) {
-    // console.log('IN APPROVED Request', article);
     return axios.put(`api/admin/articles/${article.payload.id}`, article.payload)
     .then((response)=> {
 console.log('response from approvedArticle PUT in request', response)
@@ -73,8 +66,21 @@ console.log('response from approvedArticle PUT in request', response)
     })
 }
 
+export function deleteTargetArticle(action) {
+    let id = action.payload;
+    return axios.delete(`api/admin/deleteArticle/${id}`)
+        .then((response) => {
+            console.log('Sucessful deletion of article');
+        })
+        .catch((error)=> {
+            console.log('Error deleting article', error);
+            throw error.response || error;
+        })
+ }
+
+
+
 export function setUser(type) {
-    console.log('user type request',type);
     let id = type.userId;
     let userType = type.payload;
     return axios.put(`api/admin/usertype/${id}`, type)
