@@ -45,7 +45,9 @@ class CommentsModal extends React.Component {
 
   rejectNewArticle = (id) => {
     let rejected = this.state.rejected;
-    let rejectedObj = {rejected: rejected , id: id };
+    let comments = this.state.comments;
+    let rejectedObj = {rejected: rejected , comments: comments, id: id };
+    console.log('rejectNew Article PAYLOAD', rejectedObj)
     this.handleClose();
     swal({
       title: 'Please Confirm Change',

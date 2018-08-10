@@ -12,7 +12,6 @@ const allUser = (state = [], action) => {
 }
 
 const approvedArticle = (state = [], action) => {
-    console.log('In the approve Article Reducer');
     switch(action.type) {
         case ADMIN_ACTIONS.SET_APPROVED_ARTICLE:
             console.log(' in admin reducer for approved articles', action.payload);
@@ -23,7 +22,6 @@ const approvedArticle = (state = [], action) => {
 }
 
 const newArticles = (state=[], action) => {
-    console.log('In the new Article Reducer');
     switch(action.type) {
     case ADMIN_ACTIONS.SET_NEW_ARTICLE:
     console.log(' in admin reducer for new articles', action.payload);
@@ -34,7 +32,6 @@ const newArticles = (state=[], action) => {
 }
 
 const modifiedArticles = (state=[], action) => {
-    console.log('In the modified Article Reducer');
     switch(action.type) {
     case ADMIN_ACTIONS.SET_MODIFIED_ARTICLE:
     console.log(' in admin reducer for new articles', action.payload);
@@ -45,7 +42,7 @@ const modifiedArticles = (state=[], action) => {
 }
 
 const deleteArticle = (state=[], action) => {
-    console.log('In the deleteArticle Reducer');
+  
     switch(action.type){
     case ADMIN_ACTIONS.DELETE_ARTICLE:
     console.log('in admin reducer for deleteArticle', action.payload);
@@ -55,8 +52,7 @@ const deleteArticle = (state=[], action) => {
 }
 
 const rejectBadArticle = (state=[], action) => {
-    console.log('In the REJECTArticle Reducer');
-    switch(action.type){
+    switch(action.type){ 
     case ADMIN_ACTIONS.REJECTED_ARTICLE:
     console.log(' in admin reducer for rejectedArticle', action.payload);
       return action.payload

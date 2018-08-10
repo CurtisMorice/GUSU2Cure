@@ -164,7 +164,6 @@ class NewArticleTable extends React.Component{
         }
        
         fetchNewArticles = () => {
-                console.log('hello, is it me your looking for ');
                 this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
         };
         handleChangePage = (event, page) => {
