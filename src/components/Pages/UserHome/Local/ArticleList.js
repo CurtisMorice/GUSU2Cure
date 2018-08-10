@@ -116,7 +116,7 @@ class ArticleCard extends React.Component {
                 </CardContent>
                 <CardActions className="actionButton">
                     <EditArticleModal article={article}/>
-                    <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={ ()=>this.requestDelete(detail.id) }>
+                    <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={ ()=>this.requestDelete(article.id) }>
                         <DeleteRoundedIcon/>
                     </IconButton>
                 </CardActions>
