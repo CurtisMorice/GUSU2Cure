@@ -301,7 +301,7 @@ class NewArticleTable extends React.Component{
 
                           <TableCell component="th" scope="row">{newArticle.date_posted}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.research_title}</TableCell> 
-                          <TableCell> <ArticleModal/> </TableCell>
+                          <TableCell> <ArticleModal adminArticle={newArticle}/> </TableCell>
                           {/* <TableCell component="th" scope="row">{newArticle.type}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.phase}</TableCell> 
                           <TableCell component="th" scope="row">{newArticle.institution_name}</TableCell>
@@ -311,6 +311,7 @@ class NewArticleTable extends React.Component{
                           <TableCell component="th" scope="row">{newArticle.username}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.email}</TableCell>
                        <TableCell> 
+                         
                         <Tooltip title="Approved">
                          <IconButton aria-label="Approved" color="primary" onClick={()=>this.approveNewArticle(newArticle.id)}>
                           <i className="material-icons">
