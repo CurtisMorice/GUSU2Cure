@@ -100,8 +100,8 @@ class ArticleCard extends React.Component {
         const { classes } = this.props;        
       return (
         <div>
-            {this.props.articles.map((article) => 
-                <Card className={classes.card}>
+            {this.props.articles.map((article, i) => 
+                <Card key={i} className={classes.card}>
                 <CardHeader
                   title={article.research_title}
                 />
