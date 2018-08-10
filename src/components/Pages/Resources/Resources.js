@@ -80,8 +80,8 @@ class UserHome extends Component {
                   <br/>
                   Summary: {resource.summary}
                   </Typography>
-                  <EditResource resource={resource}/>
-                  <IconButton size="small" variant="contained" color="primary" onClick={() => this.removeResource(resource.id)}><DeleteIcon /></IconButton>
+                  {this.props.user.user !== null && this.props.user.user.type === "admin" && <EditResource resource={resource}/>}
+                  {this.props.user.user !== null && this.props.user.user.type === "admin" && <IconButton size="small" variant="contained" color="primary" onClick={() => this.removeResource(resource.id)}><DeleteIcon /></IconButton>}
                   </CardContent>
                 </Card>)}
       
