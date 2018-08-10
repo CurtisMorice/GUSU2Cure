@@ -48,7 +48,7 @@ const deleteArticle = (state=[], action) => {
     console.log('In the deleteArticle Reducer');
     switch(action.type){
     case ADMIN_ACTIONS.DELETE_ARTICLE:
-    console.log(' in admin reducer for deleteArticle', action.payload);
+    console.log('in admin reducer for deleteArticle', action.payload);
       return action.payload
     }
     return state;
