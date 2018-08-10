@@ -30,6 +30,7 @@ import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 //actions
 import { USER_ACTIONS } from '../../../../redux/actions/userActions';
 import { ARTICLE_ACTIONS } from '../../../../redux/actions/articleActions';
+import EditArticleModal from '../../../Global/Modals/AddArticle/EditArticleModal';
 
 //ReduxStore
 const mapStateToProps = state => ({
@@ -99,23 +100,22 @@ class ArticleCard extends React.Component {
         const { classes } = this.props;        
       return (
         <div>
-            {this.props.articles.map((detail) => 
+            {this.props.articles.map((article) => 
                 <Card className={classes.card}>
                 <CardHeader
-                  title={detail.research_title}
+                  title={article.research_title}
                 />
                 <CardContent id="articleStatus">
                   <Typography component="p">
-                    Date Submitted: {detail.date_posted}
+                    Date Submitted: {article.date_posted}
                   </Typography>
                   <Typography component="p">
-                    Status: {detail.status} {detail.id}
+                    Status: {article.status}
+
                   </Typography>
                 </CardContent>
                 <CardActions className="actionButton">
-                    <IconButton variant="fab" color="primary" aria-label="Edit">
-                        <EditIcon/>
-                    </IconButton>
+                    <EditArticleModal article={article}/>
                     <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={ ()=>this.requestDelete(detail.id) }>
                         <DeleteRoundedIcon/>
                     </IconButton>
