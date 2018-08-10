@@ -100,7 +100,7 @@ function* rejectArticle (action){
     }
 }
 
-function* deleteBadArticle (action){
+function* deleteArticle (action){
 
     try{
         yield deleteTargetArticle(action)
