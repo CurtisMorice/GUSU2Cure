@@ -68,7 +68,7 @@ class UserHome extends Component {
       content = (
         <div>
           <h1>Resources</h1>
-          <AddResourceModal />
+          {this.props.user.user !== null && this.props.user.user.type === "admin" && <AddResourceModal />}
           {this.props.resources.resourcesFetched && <div className="resourceDiv">
               {this.props.resources.articles.map((resource, i) => 
                 <Card key={i} className="resourceCards">
