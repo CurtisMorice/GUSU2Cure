@@ -170,7 +170,6 @@ class CatalogueTable extends Component{
           }).then((result) => {
             if (result.value) {
                 console.log(id);
-                
               this.props.dispatch({type: ADMIN_ACTIONS.DELETE_TARGET_ARTICLE, payload: id});
               swal(
                 'Deleted!',

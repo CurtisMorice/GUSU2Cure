@@ -73,8 +73,7 @@ class ArticleCard extends React.Component {
   
     componentDidMount(){
       this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-
-        this.getArticleDetail();
+      this.getArticleDetail();
         
     }
 
@@ -88,8 +87,12 @@ class ArticleCard extends React.Component {
 
     getArticleDetail = (id) => {
         id = this.props.user.user.id;
-        console.log('THIS IS THE USERS ID',id);
         this.props.dispatch({type: ARTICLE_ACTIONS.FETCH_USER_ARTICLES, payload: id});
+    }
+
+    requestDelete = (id) =>{
+      console.log('this is the article id,', id);
+      
     }
 
     render() {
@@ -99,16 +102,6 @@ class ArticleCard extends React.Component {
             {this.props.articles.map((detail) => 
                 <Card className={classes.card}>
                 <CardHeader
-                //   avatar={
-                //     <Avatar aria-label="Recipe" className={classes.avatar}>
-                //       img
-                //     </Avatar>
-                //   }
-                //   action={
-                //     <IconButton>
-                //       <MoreVertIcon />
-                //     </IconButton>
-                //   }
                   title={detail.research_title}
                 />
                 <CardContent id="articleStatus">
@@ -116,45 +109,16 @@ class ArticleCard extends React.Component {
                     Date Submitted: {detail.date_posted}
                   </Typography>
                   <Typography component="p">
-                    Status: {detail.status}
+                    Status: {detail.status} {detail.id}
                   </Typography>
                 </CardContent>
-                {/* <CardActions className={classes.actions} disableActionSpacing>
-                    <Typography>
-                        Article
-                    </Typography>
-                  <IconButton aria-label="Add to favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label="Share">
-                    <ShareIcon />
-                  </IconButton>
-                  <IconButton
-                    className={classnames(classes.expand, {
-                      [classes.expandOpen]: this.state.expanded,
-                    })}
-                    onClick={this.handleExpandClick}
-                    aria-expanded={this.state.expanded}
-                    aria-label="Show more"
-                  >
-                    <ExpandMoreIcon />
-                  </IconButton>
-                </CardActions>
-                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                  <CardContent>
-                    <Typography>
-                        {this.props.user.user.bio}
-                    </Typography>
-                  </CardContent>
-                </Collapse> */}
                 <CardActions className="actionButton">
                     <IconButton variant="fab" color="primary" aria-label="Edit">
                         <EditIcon/>
                     </IconButton>
-                    <IconButton variant="fab" color="secondary" aria-label="Edit" >
+                    <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={ ()=>this.requestDelete(detail.id) }>
                         <DeleteRoundedIcon/>
                     </IconButton>
-                    {/* <DeleteArticle /> */}
                 </CardActions>
               </Card>
             )}

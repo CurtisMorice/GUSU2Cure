@@ -77,25 +77,28 @@ class EditUserModal extends React.Component {
       cancelButtonText: 'Cancel',
       reverseButtons: true
     }).then((result) => {
-      if(result.value) {
-        console.log(event.target.value);
-        console.log('id:',this.props.id.user_id);
+      if(result.value && this.props.user !== this.props.id.user_id) {
         let userId = this.props.id.user_id;
         this.setState({
           type: event.target.value
         })
-        console.log('this is state.type', this.state.type);
         this.props.dispatch({type: ADMIN_ACTIONS.SET_USER_TYPE, payload: this.state.type, userId })
         // this.props.dispatch({type: ADMIN_ACTIONS.FETCH_ALL_USER})
         swal(
+          `Success`,
           'User Type Has been Modified',
-          'Sucess',
           'success'
+        )
+      } if (this.props.user === this.props.id.user_id){
+        swal(
+          'Invalid',
+          `Users Can't Change Own User Type`,
+          'error'
         )
       } else if (result.dismiss === swal.DismissReason.cancel) {
         swal(
           'Cancelled',
-          'User Type Changed Cancelled',
+          'User Type Change Action Cancelled',
           'error'
         )
       }
@@ -107,8 +110,6 @@ class EditUserModal extends React.Component {
 
     return (
       <div>
-        {JSON.stringify(this.props.user)}
-        {JSON.stringify(this.props.id.user_id)}
             <FormHelperText> {this.props.id.type} </FormHelperText>
             <Select
                 value={this.state.type} 
@@ -124,7 +125,6 @@ class EditUserModal extends React.Component {
             >
                 <MenuItem value='user'> User </MenuItem>
                 <MenuItem value='admin'> Admin </MenuItem>
-                {/* <MenuItem value={30}>Thirty</MenuItem> */}
             </Select>
       </div>
     );
