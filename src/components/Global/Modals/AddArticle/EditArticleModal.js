@@ -14,6 +14,8 @@ import { renderComponent } from 'recompose';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import {USER_ACTIONS} from '../../../../redux/actions/userActions';
+import {ADMIN_ACTIONS} from '../../../../redux/actions/adminActions';
 
 
 // import DeleteSnackbar from '../Snackbars/DeleteSnackbar';
@@ -34,6 +36,17 @@ class EditArticle extends React.Component {
             }
         }
     }
+
+    componentDidMount() {
+        this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+        this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_TYPE});
+        this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_PHASE});
+        this.props.dispatch({ type: ADMIN_ACTIONS.FETCH_APPROVED_ARTICLE})
+        if (!this.props.user.isLoading && this.props.user.user === null) {
+          // this.props.history.push('home');
+        }
+      
+      }
 
 handleClickOpen = () => {
     this.setState({ 
@@ -60,9 +73,9 @@ handleClose = () => {
     this.setState({ open: false });
 };
 
-handleUpdate = (propertyName) => async(event) => {
+handleUpdate = (propertyName) => (event) => {
     console.log('event happened', event.target.value);
-    await this.setState({
+    this.setState({
         updatedArticle: {
             ...this.state.updatedArticle,
             id: this.props.article.id,
@@ -138,7 +151,7 @@ updateResource = () => {
               )
             })}
           </Select>
-
+            {JSON.stringify(this.state.research_phase)}
             <TextField 
               type="date"
               InputLabelProps={{ shrink: true, }}
