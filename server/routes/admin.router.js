@@ -111,6 +111,6 @@ router.delete(`/deleteArticle/:id`, (req, res) => {
             console.log('Error deleting article', error);
             res.sendStatus(500);
         })
-})
+ })
 
 module.exports = router;

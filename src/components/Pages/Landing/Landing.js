@@ -7,7 +7,7 @@ import { MAP_ACTIONS } from '../../../redux/actions/mapActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 import DropdownSearch from './Local/DropdownSearch';
 import Grid from '@material-ui/core/Grid';
-
+import Sidebar from './Sidebar';
 import AddArticleModal from '../../Global/Modals/AddArticle/AddArticleModal';
 import { ARTICLE_ACTIONS } from '../../../redux/actions/articleActions';
 import MapWrapper from './Local/Map/MapWrapper';
@@ -25,8 +25,6 @@ const mapStateToProps = state => ({
   catalogue: state.adminReducer.approvedArticle,
   research_type: state.articleReducer.research_type,
   research_phase: state.articleReducer.research_phase,
-  // lat: state.mapReducer.mapReducer.location.lat,
-  // lng: state.mapReducer.mapReducer.location.lng,
 });
 
 class Landing extends Component {
@@ -66,7 +64,9 @@ class Landing extends Component {
         {/* <Nav /> */}
         <div>
           <Grid container spacing={24}>
-            <Grid item xs={12} />
+            <Grid item xs={12}>
+              <Sidebar />
+            </Grid>
             <Grid item xs={4}>
               <DropdownSearch />
               {this.props.user.user&& <AddArticleModal />}
