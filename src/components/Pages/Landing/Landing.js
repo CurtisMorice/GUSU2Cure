@@ -7,10 +7,11 @@ import { MAP_ACTIONS } from '../../../redux/actions/mapActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 import DropdownSearch from './Local/DropdownSearch';
 import Grid from '@material-ui/core/Grid';
-
+import Sidebar from './Sidebar';
 import AddArticleModal from '../../Global/Modals/AddArticle/AddArticleModal';
 import { ARTICLE_ACTIONS } from '../../../redux/actions/articleActions';
 import MapWrapper from './Local/Map/MapWrapper';
+import ArticleModal from '../../Global/Modals/ArticleModal';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -25,8 +26,6 @@ const mapStateToProps = state => ({
   catalogue: state.adminReducer.approvedArticle,
   research_type: state.articleReducer.research_type,
   research_phase: state.articleReducer.research_phase,
-  // lat: state.mapReducer.mapReducer.location.lat,
-  // lng: state.mapReducer.mapReducer.location.lng,
 });
 
 class Landing extends Component {
@@ -66,10 +65,14 @@ class Landing extends Component {
         {/* <Nav /> */}
         <div>
           <Grid container spacing={24}>
-            <Grid item xs={12} />
+            <Grid item xs={12}>
+              {/* <Sidebar /> */}
+            </Grid>
             <Grid item xs={4}>
               <DropdownSearch />
-              {this.props.user.user&& <AddArticleModal />}
+              {this.props.user.user && <AddArticleModal />}
+
+
               {this.props.catalogue.map((article, i) => {
                 return (
                   <Card key={i} value={article}>
@@ -87,8 +90,9 @@ class Landing extends Component {
                   <br/>
                   {article.related_articles}
                   <br/>
-                  {article.date_posted}
+                  {article.date_posted.split('T')[0]}
                   </Typography>
+                  <ArticleModal article={article} />
                   </CardContent>
                   </Card>
                    )

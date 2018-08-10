@@ -19,6 +19,8 @@ class ArticleModal extends React.Component {
     scroll: 'paper',
   };
 
+
+
   handleClickOpen = scroll => () => {
     this.setState({ open: true, scroll });
   };
@@ -49,12 +51,34 @@ class ArticleModal extends React.Component {
 
                 <li> <em><strong>Institutions Name:</strong></em> {this.props.adminArticle.institution_name} </li><br/>
 
-                <li><em> <strong>URL:</strong></em> {this.props.adminArticle.institution_url} </li><br/>
+                <li><em> <strong>URL:</strong></em> <a style={{color:'rgb(51,102,187)'}} href={this.props.adminArticle.institution_url}>{this.props.adminArticle.institution_url}</a> </li><br/>
 
                 <li> <em><strong>Funding Source:</strong></em> {this.props.adminArticle.funding_source} </li><br/>
 
-                <li> <em><strong>Research Date:</strong></em> {this.props.adminArticle.research_date} </li><br/>
+                <li> <em><strong>Research Date:</strong></em> {this.props.adminArticle.research_date.split('T')[0]} </li><br/>
+
+                <li><em><strong>Related Articles</strong></em> {this.props.adminArticle.related_articles.map((item, i)=> <a style={{color:'rgb(51,102,187)'}} href={item}><li key={i} style={{listStyleType:"none", marginLeft:"25px"}}>{item}</li></a>)}
+            </li>
             </DialogContentText>
+            }
+
+            {this.props.article &&
+            <DialogContentText >
+            <li> <em><strong>Type:</strong></em> {this.props.article.type}</li><br/>
+
+            <li> <em><strong>Phase:</strong></em> {this.props.article.phase} </li><br/>
+
+            <li> <em><strong>Institutions Name:</strong></em> {this.props.article.institution_name} </li><br/>
+
+            <li><em> <strong>URL:</strong></em> <a style={{color:'rgb(51,102,187)'}} href={this.props.article.institution_url}>{this.props.article.institution_url} </a></li><br/>
+
+            <li> <em><strong>Funding Source:</strong></em> {this.props.article.funding_source} </li><br/>
+
+            <li> <em><strong>Research Date:</strong></em> {this.props.article.research_date.split('T')[0]} </li><br/>
+
+            <li><em><strong>Related Articles</strong></em> {this.props.article.related_articles.map((item, i)=> <a key={i} style={{color:'rgb(51,102,187)', marginLeft: '25px'}} href={item}>{i === 0 && <br/>}{item}<br/></a>)}
+            </li>
+        </DialogContentText>
             }
         </DialogContent>
   
