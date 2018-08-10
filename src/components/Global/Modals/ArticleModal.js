@@ -30,8 +30,7 @@ class ArticleModal extends React.Component {
   };
 
   render() {
-    return (
-        
+      return(
       <div>
         <Button onClick={this.handleClickOpen('paper')}>More Info</Button>
         {/* <Button onClick={this.handleClickOpen('body')}></Button> */}
@@ -41,32 +40,37 @@ class ArticleModal extends React.Component {
           scroll={this.state.scroll}
           aria-labelledby="scroll-dialog-title"
         >
-          <DialogTitle id="scroll-dialog-title">MORE INFO</DialogTitle>
-          {/* {JSON.stringify(this.props.adminReducer)} */}
-          
-          
-          <DialogContent>
-          {this.props.adminReducer.map(newArticle => {
-              return(
-                  <div key={newArticle.id}>
-                <DialogContentText> Type: {newArticle.type} 
-                 Phase: {newArticle.phase} 
-                 Institutions Name:  {newArticle.institution_name} 
-                 URL: {newArticle.institution_url} 
-                  Funding Source:{newArticle.funding_source} 
-              Research Date:{newArticle.research_date} </DialogContentText>
-              </div>
-              )
-            })}
-          </DialogContent>
        
+          <DialogTitle id="scroll-dialog-title">More Info</DialogTitle>
+          {/* {JSON.stringify(this.props.adminReducer)} */}
+
+          <DialogContent >
+          {this.props.adminArticle &&
+            <DialogContentText > 
+
+                <li> <em><strong>Type:</strong></em> {this.props.adminArticle.type}</li><br/>
+
+                <li> <em><strong>Phase:</strong></em> {this.props.adminArticle.phase} </li><br/>
+
+                <li> <em><strong>Institutions Name:</strong></em> {this.props.adminArticle.institution_name} </li><br/>
+
+                <li><em> <strong>URL:</strong></em> {this.props.adminArticle.institution_url} </li><br/>
+
+                <li> <em><strong>Funding Source:</strong></em> {this.props.adminArticle.funding_source} </li><br/>
+
+                <li> <em><strong>Research Date:</strong></em> {this.props.adminArticle.research_date} </li><br/>
+              
+            </DialogContentText>
+            }
+        </DialogContent>
+  
           <DialogActions>
             <Button onClick={this.handleClose} color="primary"> Close </Button>
           </DialogActions>
+        
         </Dialog>
       </div>
-      
-    );
+);
   }
 }
 
