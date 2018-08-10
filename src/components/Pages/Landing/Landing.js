@@ -88,8 +88,8 @@ class Landing extends Component {
                   {article.related_articles}
                   <br/>
                   {article.date_posted.split('T')[0]}
-                  <ArticleModal article={article} />
                   </Typography>
+                  <ArticleModal article={article} />
                   </CardContent>
                   </Card>
                    )
