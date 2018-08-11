@@ -31,6 +31,7 @@ import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import { USER_ACTIONS } from '../../../../redux/actions/userActions';
 import { ARTICLE_ACTIONS } from '../../../../redux/actions/articleActions';
 import EditArticleModal from '../../../Global/Modals/AddArticle/EditArticleModal';
+import ArticleModal from '../../../Global/Modals/ArticleModal';
 
 //ReduxStore
 const mapStateToProps = state => ({
@@ -44,7 +45,7 @@ const styles = theme => ({
     },
     media: {
       height: 0,
-      paddingTop: '56.25%', // 16:9
+      paddingTop: '106.25%', // 16:9
     },
     actions: {
       display: 'flex',
@@ -99,21 +100,44 @@ class ArticleCard extends React.Component {
     render() {
         const { classes } = this.props;        
       return (
-        <div>
+        <div >
+         
             {this.props.articles.map((article, i) => 
+            <div> 
+              <br/>
                 <Card key={i} className={classes.card}>
                 <CardHeader
+                  style={{ textDecoration: 'underline', backgroundColor:'#',  fontSize:'20px' }}
                   title={article.research_title}
                 />
                 <CardContent id="articleStatus">
-                  <Typography component="p">
+                  <Typography style={{color:'#475c87', fontStyle: 'italic', fontSize:'20px'}}component="p">
                     Date Submitted: {article.date_posted}
                   </Typography>
-                  <Typography component="p">
+                  { article.status === "rejected" &&  
+                  <Typography style={{color:'#475c87', fontStyle: 'italic', fontSize:'20px'}} component="p">
                     Status: {article.status}
 
                   </Typography>
+                  }
                 </CardContent>
+                <CardContent>
+                  <Typography  style={{color:'#475c87', fontSize:'20px'}}> Institution Name: </Typography> 
+
+                  <Typography style={{color:'black', fontStyle: 'italic', fontSize:'20px'}}> { article.institution_name } </Typography>
+
+                </CardContent>
+                { article.status === "rejected" &&  
+                <CardContent>
+                  <Typography  style={{color:'#A23645', fontSize:'25px'}}>
+                
+                    Reason article was rejected:</Typography> 
+                    
+                    <Typography style={{color:'black', fontStyle: 'italic', textDecoration: 'underline',  fontSize:'20px'}}>{article.admin_comment}</Typography>
+                  
+                  
+                </CardContent>
+                  }
                 <CardActions className="actionButton">
                     <EditArticleModal article={article}/>
                     <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={ ()=>this.requestDelete(article.id) }>
@@ -121,7 +145,9 @@ class ArticleCard extends React.Component {
                     </IconButton>
                 </CardActions>
               </Card>
+            </div>
             )}
+            
         </div>
       );
     }

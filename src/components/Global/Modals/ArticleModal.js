@@ -81,6 +81,12 @@ class ArticleModal extends React.Component {
         </DialogContentText>
             }
         </DialogContent>
+
+        {this.props.comments &&
+        <DialogContentText>
+          <li> <em><strong>Reason for non-approval of Article:</strong></em> {this.props.admin_comment} </li><br/>
+          </DialogContentText>
+         }
   
           <DialogActions>
             <Button onClick={this.handleClose} color="primary"> Close </Button>

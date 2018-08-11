@@ -259,12 +259,7 @@ class NewArticleTable extends React.Component{
                     <TableCell> Date Posted </TableCell>
                     <TableCell> Research Title </TableCell>
                     <TableCell> More Info</TableCell>
-                    {/* <TableCell> Research Type </TableCell>
-                    <TableCell> Research Phase </TableCell>
-                    <TableCell> Institution Name </TableCell>
-                    <TableCell> Institution URL </TableCell>
-                    <TableCell> Funding Source</TableCell>
-                    <TableCell> Research Date </TableCell> */}
+                            {/* More Info goes here */}
                     <TableCell> User Name </TableCell>
                     <TableCell> User Email </TableCell>
                     <TableCell> Approved </TableCell>
@@ -279,13 +274,11 @@ class NewArticleTable extends React.Component{
 
                           <TableCell component="th" scope="row">{newArticle.date_posted}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.research_title}</TableCell> 
-                          <TableCell> <ArticleModal  adminArticle={newArticle}/> </TableCell>
-                          {/* <TableCell component="th" scope="row">{newArticle.type}</TableCell>
-                          <TableCell component="th" scope="row">{newArticle.phase}</TableCell> 
-                          <TableCell component="th" scope="row">{newArticle.institution_name}</TableCell>
-                          <TableCell component="th" scope="row">{newArticle.institution_url}</TableCell>
-                          <TableCell component="th" scope="row">{newArticle.funding_source}</TableCell>
-                          <TableCell component="th" scope="row">{newArticle.research_date}</TableCell> */}
+                          
+                          <TableCell> 
+                            <ArticleModal  adminArticle={newArticle}/> 
+                          </TableCell>
+
                           <TableCell component="th" scope="row">{newArticle.username}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.email}</TableCell>
                        <TableCell> 

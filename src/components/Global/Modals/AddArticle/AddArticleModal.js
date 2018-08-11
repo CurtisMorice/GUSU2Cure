@@ -215,7 +215,7 @@ class AddArticleModal extends React.Component {
                     <MenuItem key={i} value={research_type.id}>{research_type.type}</MenuItem>
                 )
             })}
-          </Select>
+          </Select> <InputLabel htmlFor="required-simple">*required</InputLabel>
           <br/>
 
           <InputLabel htmlFor="research_phase-simple">Research Phase</InputLabel>
@@ -225,8 +225,8 @@ class AddArticleModal extends React.Component {
             inputProps={{
             name: 'research_phase',
             id: 'research_phase-simple',
-            }}
-          >
+            }} 
+          > 
             <MenuItem>
             <em>None</em>
             </MenuItem>
@@ -235,7 +235,7 @@ class AddArticleModal extends React.Component {
                   <MenuItem key={i} value={research_phase.id}>{research_phase.phase}</MenuItem>
               )
             })}
-          </Select>
+          </Select> <InputLabel  htmlFor="required-simple">*required</InputLabel>
           <TextField 
             type="text"
             value={this.state.research_title}

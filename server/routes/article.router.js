@@ -193,7 +193,7 @@ router.post('/quasi_articles', (req, res) => {
         INSERT INTO quasi_articles(article_id, location_id, user_id, research_date, research_title, research_type, research_phase, 
         institution_name, institution_url, status, funding_source, related_articles, brief_description, summary, user_story) 
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, 
-        $12, $13, $14, $15);`
+        $12, $13, $14, $15) ORDER BY research_date ASC;`
         pool.query(queryText, [article_id, location_id, user_id, research_date, research_title, research_type, research_phase, institution_name,
         institution_url, status, funding_source, related_articles, brief_description, summary, user_story])
         .then(()=>{
