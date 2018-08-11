@@ -185,6 +185,8 @@ INSERT INTO comments(comment, user_id, article_id) VALUES ('Fascinating', 1, 1);
 -- LEFT JOIN users ON user_id = users.id
 -- ORDER BY research_date ASC;
 
+-- Reject articles
+--UPDATE articles SET status=2, admin_comment=articles.admin_comment WHERE id=1;
 
 
 

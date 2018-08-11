@@ -39,16 +39,18 @@ class CommentsModal extends React.Component {
   handleCommentsChange = propertyName => (event) => { 
     console.log('handle change for Comments in COmMeNTS Modal', event.target.value);
     this.setState({
+      ...this.state,
       [propertyName]: event.target.value,
     })
   };
 
   rejectNewArticle = (id) => {
+    this.handleClose();
     let rejected = this.state.rejected;
     let comments = this.state.comments;
-    let rejectedObj = {rejected: rejected , comments: comments, id: id };
+    let rejectedObj = { id: id, rejected: rejected , comments: comments };
     console.log('rejectNew Article PAYLOAD', rejectedObj)
-    this.handleClose();
+    
     swal({
       title: 'Please Confirm Change',
       text: 'Are you sure you want to reject this article?',
@@ -63,6 +65,7 @@ class CommentsModal extends React.Component {
          type: ADMIN_ACTIONS.REJECTED_ARTICLE,
          payload:rejectedObj
      });
+     
      this.props.dispatch(action);
      swal(
       'Rejected!',
@@ -120,7 +123,7 @@ class CommentsModal extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.rejectNewArticle} color="primary">
+            <Button onClick={()=> this.rejectNewArticle(this.props.adminArticle.id)} color="primary">
               Send to User
             </Button>
           </DialogActions>

@@ -47,6 +47,7 @@ export function deleteUser(id) {
 }
 
 export function rejectedArticle(article) {
+    console.log('ADMINREQUEST-', article, article.payload);
     return axios.put(`api/admin/articles/${article.payload.id}`, article.payload)
     .then(response => {
         console.log('response from rejectedArticle PUT in request', response)

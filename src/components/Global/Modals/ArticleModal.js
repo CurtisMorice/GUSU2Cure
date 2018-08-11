@@ -57,7 +57,7 @@ class ArticleModal extends React.Component {
 
                 <li> <em><strong>Research Date:</strong></em> {this.props.adminArticle.research_date.split('T')[0]} </li><br/>
 
-                <li><em><strong>Related Articles</strong></em> {this.props.adminArticle.related_articles.map((item, i)=> <a style={{color:'rgb(51,102,187)'}} href={item}><li key={i} style={{listStyleType:"none", marginLeft:"25px"}}>{item}</li></a>)}
+                <li><em><strong>Related Articles</strong></em> {this.props.adminArticle.related_articles.map((item, i)=> <a style={{color:'rgb(51,102,187)'}} key={i} href={item}><li key={i} style={{listStyleType:"none", marginLeft:"25px"}}>{item}</li></a>)}
             </li>
             </DialogContentText>
             }
