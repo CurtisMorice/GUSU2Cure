@@ -88,7 +88,7 @@ class CommentsModal extends React.Component {
       <div>
         {/* <Button onClick={this.handleClickOpen}>Open form dialog</Button> */}
         <Tooltip id="rejected" title="Rejected"> 
-                          <IconButton aria-label="Rejected" color="secondary"  onClick={this.handleClickOpen}> 
+                          <IconButton aria-label="Reject" style={{color:'#bf5754'}}  onClick={this.handleClickOpen}> 
                            <i className="material-icons" >
                             thumb_down
                            </i>

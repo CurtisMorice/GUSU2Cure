@@ -49,11 +49,11 @@ class SimpleTabs extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Tabs value={value} onChange={this.handleChange}>
-            <Tab label="New Articles" />
-            <Tab label="Article Edits" />
-            <Tab label="Catalogue" />
+            <Tab label="Pending Articles" />
+            <Tab label="Pending Edits" />
+            <Tab label="All Articles" />
             <Tab label="Users" />
-            <Tab label="NEWTAble" />
+            {/* <Tab label="NEWTAble" /> */}
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer> <NewArticleTable /> </TabContainer>}

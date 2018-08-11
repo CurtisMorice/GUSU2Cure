@@ -268,7 +268,7 @@ class NewArticleTable extends React.Component{
                     <TableCell> User Name </TableCell>
                     <TableCell> User Email </TableCell>
                     <TableCell> Approved </TableCell>
-                    <TableCell> Rejected </TableCell>
+                    <TableCell> Reject </TableCell>
                     <TableCell> Delete </TableCell>
                 </TableRow>
             </TableHead>
@@ -290,7 +290,7 @@ class NewArticleTable extends React.Component{
                           <TableCell component="th" scope="row">{newArticle.email}</TableCell>
                        <TableCell> 
                          
-                        <Tooltip title="Approved">
+                        <Tooltip title="Approve">
                          <IconButton aria-label="Approved" color="primary" onClick={()=>this.approveNewArticle(newArticle.id)}>
                           <i className="material-icons">
                             thumb_up
