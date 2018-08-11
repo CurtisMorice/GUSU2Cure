@@ -141,6 +141,7 @@ router.post('/', (req, res) => {
     })
 });
 
+// this is where we will also delete the quasi_articles row upon successfully editing the articles table with the updated info
 router.put('/:id', (req, res) => {
     const articleQueryText = `UPDATE articles SET research_date = $1, research_title = $2, research_type = $3,
         research_phase = $4, institution_name = $5, institution_url = $6, funding_source = $7, related_articles = $8 WHERE id = $9;`;
@@ -165,5 +166,58 @@ router.delete('/:id', (req,res) => {
         res.sendStatus(500);
     })
 })
+
+// quasi_articles routes
+router.put('/quasi_articles/:id', (req, res) => {
+    
+})
+
+router.post('/quasi_articles', (req, res) => {
+        console.log('in route to post quasi article');
+        const article_id = req.body.article_id;
+        const location_id = req.body.article_id;
+        const user_id = req.body.user_id;
+        const research_date = req.body.research_date;
+        const research_title = req.body.research_title;
+        const research_type = req.body.research_type;
+        const research_phase = req.body.research_phase;
+        const institution_name = req.body.institution_name;
+        const institution_url = req.body.institution_url;
+        const status = 1;
+        const funding_source = req.body.funding_source;
+        const related_articles = req.body.related_articles;
+        const brief_description = req.body.brief_description;
+        const summary = req.body.summary;
+        const user_story = req.body.user_story;
+        const queryText = `
+        INSERT INTO quasi_articles(article_id, location_id, user_id, research_date, research_title, research_type, research_phase, 
+        institution_name, institution_url, status, funding_source, related_articles, brief_description, summary, user_story) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, 
+        $12, $13, $14, $15);`
+        pool.query(queryText, [article_id, location_id, user_id, research_date, research_title, research_type, research_phase, institution_name,
+        institution_url, status, funding_source, related_articles, brief_description, summary, user_story])
+        .then(()=>{
+            console.log('successfully posted quasi_article');
+            res.sendStatus(201);
+        })
+        .catch((error)=>{
+            console.log('error posting into quasi_articles:', error);
+            res.sendStatus(500);
+        })
+});
+
+router.get('/quasi_articles', (req, res) => {
+    console.log('in route to get quasi_articles');
+    const queryText = `SELECT * from quasi_articles`
+    pool.query(queryText)
+    .then((result)=>{
+        console.log('fetched quasi articles');
+        res.send(result.rows);
+    })
+    .catch((error)=>{
+        console.log('error fetching quasi articles:', error);
+        res.sendStatus(500);
+    })
+});
 
 module.exports = router;
