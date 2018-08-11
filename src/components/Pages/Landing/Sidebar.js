@@ -17,21 +17,23 @@ import { triggerLogout } from '../../../redux/actions/loginActions';
 import { ARTICLE_ACTIONS } from '../../../redux/actions/articleActions';
 
 // Material-UI required components
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-
 // External components required for functionality
 import DropdownSearch from '../Landing/Local/DropdownSearch';
 import SearchBar from '../Landing/Local/SearchBar';
 import AddArticleModal from '../../Global/Modals/AddArticle/AddArticleModal';
+import ArticleModal from '../../Global/Modals/ArticleModal';
 import Map from './Local/Map/Map';
 import MapWrapper from './Local/Map/MapWrapper';
 
@@ -52,6 +54,12 @@ const mapStateToProps = state => ({
 const drawerWidth = 563;
 
 // setting styling and thematic properties of objects
+const theme = createMuiTheme({
+  palette: {
+    type: 'light',
+  },
+});
+
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -63,8 +71,12 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
   },
+  flex: {
+    flexGrow: 1,
+  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    background: '#18335a',
   },
   drawerPaper: {
     position: 'relative',
@@ -75,6 +87,10 @@ const styles = theme => ({
     display: 'flex',
     width: '100%',
     height: '100%',
+  },
+  addArticleModalButton: {
+    marginLeft: 20,
+    marginRight: -12,
   },
   content: {
     flexGrow: 1,
@@ -90,6 +106,21 @@ const styles = theme => ({
     transform: 'translateZ(0)',
   },
   toolbar: theme.mixins.toolbar,
+  cardOutput: {
+    position: 'relative',
+    float: 'left',
+    paddingLeft: '20px',
+    paddingRight: '20px',
+  },
+  cardObject: {
+    float: 'right',
+    marginLeft: '10px',
+    minWidth: 300,
+  },
+  title: {
+    marginBottom: 16,
+  }
+  
 });
 
 class Sidebar extends Component {
@@ -131,22 +162,54 @@ class Sidebar extends Component {
         <Drawer
           variant="permanent"
           classes={{
-              paper: classes.drawerPaper,
-            }}
+            paper: classes.drawerPaper,
+          }}
           >
           <div className={classes.toolbar}>
-
-            <AppBar position="absolute" className={classes.appBar}>
+            <AppBar position="absolute" className={classes.appBar} >
               <Toolbar>
-                ...
+                <Typography variant='title' color='inherit' className={classes.flex}>
+                  Find resources in your area
+                </Typography>
+                <div className={classes.addArticleModalButton}>
+                  {this.props.user.user && <AddArticleModal />}  
+                </div>
               </Toolbar>
             </AppBar>
           </div>
 
-          {/* <div className={classes.gridList} cols={1}>
-            {tileData.map(tile => 
-            )}
-          </div> */}
+          <div className={classes.gridList} cols={1}>
+            <GridList className={classes.cardOutput}>
+              {this.props.catalogue.map((article, i) => {
+                return (
+                  <GridListTile className={classes.cardObject}>
+                  <Card key={i} value={article}>
+                    <CardContent>
+                      <Typography variant="title">
+                        {article.research_title}
+                      </Typography>
+                      <Typography className={classes.title}>
+                        {article.institution_name}
+                        <br />
+                        {article.institution_url}
+                      </Typography>
+                      <Typography component='p'>
+                        {article.funding_source}
+                        <br />
+                        {article.related_articles}
+                        <br />
+                        {article.date_posted.split('T')[0]}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <ArticleModal article={article} />
+                    </CardActions>
+                  </Card>
+                </GridListTile>
+                )
+              })}
+            </GridList>
+          </div>
         </Drawer>
         <main className={classes.appFrame}>
           <div className={classes.content}>
