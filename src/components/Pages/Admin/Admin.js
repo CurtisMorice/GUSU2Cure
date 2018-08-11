@@ -7,7 +7,6 @@ import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 
 // Components
-import AdminHomeProfile from './Local/AdminHomeProfile';
 import AdminNav from './Local/AdminNav';
 
 // styles
