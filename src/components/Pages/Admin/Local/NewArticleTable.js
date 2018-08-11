@@ -279,7 +279,7 @@ class NewArticleTable extends React.Component{
 
                           <TableCell component="th" scope="row">{newArticle.date_posted}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.research_title}</TableCell> 
-                          <TableCell> <ArticleModal adminArticle={newArticle}/> </TableCell>
+                          <TableCell> <ArticleModal  adminArticle={newArticle}/> </TableCell>
                           {/* <TableCell component="th" scope="row">{newArticle.type}</TableCell>
                           <TableCell component="th" scope="row">{newArticle.phase}</TableCell> 
                           <TableCell component="th" scope="row">{newArticle.institution_name}</TableCell>
