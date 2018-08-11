@@ -34,7 +34,7 @@ class AdminHome extends Component {
 
   render() {
     let content = null;
-    if (this.props.user.user != null && this.props.user.user.type == 'admin') {
+    if (this.props.user.user !== null && this.props.user.user.type === 'admin') {
       content = (
         <div>
           <AdminNav/>
