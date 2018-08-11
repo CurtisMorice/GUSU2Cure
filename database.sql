@@ -78,10 +78,34 @@ CREATE TABLE "articles"(
     "funding_source" VARCHAR(100),
     --"related_articles" text[5],
     --"admin_comment" VARCHAR(500),
-	--"brief_description" VARCHAR(500),
-	--"summary" VARCHAR(500),
-	--"user_story" VARCHAR(500)
+	--"brief_description" VARCHAR(300),
+	--"summary" VARCHAR(1000),
+	--"user_story" VARCHAR(1000)
     );
+
+-- create quasi article table. the rows in here will be the information for a proposed article edit. once the admin approves, the information here
+-- will replace what is in the article table and the quasi-article will be deleted
+CREATE TABLE "quasi_articles"(
+	"id" SERIAL PRIMARY KEY,
+	"article_id" INT NOT NULL REFERENCES articles,
+	"location_id" INT NOT NULL REFERENCES locations,
+	"user_id" INT NOT NULL REFERENCES users,
+	-- "date_posted" DATE DEFAULT current_date,
+	"research_date" date NOT NULL,
+	"research_title" VARCHAR(200) NOT NULL,
+	"research_type" INT NOT NULL REFERENCES research_type,
+	"research_phase" INT NOT NULL REFERENCES research_phase,
+	"institution_name" VARCHAR(100) NOT NULL,
+	"institution_url" VARCHAR(300) NOT NULL,
+	"status" INT NOT NULL REFERENCES statuses,
+	"funding_source" VARCHAR(100),
+	-- "related_articles" text[5],
+	-- "admin_comment" VARCHAR(500),
+	-- "brief_description" VARCHAR(300),
+	-- "summary" VARCHAR (1000),
+	-- "user_story" VARCHAR (1000)
+	);
+
 	
 --create comments table. date will be automatically inserted. commented out due to linter errors
 CREATE TABLE "comments"(
