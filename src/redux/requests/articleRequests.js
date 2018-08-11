@@ -70,3 +70,14 @@ export function putArticle(id, article){
         throw error.response || error; 
     })
 }
+
+export function requestDeleteArticle(id){
+    return axios.put(`/api/articles/delete/${id}`)
+    .then((response) => {
+        console.log('successfully requested delete', response);
+    })
+    .catch((error) => {
+        console.log('error requesting delete', error);
+        throw error.response || error;  
+    })   
+}
