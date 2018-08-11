@@ -250,8 +250,8 @@ const mapStateToProps = state => ({
                         <TableCell> Research Date </TableCell>
                         <TableCell> User Name </TableCell>
                         <TableCell> User Email </TableCell>
-                        <TableCell> Approved </TableCell>
-                        <TableCell> Rejected </TableCell>
+                        <TableCell> Approve </TableCell>
+                        <TableCell> Reject </TableCell>
                     </TableRow>
                 </TableHead>
             <TableBody>
@@ -271,7 +271,7 @@ const mapStateToProps = state => ({
                               <TableCell component="th" scope="row">{newArticle.email}</TableCell>
                               <TableCell> 
                               <Tooltip title="Approved">
-                              <IconButton aria-label="Approved" color="primary" onClick={()=>this.approveNewArticle(newArticle.id)}>
+                              <IconButton aria-label="Approve" color="primary" onClick={()=>this.approveNewArticle(newArticle.id)}>
                                 <i className="material-icons">
                                   thumb_up
                                 </i>

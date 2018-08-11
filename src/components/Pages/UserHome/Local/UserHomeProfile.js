@@ -15,6 +15,7 @@ import './userHomeProfile.css';
 
 
 const mapStateToProps = state => ({
+    adminReducer: state.adminReducer.newArticles
 
 });
 
@@ -44,7 +45,12 @@ class UserHomeProfile extends Component{
                 </div>
 
                 {/* GRID 3 */}
-                <div className="grid">  </div>
+                <div className="grid"> 
+                    
+                    Rejected Articles
+                    {JSON.stringify(this.props.adminReducer)}
+                    
+                </div>
             </div>
         )
     }
