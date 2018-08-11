@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {ARTICLE_ACTIONS} from '../../../../redux/actions/articleActions';
+import {ADMIN_ACTIONS} from '../../../../redux/actions/adminActions';
 import { connect } from 'react-redux';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
@@ -15,7 +16,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import {USER_ACTIONS} from '../../../../redux/actions/userActions';
-import {ADMIN_ACTIONS} from '../../../../redux/actions/adminActions';
+import ResearchPhaseSelect from './ResearchPhaseSelect';
+import ResearchTypeSelect from './ResearchTypeSelect';
 
 
 // import DeleteSnackbar from '../Snackbars/DeleteSnackbar';
@@ -46,6 +48,24 @@ class EditArticle extends React.Component {
           // this.props.history.push('home');
         }
       
+      }
+
+      componentDidUpdate(prevProps) {
+        if(this.props.research_phase !== prevProps.research_phase){
+          this.setState({
+            ...this.state,
+            research_phase: this.props.research_phase
+          })
+          console.log('this.state:', this.state);
+          
+        }
+        else if(this.props.research_type !== prevProps.research_type){
+          this.setState({
+            ...this.state,
+            research_type: this.props.research_type
+          })
+          console.log('this.state:', this.state);
+        }
       }
 
 handleClickOpen = () => {
@@ -99,6 +119,7 @@ updateResource = () => {
   }
 
   render() {
+    console.log("ME!!!: ", this.props.article.research_type);
     return (
       <div>
         <IconButton onClick={this.handleClickOpen}>
@@ -111,18 +132,17 @@ updateResource = () => {
         >
           <DialogTitle id="form-dialog-title">Update the article below:</DialogTitle>
           <DialogContent>
-          <InputLabel htmlFor="research_phase-simple">Research Type</InputLabel>
+          {/* <InputLabel htmlFor="research_phase-simple">Research Type</InputLabel>
             <Select
-              value={this.state.research_type}
+              value={this.state.research_type || this.props.article.research_type}
               onChange={this.handleUpdate('research_type')}
-              defaultValue={this.props.article.research_phase}
               inputProps={{
               name: 'research_type',
               id: 'research_type-simple',
               }} 
             >
-            <MenuItem>
-            <em>None</em>
+            <MenuItem value={this.state.research_type || this.props.article.research_type}>
+           {this.props.article.research_type}
             </MenuItem>
             {this.props.research_type.map((research_type, i) => {
                 return (
@@ -130,9 +150,12 @@ updateResource = () => {
                     <MenuItem key={i} value={research_type.id} defaultValue={this.props.article.research_phase}>{research_type.type}</MenuItem>
                 )
             })}
-          </Select>
-
-           <InputLabel htmlFor="research_phase-simple">Research Phase</InputLabel>
+          </Select> */}
+          <label>Research Type</label>
+          <ResearchTypeSelect article={this.props.article} research_type={this.props.research_type}/>
+          <label>Research Phase</label>
+          <ResearchPhaseSelect article={this.props.article} research_phase={this.props.research_phase}/>
+           {/* <InputLabel htmlFor="research_phase-simple">Research Phase</InputLabel>
           <Select
             value={this.state.research_phase}
             onChange={this.handleUpdate('research_phase')}
@@ -150,8 +173,7 @@ updateResource = () => {
                   <MenuItem key={i} value={research_phase.id}>{research_phase.phase}</MenuItem>
               )
             })}
-          </Select>
-            {JSON.stringify(this.state.research_phase)}
+          </Select> */}
             <TextField 
               type="date"
               InputLabelProps={{ shrink: true, }}
