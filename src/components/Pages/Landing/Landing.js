@@ -5,7 +5,6 @@ import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import {ADMIN_ACTIONS} from '../../../redux/actions/adminActions';
 import { MAP_ACTIONS } from '../../../redux/actions/mapActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
-import DropdownSearch from './Local/DropdownSearch';
 import Grid from '@material-ui/core/Grid';
 import Sidebar from './Sidebar';
 import AddArticleModal from '../../Global/Modals/AddArticle/AddArticleModal';
@@ -69,7 +68,6 @@ class Landing extends Component {
               {/* <Sidebar /> */}
             </Grid>
             <Grid item xs={4}>
-              <DropdownSearch />
               {this.props.user.user && <AddArticleModal />}
 
 
