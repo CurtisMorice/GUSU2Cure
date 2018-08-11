@@ -207,26 +207,31 @@ class UserTable extends Component{
 
     return(
       <div>
-        <paper>
+       <Paper>
           <Table>
             <TableHead>
+              <TableRow>
               <TableCell>Username</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Contact Info</TableCell>
               <TableCell>User Type</TableCell>
               <TableCell>Edit User Type</TableCell>
               <TableCell>Delete User</TableCell>
+              </TableRow>
             </TableHead>
+            
             <TableBody>
               {this.props.allUsers.map((n, i) => {
                 return (
+          
                   <TableRow key={i}>
                     <TableCell component="th" scope="row"> {n.username} </TableCell>
                     <TableCell component="th" scope="row"> {n.email} </TableCell>
                     <TableCell component="th" scope="row"> {n.contact_info} </TableCell>
                     <TableCell component="th" scope="row"> {n.type} </TableCell>
                     <TableCell component="th" scope="row"> <EditUserModal id={n}/> </TableCell>
-                    <TableCell component="th" scope="row"> 
+                        
+                  <TableCell component="th" scope="row"> 
                       <Tooltip title="Delete" >
                         <IconButton aria-label="Delete" color="secondary" onClick={ ()=>this.deleteUser(n.user_id) }>
                           <DeleteIcon />
@@ -237,6 +242,7 @@ class UserTable extends Component{
                 )
               })}
             </TableBody>
+            
             <TableFooter>
               <TableRow>
                 <TablePagination
@@ -251,7 +257,7 @@ class UserTable extends Component{
               </TableRow>
             </TableFooter>
           </Table>
-        </paper>
+          </Paper>
 
       </div>
 
@@ -259,8 +265,8 @@ class UserTable extends Component{
   }
 }
 
-UserTable.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// UserTable.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default connect(mapStateToProps)(UserTable);
