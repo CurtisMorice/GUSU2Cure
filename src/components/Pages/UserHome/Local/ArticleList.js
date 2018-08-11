@@ -171,3 +171,57 @@ class ArticleCard extends React.Component {
       withStyles(styles),
       connect(mapStateToProps)
   )(ArticleCard);
+
+ 
+    {/* <div >
+     
+        {this.props.articles.map((article, i) => 
+        <div> 
+          <br/>
+            <Card key={i} className={classes.card}>
+            <CardHeader
+              style={{ textDecoration: 'underline', backgroundColor:'#',  fontSize:'20px' }}
+              title={article.research_title}
+            />
+            <CardContent id="articleStatus">
+              <Typography style={{color:'#475c87', fontStyle: 'italic', fontSize:'20px'}}component="p">
+                Date Submitted: {article.date_posted}
+              </Typography>
+              { article.status === "rejected" &&  
+              <Typography style={{color:'#475c87', fontStyle: 'italic', fontSize:'20px'}} component="p">
+                Status: {article.status}
+
+              </Typography>
+              }
+            </CardContent>
+            <CardContent>
+              <Typography  style={{color:'#475c87', fontSize:'20px'}}> Institution Name: </Typography> 
+
+              <Typography style={{color:'black', fontStyle: 'italic', fontSize:'20px'}}> { article.institution_name } </Typography>
+
+            </CardContent>
+            { article.status === "rejected" &&  
+            <CardContent>
+              <Typography  style={{color:'#A23645', fontSize:'25px'}}>
+            
+                Reason article was rejected:</Typography> 
+                
+                <Typography style={{color:'black', fontStyle: 'italic', textDecoration: 'underline',  fontSize:'20px'}}>{article.admin_comment}</Typography>
+              
+              
+            </CardContent>
+              }
+            <CardActions className="actionButton">
+                <EditArticleModal article={article}/>
+                <IconButton variant="fab" color="secondary" disabled={this.state.isButtonDisabled} aria-label="Edit" onClick={ ()=>this.requestDelete(article.id) }>
+                    <DeleteRoundedIcon/>
+                </IconButton>
+            </CardActions>
+          </Card>
+        </div>
+        )}
+        
+    </div>
+  );
+}
+} */}
