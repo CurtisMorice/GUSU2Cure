@@ -23,8 +23,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import {ARTICLE_ACTIONS} from '../../../../redux/actions/articleActions';
 import {MAP_ACTIONS} from '../../../../redux/actions/mapActions';
 
-import MapWrapper from '../../../Pages/Landing/Local/Map/MapWrapper';
-import SearchBar from '../../../Pages/Landing/Local/SearchBar';
+import MapWrapper from '../../../Global//Modals/AddArticle/Map/MapWrapper';
 import axios from 'axios';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -78,11 +77,29 @@ class AddArticleModal extends React.Component {
               summary: '',
               user_story: '',
               address: '',
-              lat: '',
-              lng: '',
+              lat: 0,
+              lng: 0,
               activeStep: 0, 
               open: false,
       }
+    }
+
+    async componentDidUpdate(prevProps){
+      if (prevProps.research_type !== this.props.research_type){
+        await this.setState({...this.state, research_type_array: this.props.research_type})
+      }
+      if (prevProps.research_phase !== this.props.research_phase){
+        await this.setState({...this.state, research_phase_array: this.props.research_phase})
+        
+      }
+      console.log('this.state:', this.state);
+      
+    }
+
+    componentDidMount(){
+      // this.setState({...this.state, research_type_array: this.props.research_type})
+      console.log('this.props:', this.props);
+      
     }
 
     googleApiCall = (event) => {
@@ -161,11 +178,18 @@ class AddArticleModal extends React.Component {
 
   handleInputChangeFor = propertyName => (event) => {
       console.log('user id', this.props.user.user.id);  
-      this.setState({
-            ...this.state,
-            [propertyName]: event.target.value,
-            user_id: this.props.user.user.id,
-      });
+      if(propertyName === 'research_type'){
+        console.log('research type');
+        
+      }
+      else {
+        this.setState({
+          ...this.state,
+          [propertyName]: event.target.value,
+          user_id: this.props.user.user.id,
+    });
+      }
+      
   }
 
   getStepContent = (stepIndex) => {
@@ -180,15 +204,15 @@ class AddArticleModal extends React.Component {
               inputProps={{
               name: 'research_type',
               id: 'research_type-simple',
-              }}
+              }} 
             >
             <MenuItem>
             <em>None</em>
             </MenuItem>
-            {this.props.research_type.map(research_type => {
+            {this.props.research_type.map((research_type, i) => {
                 return (
 
-                    <MenuItem key={research_type.id} value={research_type.id}>{research_type.type}</MenuItem>
+                    <MenuItem key={i} value={research_type.id}>{research_type.type}</MenuItem>
                 )
             })}
           </Select>
@@ -232,6 +256,7 @@ class AddArticleModal extends React.Component {
             margin="dense"
             label="Date Published"
             fullWidth
+            InputLabelProps={{ shrink: true, }}
             />
           <TextField 
             type="text"
@@ -295,7 +320,7 @@ class AddArticleModal extends React.Component {
             name="summary"
             autoFocus
             margin="dense"
-            label="Summary"
+            label="Article Summary"
             fullWidth
             multiline
             />
@@ -326,13 +351,20 @@ class AddArticleModal extends React.Component {
         return (
         <div>
           <ul>
-          <li>{this.state.research_title}</li>
-          <li>{this.state.research_date}</li>
-          <li>{this.state.research_phase}</li>
+          <li>Title: {this.state.research_title}</li>
+          <li>Date Published: {this.state.research_date}</li>
+          <li>Research Type: {this.props.research_type[this.state.research_type-2].type}</li>
+          <li>Research Phase: {this.props.research_phase[0].phase}</li>
+          <li>Institution Name: {this.state.institution_name}</li>
+          <li>Institution Url: {this.state.institution_url}</li>
+          <li>Institution Address: {this.state.address}</li>
+          <li>Brief Description: {this.state.brief_description}</li>
+          <li>Article Summary: {this.state.summary}</li>
+          <li>User Story: {this.state.user_story}</li>
           </ul>
-          <Paper>
-          <MapWrapper />
-          </Paper>
+          <div style={{height: `20%`, width:`50%`, justifyContent: `center`}}>
+          <MapWrapper initialCenter={{lat:this.state.lat, lng: this.state.lng}} />
+          </div>
         </div>);
       
       default:
