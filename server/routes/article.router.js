@@ -155,6 +155,18 @@ router.put('/:id', (req, res) => {
         }) 
     })
 
+router.put('/delete/:id', (req, res) => {
+    const articleQueryText = `UPDATE articles SET status = $1,  id = $2;`;
+        pool.query(articleQueryText, [4, id])
+        .then(() => {
+            console.log('success');
+            res.sendStatus(201);
+        }).catch((error) =>{
+            console.log('error trying to delete article:', error);
+            res.sendStatus(500);
+        }) 
+    })
+
 router.delete('/:id', (req,res) => {
     let queryText = 'DELETE FROM locations WHERE id = $1;';
     pool.query(queryText, [req.params.id])

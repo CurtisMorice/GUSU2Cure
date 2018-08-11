@@ -1,7 +1,7 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import {ARTICLE_ACTIONS} from '../actions/articleActions';
 import {getArticles, postArticle, deleteArticle, putArticle, getUserArticles} from '../requests/articleRequests';
-import {getResearchPhase, getResearchType} from '../requests/articleRequests';
+import {getResearchPhase, getResearchType, requestDeleteArticle} from '../requests/articleRequests';
 
 function* fetchArticles(action) {
     try {
@@ -92,6 +92,19 @@ function* updateArticle(action) {
     } 
 }
 
+function* requestDelete(action) {
+    try {
+        let id = action.payload.id
+        yield requestDeleteArticle(id);
+        console.log('in article saga to request delete', action.payload);
+        yield put ({
+            type: ARTICLE_ACTIONS.FETCH_ARTICLES
+        })
+    } catch (error) {
+        console.log('error in article saga on PUT', error);
+    } 
+}
+
 function* articleSaga() {
     yield takeLatest (ARTICLE_ACTIONS.FETCH_ARTICLES, fetchArticles)
     yield takeLatest (ARTICLE_ACTIONS.FETCH_USER_ARTICLES, fetchUserArticles)
@@ -100,6 +113,7 @@ function* articleSaga() {
     yield takeLatest (ARTICLE_ACTIONS.POST_ARTICLE, addArticle)
     yield takeLatest (ARTICLE_ACTIONS.DELETE_ARTICLE, deleteArticle)
     yield takeLatest (ARTICLE_ACTIONS.UPDATE_ARTICLE, updateArticle)
+    yield takeLatest (ARTICLE_ACTIONS.UPDATE_ARTICLE, requestDelete)
   }
   
   export default articleSaga;
