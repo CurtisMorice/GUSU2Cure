@@ -90,7 +90,7 @@ function* rejectArticle (action){
         yield fetchModifiedArticles();
 
     }catch(error) {
-        console.log('error in admin saga approving article', error)
+        console.log('error in admin saga rejecting  article', error)
     }
 }
 

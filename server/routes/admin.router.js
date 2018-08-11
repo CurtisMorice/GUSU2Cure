@@ -53,9 +53,10 @@ router.get('/newArticles', (req, res) => {
 
 router.put(`/articles/:id`,(req,res) =>{
     const id = req.params.id;
-    const status = req.body.approved || req.body.rejected
-    const queryText=`UPDATE articles SET status=$1 WHERE id=$2;`
-    pool.query(queryText, [status , id])
+    const status = req.body.approved || req.body.rejected;
+    const admin_comment = req.body.comments;
+    const queryText=`UPDATE articles SET status=$1, admin_comment=$3 WHERE id=$2;`
+    pool.query(queryText, [status , id, admin_comment])
     .then((result) => {
         console.log(result);
         res.sendStatus(201)

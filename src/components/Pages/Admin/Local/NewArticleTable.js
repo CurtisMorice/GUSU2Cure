@@ -300,7 +300,7 @@ class NewArticleTable extends React.Component{
                        </TableCell>
                        <TableCell>
 
-                         <CommentsModal /> 
+                         <CommentsModal adminArticle={newArticle} /> 
 
                         </TableCell>
                         <TableCell>
