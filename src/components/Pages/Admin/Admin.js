@@ -7,7 +7,6 @@ import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 
 // Components
-import AdminHomeProfile from './Local/AdminHomeProfile';
 import AdminNav from './Local/AdminNav';
 
 // styles
@@ -34,7 +33,7 @@ class AdminHome extends Component {
 
   render() {
     let content = null;
-    if (this.props.user.user != null && this.props.user.user.type == 'admin') {
+    if (this.props.user.user != null && this.props.user.user.type === 'admin') {
       content = (
         <div>
           <AdminNav/>
