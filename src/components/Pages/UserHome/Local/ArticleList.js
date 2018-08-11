@@ -71,6 +71,7 @@ const styles = theme => ({
 class ArticleCard extends React.Component {
     state = { 
         expanded: false,
+        isButtonDisabled: false
     };
   
     componentDidMount(){
@@ -94,7 +95,15 @@ class ArticleCard extends React.Component {
 
     requestDelete = (id) =>{
       console.log('this is the article id,', id);
-      
+      const action = ({
+        type: ARTICLE_ACTIONS.UPDATE_ARTICLE,
+        payload: id
+      })
+      console.log('action:', action);
+      this.props.dispatch(action);
+      this.setState({
+        isButtonDisabled: true
+      });
     }
 
     render() {
@@ -140,7 +149,7 @@ class ArticleCard extends React.Component {
                   }
                 <CardActions className="actionButton">
                     <EditArticleModal article={article}/>
-                    <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={ ()=>this.requestDelete(article.id) }>
+                    <IconButton variant="fab" color="secondary" disabled={this.state.isButtonDisabled} aria-label="Edit" onClick={ ()=>this.requestDelete(article.id) }>
                         <DeleteRoundedIcon/>
                     </IconButton>
                 </CardActions>

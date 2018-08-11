@@ -8,7 +8,7 @@ const router = express.Router();
 router.get(`/userArticle/:id`, (req, res) => {
     let id = req.params.id
     console.log('this is id',id);
-    const queryText = `SELECT research_type.type, research_phase.phase, articles.id, location_id, user_id, date_posted, research_date, research_title, research_type, research_phase, institution_name, institution_url, funding_source, related_articles, admin_comment, statuses.status FROM articles JOIN statuses ON articles.status = statuses.id JOIN research_type on articles.research_type=research_type.id JOIN research_phase ON articles.research_phase=research_phase.id WHERE user_id = $1`;
+    const queryText = `SELECT *, statuses.status FROM articles JOIN statuses ON articles.status = statuses.id JOIN research_type on articles.research_type=research_type.id JOIN research_phase ON articles.research_phase=research_phase.id WHERE user_id = $1`;
     pool.query(queryText, [id])
     .then((result)=>{
         console.log('back from database with articles', result.rows);
@@ -151,6 +151,18 @@ router.put('/:id', (req, res) => {
             res.sendStatus(201);
         }).catch((error) =>{
             console.log('error updating article:', error);
+            res.sendStatus(500);
+        }) 
+    })
+
+router.put('/delete/:id', (req, res) => {
+    const articleQueryText = `UPDATE articles SET status = $1,  id = $2;`;
+        pool.query(articleQueryText, [4, id])
+        .then(() => {
+            console.log('success');
+            res.sendStatus(201);
+        }).catch((error) =>{
+            console.log('error trying to delete article:', error);
             res.sendStatus(500);
         }) 
     })
