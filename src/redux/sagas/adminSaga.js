@@ -114,6 +114,10 @@ function* deleteArticle (action){
 function* fetchArticlesByLocation(location){
     console.log('location here:', location);
     const filterLocation = yield getArticlesByLocation(location.payload);
+    yield put({
+        type: ADMIN_ACTIONS.SET_APPROVED_ARTICLE,
+        payload: filterLocation
+    })
     
 }
 
