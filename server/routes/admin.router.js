@@ -23,6 +23,7 @@ router.get('/articles', (req, res) => {
                         JOIN research_phase ON articles.research_phase = research_phase.id
                         LEFT JOIN users ON user_id = users.id
                         WHERE statuses.status = 'approved'
+                        OR WHERE statuses.status = ''
                         ORDER BY date_posted ASC;`
     pool.query(queryText)
         .then((result) => {
