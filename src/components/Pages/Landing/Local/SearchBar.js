@@ -29,22 +29,29 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'nowrap',
+    flexGrow: 1,
   },
   input: {
     fullWidth: 'true',
+    maxWidth: 852,
   },
   textField: {
     flexBasis: 200,
   },
   button: {
     margin: 'normal',
-    marginLeft: 5,
+    marginTop: 12,
+    marginLeft: 20,
     marginRight: -20,
+  },
+  icon: {
+    // marginRight: 20,
   },
   appBar: {
     background: '#18335a',
     display: 'flex',
-    flexBasis: '1 1 1100px',
+    maxWidth: 1100,
+    maxHeight: 64,
     flexWrap: 'nowrap',
     flexGrow: 'auto',
   },
@@ -108,31 +115,35 @@ class SearchBar extends React.Component{
     <div className={classes.root}>
       <AppBar position='static' variant='dense' className={classes.appBar}>
           <Toolbar className={classes.container}>
-            <Grid container direction='row' justify='space-evenly' alignItems='center'>
-              <Grid item justify='flex-start'>
+            <Grid container direction='row' alignItems='center' spacing={16}>
+              <Grid item className={classes.icon}>
                 <SearchIcon />
               </Grid>
-              <Grid item justify='center' xs={12} sm={8} alignItems='stretch'>
-                <FormControl fullWidth className={classes.input}>
-                  <Autocomplete
-                    placeholder='Enter zip code or location'
-                    onChange={this.handleInputChangeFor('searchAddress')}
-                    style={{width: '100%',
-                      height:'44px',
-                      fontSize:'18px',
-                      disableUnderline:'true',
-                      margin: 'none',
-                      // backgroundColor: '#7589b7',
-                    }}
-                    onPlaceSelected={(place) => {
-                      console.log(place);
-                    }}
-                    types={['(regions)']}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item justify='flex-end' margin='none'>
-                <Button size='large' variant='contained' onClick={this.googleApiCall} className={classes.button} aria-label='search' color='primary'>Search</Button>              
+              <Grid item xs={12} sm container>
+                <Grid item xs container direction='row' spacing={16}>
+                  <Grid item xs>
+                    <FormControl fullWidth className={classes.input}>
+                      <Autocomplete
+                        placeholder='Enter zip code or location'
+                        onChange={this.handleInputChangeFor('searchAddress')}
+                        style={{width: '100%',
+                          height:'44px',
+                          fontSize:'18px',
+                          disableUnderline:'true',
+                          margin: 'none',
+                          // backgroundColor: '#7589b7',
+                        }}
+                        onPlaceSelected={(place) => {
+                          console.log(place);
+                        }}
+                        types={['(regions)']}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <Button size='large' variant='contained' onClick={this.googleApiCall} className={classes.button} aria-label='search' color='primary'>Search</Button>              
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Toolbar>
