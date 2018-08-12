@@ -39,7 +39,7 @@ const theme = createMuiTheme({
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
-    <div>
+    <div className='appFrame'>
       <Router>
         <div>
          <Header />

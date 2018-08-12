@@ -14,6 +14,14 @@ html {
     overflow: hidden;
 }
 
+.appFrame {
+    max-height: 953px;
+    max-width: 1680px;
+    margin: 0 auto;
+    padding: 0 auto;
+    overflow: hidden;
+}
+
 input {
     margin: 5px;
     margin-bottom: 10px;
