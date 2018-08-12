@@ -4,15 +4,12 @@ import { connect } from 'react-redux';
 //components
 import ProfileCard from './Card';
 import ArticleCard from './ArticleList';
-import ArticleModal from '../../../Global/Modals/ArticleModal';
+
 
 //stylesheets
 import './userHomeProfile.css';
 
-// //materiaul-ui
-// import AddCircle from '@material-ui/icons/Add';
-// import IconButton from '@material-ui/core/IconButton';
-// import Button from '@material-ui/core/Button';
+
 
 
 const mapStateToProps = state => ({

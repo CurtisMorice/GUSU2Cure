@@ -31,6 +31,10 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 
+import swal from 'sweetalert2'; 
+import './AddArticleModal';
+
+
 const mapStateToProps = state => ({
   user: state.user,
   mapReducer: state.mapReducer,
@@ -51,6 +55,12 @@ instructions: {
   marginTop: theme.spacing.unit,
   marginBottom: theme.spacing.unit,
 },
+
+swal2container: {
+  zIndex: 2147483647,
+}
+
+
 });
 
 function Transition(props) {
@@ -380,16 +390,62 @@ class AddArticleModal extends React.Component {
       console.log('this.state:', this.state);
   }
 
+  // handleNext = (event) => {
+  //   const { activeStep } = this.state;
+  //   this.setState({
+  //     activeStep: activeStep + 1,
+  //   });
+  //   if (this.state.activeStep === 0){
+  //     this.googleApiCall(event);
+  //   }
+    
+  // };
+
   handleNext = (event) => {
     const { activeStep } = this.state;
-    this.setState({
-      activeStep: activeStep + 1,
-    });
-    if (this.state.activeStep === 0){
-      this.googleApiCall(event);
-    }
-    
-  };
+    if( this.state.activeStep === 0) {   
+    if(
+    this.state.research_title === '' ||
+    this.props.research_type === 0 ||
+    this.props.research_phase === 0 ||
+    this.state.institution_name === '' ||
+    this.state.institution_url === '' ||
+    this.state.funding_source ==='') {
+    swal({
+        type: 'warning',
+        title: 'Missing Input',
+        text: 'Please Fill In ALL Fields!',
+      
+      })    
+        }else
+            this.setState({
+              activeStep: activeStep + 1,
+            });
+            if (this.state.activeStep === 0){
+              this.googleApiCall(event);
+            }
+          }
+          else if( this.state.activeStep === 1) {   
+            if(this.state.brief_description === '' ||
+            this.state.summary ==='') {
+              swal({
+                type: 'warning',
+                title: 'Missing Input',
+                text: 'Must have Brief Description and Article Summary!',
+              
+              }) 
+
+            } 
+            else
+            this.setState({
+              activeStep: activeStep + 1,
+            });
+            if (this.state.activeStep === 0){
+              this.googleApiCall(event);
+            }
+          }
+        }
+  
 
   handleBack = () => {
     const { activeStep } = this.state;
