@@ -43,6 +43,10 @@ const styles = theme => ({
   },
   appBar: {
     background: '#18335a',
+    display: 'flex',
+    flexBasis: '1 1 1100px',
+    flexWrap: 'nowrap',
+    flexGrow: 'auto',
   },
   container: {
     display: 'flex',

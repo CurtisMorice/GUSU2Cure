@@ -9,27 +9,18 @@ html {
 
 #app {
     height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
-.instructions h1 {
-    font-size: 24px;
-    font-weight: 700;
+.appFrame {
+    max-height: 953px;
+    max-width: 1680px;
+    margin: 0 auto;
+    padding: 0 auto;
+    overflow: hidden;
 }
-
-.instructions {
-    background-color: #00acb0;
-    padding: 5px;
-    color: #ece7e7;
-}
-/* 
-form {
-    background-color: #dbd5d5;
-    width: 30%;
-    height: 250px;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 2px;
-} */
 
 input {
     margin: 5px;
