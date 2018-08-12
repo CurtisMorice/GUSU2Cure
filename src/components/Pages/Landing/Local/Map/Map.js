@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
 import SearchBar from '../SearchBar'
+import { connect } from 'react-redux';
+import {ADMIN_ACTIONS} from '../../../../../redux/actions/adminActions';
+
+const mapStateToProps = state => ({
+  catalogue: state.adminReducer.approvedArticle,
+});
 
 export class Map extends Component {
     constructor(props) {
@@ -97,7 +103,9 @@ export class Map extends Component {
     // this is fed to the searchbar component. it allows the searchbar to set the state
     // of this component so the map can recenter
     setCurrentLocation = async(location) =>{
-        await this.setState({...this.state, currentLocation: location})        
+        await this.setState({...this.state, currentLocation: location})  
+        console.log('current location:', location);
+        this.props.dispatch({type: ADMIN_ACTIONS.FETCH_ARTICLES_BY_LOCATION, payload: location})
     }
   
     render() {
@@ -144,4 +152,4 @@ Map.defaultProps = {
     }
 }
 
-export default Map
+export default connect(mapStateToProps)(Map)

@@ -94,3 +94,15 @@ export function deleteTargetArticle(action) {
             throw error.response || error;
         })
 }
+
+export function getArticlesByLocation(action){
+    console.log('action is:', action);
+    return axios.get(`api/admin/filterByLocation?lat=${action.lat}&lng=${action.lng}`)
+    .then((response)=>{
+        console.log('here is response.data:', response.data);
+        
+        return response.data})
+    .catch((error)=>{
+        console.log('error retrieving filtered article list in adminRequest:', error);
+    })
+}
