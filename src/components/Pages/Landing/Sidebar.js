@@ -34,7 +34,6 @@ import DropdownSearch from '../Landing/Local/DropdownSearch';
 import SearchBar from '../Landing/Local/SearchBar';
 import AddArticleModal from '../../Global/Modals/AddArticle/AddArticleModal';
 import ArticleModal from '../../Global/Modals/ArticleModal';
-import Map from './Local/Map/Map';
 import MapWrapper from './Local/Map/MapWrapper';
 
 // Stylesheet
