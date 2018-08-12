@@ -6,13 +6,11 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
+import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import '../Landing.css';
-import './SearchBar.css';
 import { MAP_ACTIONS } from '../../../../redux/actions/mapActions';
 import Autocomplete from 'react-google-autocomplete';
 import {KEYS} from '../../../../Key';
@@ -25,23 +23,31 @@ const styles = theme => ({
     flexGrow: 'auto',
   },
   searchButton: {
-    marginLeft: -12,
-    marginRight: 20,
+    marginLeft: -10,
+    marginRight: 10,
   },
   container: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'nowrap',
   },
   input: {
-    margin: theme.spacing.unit,
-    color: 'white',
-    
+    fullWidth: 'true',
   },
   textField: {
     flexBasis: 200,
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: 'normal',
+    marginLeft: 5,
+    marginRight: -20,
+  },
+  appBar: {
+    background: '#18335a',
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'nowrap',
+    fullWidth: 'true',
   },
 });
 
@@ -96,45 +102,36 @@ class SearchBar extends React.Component{
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton className={classes.searchButton} color="inherit" aria-label="search icon">
-            <SearchIcon />
-          </IconButton>
-          <FormControl fullWidth className={classes.input}>
-            <Autocomplete
-              placeholder="Search Google Maps"
-              onChange={this.handleInputChangeFor("searchAddress")}
-              style={{width: '99%',
-                flex: 'auto',
-                height:'30px',
-                fontSize:'18px',
-                disableUnderline:"true",
-                placeholder:"Search Google Maps",
-                color:"white",
-                backgroundColor: "#475c87",
-              }}
-              onPlaceSelected={(place) => {
-                console.log(place);
-              }}
-              types={['(regions)']}
-            />
-          {/* <Input
-            type="search"
-            id="full-width"
-            disableUnderline="true"
-            placeholder="Search Google Maps"
-            className={classes.input}
-            color="white"
-            inputProps={{
-              'aria-label': 'Search Input',
-            }}
-            onChange={this.handleInputChangeFor("searchAddress")}
-
-            /> */}
-          </FormControl>
-          <Button variant="contained" onClick={this.googleApiCall} className={classes.button} aria-label="search" color="primary">Search</Button>
-        </Toolbar>
+      <AppBar position='static' variant='dense' className={classes.appBar}>
+          <Toolbar className={classes.container}>
+            <Grid container direction='row' justify='space-evenly' alignItems='center'>
+              <Grid item justify='flex-start'>
+                <SearchIcon />
+              </Grid>
+              <Grid item justify='center' xs={12} sm={8} alignItems='stretch'>
+                <FormControl fullWidth className={classes.input}>
+                  <Autocomplete
+                    placeholder='Enter zip code or location'
+                    onChange={this.handleInputChangeFor('searchAddress')}
+                    style={{width: '100%',
+                      height:'44px',
+                      fontSize:'18px',
+                      disableUnderline:'true',
+                      margin: 'none',
+                      // backgroundColor: '#7589b7',
+                    }}
+                    onPlaceSelected={(place) => {
+                      console.log(place);
+                    }}
+                    types={['(regions)']}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item justify='flex-end' margin='none'>
+                <Button size='large' variant='contained' onClick={this.googleApiCall} className={classes.button} aria-label='search' color='primary'>Search</Button>              
+              </Grid>
+            </Grid>
+          </Toolbar>
       </AppBar>
     </div>
   )

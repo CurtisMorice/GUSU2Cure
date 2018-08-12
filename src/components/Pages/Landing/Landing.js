@@ -65,7 +65,7 @@ class Landing extends Component {
         <div>
           <Grid container spacing={24}>
             <Grid item xs={12}>
-              {/* <Sidebar /> */}
+              <Sidebar />
             </Grid>
             <Grid item xs={4}>
               {this.props.user.user && <AddArticleModal />}
