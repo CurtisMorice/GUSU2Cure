@@ -1,6 +1,6 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import {ADMIN_ACTIONS} from '../actions/adminActions';
-import { getAllUsers, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser, deleteBadArticle, rejectedArticle, approvedArticle, setUser, deleteTargetArticle} from '../requests/adminRequest';
+import { getAllUsers, getArticlesByLocation, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser, deleteBadArticle, rejectedArticle, approvedArticle, setUser, deleteTargetArticle} from '../requests/adminRequest';
 
 //fetch all registered users
 function* fetchAllUser(action) {
@@ -111,6 +111,15 @@ function* deleteArticle (action){
     }
 }
 
+function* fetchArticlesByLocation(location){
+    console.log('location here:', location);
+    const filterLocation = yield getArticlesByLocation(location.payload);
+    yield put({
+        type: ADMIN_ACTIONS.SET_APPROVED_ARTICLE,
+        payload: filterLocation
+    })
+    
+}
 
 function* adminSaga() {
     yield takeLatest(ADMIN_ACTIONS.FETCH_ALL_USER, fetchAllUser);
@@ -122,6 +131,7 @@ function* adminSaga() {
     yield takeLatest(ADMIN_ACTIONS.SET_USER_TYPE, userType);
     yield takeLatest(ADMIN_ACTIONS.REJECTED_ARTICLE, rejectArticle);
     yield takeLatest(ADMIN_ACTIONS.DELETE_TARGET_ARTICLE, deleteArticle);
+    yield takeLatest(ADMIN_ACTIONS.FETCH_ARTICLES_BY_LOCATION, fetchArticlesByLocation);
 }
   
   export default adminSaga;

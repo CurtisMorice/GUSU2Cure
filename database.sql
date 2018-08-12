@@ -35,7 +35,7 @@ CREATE TABLE "resources" (
 CREATE TABLE "statuses" (
 	"id" SERIAL PRIMARY KEY,
 	"status" varchar(20),
-	CONSTRAINT chk_status CHECK (status IN ('pending', 'approved', 'rejected', 'reviewing'))
+	CONSTRAINT chk_status CHECK (status IN ('pending', 'approved', 'rejected', 'edit-review', 'edit-delete'))
 );
 
 --create research type table
@@ -135,7 +135,9 @@ INSERT INTO profiles(user_id, bio, contact_info) VALUES (1, 'I love research!', 
 INSERT INTO statuses(status) VALUES ('pending');
 INSERT INTO statuses(status) VALUES ('approved');
 INSERT INTO statuses(status) VALUES ('rejected');
-INSERT INTO statuses(status) VALUES ('reviewing');
+INSERT INTO statuses(status) VALUES ('edit-review');
+INSERT INTO statuses(status) VALUES ('edit-delete');
+
 
 
 -- insert into research_type table will only accept nine values: 'stem_cell', 'molecular', 'gene', 'pharmaceutical', 'device', 'rehabilitation', 'fitness', 'survey',  and'other'.

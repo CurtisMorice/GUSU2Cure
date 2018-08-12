@@ -15,6 +15,42 @@ router.get('/', (req, res) => {
         })
 })
 
+router.get('/filterByLocation', (req, res)=> {
+    const lat = parseFloat(req.query.lat);
+    const lng = parseFloat(req.query.lng);
+    console.log('lat:', lat);
+    console.log('lng:', lng);
+    const latRangeMinus = lat-2;    
+    const latRangePlus = lat+2;
+    const lngRangeMinus = lng-2;
+    const lngRangePlus = lng+2;
+    console.log('lat range:', latRangeMinus);
+    console.log('lat range:', latRangePlus);
+    console.log('lat range:', lngRangeMinus);
+    console.log('lat range:', lngRangePlus);
+
+    
+    const queryText = `SELECT articles.*, statuses.status, locations.lat, locations.lng, locations.address from articles                        JOIN statuses ON articles.status = statuses.id
+    RIGHT JOIN research_type ON articles.research_type = research_type.id
+    JOIN research_phase ON articles.research_phase = research_phase.id
+    LEFT JOIN users ON user_id = users.id
+    JOIN locations on location_id = locations.id
+    WHERE (lat BETWEEN ${latRangeMinus} AND ${latRangePlus})
+    AND (lng BETWEEN ${lngRangeMinus} AND ${lngRangePlus})
+    AND (statuses.status = 'approved' OR statuses.status = 'edit-review'
+    OR statuses.status = 'edit-delete');`
+    console.log('queryText:', queryText);
+    pool.query(queryText)
+    .then((result)=>{
+        console.log('back from database with articles filtered by location:', result.rows);
+        res.send(result.rows);
+    })
+    .catch((error)=>{
+        console.log('error getting filtered list of articles:', error);
+        res.sendStatus(500);
+    })
+})
+
 router.get('/articles', (req, res) => {
     const queryText = `SELECT articles.id, date_posted, research_date, research_title, institution_name, institution_url, 
                         funding_source, related_articles, admin_comment, statuses.status, research_type.type, research_phase.phase, username, email FROM articles
@@ -23,6 +59,8 @@ router.get('/articles', (req, res) => {
                         JOIN research_phase ON articles.research_phase = research_phase.id
                         LEFT JOIN users ON user_id = users.id
                         WHERE statuses.status = 'approved'
+                        OR statuses.status = 'edit-review'
+                        OR statuses.status = 'edit-delete'
                         ORDER BY date_posted ASC;`
     pool.query(queryText)
         .then((result) => {
