@@ -29,9 +29,8 @@ import Divider from '@material-ui/core/Divider';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+
 // External components required for functionality
-import DropdownSearch from '../Landing/Local/DropdownSearch';
-import SearchBar from '../Landing/Local/SearchBar';
 import AddArticleModal from '../../Global/Modals/AddArticle/AddArticleModal';
 import ArticleModal from '../../Global/Modals/ArticleModal';
 import MapWrapper from './Local/Map/MapWrapper';

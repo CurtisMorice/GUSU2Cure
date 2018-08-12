@@ -6,7 +6,7 @@ import {ADMIN_ACTIONS} from '../../../redux/actions/adminActions';
 import { MAP_ACTIONS } from '../../../redux/actions/mapActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 import Grid from '@material-ui/core/Grid';
-import Sidebar from './Sidebar';
+// import Sidebar from './Sidebar';
 import AddArticleModal from '../../Global/Modals/AddArticle/AddArticleModal';
 import { ARTICLE_ACTIONS } from '../../../redux/actions/articleActions';
 import MapWrapper from './Local/Map/MapWrapper';
@@ -64,9 +64,9 @@ class Landing extends Component {
         {/* <Nav /> */}
         <div>
           <Grid container spacing={24}>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Sidebar />
-            </Grid>
+            </Grid> */}
             <Grid item xs={4}>
               {this.props.user.user && <AddArticleModal />}
 
