@@ -202,7 +202,7 @@ class CatalogueTable extends Component{
                                 <TableCell> Research Title </TableCell>
                                 <TableCell> Research Type </TableCell>
                                 <TableCell> Research Phase </TableCell>
-                                <TableCell> Institution Name </TableCell>
+                                <TableCell > Institution Name </TableCell>
                                 <TableCell> Institution Website </TableCell>
                                 <TableCell> Funding Source </TableCell>
                                 <TableCell> Research Date </TableCell>
@@ -215,12 +215,12 @@ class CatalogueTable extends Component{
                         <TableBody>
                             {this.props.catalogue.map(article => {
                                 return(
-                                    <TableRow key={article.id}>
+                                    <TableRow key={article.id} >
                                         <TableCell component="th" scope="row"> {article.date_posted.split('T')[0]} </TableCell>
                                         <TableCell component="th" scope="row"> {article.research_title} </TableCell>
                                         <TableCell component="th" scope="row"> {article.type} </TableCell>
                                         <TableCell component="th" scope="row"> {article.phase} </TableCell>
-                                        <TableCell component="th" scope="row"> {article.institution_name} </TableCell>
+                                        <TableCell component="th" scope="row" > {article.institution_name} </TableCell>
                                         <TableCell component="th" scope="row"> {article.institution_url} </TableCell>
                                         <TableCell component="th" scope="row"> {article.funding_source} </TableCell>
                                         <TableCell component="th" scope="row"> {article.research_date} </TableCell>

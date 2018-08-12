@@ -1,9 +1,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import PropTypes from 'prop-types';
@@ -21,7 +20,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import {ARTICLE_ACTIONS} from '../../../../redux/actions/articleActions';
-import {MAP_ACTIONS} from '../../../../redux/actions/mapActions';
+
 
 import MapWrapper from '../../../Global//Modals/AddArticle/Map/MapWrapper';
 import axios from 'axios';
@@ -31,7 +30,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import Paper from '@material-ui/core/Paper';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -215,8 +213,8 @@ class AddArticleModal extends React.Component {
                     <MenuItem key={i} value={research_type.id}>{research_type.type}</MenuItem>
                 )
             })}
-          </Select>
-          <br/>
+          </Select> 
+       <br/>
 
           <InputLabel htmlFor="research_phase-simple">Research Phase</InputLabel>
           <Select
@@ -225,8 +223,8 @@ class AddArticleModal extends React.Component {
             inputProps={{
             name: 'research_phase',
             id: 'research_phase-simple',
-            }}
-          >
+            }} 
+          > 
             <MenuItem>
             <em>None</em>
             </MenuItem>
@@ -235,7 +233,7 @@ class AddArticleModal extends React.Component {
                   <MenuItem key={i} value={research_phase.id}>{research_phase.phase}</MenuItem>
               )
             })}
-          </Select>
+          </Select> 
           <TextField 
             type="text"
             value={this.state.research_title}

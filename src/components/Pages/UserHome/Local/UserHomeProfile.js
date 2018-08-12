@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 //components
 import ProfileCard from './Card';
 import ArticleCard from './ArticleList';
+import ArticleModal from '../../../Global/Modals/ArticleModal';
 
 //stylesheets
 import './userHomeProfile.css';
@@ -23,7 +24,7 @@ class UserHomeProfile extends Component{
     constructor(){
         super();
         this.state={
-
+        
         }
     }
 
@@ -47,8 +48,8 @@ class UserHomeProfile extends Component{
                 {/* GRID 3 */}
                 <div className="grid"> 
                     
-                    Rejected Articles
-                    {JSON.stringify(this.props.adminReducer)}
+                    
+                    {/* {JSON.stringify(this.props.adminReducer)} */}
                     
                 </div>
             </div>

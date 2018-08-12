@@ -1,36 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 //components
-import DeleteArticle from '../../../Global/Article/Article';
+
 
 //material-ui
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import classnames from 'classnames';
+
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
+
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Button from '@material-ui/core/Button';
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 
 //actions
 import { USER_ACTIONS } from '../../../../redux/actions/userActions';
 import { ARTICLE_ACTIONS } from '../../../../redux/actions/articleActions';
 import EditArticleModal from '../../../Global/Modals/AddArticle/EditArticleModal';
+
 
 //ReduxStore
 const mapStateToProps = state => ({
@@ -44,7 +37,7 @@ const styles = theme => ({
     },
     media: {
       height: 0,
-      paddingTop: '56.25%', // 16:9
+      paddingTop: '106.25%', // 16:9
     },
     actions: {
       display: 'flex',
@@ -108,21 +101,44 @@ class ArticleCard extends React.Component {
     render() {
         const { classes } = this.props;        
       return (
-        <div>
+        <div >
+         
             {this.props.articles.map((article, i) => 
+            <div> 
+              <br/>
                 <Card key={i} className={classes.card}>
                 <CardHeader
+                  style={{ textDecoration: 'underline', backgroundColor:'#',  fontSize:'20px' }}
                   title={article.research_title}
                 />
                 <CardContent id="articleStatus">
-                  <Typography component="p">
+                  <Typography style={{color:'#475c87', fontStyle: 'italic', fontSize:'20px'}}component="p">
                     Date Submitted: {article.date_posted}
                   </Typography>
-                  <Typography component="p">
+                  { article.status === "rejected" &&  
+                  <Typography style={{color:'#475c87', fontStyle: 'italic', fontSize:'20px'}} component="p">
                     Status: {article.status}
 
                   </Typography>
+                  }
                 </CardContent>
+                <CardContent>
+                  <Typography  style={{color:'#475c87', fontSize:'20px'}}> Institution Name: </Typography> 
+
+                  <Typography style={{color:'black', fontStyle: 'italic', fontSize:'20px'}}> { article.institution_name } </Typography>
+
+                </CardContent>
+                { article.status === "rejected" &&  
+                <CardContent>
+                  <Typography  style={{color:'#A23645', fontSize:'25px'}}>
+                
+                    Reason article was rejected:</Typography> 
+                    
+                    <Typography style={{color:'black', fontStyle: 'italic', textDecoration: 'underline',  fontSize:'20px'}}>{article.admin_comment}</Typography>
+                  
+                  
+                </CardContent>
+                  }
                 <CardActions className="actionButton">
                     <EditArticleModal article={article}/>
                     <IconButton variant="fab" color="secondary" disabled={this.state.isButtonDisabled} aria-label="Edit" onClick={ ()=>this.requestDelete(article.id) }>
@@ -130,7 +146,9 @@ class ArticleCard extends React.Component {
                     </IconButton>
                 </CardActions>
               </Card>
+            </div>
             )}
+            
         </div>
       );
     }
