@@ -11,7 +11,7 @@ import UserTable from './UserTable';
 import CatalogueTable from './CatalogueTable';
 import NewArticleTable from './NewArticleTable';
 import ModifiedArticleTable from './ModifiedArticleTable';
-import EnhancedTable from './EnhancedTable';
+
 
 function TabContainer(props) {
   return (
@@ -53,14 +53,12 @@ class SimpleTabs extends React.Component {
             <Tab label="Pending Edits" />
             <Tab label="All Articles" />
             <Tab label="Users" />
-            {/* <Tab label="NEWTAble" /> */}
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer> <NewArticleTable /> </TabContainer>}
         {value === 1 && <TabContainer> <ModifiedArticleTable /> </TabContainer>}
         {value === 2 && <TabContainer> <CatalogueTable /> </TabContainer>}
         {value === 3 && <TabContainer> <UserTable /> </TabContainer>}
-        {/* {value === 4 && <TabContainer> <EnhancedTable /> </TabContainer>} */}
       </div>
     );
   }

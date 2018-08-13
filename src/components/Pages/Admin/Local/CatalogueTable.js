@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { ADMIN_ACTIONS } from '../../../../redux/actions/adminActions';
+import ArticleModal from '../../../Global/Modals/ArticleModal';
 
 //material ui
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableFooter from '@material-ui/core/TableFooter';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
@@ -43,14 +42,6 @@ const actionsStyles = theme => ({
     handleFirstPageButtonClick = event => {
         this.props.onChangePage(event, 0);
       };
-
-    // componentDidMount(){
-    //         this.fetchNewArticles();
-    // };
-
-    // fetchNewArticles = () => {
-    //     this.props.dispatch({type: ADMIN_ACTIONS.FETCH_APPROVED_ARTICLE});
-    // };
 
     handleBackButtonClick = event => {
         this.props.onChangePage(event, this.props.page - 1);
@@ -197,17 +188,10 @@ class CatalogueTable extends Component{
                 <Paper className={classes.root}>
                     <Table className={classes.table}>
                         <TableHead>
-                            <TableRow>
+                        <TableRow>
                                 <TableCell> Date Posted </TableCell>
                                 <TableCell> Research Title </TableCell>
-                                <TableCell> Research Type </TableCell>
-                                <TableCell> Research Phase </TableCell>
-                                <TableCell > Institution Name </TableCell>
-                                <TableCell> Institution Website </TableCell>
-                                <TableCell> Funding Source </TableCell>
-                                <TableCell> Research Date </TableCell>
-                                {/* <TableCell> Related Articles </TableCell> */}
-                                <TableCell> User Posted </TableCell>
+                                <TableCell> More Information</TableCell>
                                 <TableCell> User Email </TableCell>
                                 <TableCell> Delete Article </TableCell>
                             </TableRow>
@@ -218,13 +202,10 @@ class CatalogueTable extends Component{
                                     <TableRow key={article.id} >
                                         <TableCell component="th" scope="row"> {article.date_posted.split('T')[0]} </TableCell>
                                         <TableCell component="th" scope="row"> {article.research_title} </TableCell>
-                                        <TableCell component="th" scope="row"> {article.type} </TableCell>
-                                        <TableCell component="th" scope="row"> {article.phase} </TableCell>
-                                        <TableCell component="th" scope="row" > {article.institution_name} </TableCell>
-                                        <TableCell component="th" scope="row"> {article.institution_url} </TableCell>
-                                        <TableCell component="th" scope="row"> {article.funding_source} </TableCell>
-                                        <TableCell component="th" scope="row"> {article.research_date} </TableCell>
-                                        {/* <TableCell component="th" scope="row"> {article.related_articles} </TableCell> */}
+                                        <TableCell> 
+                                             <ArticleModal  adminArticle={article}/> 
+                                        </TableCell>
+                                    
                                         <TableCell component="th" scope="row"> {article.username} </TableCell>
                                         <TableCell component="th" scope="row"> {article.email} </TableCell>
                                         <TableCell component="th" scope="row"> 
