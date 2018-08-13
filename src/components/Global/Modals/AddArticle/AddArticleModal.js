@@ -444,6 +444,11 @@ class AddArticleModal extends React.Component {
               this.googleApiCall(event);
             }
           }
+          else if( this.state.activeStep === 2) {  
+            this.setState({
+              activeStep: activeStep + 1,
+            });
+          }
         }
   
 
