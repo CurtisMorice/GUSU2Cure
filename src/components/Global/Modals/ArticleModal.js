@@ -8,10 +8,6 @@ import {connect} from 'react-redux';
 import { DialogContentText } from '@material-ui/core';
 
 
-const mapStateToProps = state => ({
-    adminReducer :state.adminReducer.newArticles,
-})
-
 
 class ArticleModal extends React.Component {
   state = {
@@ -19,10 +15,11 @@ class ArticleModal extends React.Component {
     scroll: 'paper',
   };
 
+  
 
 
   handleClickOpen = scroll => () => {
-    this.setState({ open: true, scroll });
+    this.setState({ open: true, scroll });    
   };
 
   handleClose = () => {
@@ -41,7 +38,6 @@ class ArticleModal extends React.Component {
           aria-labelledby="scroll-dialog-title"
         >
           <DialogTitle id="scroll-dialog-title">More Info</DialogTitle>
-          {/* {JSON.stringify(this.props.adminReducer)} */}
           <DialogContent >
           {this.props.adminArticle &&
             <DialogContentText >
@@ -58,6 +54,8 @@ class ArticleModal extends React.Component {
                 <li> <em><strong>Research Date:</strong></em> {this.props.adminArticle.research_date.split('T')[0]} </li><br/>
 
                 <li><em><strong>Related Articles</strong></em> {this.props.adminArticle.related_articles.map((item, i)=> <a style={{color:'rgb(51,102,187)'}} key={i} href={item}><li key={i} style={{listStyleType:"none", marginLeft:"25px"}}>{item}</li></a>)}
+                <li> <em><strong>Summary:</strong></em> {this.props.adminArticle.summary} </li><br/>
+            <li> <em><strong>User Story:</strong></em> {this.props.adminArticle.user_story} </li><br/>
             </li>
             </DialogContentText>
             }
@@ -78,6 +76,9 @@ class ArticleModal extends React.Component {
 
             <li><em><strong>Related Articles</strong></em> {this.props.article.related_articles.map((item, i)=> <a key={i} style={{color:'rgb(51,102,187)', marginLeft: '25px'}} href={item}>{i === 0 && <br/>}{item}<br/></a>)}
             </li>
+            <li> <em><strong>Summary:</strong></em> {this.props.article.summary} </li><br/>
+            <li> <em><strong>User Story:</strong></em> {this.props.article.user_story} </li><br/>
+
         </DialogContentText>
             }
         </DialogContent>
@@ -98,4 +99,4 @@ class ArticleModal extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(ArticleModal);
+export default ArticleModal;

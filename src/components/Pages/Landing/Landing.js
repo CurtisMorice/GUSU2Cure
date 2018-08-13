@@ -173,7 +173,7 @@ class Landing extends Component {
           <div className={classes.toolbar}>
             <AppBar position="absolute" className={classes.appBar} >
               <div className='toolbarContainer'>
-                <Toolbar>
+                <Toolbar className="mdc-toolbar--fixed">
                   <Typography variant='title' color='inherit' className={classes.flex}>
                     Find resources in your area
                   </Typography>
@@ -185,7 +185,7 @@ class Landing extends Component {
             </AppBar>
           </div>
           <div>
-            <Paper elevation={1} className='scrollPaper'>
+            {/* <Paper elevation={1} className='scrollPaper'> */}
             
               {/* <Parallax filter> */}
                 <div className={classes.gridList} cols={1}>
@@ -222,7 +222,7 @@ class Landing extends Component {
                   </GridList>
                 </div>
               {/* </Parallax> */}
-            </Paper>
+            {/* </Paper> */}
           </div>
         </Drawer>
         <main className={classes.appFrame}>

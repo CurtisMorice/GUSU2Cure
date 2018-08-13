@@ -52,8 +52,7 @@ router.get('/filterByLocation', (req, res)=> {
 })
 
 router.get('/articles', (req, res) => {
-    const queryText = `SELECT articles.id, date_posted, research_date, research_title, institution_name, institution_url, 
-                        funding_source, related_articles, admin_comment, statuses.status, research_type.type, research_phase.phase, username, email FROM articles
+    const queryText = `SELECT articles.*, statuses.status, research_type.type, research_phase.phase, username, email FROM articles
                         JOIN statuses ON articles.status = statuses.id
                         RIGHT JOIN research_type ON articles.research_type = research_type.id
                         JOIN research_phase ON articles.research_phase = research_phase.id
@@ -73,7 +72,7 @@ router.get('/articles', (req, res) => {
 })
 
 router.get('/newArticles', (req, res) => {
-    const queryText = `SELECT articles.id,date_posted,research_date,research_title,research_phase.phase,institution_name,institution_url,funding_source,related_articles,admin_comment,statuses.status,research_type.type,username,email FROM articles
+    const queryText = `SELECT articles.*, statuses.status,research_type.type,users.username,users.email FROM articles
     JOIN statuses ON articles.status = statuses.id
     RIGHT JOIN research_type ON articles.research_type = research_type.id
     JOIN research_phase ON articles.research_phase = research_phase.id
