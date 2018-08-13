@@ -1,7 +1,7 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import {ARTICLE_ACTIONS} from '../actions/articleActions';
 import {getArticles, postArticle, deleteArticle, putArticle, getUserArticles} from '../requests/articleRequests';
-import {getResearchPhase, getResearchType, requestDeleteArticle} from '../requests/articleRequests';
+import {getResearchPhase, getResearchType, requestDeleteArticle, postQuasiArticle, postQuasiArticleDelete} from '../requests/articleRequests';
 
 function* fetchArticles(action) {
     try {
@@ -66,13 +66,36 @@ function* addArticle(action) {
     }  
 } 
 
+function* addQuasiArticle(action) {
+    try {
+        let article = action.payload
+        yield postQuasiArticle(article);
+    } catch (error) {
+        console.log('error in article saga on POST', error); 
+    }  
+} 
+
+function* addQuasiArticleDelete(action) {
+    try {
+        let article = action.payload
+        yield postQuasiArticleDelete(article);
+        yield put ({
+            type: ARTICLE_ACTIONS.FETCH_USER_ARTICLES,
+            payload: action.payload.user_id
+        })
+    } catch (error) {
+        console.log('error in article saga on PUT', error);
+    } 
+}
+
+
 function* removeArticle(action) {
     try {
         let id = action.payload
         yield deleteArticle(id);
         yield put ({
             type: ARTICLE_ACTIONS.FETCH_ARTICLES
-        })
+        });
     } catch (error) {
         console.log('error in article saga on DELETE', error);    
     }   
@@ -81,26 +104,11 @@ function* removeArticle(action) {
 function* updateArticle(action) {
     try {
         let article = action.payload
-        let id = action.payload.id
-        yield putArticle(article, id);
-        console.log('in article saga for update', action.payload);
-        yield put ({
-            type: ARTICLE_ACTIONS.FETCH_ARTICLES
-        })
-    } catch (error) {
-        console.log('error in article saga on PUT', error);
-    } 
-}
-
-function* requestDelete(action) {
-    try {
-        let id = action.payload.id
-        yield requestDeleteArticle(id);
-        console.log('in article saga to request delete', action.payload.id);
-        yield put ({
-            type: ARTICLE_ACTIONS.FETCH_USER_ARTICLES,
-            payload: action.payload.user_id
-        })
+        yield putArticle(article);
+        console.log('in article saga for update', action);
+        // yield put ({
+        //     type: ARTICLE_ACTIONS.FETCH_ARTICLES
+        // })
     } catch (error) {
         console.log('error in article saga on PUT', error);
     } 
@@ -112,9 +120,10 @@ function* articleSaga() {
     yield takeLatest (ARTICLE_ACTIONS.FETCH_RESEARCH_TYPE, fetchResearchType)
     yield takeLatest (ARTICLE_ACTIONS.FETCH_RESEARCH_PHASE, fetchResearchPhase)
     yield takeLatest (ARTICLE_ACTIONS.POST_ARTICLE, addArticle)
-    // yield takeLatest (ARTICLE_ACTIONS.DELETE_ARTICLE, deleteArticle)
     yield takeLatest (ARTICLE_ACTIONS.UPDATE_ARTICLE, updateArticle)
-    yield takeLatest (ARTICLE_ACTIONS.UPDATE_ARTICLE_STATUS, requestDelete)
+    yield takeLatest (ARTICLE_ACTIONS.POST_QUASI_ARTICLE, addQuasiArticle)
+    yield takeLatest (ARTICLE_ACTIONS.POST_QUASI_DELETE, addQuasiArticleDelete)
+
   }
   
   export default articleSaga;
