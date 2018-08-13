@@ -51,6 +51,18 @@ router.get('/filterByLocation', (req, res)=> {
     })
 })
 
+router.get('/reviewArticles', (req, res) => {
+    const queryText = `SELECT quasi_articles.id, article_id, user_id, date_posted, research_title, institution_name, institution_url, funding_source, related_articles, admin_comment, brief_description, summary, user_story, research_date, research_type.type, research_phase.phase FROM quasi_articles JOIN research_type on quasi_articles.research_type = research_type.id JOIN research_phase ON quasi_articles.research_phase = research_phase.id;`
+    pool.query(queryText)
+        .then((result) => {
+            console.log('back from the databse with quasi articles', result);
+            res.send(result.rows);
+        }).catch((error) => {
+            console.log('error getting approved articles', error);
+            res.sendStatus(500);
+        })
+})
+
 router.get('/articles', (req, res) => {
     const queryText = `SELECT articles.*, statuses.status, research_type.type, research_phase.phase, username, email FROM articles
                         JOIN statuses ON articles.status = statuses.id

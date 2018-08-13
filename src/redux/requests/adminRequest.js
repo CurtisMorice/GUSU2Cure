@@ -29,7 +29,7 @@ export function getNewArticles() {
 }
 
 export function getModifiedArticles() {
-    return axios.get('/api/admin/articles')
+    return axios.get('/api/admin/reviewArticles')
     .then(response => response.data)
     .catch((error)=>{
         console.log('error in the getModifiedArticles');
