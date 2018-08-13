@@ -9,7 +9,8 @@ function CustomCardHeader({ ...props }) {
     const { 
         classes, 
         className, 
-        children, 
+        children,
+        color,
         ...rest 
     } = props;
 
