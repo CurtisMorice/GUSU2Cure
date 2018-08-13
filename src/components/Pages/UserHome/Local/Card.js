@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 //components
+import EditProfile from '../../../Global/Modals/EditProfile';
 
 //material-ui
 import PropTypes from 'prop-types';
@@ -86,8 +87,8 @@ class ProfileCard extends React.Component {
                 </Avatar>
               }
             action={
-                <IconButton variant="fab" color="primary" aria-label="Edit" onClick={this.editProfile}>
-                  <EditIcon/>
+                <IconButton>
+                  <EditProfile/>
                 </IconButton>
             }
               title={this.props.user.user.username}

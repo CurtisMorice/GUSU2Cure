@@ -1,6 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import { USER_ACTIONS } from '../actions/userActions';
-import { callUser } from '../requests/userRequests';
+import { callUser, userProfileUpdate } from '../requests/userRequests';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchUser() {
@@ -39,8 +39,21 @@ function* fetchUser() {
   dispatched while a fetch is already pending, that pending fetch is cancelled
   and only the latest one will be run.
 */
+
+function* updateUserProfile(action) {
+  try{
+    console.log('thi is the action', action)
+    yield userProfileUpdate(action);
+    // yield fetchUser();
+  } catch (error){
+    console.log('Error updating user profile saga');
+    
+  }
+}
+
 function* userSaga() {
   yield takeLatest(USER_ACTIONS.FETCH_USER, fetchUser);
+  yield takeLatest(USER_ACTIONS.UPDATE_PROFILE, updateUserProfile)
 }
 
 export default userSaga;

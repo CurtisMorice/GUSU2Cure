@@ -18,12 +18,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 import {USER_ACTIONS} from '../../../redux/actions/userActions';
 
-
 const mapStateToProps = state => ({
     user: state.user,
 });
 
-class editProfile extends React.Component {
+class EditProfile extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -35,14 +34,16 @@ class editProfile extends React.Component {
 
     componentDidMount(){
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-
     }
 
     handleClickOpen  = () => {
         this.setState({
             open: true,
             updatedProfile: {
-
+                email: this.props.user.user.email,
+                contact_info: this.props.user.user.contact_info,
+                bio: this.props.user.user.bio,
+                id: this.props.user.user.id
             }
         })
     }
@@ -51,21 +52,79 @@ class editProfile extends React.Component {
         this.setState({ open: false });
     };
 
+    handleUpdateProfile = (propertyName) => (event) => {
+        console.log('changes', event.target.value);
+        this.setState({
+            updatedProfile: {
+            ...this.state.updatedProfile,
+            [propertyName]: event.target.value
+            }
+        })
+
+        console.log('state of profile:', this.state);
+    }
+
+    updateUserProfile = () => {
+        console.log('update user profile');
+        const action = ({
+            type: USER_ACTIONS.UPDATE_PROFILE,
+            payload: this.state.updatedProfile
+        })
+        this.props.dispatch(action)
+        console.log('updated profile is: ', action);
+    }
+
     render(){
         return(
             <div>
-        <IconButton onClick={this.handleClickOpen}>
-            <Icon color="primary">edit_icon</Icon>
-        </IconButton>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-        <DialogTitle id="form-dialog-title">Update the article below:</DialogTitle>
-        <DialogContent>
-        </DialogContent>
-        </Dialog>
+                <IconButton onClick={this.handleClickOpen}>
+                    <Icon color="primary">edit_icon</Icon>
+                </IconButton>
+                <Dialog
+                open={this.state.open}
+                onClose={this.handleClose}
+                aria-labelledby="form-dialog-title"
+                >
+                <DialogTitle id="form-dialog-title">Update the article below:</DialogTitle>
+                <DialogContent>
+                    {JSON.stringify(this.props.user)}
+                    <TextField
+                        value={this.state.updatedProfile.email}
+                        onChange={this.handleUpdateProfile('email')}
+                        name="email"
+                        label="User Email"
+                        autoFocus
+                        margin="dense"
+                        fullWidth
+                    />
+                    <TextField
+                        value={this.state.updatedProfile.contact_info}
+                        onChange={this.handleUpdateProfile('contact_info')}
+                        name="contact"
+                        label="User contact"
+                        autoFocus
+                        margin="dense"
+                        fullWidth
+                    />
+                    <TextField
+                        value={this.state.updatedProfile.bio}
+                        onChange={this.handleUpdateProfile('bio')}
+                        name="bio"
+                        label="User Bio"
+                        autoFocus
+                        margin="dense"
+                        fullWidth
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.updateUserProfile} variant="contained" color="primary">
+                        Update Profile
+                    </Button>
+                    <Button onClick={this.handleClose} color="primary">
+                        Cancel
+                    </Button>
+                </DialogActions>
+                </Dialog>
 
             </div>
         )
@@ -74,3 +133,4 @@ class editProfile extends React.Component {
 }
 
 
+export default connect(mapStateToProps)(EditProfile);

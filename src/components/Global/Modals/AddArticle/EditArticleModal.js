@@ -101,8 +101,7 @@ handleUpdate = (propertyName) => (event) => {
             [propertyName]: event.target.value
         }
     })
-    console.log('state:', this.state);
-    
+    console.log('state:', this.state);   
 }
 
 updateArticle = () => {
