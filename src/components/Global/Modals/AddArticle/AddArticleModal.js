@@ -22,7 +22,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import {ARTICLE_ACTIONS} from '../../../../redux/actions/articleActions';
 
 
-import MapWrapper from '../../../Global//Modals/AddArticle/Map/MapWrapper';
+import MapWrapper from './Map/MapWrapper';
 import axios from 'axios';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -390,16 +390,7 @@ class AddArticleModal extends React.Component {
       console.log('this.state:', this.state);
   }
 
-  // handleNext = (event) => {
-  //   const { activeStep } = this.state;
-  //   this.setState({
-  //     activeStep: activeStep + 1,
-  //   });
-  //   if (this.state.activeStep === 0){
-  //     this.googleApiCall(event);
-  //   }
-    
-  // };
+
 
   handleNext = (event) => {
     const { activeStep } = this.state;
