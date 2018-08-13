@@ -70,13 +70,11 @@ const styles = theme => ({
 class ArticleCard extends React.Component {
     state = { 
         expanded: false,
-        isButtonDisabled: false
     };
   
-    componentDidMount(){
+    componentDidMount = async() => {
       this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-      this.getArticleDetail();
-        
+      await this.getArticleDetail();
     }
 
     handleExpandClick = () => {
@@ -92,17 +90,16 @@ class ArticleCard extends React.Component {
         this.props.dispatch({type: ARTICLE_ACTIONS.FETCH_USER_ARTICLES, payload: id});
     }
 
-    requestDelete = (id) =>{
-      console.log('this is the article id,', id);
+    requestDelete = (article) => {
+      const id = article.id
+      const user_id = article.user_id
+      console.log('this is the article id,', article);
       const action = ({
-        type: ARTICLE_ACTIONS.UPDATE_ARTICLE,
-        payload: id
+        type: ARTICLE_ACTIONS.UPDATE_ARTICLE_STATUS,
+        payload: article
       })
       console.log('action:', action);
       this.props.dispatch(action);
-      this.setState({
-        isButtonDisabled: true
-      });
     }
 
     render() {
@@ -120,12 +117,11 @@ class ArticleCard extends React.Component {
                   </Typography>
                   <Typography component="p">
                     Status: {article.status}
-
                   </Typography>
                 </CardContent>
                 <CardActions className="actionButton">
                     <EditArticleModal article={article}/>
-                    <IconButton variant="fab" color="secondary" disabled={this.state.isButtonDisabled} aria-label="Edit" onClick={ ()=>this.requestDelete(article.id) }>
+                    <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={ ()=>this.requestDelete(article) }>
                         <DeleteRoundedIcon/>
                     </IconButton>
                 </CardActions>

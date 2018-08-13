@@ -24,6 +24,7 @@ router.get('/articles', (req, res) => {
                         LEFT JOIN users ON user_id = users.id
                         WHERE statuses.status = 'approved'
                         ORDER BY date_posted ASC;`
+
     pool.query(queryText)
         .then((result) => {
             console.log('back from the databse with all the approved articles', result);
