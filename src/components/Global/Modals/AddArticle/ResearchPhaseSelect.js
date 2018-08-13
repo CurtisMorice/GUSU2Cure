@@ -50,7 +50,7 @@ class ResearchPhaseSelect extends React.Component {
           control={
             <Checkbox
               checked={this.state.research_phase}
-              onChange={this.handleChange('research_type')}
+              onChange={this.handleChange('research_phase')}
               value={research_phase.id}
               color="primary"
             />
