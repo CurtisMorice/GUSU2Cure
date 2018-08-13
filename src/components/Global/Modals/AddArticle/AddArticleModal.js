@@ -361,8 +361,8 @@ class AddArticleModal extends React.Component {
           <ul>
           <li>Title: {this.state.research_title}</li>
           <li>Date Published: {this.state.research_date}</li>
-          <li>Research Type: {this.props.research_type[this.state.research_type-2].type}</li>
-          <li>Research Phase: {this.props.research_phase[0].phase}</li>
+          <li>Research Type: {this.props.research_type[this.state.research_type-1].type}</li>
+          <li>Research Phase: {this.props.research_phase[this.state.research_phase-1].phase}</li>
           <li>Institution Name: {this.state.institution_name}</li>
           <li>Institution Url: {this.state.institution_url}</li>
           <li>Institution Address: {this.state.address}</li>
@@ -465,6 +465,27 @@ class AddArticleModal extends React.Component {
     });
   };
 
+  fillForm = () => {
+    this.setState({
+      ...this.state,
+      user_id: '',
+              research_date: '2018/08/03',
+              research_title: 'Induced Pluripotent Stem Cell Therapies for Cervical Spinal Cord Injury',
+              research_type: 3,
+              research_phase: 3,
+              institution_name: 'Department of Neurosurgery, Stanford University School of Medicine',
+              institution_url: 'http://med.stanford.edu/neurosurgery.html',
+              funding_source: 'National Institute of Health',
+              related_articles: 'https://www.nih.gov/about-nih/what-we-do/budget',
+              brief_description: 'This research discusses a new type of therapy for certical level spinal cord injuries',
+              summary: 'Cervical-level injuries account for the majority of presented spinal cord injuries (SCIs) to date. Despite the increase in survival rates due to emergency medicine improvements, overall quality of life remains poor, with patients facing variable deficits in respiratory and motor function. Therapies aiming to ameliorate symptoms and restore function, even partially, are urgently needed. Current therapeutic avenues in SCI seek to increase regenerative capacities through trophic and immunomodulatory factors, provide scaffolding to bridge the lesion site and promote regeneration of native axons, and to replace SCI-lost neurons and glia via intraspinal transplantation. Induced pluripotent stem cells (iPSCs) are a clinically viable means to accomplish this; they have no major ethical barriers, sources can be patient-matched and collected using non-invasive methods. ',
+              user_story: 'If this treatment is found to be effective, it could help a lot of people like me who have cervical level spinal cord injury.',
+              address: '300 Pasteur Dr, Palo Alto, CA 94304',
+              lat: 0,
+              lng: 0,
+    })
+  }
+
   render() {
     const { classes } = this.props;
     const steps = this.getSteps();
@@ -525,6 +546,9 @@ class AddArticleModal extends React.Component {
                 <Button variant="contained" color="primary" onClick={this.handleNext}>
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
+                {this.state.activeStep === 0 && <Button onClick={this.fillForm}>
+                  
+                </Button>}
       
               </div>
             </div>
