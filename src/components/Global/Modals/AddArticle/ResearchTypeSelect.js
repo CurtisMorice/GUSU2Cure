@@ -39,6 +39,7 @@ class ResearchTypeSelect extends React.Component {
     const { classes } = this.props;
 
     return (
+      <div>
       <FormGroup row>
       {this.props.research_type.map((research_type, i) => {
         return (
@@ -55,11 +56,8 @@ class ResearchTypeSelect extends React.Component {
         />
         )
       })}
-      
- 
-
-      
       </FormGroup>
+      </div>
     );
   }
 }

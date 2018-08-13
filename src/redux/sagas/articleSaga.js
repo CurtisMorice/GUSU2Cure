@@ -96,9 +96,10 @@ function* requestDelete(action) {
     try {
         let id = action.payload.id
         yield requestDeleteArticle(id);
-        console.log('in article saga to request delete', action.payload);
+        console.log('in article saga to request delete', action.payload.id);
         yield put ({
-            type: ARTICLE_ACTIONS.FETCH_ARTICLES
+            type: ARTICLE_ACTIONS.FETCH_USER_ARTICLES,
+            payload: action.payload.user_id
         })
     } catch (error) {
         console.log('error in article saga on PUT', error);
@@ -113,7 +114,7 @@ function* articleSaga() {
     yield takeLatest (ARTICLE_ACTIONS.POST_ARTICLE, addArticle)
     yield takeLatest (ARTICLE_ACTIONS.DELETE_ARTICLE, deleteArticle)
     yield takeLatest (ARTICLE_ACTIONS.UPDATE_ARTICLE, updateArticle)
-    yield takeLatest (ARTICLE_ACTIONS.UPDATE_ARTICLE, requestDelete)
+    yield takeLatest (ARTICLE_ACTIONS.UPDATE_ARTICLE_STATUS, requestDelete)
   }
   
   export default articleSaga;
