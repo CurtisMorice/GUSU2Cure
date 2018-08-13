@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 //components
+import EditProfile from '../../../Global/Modals/EditProfile';
 
 //material-ui
 import PropTypes from 'prop-types';
@@ -78,7 +79,6 @@ class ProfileCard extends React.Component {
         const { classes } = this.props;        
       return (
         <div>
-        {/* {JSON.stringify(this.props.user.user.username)} */}
           <Card className={classes.card}>
             <CardHeader
               avatar={
@@ -86,18 +86,12 @@ class ProfileCard extends React.Component {
                   img
                 </Avatar>
               }
-            //   action={
-            //     <IconButton>
-            //       <MoreVertIcon />
-            //     </IconButton>
-            //   }
             action={
-                <IconButton variant="fab" color="primary" aria-label="Edit" onClick={this.editProfile}>
-                  <EditIcon/>
+                <IconButton>
+                  <EditProfile/>
                 </IconButton>
             }
               title={this.props.user.user.username}
-            //   subheader="September 14, 2016"
             />
             <CardContent>
               <Typography component="p">
@@ -111,12 +105,6 @@ class ProfileCard extends React.Component {
                 <Typography>
                     User Bio
                 </Typography>
-              {/* <IconButton aria-label="Add to favorites">
-                <FavoriteIcon />
-              </IconButton>
-              <IconButton aria-label="Share">
-                <ShareIcon />
-              </IconButton> */}
               <IconButton
                 className={classnames(classes.expand, {
                   [classes.expandOpen]: this.state.expanded,

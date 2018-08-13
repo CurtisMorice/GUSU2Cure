@@ -62,7 +62,6 @@ router.get('/articles', (req, res) => {
                         OR statuses.status = 'edit-review'
                         OR statuses.status = 'edit-delete'
                         ORDER BY date_posted ASC;`
-
     pool.query(queryText)
         .then((result) => {
             console.log('back from the databse with all the approved articles', result);

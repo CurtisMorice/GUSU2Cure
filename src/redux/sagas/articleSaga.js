@@ -112,7 +112,7 @@ function* articleSaga() {
     yield takeLatest (ARTICLE_ACTIONS.FETCH_RESEARCH_TYPE, fetchResearchType)
     yield takeLatest (ARTICLE_ACTIONS.FETCH_RESEARCH_PHASE, fetchResearchPhase)
     yield takeLatest (ARTICLE_ACTIONS.POST_ARTICLE, addArticle)
-    yield takeLatest (ARTICLE_ACTIONS.DELETE_ARTICLE, deleteArticle)
+    // yield takeLatest (ARTICLE_ACTIONS.DELETE_ARTICLE, deleteArticle)
     yield takeLatest (ARTICLE_ACTIONS.UPDATE_ARTICLE, updateArticle)
     yield takeLatest (ARTICLE_ACTIONS.UPDATE_ARTICLE_STATUS, requestDelete)
   }
