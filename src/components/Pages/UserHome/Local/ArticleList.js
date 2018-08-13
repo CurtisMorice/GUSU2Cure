@@ -88,7 +88,7 @@ class ArticleCard extends React.Component {
     requestDelete = (id) =>{
       console.log('this is the article id,', id);
       const action = ({
-        type: ARTICLE_ACTIONS.UPDATE_ARTICLE,
+        type: ARTICLE_ACTIONS.DELETE_ARTICLE,
         payload: id
       })
       console.log('action:', action);
