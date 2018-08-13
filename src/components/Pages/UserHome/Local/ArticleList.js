@@ -136,10 +136,16 @@ class ArticleCard extends React.Component {
                 </CardContent>
                   }
                 <CardActions className="actionButton">
+                {console.log('status', article.status)}
+                    
                     <EditArticleModal article={article}/>
+                    {article.status !== 'edit-delete'?
                     <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={ ()=>this.requestDelete(article) }>
                         <DeleteRoundedIcon/>
+                    </IconButton> : <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={ ()=>this.requestDelete(article)} disabled>
+                        <DeleteRoundedIcon/>
                     </IconButton>
+                  }
                 </CardActions>
               </Card>
             </div>

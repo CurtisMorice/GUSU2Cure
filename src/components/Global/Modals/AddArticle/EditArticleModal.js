@@ -114,9 +114,13 @@ postQuasiArticle = () => {
   render() {
     return (
       <div>
+        {this.props.article.status !== 'edit-review'?
         <IconButton onClick={() => this.handleClickOpen(this.props.article)}>
         <Icon color="primary">edit_icon</Icon>
-        </IconButton>
+        </IconButton>:<IconButton onClick={() => this.handleClickOpen(this.props.article)} disabled>
+        <Icon color="primary">edit_icon</Icon>
+        </IconButton> 
+        }
         
         <Dialog
           open={this.state.open}
