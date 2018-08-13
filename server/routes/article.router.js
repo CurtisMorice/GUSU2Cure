@@ -74,7 +74,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/type', (req, res) => {
-    const queryText = `SELECT * FROM research_type`;
+    const queryText = `SELECT * FROM research_type ORDER BY id;`;
     pool.query(queryText)
     .then((result)=>{
         console.log('back from database with research types', result.rows);
@@ -87,7 +87,7 @@ router.get('/type', (req, res) => {
 });
 
 router.get('/phase', (req, res) => {
-    const queryText = `SELECT * FROM research_phase`;
+    const queryText = `SELECT * FROM research_phase ORDER BY id;`;
     pool.query(queryText)
     .then((result)=>{
         console.log('back from database with research phases', result.rows);
