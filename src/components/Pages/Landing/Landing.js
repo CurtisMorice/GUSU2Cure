@@ -19,9 +19,11 @@ import { ARTICLE_ACTIONS } from '../../../redux/actions/articleActions';
 // Material-UI required components
 import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
+import Button from '@material-ui/core/Button'; 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
@@ -109,22 +111,39 @@ const styles = theme => ({
   cardOutput: {
     position: 'relative',
     float: 'left',
-    paddingLeft: '20px',
-    paddingRight: '20px',
+    padding: '20px',
   },
   cardObject: {
     float: 'right',
-    marginLeft: '10px',
-    minWidth: 300,
+    marginTop: '30px',
+    marginBottom: '30px',
+    minWidth: 500,
+    flexGrow: 'auto',
   },
   title: {
-    marginBottom: 16
+    marginBottom: 16,
   },
   toolbarContainer: {
 		position: 'sticky',
 		width: '100%',
 		zIndex: 1
-	},
+  },
+  gridList: {
+    maxWidth: '550px',
+  },
+  articleList: {
+    scroll: 'paper',
+  },
+
+  subtext: {
+    color: '#808080',
+    fontSize: '.75rem',
+  },
+
+  button: {
+    marginRight: '1rem',
+  },
+
   
 });
 
@@ -185,14 +204,16 @@ class Landing extends Component {
             </AppBar>
           </div>
           <div>
-            {/* <Paper elevation={1} className='scrollPaper'> */}
+            <Paper elevation={1} className={classes.articleList}>
+
             
-              {/* <Parallax filter> */}
+              <Parallax filter>
                 <div className={classes.gridList} cols={1}>
                   <GridList className={classes.cardOutput}>
                     {this.props.catalogue.map((article, i) => {
                       return (
-                        <GridListTile className={classes.cardObject}>
+                        
+                        <ListItem className={classes.cardObject}>
                           <CustomCard key={i} value={article}>
                             <CustomCardHeader>
                               <Typography color='inherit' variant='title'>
@@ -203,26 +224,34 @@ class Landing extends Component {
                               <Typography className={classes.title}>
                                 {article.institution_name}
                                 <br />
-                                {article.institution_url}
                               </Typography>
                               <Typography component='p'>
-                                {article.funding_source}
+                                Funded by: {article.funding_source}
                                 <br />
-                                {article.related_articles}
+                                {/* {article.related_articles} */}
                                 <br />
-                                {article.date_posted.split('T')[0]}
+                                
                               </Typography>
-                              <ArticleModal article={article} />
+                              <Typography className={classes.subtext}>
+                                Posted on: {article.date_posted.split('T')[0]}
+                              </Typography>
                             </CustomCardBody>
+                            <CustomCardFooter>
+                              <a href={article.institution_url}>
+                                <Button variant='contained' color='primary' className={classes.button}>
+                                  Visit Website
+                                </Button>
+                              </a>
+                              <ArticleModal article={article} />
+                            </CustomCardFooter>
                           </CustomCard>
-                        </GridListTile>
-                        
+                        </ListItem>
                       )
                     })}
                   </GridList>
                 </div>
-              {/* </Parallax> */}
-            {/* </Paper> */}
+              </Parallax>
+            </Paper>
           </div>
         </Drawer>
         <main className={classes.appFrame}>

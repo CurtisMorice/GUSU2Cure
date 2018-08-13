@@ -50,7 +50,7 @@ const styles = theme => ({
   appBar: {
     background: '#18335a',
     display: 'flex',
-    maxWidth: 1100,
+    maxWidth: 1680,
     maxHeight: 64,
     flexWrap: 'nowrap',
     flexGrow: 'auto',
