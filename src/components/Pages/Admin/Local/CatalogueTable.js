@@ -203,7 +203,9 @@ class CatalogueTable extends Component{
                                         <TableCell component="th" scope="row"> {article.date_posted.split('T')[0]} </TableCell>
                                         <TableCell component="th" scope="row"> {article.research_title} </TableCell>
                                         <TableCell> 
-                                             <ArticleModal  adminArticle={article}/> 
+                                        {console.log('the article:', article)}
+                                             
+                                        <ArticleModal  adminArticle={article}/> 
                                         </TableCell>
                                     
                                         <TableCell component="th" scope="row"> {article.username} </TableCell>
