@@ -42,6 +42,7 @@ class ResearchPhaseSelect extends React.Component {
     const { classes } = this.props;
 
     return (
+      <div>
       <FormGroup row>
       {this.props.research_phase.map((research_phase, i) => {
         return (
@@ -58,8 +59,8 @@ class ResearchPhaseSelect extends React.Component {
         />
         )
       })}
-       
       </FormGroup>
+      </div>
     );
   }
 }

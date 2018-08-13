@@ -15,6 +15,9 @@ const article = (state=[], action) => {
         case ARTICLE_ACTIONS.UPDATE_ARTICLE:
             // console.log('in article reducer for PUT', action.payload);
             return [action.payload]
+        case ARTICLE_ACTIONS.UPDATE_ARTICLE_STATUS:
+            // console.log('in article reducer for PUT', action.payload);
+            return [action.payload]
         default:
             return state; 
     }

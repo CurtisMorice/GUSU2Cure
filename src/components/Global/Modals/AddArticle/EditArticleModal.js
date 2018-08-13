@@ -18,13 +18,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import {USER_ACTIONS} from '../../../../redux/actions/userActions';
 import ResearchPhaseSelect from './ResearchPhaseSelect';
 import ResearchTypeSelect from './ResearchTypeSelect';
-
-
-// import DeleteSnackbar from '../Snackbars/DeleteSnackbar';
+ 
 
 const mapStateToProps = state => ({
     user: state.user,
-    articles: state.articleReducer.article,
+    // articles: state.articleReducer.article,
     research_type: state.articleReducer.research_type,
     research_phase: state.articleReducer.research_phase
   });
@@ -43,30 +41,30 @@ class EditArticle extends React.Component {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_TYPE});
         this.props.dispatch({ type: ARTICLE_ACTIONS.FETCH_RESEARCH_PHASE});
-        this.props.dispatch({ type: ADMIN_ACTIONS.FETCH_APPROVED_ARTICLE})
+        // this.props.dispatch({ type: ADMIN_ACTIONS.FETCH_APPROVED_ARTICLE})
         if (!this.props.user.isLoading && this.props.user.user === null) {
           // this.props.history.push('home');
         }
       
       }
 
-      componentDidUpdate(prevProps) {
-        if(this.props.research_phase !== prevProps.research_phase){
-          this.setState({
-            ...this.state,
-            research_phase: this.props.research_phase
-          })
-          console.log('this.state:', this.state);
+      // componentDidUpdate(prevProps) {
+      //   if(this.props.research_phase !== prevProps.research_phase){
+      //     this.setState({
+      //       ...this.state,
+      //       research_phase: this.props.research_phase
+      //     })
+      //     console.log('this.state:', this.state);
           
-        }
-        else if(this.props.research_type !== prevProps.research_type){
-          this.setState({
-            ...this.state,
-            research_type: this.props.research_type
-          })
-          console.log('this.state:', this.state);
-        }
-      }
+      //   }
+      //   else if(this.props.research_type !== prevProps.research_type){
+      //     this.setState({
+      //       ...this.state,
+      //       research_type: this.props.research_type
+      //     })
+      //     console.log('this.state:', this.state);
+      //   }
+      // }
 
 handleClickOpen = () => {
     this.setState({ 
@@ -85,6 +83,7 @@ handleClickOpen = () => {
         summary: this.props.summary,
         brief_description: this.props.brief_description,
         address: this.props.address,
+        status: this.props.status
       } 
     });
 };
@@ -98,7 +97,7 @@ handleUpdate = (propertyName) => (event) => {
     this.setState({
         updatedArticle: {
             ...this.state.updatedArticle,
-            id: this.props.article.id,
+            status: 4,
             [propertyName]: event.target.value
         }
     })
@@ -106,7 +105,7 @@ handleUpdate = (propertyName) => (event) => {
     
 }
 
-updateResource = () => {
+updateArticle = () => {
     console.log('in updateResource');
     const action = ({
       type: ARTICLE_ACTIONS.UPDATE_ARTICLE,
@@ -118,8 +117,8 @@ updateResource = () => {
     this.handleClose();
   }
 
+
   render() {
-    console.log("ME!!!: ", this.props.article.research_type);
     return (
       <div>
         <IconButton onClick={this.handleClickOpen}>
@@ -132,48 +131,11 @@ updateResource = () => {
         >
           <DialogTitle id="form-dialog-title">Update the article below:</DialogTitle>
           <DialogContent>
-          {/* <InputLabel htmlFor="research_phase-simple">Research Type</InputLabel>
-            <Select
-              value={this.state.research_type || this.props.article.research_type}
-              onChange={this.handleUpdate('research_type')}
-              inputProps={{
-              name: 'research_type',
-              id: 'research_type-simple',
-              }} 
-            >
-            <MenuItem value={this.state.research_type || this.props.article.research_type}>
-           {this.props.article.research_type}
-            </MenuItem>
-            {this.props.research_type.map((research_type, i) => {
-                return (
-
-                    <MenuItem key={i} value={research_type.id} defaultValue={this.props.article.research_phase}>{research_type.type}</MenuItem>
-                )
-            })}
-          </Select> */}
           <label>Research Type</label>
           <ResearchTypeSelect article={this.props.article} research_type={this.props.research_type}/>
           <label>Research Phase</label>
           <ResearchPhaseSelect article={this.props.article} research_phase={this.props.research_phase}/>
-           {/* <InputLabel htmlFor="research_phase-simple">Research Phase</InputLabel>
-          <Select
-            value={this.state.research_phase}
-            onChange={this.handleUpdate('research_phase')}
-            defaultValue={this.props.article.research_phase}
-            inputProps={{
-            name: 'research_phase',
-            id: 'research_phase-simple',
-            }}
-          >
-            <MenuItem>
-            <em>None</em>
-            </MenuItem>
-            {this.props.research_phase.map((research_phase, i) => {
-              return (
-                  <MenuItem key={i} value={research_phase.id}>{research_phase.phase}</MenuItem>
-              )
-            })}
-          </Select> */}
+             {JSON.stringify(this.props.article)} 
             <TextField 
               type="date"
               InputLabelProps={{ shrink: true, }}
@@ -258,6 +220,7 @@ updateResource = () => {
               margin="dense"
               label="Brief Description"
               fullWidth
+              multiline
             />
             <TextField 
               value={this.state.updatedArticle.summary} 
@@ -270,6 +233,7 @@ updateResource = () => {
               margin="dense"
               label="Summary"
               fullWidth
+              multiline
             />
             <TextField 
               value={this.state.updatedArticle.user_story} 
@@ -282,6 +246,7 @@ updateResource = () => {
               margin="dense"
               label="User Story"
               fullWidth
+              multiline
             />
             
           </DialogContent>
