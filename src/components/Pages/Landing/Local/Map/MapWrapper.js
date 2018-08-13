@@ -7,6 +7,7 @@ import { MAP_ACTIONS } from '../../../../../redux/actions/mapActions';
 import Marker from './Marker';
 import {KEYS} from '../../../../../Key';
 import InfoWindow from './InfoWindow';
+import ArticleModal from '../../../../Global/Modals/ArticleModal';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -27,7 +28,7 @@ export class Container extends React.Component{
           searchAddress: '',
           showingInfoWindow: false,
           articlesFetched: false,
-          selectedPlace: {},
+          selectedPlace: '',
         }
       }
       
@@ -79,7 +80,7 @@ export class Container extends React.Component{
             <div>
               {this.props.mapReducer.mapReducer.length !== 0 && <Map google={this.props.google}>
                 {this.props.mapReducer.mapReducer.length !== 0 && this.props.mapReducer.mapReducer.map((article,i) =>
-                <Marker name={article.institution_name} onClick={this.onMarkerClick} key={i} position={{lat: article.lat, lng: article.lng}} />
+                <Marker name={article.institution_name} article={article} onClick={this.onMarkerClick} key={i} position={{lat: article.lat, lng: article.lng}} />
                   )}
               
               <InfoWindow
@@ -88,7 +89,10 @@ export class Container extends React.Component{
                   name="info-window"
                   >
                     <div>
-                      <h1>{console.log('selectedPlace:', this.state.selectedPlace)}{this.state.selectedPlace && this.state.selectedPlace.name}</h1>
+                      <h1>{console.log('selectedPlace:', this.state.selectedPlace)}{this.state.selectedPlace && this.state.selectedPlace.article.research_title}</h1>
+                      <div>
+                        {this.state.selectedPlace !== '' && <ArticleModal article={this.state.selectedPlace.article} />}
+                      </div>
                     </div>
               </InfoWindow>
 

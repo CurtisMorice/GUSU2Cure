@@ -88,7 +88,7 @@ class ArticleCard extends React.Component {
       const user_id = article.user_id
       console.log('this is the article id,', article);
       const action = ({
-        type: ARTICLE_ACTIONS.UPDATE_ARTICLE_STATUS,
+        type: ARTICLE_ACTIONS.POST_QUASI_DELETE,
         payload: article
       })
       console.log('action:', action);
@@ -110,7 +110,7 @@ class ArticleCard extends React.Component {
                 />
                 <CardContent id="articleStatus">
                   <Typography style={{color:'#475c87', fontStyle: 'italic', fontSize:'20px'}}component="p">
-                    Date Submitted: {article.date_posted}
+                    Date Submitted: {(article.date_posted).split('T')[0]}
                   </Typography>
                   { article.status === "rejected" &&  
                   <Typography style={{color:'#475c87', fontStyle: 'italic', fontSize:'20px'}} component="p">
@@ -136,10 +136,16 @@ class ArticleCard extends React.Component {
                 </CardContent>
                   }
                 <CardActions className="actionButton">
+                {console.log('status', article.status)}
+                    
                     <EditArticleModal article={article}/>
+                    {article.status !== 'edit-delete'?
                     <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={ ()=>this.requestDelete(article) }>
                         <DeleteRoundedIcon/>
+                    </IconButton> : <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={ ()=>this.requestDelete(article)} disabled>
+                        <DeleteRoundedIcon/>
                     </IconButton>
+                  }
                 </CardActions>
               </Card>
             </div>

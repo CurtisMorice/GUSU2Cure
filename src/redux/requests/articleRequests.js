@@ -10,7 +10,6 @@ export function getArticles() {
 }
 
 export function getUserArticles(id) {
-    console.log('this is id zzzzzzzzzzz', id);
     return axios.get(`/api/articles/userArticle/${id}`)
     .then(response => response.data)
     .catch((error) => {
@@ -59,9 +58,9 @@ export function deleteArticle(id){
     })
 }
 
-export function putArticle(id, article){
-    console.log('articleRequest', id, article);
-    return axios.put(`/api/articles/${id}, article`)
+export function putArticle(article){
+    console.log('articleRequest', article, article.id);
+    return axios.put(`/api/articles/${article.id}`, article)
     .then((response) => {
         console.log('successfully updated article', response);
     })
@@ -80,4 +79,24 @@ export function requestDeleteArticle(id){
         console.log('error requesting delete', error);
         throw error.response || error;  
     })   
+}
+
+export function postQuasiArticle(action){
+    return axios.post('/api/articles/quasi_articles', action)
+    .then((response) => {
+        console.log('successfully posted to the quasi table', response);  
+    }).catch((error) => {
+        console.log('error posting to quasi table');
+        throw error.response || error;
+    })
+}
+
+export function postQuasiArticleDelete(action){
+    return axios.post('/api/articles/quasi_articles/delete', action)
+    .then((response) => {
+        console.log('successfully posted to the quasi table', response);  
+    }).catch((error) => {
+        console.log('error posting to quasi table');
+        throw error.response || error;
+    })
 }

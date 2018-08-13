@@ -29,7 +29,7 @@ import swal from 'sweetalert2';
 
 
 const mapStateToProps = state => ({
-    adminReducer :state.adminReducer.newArticles,
+    adminReducer :state.adminReducer.modifiedArticles,
 })
 
     
@@ -54,7 +54,6 @@ const mapStateToProps = state => ({
         }
     
         fetchModifiedArticles = () => {
-            console.log('hello, is it me your looking for ');
             this.props.dispatch({type: ADMIN_ACTIONS.FETCH_MODIFIED_ARTICLE});
         }
       
@@ -223,14 +222,14 @@ const mapStateToProps = state => ({
                           return (
                             <TableRow key={newArticle.id}>
     
-                              <TableCell component="th" scope="row">{newArticle.date_posted}</TableCell>
+                              <TableCell component="th" scope="row">{(newArticle.date_posted).split('T')[0]}</TableCell>
                               <TableCell component="th" scope="row">{newArticle.research_title}</TableCell> 
                               <TableCell component="th" scope="row">{newArticle.type}</TableCell>
                               <TableCell component="th" scope="row">{newArticle.phase}</TableCell> 
                               <TableCell component="th" scope="row">{newArticle.institution_name}</TableCell>
                               <TableCell component="th" scope="row">{newArticle.institution_url}</TableCell>
                               <TableCell component="th" scope="row">{newArticle.funding_source}</TableCell>
-                              <TableCell component="th" scope="row">{newArticle.research_date}</TableCell>
+                              <TableCell component="th" scope="row">{(newArticle.research_date).split('T')[0]}</TableCell>
                               <TableCell component="th" scope="row">{newArticle.username}</TableCell>
                               <TableCell component="th" scope="row">{newArticle.email}</TableCell>
                               <TableCell> 
