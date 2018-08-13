@@ -76,6 +76,7 @@ const styles = theme => ({
     overflow: 'auto',
     position: 'relative',
     display: 'flex',
+    backgroundColor: '#dcdcdc'
   },
   flex: {
     flexGrow: 1,
@@ -83,10 +84,13 @@ const styles = theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     background: '#18335a',
+    position: 'sticky',
   },
   drawerPaper: {
     position: 'relative',
     width: drawerWidth,
+    backgroundColor: '#dcdcdc', 
+    overflow: 'auto',
   },
   appFrame: {
     position: 'relative',
@@ -107,32 +111,33 @@ const styles = theme => ({
     minWidth: 0, // So the Typography noWrap works
     overflow: 'auto',
   },
-  toolbar: theme.mixins.toolbar,
   cardOutput: {
     position: 'relative',
     float: 'left',
-    padding: '20px',
+    padding: '40px',
+    overflow: 'auto',
+    backgroundColor: '#dcdcdc',
   },
   cardObject: {
     float: 'right',
     marginTop: '30px',
-    marginBottom: '30px',
+    marginBottom: '80px',
     minWidth: 500,
     flexGrow: 'auto',
+    padding: '30px',
+    
   },
   title: {
     marginBottom: 16,
   },
   toolbarContainer: {
-		position: 'sticky',
 		width: '100%',
 		zIndex: 1
   },
   gridList: {
     maxWidth: '550px',
-  },
-  articleList: {
-    scroll: 'paper',
+    overflow: 'auto',
+    backgroundColor: '#dcdcdc'
   },
 
   subtext: {
@@ -192,7 +197,7 @@ class Landing extends Component {
           <div className={classes.toolbar}>
             <AppBar position="absolute" className={classes.appBar} >
               <div className='toolbarContainer'>
-                <Toolbar className="mdc-toolbar--fixed">
+                <Toolbar className={classes.toolbar}>
                   <Typography variant='title' color='inherit' className={classes.flex}>
                     Find resources in your area
                   </Typography>
@@ -204,16 +209,17 @@ class Landing extends Component {
             </AppBar>
           </div>
           <div>
-            <Paper elevation={1} className={classes.articleList}>
+            {/* <Paper elevation={1} className=''>
 
             
-              <Parallax filter>
+              <Parallax filter> */}
                 <div className={classes.gridList} cols={1}>
                   <GridList className={classes.cardOutput}>
                     {this.props.catalogue.map((article, i) => {
                       return (
+                        // <ListItem divider className={classes.cardObject}>
+                        <div className={classes.cardObject}>
                         
-                        <ListItem className={classes.cardObject}>
                           <CustomCard key={i} value={article}>
                             <CustomCardHeader>
                               <Typography color='inherit' variant='title'>
@@ -245,13 +251,14 @@ class Landing extends Component {
                               <ArticleModal article={article} />
                             </CustomCardFooter>
                           </CustomCard>
-                        </ListItem>
+                        </div>
+                        // </ListItem>
                       )
                     })}
                   </GridList>
                 </div>
-              </Parallax>
-            </Paper>
+              {/* </Parallax>
+            </Paper> */}
           </div>
         </Drawer>
         <main className={classes.appFrame}>
