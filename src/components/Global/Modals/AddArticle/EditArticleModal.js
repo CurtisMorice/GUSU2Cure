@@ -175,7 +175,7 @@ postQuasiArticle = () => {
           <br/>
           <br/>
 
-          <InputLabel htmlFor="research_date-simple">Current Research Date: {(this.props.article.research_date).split('T')[0]}</InputLabel>
+          <InputLabel htmlFor="research_date-simple">Current Research Date: {(this.props.article.research_date)}</InputLabel>
             <TextField 
               type="date"
               InputLabelProps={{ shrink: true, }}
