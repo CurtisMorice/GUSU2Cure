@@ -1,7 +1,7 @@
 const cardStyle = {
     card: {
-        overflowX: 'auto',
-        overflowY: 'auto',
+        // overflowX: 'auto',
+        // overflowY: 'auto',
         display: "inline-block",
         position: "relative",
         display: 'flex',
@@ -18,8 +18,8 @@ const cardStyle = {
     },
 
     cardBody: {
-        overflowX: 'auto',
-        overflowY: 'auto',
+        // overflowX: 'auto',
+        // overflowY: 'auto',
         width: 'auto',
         padding: "0.9375rem 1.875rem",
         flex: "1 1 auto"
@@ -33,8 +33,8 @@ const cardStyle = {
     },
 
     cardHeader: {
-        overflowX: 'visible',
-        overflowY: 'visible',
+        // overflowX: 'visible',
+        // overflowY: 'visible',
         borderRadius: '3px',
         padding: '1rem 15px',
         marginLeft: '15px',
