@@ -33,7 +33,7 @@ const mapStateToProps = state => ({
 
 const styles = theme => ({
     card: {
-      maxWidth: 750,
+      maxWidth: 'auto',
     },
     media: {
       height: 0,
@@ -112,9 +112,9 @@ class ArticleCard extends React.Component {
                   <Typography style={{color:'#475c87', fontStyle: 'italic', fontSize:'20px'}}component="p">
                     Date Submitted: {article.date_posted}
                   </Typography>
-                  { article.status === "rejected" &&  
+                  { article.status &&  
                   <Typography style={{color:'#475c87', fontStyle: 'italic', fontSize:'20px'}} component="p">
-                    Status: {article.status}
+                    Status: {article.status === 'pending' && 'Pending'} {article.status === 'approved' && 'Approved'} {article.status === 'rejected' && 'Rejected'} {article.status === 'edit-review' && 'Under Review For Editing'} {article.status === 'edit-delete' && 'Under Review For Deletion'}
                   </Typography>
                   }
                 </CardContent>
