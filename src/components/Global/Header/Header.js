@@ -226,7 +226,7 @@ class Header extends Component {
                 </div>
               </Drawer>
               <Typography variant='title' color='inherit' className={classes.flex}>
-                Spinal Cord Injury Resource Database
+                Spinal Cord Injury Research Database
               </Typography>
               { loginButton }
               <RegisterModal />
