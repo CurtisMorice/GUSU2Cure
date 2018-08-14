@@ -110,8 +110,7 @@ class ArticleCard extends React.Component {
                 />
                 <CardContent id="articleStatus">
                   <Typography style={{color:'#475c87', fontStyle: 'italic', fontSize:'20px'}}component="p">
-                    {console.log('date posted:', article.date_posted)}
-                    Date Submitted: {(article.date_posted)}
+                    Date Submitted: {article.date_posted}
                   </Typography>
                   { article.status === "rejected" &&  
                   <Typography style={{color:'#475c87', fontStyle: 'italic', fontSize:'20px'}} component="p">

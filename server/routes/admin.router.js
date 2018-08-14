@@ -52,7 +52,7 @@ router.get('/filterByLocation', (req, res)=> {
 })
 
 router.get('/reviewArticles', (req, res) => {
-    const queryText = `SELECT quasi_articles.id, article_id, user_id, date_posted, research_title, institution_name, institution_url, funding_source, related_articles, admin_comment, brief_description, summary, user_story, research_date, research_type.type, research_phase.phase FROM quasi_articles JOIN research_type on quasi_articles.research_type = research_type.id JOIN research_phase ON quasi_articles.research_phase = research_phase.id;`
+    const queryText = `SELECT quasi_articles.id, article_id, user_id, date_posted, research_title, institution_name, institution_url, funding_source, related_articles, admin_comment, brief_description, summary, user_story, research_date, research_type.type, research_phase.phase, statuses.status, users.username, research_type.id AS research_type, research_phase.id AS research_phase FROM quasi_articles JOIN research_type on quasi_articles.research_type = research_type.id JOIN research_phase ON quasi_articles.research_phase = research_phase.id JOIN statuses ON quasi_articles.status=statuses.id JOIN users ON quasi_articles.user_id=users.id;`
     pool.query(queryText)
         .then((result) => {
             console.log('back from the databse with quasi articles', result);
@@ -162,5 +162,37 @@ router.delete(`/deleteArticle/:id`, (req, res) => {
             res.sendStatus(500);
         })
  })
+
+router.delete(`/deleteQuasi/:id`, (req, res) => {
+    const id = req.params.id;
+    console.log('////////////////////',id);
+    
+    queryText = `DELETE FROM quasi_articles WHERE id=$1`;
+    pool.query(queryText, [id])
+    .then((result) => {
+        console.log('Successfull delete of QUASI article');
+        res.sendStatus(200)
+    })
+    .catch((error) => {
+        console.log('Error deleting QUASI article', error);
+        res.sendStatus(500);
+    })
+})
+
+router.put(`/editArticle/:id`, (req,res) => {
+    console.log('body',req.body);
+    const id = req.params.id;
+    const queryText = `UPDATE articles SET research_date = $1, research_title = $2, research_type = $3,
+    research_phase = $4, institution_name = $5, institution_url = $6, funding_source = $7, related_articles = $8, status = $9 WHERE id = $10;`;
+    pool.query(queryText, [req.body.research_date, req.body.research_title, req.body.research_type, req.body.research_phase, req.body.institution_name, req.body.institution_url, req.body.funding_source, req.body.related_articles, 2, id])
+        .then(() => {
+            console.log('article successfully updated', res);
+
+            res.sendStatus(201);
+        }).catch((error) =>{
+            console.log('error updating article:', error);
+            res.sendStatus(500);
+        }) 
+})
 
 module.exports = router;

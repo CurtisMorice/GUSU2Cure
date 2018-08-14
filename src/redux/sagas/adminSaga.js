@@ -1,6 +1,6 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import {ADMIN_ACTIONS} from '../actions/adminActions';
-import { getAllUsers, getArticlesByLocation, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser, deleteBadArticle, rejectedArticle, approvedArticle, setUser, deleteTargetArticle} from '../requests/adminRequest';
+import { getAllUsers, getArticlesByLocation, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser, deleteBadArticle, rejectedArticle, approvedArticle, setUser, deleteTargetArticle, updateArticle, deleteQuasi} from '../requests/adminRequest';
 
 //fetch all registered users
 function* fetchAllUser(action) {
@@ -88,6 +88,28 @@ function* userType(action){
     }
 }
 
+function* editArticle(action){
+    const articleId = action.payload.id;
+    console.log('this is the id', action);
+    
+    try{
+        yield updateArticle(action);
+        yield deleteQuasiArticle(articleId);
+        // yield fetchModifiedArticles();
+    } catch(error){
+        console.log('Error setting user type in the Admin Saga', error);  
+    }
+}
+
+//deletes an article off quasi table after accept
+function* deleteQuasiArticle(articleId){
+    try {
+        yield deleteQuasi(articleId)
+        yield fetchModifiedArticles();
+    } catch (error) {
+        
+    }}
+
 //rejects newly added articles
 function* rejectArticle (action){
     console.log('action in approvedArticle in adminSaga', action);
@@ -105,6 +127,7 @@ function* deleteArticle (action){
     try{
         yield deleteTargetArticle(action)
         yield fetchArticlesApproved();
+        yield fetchModifiedArticles();
     }
     catch (error) {
         console.log('Error deleting target Article', error);
@@ -132,6 +155,7 @@ function* adminSaga() {
     yield takeLatest(ADMIN_ACTIONS.REJECTED_ARTICLE, rejectArticle);
     yield takeLatest(ADMIN_ACTIONS.DELETE_TARGET_ARTICLE, deleteArticle);
     yield takeLatest(ADMIN_ACTIONS.FETCH_ARTICLES_BY_LOCATION, fetchArticlesByLocation);
+    yield takeLatest(ADMIN_ACTIONS.UPDATE_TARGET_ARTICLE, editArticle);
 }
   
   export default adminSaga;

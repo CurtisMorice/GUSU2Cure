@@ -167,23 +167,39 @@ const mapStateToProps = state => ({
               this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
             }
             
-            approveNewArticle = (id) => {   
-              let approved = this.state.approved;
-              let approvedObj = {approved: approved, id: id};
-              swal({
-                title: 'Please Confirm Change',
-                text: 'Are you sure you want to approve this article?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'Cancel',
-                reverseButtons: true }).then(()=>{
+            approveModifiedArticle = (newArticle) => {
+              if (newArticle.status === 'edit-review'){
+                console.log(newArticle.status);
+                
                 const action = ({
-                    type: ADMIN_ACTIONS.APPROVED_ARTICLE,
-                    payload: approvedObj
+                  type: ADMIN_ACTIONS.UPDATE_TARGET_ARTICLE,
+                  payload: newArticle
                 })
                 this.props.dispatch(action);
-              })
+              }
+              else if (newArticle.status ==='edit-delete'){
+                const action = ({
+                  type:ADMIN_ACTIONS.DELETE_TARGET_ARTICLE,
+                  payload: newArticle.article_id
+                })
+                this.props.dispatch(action);
+              }
+            //   let approved = this.state.approved;
+            //   let approvedObj = {approved: approved, id: newArticle.id};
+            //   swal({
+            //     title: 'Please Confirm Change',
+            //     text: 'Are you sure you want to approve this article?',
+            //     type: 'warning',
+            //     showCancelButton: true,
+            //     confirmButtonText: 'Yes',
+            //     cancelButtonText: 'Cancel',
+            //     reverseButtons: true }).then(()=>{
+            //     const action = ({
+            //         type: ADMIN_ACTIONS.APPROVED_ARTICLE,
+            //         payload: approvedObj
+            //     })
+            //     this.props.dispatch(action);
+            //   })
             }
 
             render() {
@@ -204,6 +220,7 @@ const mapStateToProps = state => ({
                 </TableRow>
                 <TableRow>
                         <TableCell> Date Posted </TableCell>
+                        <TableCell> Status </TableCell>
                         <TableCell> Research Title </TableCell>
                         <TableCell> Research Type </TableCell>
                         <TableCell> Research Phase </TableCell>
@@ -212,7 +229,6 @@ const mapStateToProps = state => ({
                         <TableCell> Funding Source</TableCell>
                         <TableCell> Research Date </TableCell>
                         <TableCell> User Name </TableCell>
-                        <TableCell> User Email </TableCell>
                         <TableCell> Approve </TableCell>
                         <TableCell> Reject </TableCell>
                     </TableRow>
@@ -222,19 +238,19 @@ const mapStateToProps = state => ({
                           return (
                             <TableRow key={newArticle.id}>
     
-                              <TableCell component="th" scope="row">{(newArticle.date_posted).split('T')[0]}</TableCell>
+                              <TableCell component="th" scope="row">{(newArticle.date_posted)}</TableCell>
+                              <TableCell component="th" scope="row">{newArticle.status}</TableCell> 
                               <TableCell component="th" scope="row">{newArticle.research_title}</TableCell> 
                               <TableCell component="th" scope="row">{newArticle.type}</TableCell>
                               <TableCell component="th" scope="row">{newArticle.phase}</TableCell> 
                               <TableCell component="th" scope="row">{newArticle.institution_name}</TableCell>
                               <TableCell component="th" scope="row">{newArticle.institution_url}</TableCell>
                               <TableCell component="th" scope="row">{newArticle.funding_source}</TableCell>
-                              <TableCell component="th" scope="row">{(newArticle.research_date).split('T')[0]}</TableCell>
+                              <TableCell component="th" scope="row">{(newArticle.research_date)}</TableCell>
                               <TableCell component="th" scope="row">{newArticle.username}</TableCell>
-                              <TableCell component="th" scope="row">{newArticle.email}</TableCell>
                               <TableCell> 
                               <Tooltip title="Approved">
-                              <IconButton aria-label="Approve" color="primary" onClick={()=>this.approveNewArticle(newArticle.id)}>
+                              <IconButton aria-label="Approve" color="primary" onClick={()=>this.approveModifiedArticle(newArticle)}>
                                 <i className="material-icons">
                                   thumb_up
                                 </i>
