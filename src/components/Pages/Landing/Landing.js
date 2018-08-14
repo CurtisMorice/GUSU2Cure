@@ -109,8 +109,8 @@ const styles = theme => ({
   },
   cardObject: {
     float: 'right',
-    marginTop: '30px',
-    marginBottom: '80px',
+    marginTop: '30%',
+    marginBottom: '10%',
     minWidth: 500,
     flexGrow: 'auto',
     padding: '30px',
@@ -216,7 +216,7 @@ class Landing extends Component {
                           <br />
                         </Typography>
                         <Typography component='p'>
-                          Funded by: {article.funding_source}
+                          Description: {article.brief_description}
                           <br />
                           {/* {article.related_articles} */}
                           <br />
