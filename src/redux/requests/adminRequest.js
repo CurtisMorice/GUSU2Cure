@@ -67,7 +67,16 @@ console.log('response from approvedArticle PUT in request', response)
     })
 }
 
-
+export function deleteQuasi(action){
+    console.log(action);
+    return axios.delete(`api/admin/deleteQuasi/${action}`)
+    .then((response)=> {
+        console.log('deleted article from the quasi table', response)
+            }).catch((error)=>{
+                console.log('error deleting article from quasi article', error);
+                throw error.response || error;
+            })
+}
 
 export function setUser(type) {
     let id = type.userId;
@@ -78,6 +87,19 @@ export function setUser(type) {
         })
         .catch((error) => {
             console.log('Error changing user type', error);
+            throw error.response || error;
+        })
+}
+
+export function updateArticle(article) {
+    let id = article.payload.article_id;
+    console.log('article:', article, id);
+    return axios.put(`api/admin/editArticle/${id}`, article.payload)
+        .then((response) =>{
+            console.log('Successful user type change', response);
+        })
+        .catch((error) => {
+            console.log('Error updating article', error);
             throw error.response || error;
         })
 }
