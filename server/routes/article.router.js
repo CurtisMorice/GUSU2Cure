@@ -221,7 +221,20 @@ router.post('/quasi_articles', (req, res) => {
         institution_url, status, funding_source, related_articles, brief_description, summary, user_story])
         .then(()=>{
             console.log('successfully posted quasi_article');
-            res.sendStatus(201);
+            console.log('articleid:', article_id);
+            
+            const secondQuery = `UPDATE articles set status=4 WHERE id=$1;`
+            pool.query(secondQuery, [parseInt(article_id)])
+            .then(()=>{
+                console.log('updated article status');
+                res.sendStatus(201)
+            })
+            .catch((error)=>{
+                console.log('error updating article status', error);
+                res.sendStatus(500);
+                
+            })
+            // res.sendStatus(201);
         })
         .catch((error)=>{
             console.log('error posting into quasi_articles:', error);

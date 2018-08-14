@@ -109,8 +109,8 @@ const styles = theme => ({
   },
   cardObject: {
     float: 'right',
-    marginTop: '30%',
-    marginBottom: '10%',
+    marginTop: '100px',
+    marginBottom: '80px',
     minWidth: 500,
     flexGrow: 'auto',
     padding: '30px',
