@@ -168,6 +168,8 @@ const mapStateToProps = state => ({
             }
             
             approveModifiedArticle = (newArticle) => {
+              console.log('is this running');
+              
               if (newArticle.status === 'edit-review'){
                 console.log(newArticle.status);
                 

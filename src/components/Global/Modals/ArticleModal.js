@@ -41,9 +41,9 @@ class ArticleModal extends React.Component {
           <DialogContent >
           {this.props.adminArticle &&
             <DialogContentText >
-                <li> <em><strong>Type:</strong></em> {this.props.adminArticle.type}</li><br/>
+                <li> <em><strong>Type:</strong></em> {this.props.adminArticle.research_type}</li><br/>
 
-                <li> <em><strong>Phase:</strong></em> {this.props.adminArticle.phase} </li><br/>
+                <li> <em><strong>Phase:</strong></em> {this.props.adminArticle.research_phase} </li><br/>
 
                 <li> <em><strong>Institutions Name:</strong></em> {this.props.adminArticle.institution_name} </li><br/>
 

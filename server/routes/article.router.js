@@ -195,6 +195,8 @@ router.put('/quasi_articles/:id', (req, res) => {
 // post to quasi articles
 router.post('/quasi_articles', (req, res) => {
         console.log('in route to post quasi article', req.body);
+        console.log('research_date:', req.body.research_date);
+        
         const article_id = req.body.id;
         const location_id = req;
         const user_id = req.body.user_id;
