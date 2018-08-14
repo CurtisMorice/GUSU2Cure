@@ -67,11 +67,11 @@ class UserHome extends Component {
     if (this.state) {
       content = (
         <div>
-          <h1>Resources</h1>
+          <h1 style={{textAlign:"center"}}>Resources</h1>
           {this.props.user.user !== null && this.props.user.user.type === "admin" && <AddResourceModal />}
           {this.props.resources.resourcesFetched && <div className="resourceDiv">
               {this.props.resources.articles.map((resource, i) => 
-                <Card key={i} className="resourceCards">
+                <Card style={{position:'relative', justifyContent:'center'}} key={i} className="resourceCards">
                   <CardContent>
                   <Typography>
                   Title: {resource.name}

@@ -520,7 +520,7 @@ class AddArticleModal extends React.Component {
         <div>
           {this.state.activeStep === steps.length ? (
             <div>
-              <Typography className={classes.instructions}>Thank you for submitting your article</Typography>
+              <Typography className={classes.instructions}>Thank you for submitting your article. The administrator will review your submission before accepting.</Typography>
               <Button color="primary" variant="contained" onClick={this.addArticle}>Done</Button>
             </div>
           ) : (

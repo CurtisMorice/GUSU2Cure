@@ -59,7 +59,8 @@ router.get('/', (req, res) => {
 
     // for getting all articles
     else {
-        const queryText = `SELECT articles.*, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id ORDER BY id;`;
+        const queryText = `SELECT articles.*, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id JOIN statuses ON articles.status = statuses.id WHERE (statuses.status = 'approved' OR statuses.status = 'edit-review' OR statuses.status = 'edit-delete') ORDER BY id;
+        `;
         pool.query(queryText)
         .then((result)=>{
             // console.log('back from database with articles', result.rows);
