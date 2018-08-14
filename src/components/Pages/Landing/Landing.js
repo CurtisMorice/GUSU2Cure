@@ -1,7 +1,6 @@
 // React requires
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
 // used to mapStateToProps
 import { connect } from 'react-redux';
@@ -12,31 +11,21 @@ import { compose } from 'recompose';
 // Redux Actions
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 import {ADMIN_ACTIONS} from '../../../redux/actions/adminActions';
-import { MAP_ACTIONS } from '../../../redux/actions/mapActions';
 import { triggerLogout } from '../../../redux/actions/loginActions';
 import { ARTICLE_ACTIONS } from '../../../redux/actions/articleActions';
 
 // Material-UI required components
-import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { withStyles, createMuiTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button'; 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import CustomCard from './CustomCard/CustomCard';
 import CustomCardBody from './CustomCard/CustomCardBody';
 import CustomCardFooter from './CustomCard/CustomCardFooter';
 import CustomCardHeader from './CustomCard/CustomCardHeader';
-import Parallax from './Parallax/Parallax';
-import Paper from '@material-ui/core/Paper';
 
 // External components required for functionality
 import AddArticleModal from '../../Global/Modals/AddArticle/AddArticleModal';
@@ -125,7 +114,6 @@ const styles = theme => ({
     minWidth: 500,
     flexGrow: 'auto',
     padding: '30px',
-    
   },
   title: {
     marginBottom: 16,
@@ -134,12 +122,13 @@ const styles = theme => ({
 		width: '100%',
 		zIndex: 1
   },
-  gridList: {
+  container: {
     maxWidth: '550px',
     overflow: 'auto',
-    backgroundColor: '#dcdcdc'
+    backgroundColor: '#dcdcdc',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
-
   subtext: {
     color: '#808080',
     fontSize: '.75rem',
@@ -149,7 +138,6 @@ const styles = theme => ({
     marginRight: '1rem',
   },
 
-  
 });
 
 class Landing extends Component {
@@ -193,7 +181,7 @@ class Landing extends Component {
           classes={{
             paper: classes.drawerPaper,
           }}
-          >
+        >
           <div className={classes.toolbar}>
             <AppBar position="absolute" className={classes.appBar} >
               <div className='toolbarContainer'>
@@ -209,57 +197,51 @@ class Landing extends Component {
             </AppBar>
           </div>
           <div>
-            {/* <Paper elevation={1} className=''>
-
             
-              <Parallax filter> */}
-                <div className={classes.gridList} cols={1}>
-                  <GridList className={classes.cardOutput}>
-                    {this.props.catalogue.map((article, i) => {
-                      return (
-                        // <ListItem divider className={classes.cardObject}>
-                        <div className={classes.cardObject}>
-                        
-                          <CustomCard key={i} value={article}>
-                            <CustomCardHeader>
-                              <Typography color='inherit' variant='title'>
-                                {article.research_title}
-                              </Typography>
-                            </CustomCardHeader>
-                            <CustomCardBody>
-                              <Typography className={classes.title}>
-                                {article.institution_name}
-                                <br />
-                              </Typography>
-                              <Typography component='p'>
-                                Funded by: {article.funding_source}
-                                <br />
-                                {/* {article.related_articles} */}
-                                <br />
-                                
-                              </Typography>
-                              <Typography className={classes.subtext}>
-                                Posted on: {article.date_posted.split('T')[0]}
-                              </Typography>
-                            </CustomCardBody>
-                            <CustomCardFooter>
-                              <a href={article.institution_url}>
-                                <Button variant='contained' color='primary' className={classes.button}>
-                                  Visit Website
-                                </Button>
-                              </a>
-                              <ArticleModal article={article} />
-                            </CustomCardFooter>
-                          </CustomCard>
-                        </div>
-                        // </ListItem>
-                      )
-                    })}
-                  </GridList>
-                </div>
-              {/* </Parallax>
-            </Paper> */}
+          <div className={classes.container} cols={1}>
+            <GridList className={classes.cardOutput}>
+              {this.props.catalogue.map((article, i) => {
+                return (
+                  <div className={classes.cardObject}>
+                  
+                    <CustomCard key={i} value={article}>
+                      <CustomCardHeader>
+                        <Typography color='inherit' variant='title'>
+                          {article.research_title}
+                        </Typography>
+                      </CustomCardHeader>
+                      <CustomCardBody>
+                        <Typography className={classes.title}>
+                          {article.institution_name}
+                          <br />
+                        </Typography>
+                        <Typography component='p'>
+                          Funded by: {article.funding_source}
+                          <br />
+                          {/* {article.related_articles} */}
+                          <br />
+                          
+                        </Typography>
+                        <Typography className={classes.subtext}>
+                          Posted on: {article.date_posted.split('T')[0]}
+                        </Typography>
+                      </CustomCardBody>
+                      <CustomCardFooter>
+                        <a href={article.institution_url}>
+                          <Button variant='contained' color='primary' className={classes.button}>
+                            Visit Website
+                          </Button>
+                        </a>
+                        <ArticleModal article={article} />
+                      </CustomCardFooter>
+                    </CustomCard>
+                  </div>
+                )
+              })}
+            </GridList>
           </div>
+
+        </div>
         </Drawer>
         <main className={classes.appFrame}>
           <div className={classes.content}>
