@@ -128,15 +128,15 @@ class RegisterModal extends React.Component {
                 multiline
             />
              <TextField 
-                type="text"
+                type="password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
-                name="password"
-                autoFocus
-                margin="dense"
+                id="password-input"
+                label="Password"
+                autoComplete="current-password"
+                margin="normal"
                 label="Password"
                 fullWidth
-                multiline
             />
             <TextField 
                 type="text"
