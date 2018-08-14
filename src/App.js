@@ -39,7 +39,7 @@ const theme = createMuiTheme({
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
-    <div className='appFrame'>
+    <div>
       <Router>
         <div>
          <Header />
@@ -48,10 +48,12 @@ const App = () => (
             <Route
               path="/home"
               component={Landing}
+              className='appFrame'
             />
             <Route
               path="/login"
               component={LoginPage}
+              className='appFrame'
             />
             <Route
               path="/user-profile"
@@ -60,6 +62,7 @@ const App = () => (
             <Route
               path="/register"
               component={RegisterPage}
+              className='appFrame'
             />
             <Route 
               path="/resources"
@@ -68,6 +71,7 @@ const App = () => (
             <Route 
               path="/admin"
               component={Admin}
+              className='appFrame'
             />
                 
             {/* OTHERWISE (no path!) */}
