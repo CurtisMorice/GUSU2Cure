@@ -258,7 +258,7 @@ class NewArticleTable extends React.Component{
             <TableRow>
                     <TableCell> Date Posted </TableCell>
                     <TableCell> Research Title </TableCell>
-                    <TableCell> More Information</TableCell>
+                    <TableCell> More Info</TableCell>
                             {/* More Info goes here */}
                     <TableCell> User Name </TableCell>
                     <TableCell> User Email </TableCell>
