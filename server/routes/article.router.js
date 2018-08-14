@@ -220,6 +220,7 @@ router.post('/quasi_articles', (req, res) => {
         pool.query(queryText, [article_id, user_id, research_date, research_title, research_type, research_phase, institution_name,
         institution_url, status, funding_source, related_articles, brief_description, summary, user_story])
         .then(()=>{
+            const secondQuery = 'UPDATE articles set status=4 WHERE id=1,'
             console.log('successfully posted quasi_article');
             res.sendStatus(201);
         })
