@@ -108,6 +108,7 @@ class LoginModal extends React.Component {
                 fullWidth
                 multiline
             />
+
             <TextField
                 type="password"
                 value={this.state.password}
