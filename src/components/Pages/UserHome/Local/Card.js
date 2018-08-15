@@ -72,7 +72,6 @@ class ProfileCard extends React.Component {
     };
 
     editProfile = () => {
-        console.log('hello')
     }
 
     render() {

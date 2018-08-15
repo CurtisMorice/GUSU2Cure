@@ -107,7 +107,6 @@ router.put(`/articles/:id`,(req,res) =>{
     const queryText=`UPDATE articles SET status=$1, admin_comment=$3 WHERE id=$2;`
     pool.query(queryText, [status , id, admin_comment])
     .then((result) => {
-        console.log(result);
         res.sendStatus(201)
     })
     .catch((error) => {
@@ -132,8 +131,6 @@ router.delete('/deleteUser/:id', (req, res) => {
 })
 
 router.put(`/usertype/:id`, (req, res) => {
-    console.log('Changing user type in the admin Router, ID',  req.params.id);
-    console.log('Changing user type in the admin Router, body',  req.body.payload);
     let userId = req.params.id;
     let userType = req.body.payload;
     queryText = `UPDATE users SET type=$1 WHERE id=$2;`;
@@ -149,7 +146,6 @@ router.put(`/usertype/:id`, (req, res) => {
 })
 
 router.delete(`/deleteArticle/:id`, (req, res) => {
-    console.log('id to delete', req.params.id);
     let id = req.params.id;
     const queryText = `DELETE FROM articles WHERE id = $1`;
     pool.query(queryText, [id])
@@ -178,7 +174,6 @@ router.delete(`/deleteQuasi/:id`, (req, res) => {
 })
 
 router.delete(`/declineRequest/:id`, (req, res) => {
-    console.log('////////////////////req.body', req.body);
     const quasi_id = req.params.id;
     queryText = `DELETE FROM quasi_articles WHERE id=$1; `;
     pool.query(queryText, [quasi_id])

@@ -31,7 +31,6 @@ passport.use('local', new LocalStrategy({
   passReqToCallback: true,
   usernameField: 'username',
 }, ((req, username, password, done) => {
-    console.log('in strategy with username, password:', username, password);
     pool.query('SELECT * FROM users WHERE username = $1', [username])
       .then((result) => {
         console.log('result.rows:', result.rows);

@@ -49,7 +49,6 @@ class NewArticleTable extends React.Component{
   
 
   fetchNewArticles = () => {
-    console.log('hello, is it me your looking for ');
     this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
 };
   
@@ -222,7 +221,6 @@ class NewArticleTable extends React.Component{
               reverseButtons: true
             }).then((result) => {
               if (result.value) {
-                  console.log(id);
                 this.props.dispatch({type: ADMIN_ACTIONS.DELETE_TARGET_ARTICLE, payload: id});
                 swal(
                   'Deleted!',

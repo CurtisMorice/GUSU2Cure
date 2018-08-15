@@ -51,14 +51,9 @@ export class Container extends React.Component{
     
       // gets locations from the database to render markers on the google map
       getLocations = () =>{
-        console.log('getLocations');
         
       }
-      onMarkerClick = async (props, marker) =>{
-        console.log('markerClick');
-        console.log('props:', props);
-        console.log('marker:', marker);
-        
+      onMarkerClick = async (props, marker) =>{        
         // sets the state of this component to the marker clicked on. necessary for displaying
         // the info window with the correct information
          await this.setState({
@@ -66,9 +61,7 @@ export class Container extends React.Component{
           selectedPlace: props,
           activeMarker: marker,
           showingInfoWindow: true
-        });
-        console.log('wrapper state:', this.state);
-        
+        });        
       }
   
       render(){
@@ -89,7 +82,7 @@ export class Container extends React.Component{
                   name="info-window"
                   >
                     <div>
-                      <h1>{console.log('selectedPlace:', this.state.selectedPlace)}{this.state.selectedPlace && this.state.selectedPlace.article.research_title}</h1>
+                      <h1>{this.state.selectedPlace && this.state.selectedPlace.article.research_title}</h1>
                       <div>
                         {this.state.selectedPlace !== '' && <ArticleModal article={this.state.selectedPlace.article} />}
                       </div>

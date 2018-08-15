@@ -52,7 +52,6 @@ class UserHome extends Component {
   }
 
   removeResource = (id) => {
-    console.log('in removeResource');
     const action = ({
       type: RESOURCE_ACTIONS.DELETE_RESOURCE,
       payload: id

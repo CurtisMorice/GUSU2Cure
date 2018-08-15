@@ -24,9 +24,7 @@ export class Map extends Component {
   
     // renders the children onto the map
     renderChildren = () =>{
-        const {children} = this.props;
-        // console.log('children:', children);
-      
+        const {children} = this.props;      
         if(!children) return;
 
         // children is the array, c is the object at each array index
@@ -41,7 +39,6 @@ export class Map extends Component {
     }
 
     componentDidMount(){
-      // this.getLocations();
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -85,9 +82,7 @@ export class Map extends Component {
         const node = ReactDOM.findDOMNode(mapRef);
   
         // these are from the bottom of the page in Map.defaultProps
-        let {initialCenter, zoom} = this.props;
-        console.log('initialCenter:', initialCenter);
-        
+        let {initialCenter, zoom} = this.props;        
         let {lat, lng} = initialCenter;
         const center = new maps.LatLng(lat, lng);1 
         
@@ -104,7 +99,6 @@ export class Map extends Component {
     // of this component so the map can recenter
     setCurrentLocation = async(location) =>{
         await this.setState({...this.state, currentLocation: location})  
-        console.log('current location:', location);
         this.props.dispatch({type: ADMIN_ACTIONS.FETCH_ARTICLES_BY_LOCATION, payload: location})
     }
   
