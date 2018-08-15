@@ -96,10 +96,6 @@ export class Container extends React.Component{
         }
       }
 
-{/* 
-          {/* <Marker position={pos} /> */}
-
-
 export default compose(connect(mapStateToProps),GoogleApiWrapper({
   apiKey: KEYS.GOOGLE_API_KEY,
   v: "3"

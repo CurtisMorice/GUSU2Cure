@@ -27,21 +27,14 @@ class AdminHomeProfile extends Component{
                 <div className="grid"> 
                     <ProfileCard/>
                 </div>
-
-                {/* GRID 2 */}
                 <div className="grid" id="articleHeader"> 
                     <h3>Administrator Home</h3>
                     <AdminNav/>
                 </div>
-
-                {/* GRID 3 */}
-                <div className="grid">  
-                    3
-                </div>
-
-                <div className='grid'>4</div>
-                <div className='grid'>5</div>
-                <div className='grid'>6</div>
+                <div className="grid"></div>
+                <div className='grid'></div>
+                <div className='grid'></div>
+                <div className='grid'></div>
             </div>
         )
     }

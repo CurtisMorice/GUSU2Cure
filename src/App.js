@@ -73,10 +73,7 @@ const App = () => (
               component={Admin}
               className='appFrame'
             />
-                
-            {/* OTHERWISE (no path!) */}
             <Route render={() => <h1>404</h1>} />
-
           </Switch>
         </div>
       </Router>

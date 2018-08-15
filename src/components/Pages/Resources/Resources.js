@@ -92,7 +92,6 @@ class UserHome extends Component {
 
     return (
       <div>
-        {/* <Nav /> */}
         { content }
       </div>
     );

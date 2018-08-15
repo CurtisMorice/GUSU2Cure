@@ -44,7 +44,7 @@ function* updateUserProfile(action) {
   try{
     console.log('thi is the action', action)
     yield userProfileUpdate(action);
-    // yield fetchUser();
+    yield fetchUser();
   } catch (error){
     console.log('Error updating user profile saga');
     

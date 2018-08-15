@@ -84,6 +84,11 @@ class ArticleCard extends React.Component {
     }
 
     requestDelete = (article) => {
+      swal(
+        'Notice',
+        'Your edits/deletion will be reviewed by an Admin',
+        'info'
+      )
       const id = article.id
       const user_id = article.user_id
       const action = ({
