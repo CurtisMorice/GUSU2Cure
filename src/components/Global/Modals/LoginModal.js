@@ -14,6 +14,7 @@ import Icon from '@material-ui/core/Icon';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -107,7 +108,8 @@ class LoginModal extends React.Component {
                 fullWidth
                 multiline
             />
-            <TextField 
+
+            <TextField
                 type="password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
