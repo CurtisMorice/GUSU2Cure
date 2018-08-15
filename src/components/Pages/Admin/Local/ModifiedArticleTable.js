@@ -199,7 +199,6 @@ const mapStateToProps = state => ({
               return (
                 <Paper className={classes.root}>
                   <div className={classes.tableWrapper}>
-                  {/* {JSON.stringify(this.props.adminReducer)} */}
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>

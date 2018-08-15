@@ -175,18 +175,13 @@ router.delete(`/deleteQuasi/:id`, (req, res) => {
 
 router.delete(`/declineRequest/:id`, (req, res) => {
     const quasi_id = req.params.id;
+    console.log('///////////////////////////////', req);
+    
     queryText = `DELETE FROM quasi_articles WHERE id=$1; `;
     pool.query(queryText, [quasi_id])
     .then((result) => {
         console.log('Successfull delete of QUASI article');
         res.sendStatus(200);
-        const article_id = req.body.article_id;
-        queryText = `UPDATE articles SET status = $1 where id = $2;`;
-        pool.query(queryText, [2, article_id])
-        .then((response) => {
-            console.log('successfully updated article with status');
-            res.sendStatus(200);
-        })
     })
     .catch((error) => {
         console.log('Error deleting QUASI article', error);
@@ -194,8 +189,24 @@ router.delete(`/declineRequest/:id`, (req, res) => {
     })
 })
 
+router.delete(`/updateStatus/:id`, (req, res) => {
+    console.log(req.params.id);
+    const id = req.params.id;
+    queryText = `UPDATE articles SET status = $1 WHERE id = $2`
+    pool.query(queryText, [2, id])
+    .then((response) => {
+        console.log('successfully updated article with status');
+        res.sendStatus(200);
+    })
+    .catch((error) => {
+        console.log('error', error);
+        
+    })
+})
+
+
+
 router.put(`/editArticle/:id`, (req,res) => {
-    console.log('body',req.body);
     const id = req.params.id;
     const queryText = `UPDATE articles SET research_date = $1, research_title = $2, research_type = $3,
     research_phase = $4, institution_name = $5, institution_url = $6, funding_source = $7, related_articles = $8, status = $9 WHERE id = $10;`;
