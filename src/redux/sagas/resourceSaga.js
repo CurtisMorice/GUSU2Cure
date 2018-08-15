@@ -5,7 +5,6 @@ import {getResources, postResource, deleteResource, putResource} from '../reques
 function* fetchResources() {
     try {
         let resources = yield getResources();
-        console.log('in resource saga to get resources', resources);
         yield put({
             type: RESOURCE_ACTIONS.SHOW_RESOURCES,
             payload: resources
@@ -16,11 +15,9 @@ function* fetchResources() {
 }
 
 function* addResource(action) {
-    console.log('action.payload:', action.payload);
     try {
         let resource = action.payload
         yield postResource(resource);
-        console.log('in resource saga to add resource', action.payload);
         yield put ({
             type: RESOURCE_ACTIONS.FETCH_RESOURCES
         })
@@ -30,11 +27,9 @@ function* addResource(action) {
 } 
 
 function* removeResource(action) {
-    console.log('action.payload:', action.payload);
     try {
         let id = action.payload
         yield deleteResource(id);
-        console.log('in resource saga for delete', action.payload);
         yield put ({
             type: RESOURCE_ACTIONS.FETCH_RESOURCES
         })
@@ -44,12 +39,10 @@ function* removeResource(action) {
 }
 
 function* updateResource(action) {
-    console.log('action.payload:', action.payload);
     try {
         let resource = action.payload
         let id = action.payload.id
         yield putResource(resource, id);
-        console.log('in resource saga for update', action.payload);
         yield put ({
             type: RESOURCE_ACTIONS.FETCH_RESOURCES
         })

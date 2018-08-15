@@ -28,13 +28,9 @@ class InfoWindow extends React.Component {
 
     renderInfoWindow(){
         let {map, google, mapCenter} = this.props;
-
         const iw = this.infowindow = new google.maps.InfoWindow({
             content: ''
-        })
-
-        console.log('this.infowindow:', this.infowindow);
-        
+        })        
     }
     
     updateContent(){
@@ -43,12 +39,9 @@ class InfoWindow extends React.Component {
     }
 
     renderChildren(){
-        const {children} = this.props;
-        console.log('children in iw:'. children);
-        
+        const {children} = this.props;        
         return ReactDOMServer.renderToString(children);
     }
-
     render() {
       return null;
     }

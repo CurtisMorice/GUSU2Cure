@@ -53,25 +53,20 @@ class EditProfile extends React.Component {
     };
 
     handleUpdateProfile = (propertyName) => (event) => {
-        console.log('changes', event.target.value);
         this.setState({
             updatedProfile: {
             ...this.state.updatedProfile,
             [propertyName]: event.target.value
             }
         })
-
-        console.log('state of profile:', this.state);
     }
 
     updateUserProfile = () => {
-        console.log('update user profile');
         const action = ({
             type: USER_ACTIONS.UPDATE_PROFILE,
             payload: this.state.updatedProfile
         })
         this.props.dispatch(action)
-        console.log('updated profile is: ', action);
     }
 
     render(){

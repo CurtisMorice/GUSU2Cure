@@ -2,9 +2,7 @@ import {put, takeLatest} from 'redux-saga/effects';
 import {MAP_ACTIONS} from '../actions/mapActions';
 import {getLocations} from '../requests/mapRequests';
 
-function* fetchLocations(action) {
-    console.log('fetchLocations action:', action);
-    
+function* fetchLocations(action) {    
     try {
         let locations = yield getLocations(action);
         console.log('in map saga to get locations', locations);

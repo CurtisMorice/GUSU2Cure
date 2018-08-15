@@ -17,18 +17,14 @@ export class Map extends Component {
   
     // renders the children onto the map
     renderChildren = () =>{
-        const {children} = this.props;
-        // console.log('children:', children);
-      
+        const {children} = this.props;      
         if(!children) return;
-
         // children is the array, c is the object at each array index
         return React.Children.map(children, c =>{
             return React.cloneElement(c, {
                 map: this.map,
                 google: this.props.google,
                 mapCenter: this.state.currentLocation
-
             })
         })
     }
