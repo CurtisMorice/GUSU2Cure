@@ -86,7 +86,6 @@ class CommentsModal extends React.Component {
   render() {
     return (
       <div>
-        {/* <Button onClick={this.handleClickOpen}>Open form dialog</Button> */}
         <Tooltip id="rejected" title="Rejected"> 
                           <IconButton aria-label="Reject" style={{color:'#bf5754'}}  onClick={this.handleClickOpen}> 
                            <i className="material-icons" >
@@ -117,7 +116,6 @@ class CommentsModal extends React.Component {
               label="comments"
               fullWidth
             />
-            
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">

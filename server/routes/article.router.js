@@ -220,7 +220,7 @@ router.post('/quasi_articles', (req, res) => {
         pool.query(queryText, [article_id, user_id, research_date, research_title, research_type, research_phase, institution_name,
         institution_url, status, funding_source, related_articles, brief_description, summary, user_story])
         .then(()=>{
-            const secondQuery = `UPDATE articles set status=4 WHERE id=$1;`
+            const secondQuery = `UPDATE articles set status=4 WHERE id=$1;`;
             pool.query(secondQuery, [parseInt(article_id)])
             .then(()=>{
                 console.log('updated article status');
@@ -266,6 +266,10 @@ router.post('/quasi_articles/delete', (req, res) => {
     institution_url, status, funding_source, related_articles, brief_description, summary, user_story])
     .then(()=>{
         console.log('successfully posted quasi_article');
+        const secondQuery = `UPDATE articles set STATUS = $1 WHERE id = $2;`
+        pool.query(secondQuery, [status, article_id])
+            .then(() => {})
+            .catch((error) => {error})
         res.sendStatus(201);
     })
     .catch((error)=>{
