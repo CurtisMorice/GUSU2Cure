@@ -70,6 +70,10 @@ function* addQuasiArticle(action) {
     try {
         let article = action.payload
         yield postQuasiArticle(article);
+        yield put ({
+            type: ARTICLE_ACTIONS.FETCH_USER_ARTICLES,
+            payload: action.payload.user_id
+        })
     } catch (error) {
         console.log('error in article saga on POST', error); 
     }  
