@@ -1,6 +1,6 @@
 import {put, takeLatest} from 'redux-saga/effects';
 import {ADMIN_ACTIONS} from '../actions/adminActions';
-import { getAllUsers, getArticlesByLocation, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser, deleteBadArticle, rejectedArticle, approvedArticle, setUser, deleteTargetArticle, updateArticle, deleteQuasi} from '../requests/adminRequest';
+import { getAllUsers, getArticlesByLocation, getApprovedArticles, getNewArticles , getModifiedArticles, deleteUser, deleteBadArticle, rejectedArticle, approvedArticle, setUser, deleteTargetArticle, updateArticle, deleteQuasi, rejectUserRequest} from '../requests/adminRequest';
 
 //fetch all registered users
 function* fetchAllUser(action) {
@@ -88,6 +88,7 @@ function* userType(action){
     }
 }
 
+// sends edited articles to the request/router
 function* editArticle(action){
     const articleId = action.payload.id;
     console.log('this is the id', action);
@@ -95,7 +96,6 @@ function* editArticle(action){
     try{
         yield updateArticle(action);
         yield deleteQuasiArticle(articleId);
-        // yield fetchModifiedArticles();
     } catch(error){
         console.log('Error setting user type in the Admin Saga', error);  
     }
@@ -122,8 +122,8 @@ function* rejectArticle (action){
     }
 }
 
+// delete an article from the admin page
 function* deleteArticle (action){
-
     try{
         yield deleteTargetArticle(action)
         yield fetchArticlesApproved();
@@ -134,6 +134,7 @@ function* deleteArticle (action){
     }
 }
 
+// fetches articles by location
 function* fetchArticlesByLocation(location){
     console.log('location here:', location);
     const filterLocation = yield getArticlesByLocation(location.payload);
@@ -142,6 +143,17 @@ function* fetchArticlesByLocation(location){
         payload: filterLocation
     })
     
+}
+
+// rejects a users edit and delete request
+function* rejectRequest(article){
+    try{
+        yield rejectUserRequest(article);
+        yield fetchModifiedArticles();
+    }
+    catch (error) {
+        console.log('Error rejecting user action');
+    }
 }
 
 function* adminSaga() {
@@ -156,6 +168,7 @@ function* adminSaga() {
     yield takeLatest(ADMIN_ACTIONS.DELETE_TARGET_ARTICLE, deleteArticle);
     yield takeLatest(ADMIN_ACTIONS.FETCH_ARTICLES_BY_LOCATION, fetchArticlesByLocation);
     yield takeLatest(ADMIN_ACTIONS.UPDATE_TARGET_ARTICLE, editArticle);
+    yield takeLatest(ADMIN_ACTIONS.REJECT_DELETE, rejectRequest);
 }
   
   export default adminSaga;

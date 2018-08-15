@@ -187,13 +187,10 @@ const mapStateToProps = state => ({
 
             rejectModifiedArtice = (article) => {
               console.log('article', article);
-              if (article.status === 'edit-delete'){
-                console.log('delete');
-                
-              } else if (article.status === 'edit-review'){
-                console.log('review');
-                
-              }
+              console.log('review');
+              const action = ({
+                type: ADMIN_ACTIONS.REJECT_DELETE,
+                payload: article
             }
 
 
