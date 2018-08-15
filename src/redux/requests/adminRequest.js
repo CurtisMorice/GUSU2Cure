@@ -131,7 +131,7 @@ export function getArticlesByLocation(action){
 
 export function rejectUserRequest(action){
     console.log('in rejectUserRequest with action:', action);
-    return axios.delete(`api/admin/declineRequest/:id`)
+    return axios.delete(`api/admin/declineRequest/${action.payload.id}`)
     .then((response) => {
         console.log('response', response);  
     })
