@@ -91,9 +91,7 @@ export function postQuasiArticle(action){
     })
 }
 
-export function postQuasiArticleDelete(action){
-    console.log('//////////////////////////////', action);
-    
+export function postQuasiArticleDelete(action){    
     return axios.post('/api/articles/quasi_articles/delete', action)
     .then((response) => {
         console.log('successfully posted to the quasi table', response);  
