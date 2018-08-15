@@ -164,14 +164,34 @@ router.delete(`/deleteArticle/:id`, (req, res) => {
  })
 
 router.delete(`/deleteQuasi/:id`, (req, res) => {
-    const id = req.params.id;
-    console.log('////////////////////',id);
-    
-    queryText = `DELETE FROM quasi_articles WHERE id=$1`;
-    pool.query(queryText, [id])
+    const quasi_id = req.params.id;
+    queryText = `DELETE FROM quasi_articles WHERE id=$1; `;
+    pool.query(queryText, [quasi_id])
     .then((result) => {
         console.log('Successfull delete of QUASI article');
         res.sendStatus(200)
+    })
+    .catch((error) => {
+        console.log('Error deleting QUASI article', error);
+        res.sendStatus(500);
+    })
+})
+
+router.delete(`/declineRequest/:id`, (req, res) => {
+    console.log('////////////////////req.body', req.body);
+    const quasi_id = req.params.id;
+    queryText = `DELETE FROM quasi_articles WHERE id=$1; `;
+    pool.query(queryText, [quasi_id])
+    .then((result) => {
+        console.log('Successfull delete of QUASI article');
+        res.sendStatus(200);
+        const article_id = req.body.article_id;
+        queryText = `UPDATE articles SET status = $1 where id = $2;`;
+        pool.query(queryText, [2, article_id])
+        .then((response) => {
+            console.log('successfully updated article with status');
+            res.sendStatus(200);
+        })
     })
     .catch((error) => {
         console.log('Error deleting QUASI article', error);

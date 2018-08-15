@@ -128,3 +128,15 @@ export function getArticlesByLocation(action){
         console.log('error retrieving filtered article list in adminRequest:', error);
     })
 }
+
+export function rejectUserRequest(action){
+    console.log('in rejectUserRequest with action:', action);
+    return axios.delete(`api/admin/declineRequest/:id`)
+    .then((response) => {
+        console.log('response', response);  
+    })
+    .catch((error) => {
+        console.log('error in admin rejecting user request'); 
+    })
+    
+}
