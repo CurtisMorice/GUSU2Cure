@@ -5,6 +5,22 @@ This application is ReactJS based with Node.js and PostgreSQl on the back end. T
 ## - HOROKU lINK HERE - ## 
 
 ## Technologies and Frameworks
+ReactJS
+Material-UI 
+CSS
+Node.js
+PostgreSQL
+Express
+Redux
+Redux-Saga
+Passport
+bcrypt
+dotenv
+sweetalerts2
+google-maps-react 
+lodash
+
+
 
 
 # Express/Passport with React
@@ -31,6 +47,9 @@ CREATE TABLE person (
     password VARCHAR (1000) NOT NULL
 );
 ```
+
+- The rest of the sql queries are in the database.sql file 
+
 
 If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
 
