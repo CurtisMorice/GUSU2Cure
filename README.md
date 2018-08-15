@@ -1,3 +1,12 @@
+#GUSU2Cure Research Application
+This application is for  discovering Spinal Cord Injury resources in the area or anywhere in the world. It has an admin side, login credential verification and user profile creation capabilities. You also can use google maps and their search api for finding resources. Even though this application is hosted by GUSU2Cure it will be open for anyone. 
+
+This application is ReactJS based with Node.js and PostgreSQl on the back end. This uses react-google-maps for search capacity and material-ui and css for styling. 
+## - HOROKU lINK HERE - ## 
+
+## Technologies and Frameworks
+
+
 # Express/Passport with React
 This version uses React to control the login requests and redirection in coordination with client-side routing.
 
@@ -25,11 +34,7 @@ CREATE TABLE person (
 
 If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
 
-## Download (Don't Clone) This Repository
 
-* Don't Fork or Clone. Instead, click the `Clone or Download` button and select `Download Zip`.
-* Unzip the project and start with the code in that folder.
-* Create a new GitHub project and push this code to the new repository.
 
 ## Development Setup Instructions
 
@@ -38,7 +43,9 @@ If you would like to name your database something else, you will need to change 
     ```
     SERVER_SESSION_SECRET=superDuperSecret
     ```
+
     While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
+*  Api Keys -- There is a Key.js file in the src folder that contains your API keys for google maps. Please add the file to your .gitignore. You can 
 * Start postgres if not running already by using `brew services start postgresql`
 * Run `npm run server`
 * Run `npm run client`
