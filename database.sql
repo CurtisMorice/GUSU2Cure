@@ -105,23 +105,10 @@ CREATE TABLE "quasi_articles"(
 	-- "summary" VARCHAR (1000),
 	-- "user_story" VARCHAR (1000)
 	);
-
-	
---create comments table. date will be automatically inserted. commented out due to linter errors
-CREATE TABLE "comments"(
-	"id" SERIAL PRIMARY KEY,
-	"comment" VARCHAR(300) NOT NULL,
-	"user_id" INT NOT NULL REFERENCES users,
-	"article_id" INT NOT NULL REFERENCES articles,
-	-- "date_created" DATE DEFAULT current_date
-	);
 	
 -- insert into comments table
 INSERT INTO comments(comment, user_id, article_id) VALUES ('Fascinating', 1, 1);
 		
-SELECT * FROM articles;
-
-
 -- insert a user into the user table
 INSERT INTO users(username, hash, type, email, validated) VALUES ('sean', 'sean', 'user', 'email@email.com', true);
 
@@ -179,7 +166,7 @@ INSERT INTO articles(location_id, user_id, research_date, research_title, resear
 -- insert into comments table
 INSERT INTO comments(comment, user_id, article_id) VALUES ('Fascinating', 1, 1);
 
--- Get Call for New Articles Table in Aadmin.
+-- Get Call for New Articles Table in Admin.
 -- SELECT articles.id,research_date,research_title, institution_name, institution_url, funding_source, related_articles, admin_comment, statuses.status, research_type.type, username, email FROM articles
 -- JOIN statuses ON articles.status = statuses.id
 -- RIGHT JOIN research_type ON articles.research_type = research_type.id
@@ -191,7 +178,7 @@ INSERT INTO comments(comment, user_id, article_id) VALUES ('Fascinating', 1, 1);
 --UPDATE articles SET status=2, admin_comment=articles.admin_comment WHERE id=1;
 
 
-
+-- FOR POSTING ARTICLES USING POSTMAN
 -- {
 -- 	"address": "2-６ Yamadaoka, Suita-shi, Ōsaka-fu 565-0871, Japan",
 -- 	"lat": 34.820442,
