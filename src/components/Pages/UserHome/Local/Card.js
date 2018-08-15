@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 //components
-import EditProfile from '../../../Global/Modals/EditProfile';
+import EditProfile from '../../../Global/Modals/editProfile';
 
 //material-ui
 import PropTypes from 'prop-types';
