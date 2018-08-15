@@ -164,12 +164,17 @@ router.delete(`/deleteArticle/:id`, (req, res) => {
  })
 
 router.delete(`/deleteQuasi/:id`, (req, res) => {
-    const id = req.params.id;
-    console.log('////////////////////',id);
-    
-    queryText = `DELETE FROM quasi_articles WHERE id=$1`;
-    pool.query(queryText, [id])
+    console.log('////////////////////req.body', req.body);
+    const quasi_id = req.params.id;
+    queryText = `DELETE FROM quasi_articles WHERE id=$1; `;
+    pool.query(queryText, [quasi_id])
     .then((result) => {
+        const article_id = req.body.article_id;
+        queryText = `DELETE from articles where id=$2;`;
+        pool.query(queryText, [article_id])
+        .then((result) => {
+            console.log('successfull delete from articles');  
+        })
         console.log('Successfull delete of QUASI article');
         res.sendStatus(200)
     })
