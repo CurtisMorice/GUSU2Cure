@@ -1,6 +1,9 @@
 -- database name: gusu_project
 
 -- !!!!!!!!!!!!!!!!!!!!
+-- CREATE THE FOLLOWING TABLES IN ORDER: users, profile, resources, statuses, research_type, research_phase, locations, articles, quasi_articles
+
+-- !!!!!!!!!!!!!!!!!!!!
 -- UNCOMMENT THE DATE_CREATED LINE IN RESOURCES, DATE_POSTED, RELATED_ARTICLES, 
 -- AND ADMIN_COMMENT IN ARTICLES, AND DATE_CREATED IN COMMENTS
 
