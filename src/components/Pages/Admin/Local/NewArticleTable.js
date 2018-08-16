@@ -49,7 +49,6 @@ class NewArticleTable extends React.Component{
   
 
   fetchNewArticles = () => {
-    console.log('hello, is it me your looking for ');
     this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
 };
   
@@ -222,7 +221,6 @@ class NewArticleTable extends React.Component{
               reverseButtons: true
             }).then((result) => {
               if (result.value) {
-                  console.log(id);
                 this.props.dispatch({type: ADMIN_ACTIONS.DELETE_TARGET_ARTICLE, payload: id});
                 swal(
                   'Deleted!',
@@ -247,7 +245,6 @@ class NewArticleTable extends React.Component{
           return (
             <Paper className={classes.root}>
               <div className={classes.tableWrapper}>
-              {/* {JSON.stringify(this.props.adminReducer)} */}
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
@@ -259,7 +256,6 @@ class NewArticleTable extends React.Component{
                     <TableCell> Date Posted </TableCell>
                     <TableCell> Research Title </TableCell>
                     <TableCell> More Info</TableCell>
-                            {/* More Info goes here */}
                     <TableCell> User Name </TableCell>
                     <TableCell> User Email </TableCell>
                     <TableCell> Approved </TableCell>
@@ -326,7 +322,6 @@ class NewArticleTable extends React.Component{
                     </TableRow>
                   </TableFooter>
                 </Table>
-                {/* {this.state.commentOpen && <CommentsModal/>}  */}
               </div>
             </Paper>
           );

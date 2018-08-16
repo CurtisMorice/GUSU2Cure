@@ -18,12 +18,8 @@ function* fetchArticles(action) {
 
 function* fetchUserArticles(action) {
    try{
-    console.log('FETCH USERS ARTICLES', action.payload);
     let id = action.payload;
     let userArticles = yield getUserArticles(id);
-    // yield put{(
-    //     type: USER_ACTIONS.FETCH_USER,
-    // )}
     yield put({
         type: ARTICLE_ACTIONS.SHOW_ARTICLES,
         payload: userArticles
@@ -110,9 +106,6 @@ function* updateArticle(action) {
         let article = action.payload
         yield putArticle(article);
         console.log('in article saga for update', action);
-        // yield put ({
-        //     type: ARTICLE_ACTIONS.FETCH_ARTICLES
-        // })
     } catch (error) {
         console.log('error in article saga on PUT', error);
     } 

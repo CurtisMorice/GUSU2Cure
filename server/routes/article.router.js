@@ -7,7 +7,6 @@ const router = express.Router();
 // GET call for user's submitted articles
 router.get(`/userArticle/:id`, (req, res) => {
     let id = req.params.id
-    console.log('this is id',id);
     const queryText = `SELECT articles.id, location_id, user_id, date_posted, research_date, research_title, research_type, research_phase, institution_name, institution_url, articles.status, funding_source, related_articles, admin_comment, brief_description, summary, user_story, statuses.status, research_type.type, research_phase.phase, statuses.status FROM articles JOIN statuses ON articles.status = statuses.id JOIN research_type on articles.research_type=research_type.id JOIN research_phase ON articles.research_phase=research_phase.id WHERE user_id = $1`;
     pool.query(queryText, [id])
     .then((result)=>{
@@ -22,16 +21,12 @@ router.get(`/userArticle/:id`, (req, res) => {
 
 router.get('/', (req, res) => {
     let param = req.query.param;
-    let value = req.query.value;
-    
-    console.log('param:', param, 'value:', value);
-    
+    let value = req.query.value;    
     // for filtering by research type
     if (param === 'type'){
         const queryText = `SELECT articles.*, research_type.type, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id JOIN research_type on articles.research_type = research_type.id WHERE research_type.id = ${value} ORDER BY id;`;
         pool.query(queryText)
         .then((result)=>{
-            // console.log('back from database with articles', result.rows);
             res.send(result.rows);
         })
         .catch((error)=>{
@@ -41,14 +36,11 @@ router.get('/', (req, res) => {
     }
 
     // for filtering by research phase
-
     else if (param === 'phase') {
         const queryText = `SELECT articles.*, research_phase.phase, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id JOIN research_phase
         on articles.research_phase = research_phase.id WHERE research_phase.id = ${value} ORDER BY id;`;
-        
         pool.query(queryText)
         .then((result)=>{
-            // console.log('back from database with articles', result.rows);
             res.send(result.rows);
         })
         .catch((error)=>{
@@ -56,14 +48,12 @@ router.get('/', (req, res) => {
             res.sendStatus(500);
         })
     }
-
     // for getting all articles
     else {
         const queryText = `SELECT articles.*, locations.address, locations.lat, locations.lng FROM articles JOIN locations ON locations.id = articles.location_id JOIN statuses ON articles.status = statuses.id WHERE (statuses.status = 'approved' OR statuses.status = 'edit-review' OR statuses.status = 'edit-delete') ORDER BY id;
         `;
         pool.query(queryText)
         .then((result)=>{
-            // console.log('back from database with articles', result.rows);
             res.send(result.rows);
         })
         .catch((error)=>{
@@ -71,7 +61,6 @@ router.get('/', (req, res) => {
             res.sendStatus(500);
         })
     }
-   
 });
 
 router.get('/type', (req, res) => {
@@ -108,7 +97,6 @@ router.post('/', (req, res) => {
     const queryText = `INSERT INTO locations(address, lat, lng) VALUES ($1, $2, $3) RETURNING id;`
     pool.query(queryText, [address, lat, lng])
     .then((result)=>{
-        console.log('inserted into location', result);
         const location_id = result.rows[0].id;
         const user_id = req.body.user_id;
         const research_date = req.body.research_date;
@@ -144,12 +132,9 @@ router.post('/', (req, res) => {
 
 // this is where we will also delete the quasi_articles row upon successfully editing the articles table with the updated info
 router.put('/:id', (req, res) => {
-    console.log('req.body', req.body);
     const id = req.params.id
     const research_date = req.body.research_date
-    const research_title = req.body.research_title
-    console.log('in router', id, research_date, research_title);
-    
+    const research_title = req.body.research_title    
     const articleQueryText = `UPDATE articles SET research_date = $1, research_title = $2, research_type = $3,
         research_phase = $4, institution_name = $5, institution_url = $6, funding_source = $7, related_articles = $8, status = $9 WHERE id = $10;`;
         pool.query(articleQueryText, [req.body.research_date, req.body.research_title, req.body.type, req.body.phase, req.body.institution_name, req.body.institution_url, req.body.funding_source, req.body.related_articles, 4, id])
@@ -194,9 +179,6 @@ router.put('/quasi_articles/:id', (req, res) => {
 
 // post to quasi articles
 router.post('/quasi_articles', (req, res) => {
-        console.log('in route to post quasi article', req.body);
-        console.log('research_date:', req.body.research_date);
-        
         const article_id = req.body.id;
         const location_id = req;
         const user_id = req.body.user_id;
@@ -229,7 +211,6 @@ router.post('/quasi_articles', (req, res) => {
             .catch((error)=>{
                 console.log('error updating article status', error);
                 res.sendStatus(500);
-                
             })
             // res.sendStatus(201);
         })
@@ -241,7 +222,6 @@ router.post('/quasi_articles', (req, res) => {
 
 // post to quasi articles
 router.post('/quasi_articles/delete', (req, res) => {
-    console.log('in route to post quasi article', req.body);
     const article_id = req.body.id;
     const location_id = req;
     const user_id = req.body.user_id;
@@ -279,7 +259,6 @@ router.post('/quasi_articles/delete', (req, res) => {
 });
 
 router.get('/quasi_articles', (req, res) => {
-    console.log('in route to get quasi_articles');
     const queryText = `SELECT * from quasi_articles`
     pool.query(queryText)
     .then((result)=>{

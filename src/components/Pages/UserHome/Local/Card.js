@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 //components
-// import EditProfile from '../../../Global/Modals/EditProfile';
+import EditProfile from '../../../Global/Modals/editProfile';
 
 //material-ui
 import PropTypes from 'prop-types';
@@ -72,7 +72,6 @@ class ProfileCard extends React.Component {
     };
 
     editProfile = () => {
-        console.log('hello')
     }
 
     render() {
@@ -81,14 +80,9 @@ class ProfileCard extends React.Component {
         <div>
           <Card className={classes.card}>
             <CardHeader
-              avatar={
-                <Avatar aria-label="Recipe" className={classes.avatar}>
-                  img
-                </Avatar>
-              }
             action={
                 <IconButton>
-                  {/* <EditProfile/> */}
+                  <EditProfile/>
                 </IconButton>
             }
               title={this.props.user.user.username}

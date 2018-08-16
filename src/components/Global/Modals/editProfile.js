@@ -18,6 +18,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 import {USER_ACTIONS} from '../../../redux/actions/userActions';
 
+import swal from 'sweetalert2';
+
 const mapStateToProps = state => ({
     user: state.user,
 });
@@ -40,7 +42,6 @@ class EditProfile extends React.Component {
         this.setState({
             open: true,
             updatedProfile: {
-                email: this.props.user.user.email,
                 contact_info: this.props.user.user.contact_info,
                 bio: this.props.user.user.bio,
                 id: this.props.user.user.id
@@ -53,25 +54,33 @@ class EditProfile extends React.Component {
     };
 
     handleUpdateProfile = (propertyName) => (event) => {
-        console.log('changes', event.target.value);
         this.setState({
             updatedProfile: {
             ...this.state.updatedProfile,
             [propertyName]: event.target.value
             }
         })
-
-        console.log('state of profile:', this.state);
     }
 
     updateUserProfile = () => {
-        console.log('update user profile');
+        swal(
+            '',
+            'Profile Updated',
+            'success'
+          )
         const action = ({
             type: USER_ACTIONS.UPDATE_PROFILE,
             payload: this.state.updatedProfile
         })
         this.props.dispatch(action)
-        console.log('updated profile is: ', action);
+        this.setState({
+            open: false,
+            updatedProfile: {
+                contact_info: "",
+                bio: "",
+                id: this.props.user.user.id
+            }
+        })
     }
 
     render(){
@@ -88,15 +97,6 @@ class EditProfile extends React.Component {
                 <DialogTitle id="form-dialog-title">Update the article below:</DialogTitle>
                 <DialogContent>
                     {JSON.stringify(this.props.user)}
-                    <TextField
-                        value={this.state.updatedProfile.email}
-                        onChange={this.handleUpdateProfile('email')}
-                        name="email"
-                        label="User Email"
-                        autoFocus
-                        margin="dense"
-                        fullWidth
-                    />
                     <TextField
                         value={this.state.updatedProfile.contact_info}
                         onChange={this.handleUpdateProfile('contact_info')}

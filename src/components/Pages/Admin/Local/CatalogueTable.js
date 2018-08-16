@@ -160,7 +160,6 @@ class CatalogueTable extends Component{
             reverseButtons: true
           }).then((result) => {
             if (result.value) {
-                console.log(id);
               this.props.dispatch({type: ADMIN_ACTIONS.DELETE_TARGET_ARTICLE, payload: id});
               swal(
                 'Deleted!',
@@ -202,12 +201,9 @@ class CatalogueTable extends Component{
                                     <TableRow key={article.id} >
                                         <TableCell component="th" scope="row"> {article.date_posted.split('T')[0]} </TableCell>
                                         <TableCell component="th" scope="row"> {article.research_title} </TableCell>
-                                        <TableCell> 
-                                        {console.log('the article:', article)}
-                                             
+                                        <TableCell>                                              
                                         <ArticleModal  adminArticle={article}/> 
                                         </TableCell>
-                                    
                                         <TableCell component="th" scope="row"> {article.username} </TableCell>
                                         <TableCell component="th" scope="row"> {article.email} </TableCell>
                                         <TableCell component="th" scope="row"> 

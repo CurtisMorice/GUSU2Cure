@@ -54,7 +54,6 @@ class AddResourceModal extends React.Component {
             summary: this.state.summary,
             date_created: this.state.date_created
             };
-            console.log('body:',body);
             const action = ({
                 type: RESOURCE_ACTIONS.POST_RESOURCE,
                 payload: body

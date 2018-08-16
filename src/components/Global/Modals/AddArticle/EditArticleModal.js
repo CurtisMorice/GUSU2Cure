@@ -68,9 +68,7 @@ handleClickOpen = (article) => {
         brief_description: article.brief_description,
         status: article.status
       } 
-    });
-    console.log(this.state.updatedArticle);
-    
+    });    
 };
 
 handleClose = () => {
@@ -78,39 +76,19 @@ handleClose = () => {
 };
 
 handleUpdate = (propertyName) => async (event) => {
-    console.log('event happened', event.target.value);
-    console.log('propertyName:', propertyName);
-    console.log('event.target.value:', event.target.value);
-    
     await this.setState({
         updatedArticle: {
             ...this.state.updatedArticle,
             [propertyName]: event.target.value
         }
-    })
-    console.log('state:', this.state);   
-    console.log('date:', this.state.updatedArticle.research_date);
-    
+    })    
 }
 
-// updateArticle = () => {
-//     console.log('in updateResource');
-//     const action = ({
-//       type: ARTICLE_ACTIONS.UPDATE_ARTICLE,
-//       payload: this.state.updatedArticle
-//     })
-//     console.log('action:', action);
-//     this.props.dispatch(action);
-//     this.handleClose();
-//   }
-
 postQuasiArticle = () => {
-  console.log('in postQuasiArticle with updatedArticle:', this.state.updatedArticle);
   const action = ({
     type: ARTICLE_ACTIONS.POST_QUASI_ARTICLE,
     payload: this.state.updatedArticle
   })
-  console.log('action', action);
   this.props.dispatch(action);
   this.handleClose();
 }

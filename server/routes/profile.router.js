@@ -37,8 +37,8 @@ router.delete('/:id', (req, res) => {
     })  
 });
 
+//updates the users bio and contact info
 router.put(`/update/:id`, (req, res) => {
-    console.log(req.params.id, '----adsfasdfasdf------', req.body.bio);
     let id = req.params.id;
     let bio = req.body.bio;
     let contactInfo = req.body.contact_info;

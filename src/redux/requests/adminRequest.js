@@ -131,9 +131,17 @@ export function getArticlesByLocation(action){
 
 export function rejectUserRequest(action){
     console.log('in rejectUserRequest with action:', action);
-    return axios.delete(`api/admin/declineRequest/:id`)
+    return axios.delete(`api/admin/declineRequest/${action.payload.id}`, action.payload)
     .then((response) => {
-        console.log('response', response);  
+        console.log('response', response);
+        return axios.delete(`api/admin/updateStatus/${action.payload.article_id}`, action.payload)  
+            .then((response) => {
+                console.log('succesful update of status');
+            })
+            .catch((error) => {
+                console.log('nope', error);
+                
+            })
     })
     .catch((error) => {
         console.log('error in admin rejecting user request'); 

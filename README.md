@@ -28,26 +28,63 @@ PostreSQL and/or Postico for Database usage
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+A step by step series of examples that tell you how to get a development environment running.
+
+1. From GitHub, navigate to the main page of the repository.
+2. Under the repository name, click **Clone or download**.
+3. In the Clone with HTTPs section, click the copy button to copy the clone URL for the repository.
+4. Open Terminal.
+5. Change the current working directory to the location where you want the cloned directory to be made.
+6. Type `git clone`, then paste the URL you'd copied in Step 2.
+⋅⋅* `$ git clone https://github.com/srz1992/get-up-stand-up-project`
+7. Press **Enter**. Your local clone will be created.
+
+
+Following those initial steps, run the following sequences in order:
 
 ```
-fork and clone/download this repo to your computer
+in Terminal, 
 ```
 
 ```
 npm install
-npm start server
+```
+
+```
+Download and Install [Postico](https://eggerapps.at/postico/)
+
+Using Postico, create a new database named "gusu_project"
+
+Reference and execute the queries provided in `database.sql`
+```
+
+###IMPORTANT###
+Using Postico, CREATE THE FOLLOWING TABLES IN ORDER: 
+
+1. users 
+2. profile
+3. resources
+4. statuses
+5. research_type
+6. research_phase
+7. locations
+8. articles
+9. quasi_articles
+
+
+```
+npm run server
 ```
 
 Then press Cmd + t to open a new tab in Terminal
 
 ```
-npm start client
+npm run client
 ```
 
-Using Postico, create a new database by running the queries provided
-
 Have fun!
+
+
 
 ## Development Setup Instructions
 

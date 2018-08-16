@@ -163,13 +163,11 @@ const mapStateToProps = state => ({
               this.setState({ rowsPerPage: event.target.value });
             };
             fetchNewArticles = () => {
-              console.log('hello, is it me your looking for ');
               this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
             }
             
             approveModifiedArticle = (newArticle) => {
               if (newArticle.status === 'edit-review'){
-                console.log(newArticle.status);
                 const action = ({
                   type: ADMIN_ACTIONS.UPDATE_TARGET_ARTICLE,
                   payload: newArticle
@@ -186,12 +184,12 @@ const mapStateToProps = state => ({
             }
 
             rejectModifiedArtice = (article) => {
-              console.log('article', article);
-              console.log('review');
               const action = ({
                 type: ADMIN_ACTIONS.REJECT_DELETE,
                 payload: article
-        
+            })
+            this.props.dispatch(action);
+          }
 
 
             render() {
@@ -201,7 +199,6 @@ const mapStateToProps = state => ({
               return (
                 <Paper className={classes.root}>
                   <div className={classes.tableWrapper}>
-                  {/* {JSON.stringify(this.props.adminReducer)} */}
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>

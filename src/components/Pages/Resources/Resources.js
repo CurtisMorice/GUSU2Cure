@@ -52,7 +52,6 @@ class UserHome extends Component {
   }
 
   removeResource = (id) => {
-    console.log('in removeResource');
     const action = ({
       type: RESOURCE_ACTIONS.DELETE_RESOURCE,
       payload: id
@@ -93,7 +92,6 @@ class UserHome extends Component {
 
     return (
       <div>
-        {/* <Nav /> */}
         { content }
       </div>
     );
