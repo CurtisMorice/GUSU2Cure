@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 //components
+import swal from 'sweetalert2';
 
 
 //material-ui
@@ -75,7 +76,6 @@ class ArticleCard extends React.Component {
     };
 
     editProfile = () => {
-        console.log('hello')
     }
 
     getArticleDetail = (id) => {
@@ -84,14 +84,17 @@ class ArticleCard extends React.Component {
     }
 
     requestDelete = (article) => {
+      swal(
+        'Notice',
+        'Your edits/deletion will be reviewed by an Admin',
+        'info'
+      )
       const id = article.id
       const user_id = article.user_id
-      console.log('this is the article id,', article);
       const action = ({
         type: ARTICLE_ACTIONS.POST_QUASI_DELETE,
         payload: article
       })
-      console.log('action:', action);
       this.props.dispatch(action);
     }
 
@@ -135,9 +138,7 @@ class ArticleCard extends React.Component {
                   
                 </CardContent>
                   }
-                <CardActions className="actionButton">
-                {console.log('status', article.status)}
-                    
+                <CardActions className="actionButton">                    
                     <EditArticleModal article={article}/>
                     {article.status !== 'edit-delete'?
                     <IconButton variant="fab" color="secondary" aria-label="Edit" onClick={ ()=>this.requestDelete(article) }>

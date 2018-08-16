@@ -28,12 +28,9 @@ class UserHomeProfile extends Component{
     render(){
         return(
             <div className="container">
-                {/* GRID 1 */}
                 <div className="grid"> 
                     <ProfileCard/>
                 </div>
-
-                {/* GRID 2 */}
                 <div className="grid" id="articleHeader"> 
                     <h3>History</h3>
                     <br/>
@@ -41,13 +38,7 @@ class UserHomeProfile extends Component{
                     <ArticleCard/>
                     </div>
                 </div>
-
-                {/* GRID 3 */}
                 <div className="grid"> 
-                    
-                    
-                    {/* {JSON.stringify(this.props.adminReducer)} */}
-                    
                 </div>
             </div>
         )

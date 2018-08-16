@@ -30,7 +30,6 @@ class ArticleModal extends React.Component {
       return(
       <div>
         <Button onClick={this.handleClickOpen('paper')} style={{backgroundColor:'#caccd0'}}color="primary">More Info</Button>
-        {/* <Button onClick={this.handleClickOpen('body')}></Button> */}
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}

@@ -49,26 +49,20 @@ handleClose = () => {
 };
 
 handleUpdate = (propertyName) => async(event) => {
-    console.log('event happened', event.target.value);
     await this.setState({
         updatedResource: {
             ...this.state.updatedResource,
             id: this.props.resource.id,
             [propertyName]: event.target.value
         }
-    })
-    console.log('state:', this.state);
-    
+    })    
 }
 
 updateResource = () => {
-    console.log('in updateResource');
     const action = ({
       type: RESOURCE_ACTIONS.UPDATE_RESOURCE,
       payload: this.state.updatedResource
-    })
-    console.log('action:', action);
-    
+    })    
     this.props.dispatch(action);
     this.handleClose();
   }

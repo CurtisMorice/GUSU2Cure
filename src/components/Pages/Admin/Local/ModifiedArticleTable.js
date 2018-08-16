@@ -163,16 +163,11 @@ const mapStateToProps = state => ({
               this.setState({ rowsPerPage: event.target.value });
             };
             fetchNewArticles = () => {
-              console.log('hello, is it me your looking for ');
               this.props.dispatch({type: ADMIN_ACTIONS.FETCH_NEW_ARTICLE});
             }
             
             approveModifiedArticle = (newArticle) => {
-              console.log('is this running');
-              
               if (newArticle.status === 'edit-review'){
-                console.log(newArticle.status);
-                
                 const action = ({
                   type: ADMIN_ACTIONS.UPDATE_TARGET_ARTICLE,
                   payload: newArticle
@@ -186,33 +181,24 @@ const mapStateToProps = state => ({
                 })
                 this.props.dispatch(action);
               }
-            //   let approved = this.state.approved;
-            //   let approvedObj = {approved: approved, id: newArticle.id};
-            //   swal({
-            //     title: 'Please Confirm Change',
-            //     text: 'Are you sure you want to approve this article?',
-            //     type: 'warning',
-            //     showCancelButton: true,
-            //     confirmButtonText: 'Yes',
-            //     cancelButtonText: 'Cancel',
-            //     reverseButtons: true }).then(()=>{
-            //     const action = ({
-            //         type: ADMIN_ACTIONS.APPROVED_ARTICLE,
-            //         payload: approvedObj
-            //     })
-            //     this.props.dispatch(action);
-            //   })
             }
+
+            rejectModifiedArtice = (article) => {
+              const action = ({
+                type: ADMIN_ACTIONS.REJECT_DELETE,
+                payload: article
+            })
+            this.props.dispatch(action);
+          }
+
 
             render() {
               const { classes } = this.props;
               const { rowsPerPage, page } = this.state;
               const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.adminReducer.length - page * rowsPerPage);
-          
               return (
                 <Paper className={classes.root}>
                   <div className={classes.tableWrapper}>
-                  {/* {JSON.stringify(this.props.adminReducer)} */}
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>
@@ -260,9 +246,15 @@ const mapStateToProps = state => ({
                               </Tooltip> 
                             </TableCell>
                             <TableCell> 
-                              <CommentsModal />
-                              </TableCell>
-                                  </TableRow>
+                            <Tooltip title="Approved">
+                              <IconButton aria-label="Approve" color="secondary" onClick={()=>this.rejectModifiedArtice(newArticle)}>
+                                <i className="material-icons">
+                                  thumb_down
+                                </i>
+                                </IconButton>
+                              </Tooltip>
+                            </TableCell>
+                            </TableRow>
                                 );
                               })}
                               {emptyRows > 0 && (

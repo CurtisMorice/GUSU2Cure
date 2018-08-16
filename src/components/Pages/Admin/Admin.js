@@ -52,7 +52,6 @@ class AdminHome extends Component {
 
     return (
       <div>
-        {/* <Nav /> */}
         { content }
       </div>
     );

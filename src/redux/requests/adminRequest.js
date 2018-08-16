@@ -128,3 +128,23 @@ export function getArticlesByLocation(action){
         console.log('error retrieving filtered article list in adminRequest:', error);
     })
 }
+
+export function rejectUserRequest(action){
+    console.log('in rejectUserRequest with action:', action);
+    return axios.delete(`api/admin/declineRequest/${action.payload.id}`, action.payload)
+    .then((response) => {
+        console.log('response', response);
+        return axios.delete(`api/admin/updateStatus/${action.payload.article_id}`, action.payload)  
+            .then((response) => {
+                console.log('succesful update of status');
+            })
+            .catch((error) => {
+                console.log('nope', error);
+                
+            })
+    })
+    .catch((error) => {
+        console.log('error in admin rejecting user request'); 
+    })
+    
+}

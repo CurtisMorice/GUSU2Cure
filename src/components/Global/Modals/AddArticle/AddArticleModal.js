@@ -185,10 +185,7 @@ class AddArticleModal extends React.Component {
   }
 
   handleInputChangeFor = propertyName => (event) => {
-      console.log('user id', this.props.user.user.id);  
-      if(propertyName === 'research_type'){
-        console.log('research type');
-        
+      if(propertyName === 'research_type'){        
       }
       else {
         this.setState({
@@ -381,13 +378,10 @@ class AddArticleModal extends React.Component {
   }
 
   handleInputChangeFor = propertyName => (event) => {
-      console.log('user id', this.props.user.user.id);
       this.setState({
           [propertyName]: event.target.value,
           user_id: this.props.user.user.id,
-      
       });
-      console.log('this.state:', this.state);
   }
 
 

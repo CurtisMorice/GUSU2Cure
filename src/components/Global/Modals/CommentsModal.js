@@ -37,7 +37,6 @@ class CommentsModal extends React.Component {
     this.setState({ open: false });
   };
   handleCommentsChange = propertyName => (event) => { 
-    console.log('handle change for Comments in COmMeNTS Modal', event.target.value);
     this.setState({
       ...this.state,
       [propertyName]: event.target.value,
@@ -48,9 +47,7 @@ class CommentsModal extends React.Component {
     this.handleClose();
     let rejected = this.state.rejected;
     let comments = this.state.comments;
-    let rejectedObj = { id: id, rejected: rejected , comments: comments };
-    console.log('rejectNew Article PAYLOAD', rejectedObj)
-    
+    let rejectedObj = { id: id, rejected: rejected , comments: comments };    
     swal({
       title: 'Please Confirm Change',
       text: 'Are you sure you want to reject this article?',
@@ -86,7 +83,6 @@ class CommentsModal extends React.Component {
   render() {
     return (
       <div>
-        {/* <Button onClick={this.handleClickOpen}>Open form dialog</Button> */}
         <Tooltip id="rejected" title="Rejected"> 
                           <IconButton aria-label="Reject" style={{color:'#bf5754'}}  onClick={this.handleClickOpen}> 
                            <i className="material-icons" >
@@ -117,7 +113,6 @@ class CommentsModal extends React.Component {
               label="comments"
               fullWidth
             />
-            
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">

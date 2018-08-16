@@ -87,7 +87,6 @@ class RegisterModal extends React.Component {
     } // end registerUser
     
     handleInputChangeFor = propertyName => (event) => {
-        console.log('event.target.value', event.target.value, this.state);
         this.setState({
             [propertyName]: event.target.value,
         });

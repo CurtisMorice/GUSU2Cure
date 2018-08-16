@@ -218,9 +218,7 @@ class Landing extends Component {
                         <Typography component='p'>
                           Description: {article.brief_description}
                           <br />
-                          {/* {article.related_articles} */}
                           <br />
-                          
                         </Typography>
                         <Typography className={classes.subtext}>
                           Posted on: {article.date_posted.split('T')[0]}

@@ -18,13 +18,11 @@ class UserHome extends Component {
 
   componentDidUpdate() {
     if (!this.props.user.isLoading && this.props.user.user === null) {
-      // this.props.history.push('home');
     }
   }
 
   logout = () => {
     this.props.dispatch(triggerLogout());
-    // this.props.history.push('home');
   }
 
   render() {
@@ -33,11 +31,6 @@ class UserHome extends Component {
     if (this.props.user.user) {
       content = (
         <div>
-          <h1>
-          {/* //   id="welcome"
-          // >
-          //   Welcome, { this.props.user.user.username }! */}
-          </h1>
           <UserHomeProfile/>
         </div>
       );
@@ -45,7 +38,6 @@ class UserHome extends Component {
 
     return (
       <div>
-        {/* <Nav /> */}
         { content }
       </div>
     );
