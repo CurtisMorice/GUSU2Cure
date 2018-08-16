@@ -191,7 +191,7 @@ const mapStateToProps = state => ({
               const action = ({
                 type: ADMIN_ACTIONS.REJECT_DELETE,
                 payload: article
-            }
+        
 
 
             render() {
