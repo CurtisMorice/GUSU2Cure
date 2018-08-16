@@ -2,6 +2,23 @@
 
 The Spinal Cord Injury Research Map Database (SCIRMD) is an application which allows users to discover research studies and other resources for people living with Spinal Cord Injuries and/or Traumatic Brain Injuries. Passive Users have the ability to register for authenticated accounts, upon registration, users are able to submit research projects and local resources of which they are aware. 
 
+## Technologies and Frameworks
+ReactJS
+Material-UI 
+CSS
+Node.js
+PostgreSQL
+Express
+Redux
+Redux-Saga
+Passport
+bcrypt
+dotenv
+sweetalerts2
+google-maps-react 
+lodash
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
